@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="payment-detail">
                     <h3>{{ $developer_property->name }}</h3>
-                    <p>{{ $developer_property->floor_plan_description }} </p>
+                    <p>{{ $developer_property->floorPlan_description }} </p>
                 </div>
             </div>
         </div>

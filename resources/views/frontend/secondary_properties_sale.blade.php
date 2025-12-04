@@ -89,7 +89,7 @@
                         @forelse ($properties as $property)
                             <div class="col-md-6">
                                 <div class="property-box1">
-                                    <a href="{{ route('property_details', $property->slug) }}"><img
+                                    <a href="{{ route('propertyDetails', $property->slug) }}"><img
                                             src="{{ asset('storage/' .$property->image) }}" alt=""></a>
                                     <h4 class="mt-4">{{ $property->title }}</h4>
                                     <p>{{ $property->description }}</p>

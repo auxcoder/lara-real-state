@@ -46,7 +46,7 @@
                                 <img src="{{ asset('storage/' .$developers->logo) }}" width="100" alt="{{ $developers->name }}">
 
 
-                                <p>{{ $developers->developers_properties->count() }}</p>
+                                <p>{{ $developers->developersProperties->count() }}</p>
 
                         </div>
                     </div>

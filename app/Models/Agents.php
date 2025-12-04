@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agents extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
     public function scopeActive($query)
     {

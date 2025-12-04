@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap");
 
 /* Fonts */
 :root {
-    --default-font: "Quicksand", sans-serif;
+    --default-font: "Roboto Flex", sans-serif;
 }
 
 /* Global Colors */
@@ -128,8 +128,7 @@ h2 {
     background-image:
         /* top layer: 50%-black overlay */
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        /* bottom layer: your JPG */
-        url("../images/about/homepage\ banner.jpg");
+        /* bottom layer: your JPG */ url("../images/about/homepage-banner.jpg");
     height: 100vh;
     width: 100%;
     background-repeat: no-repeat;
@@ -191,11 +190,7 @@ h2 {
 }
 
 .sec-2 .container {
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 5px 1px #0000005e;
     width: 80%;
-    background-color: #fff;
 }
 
 .sec-2 {
@@ -209,15 +204,6 @@ h2 {
     display: flex;
     align-items: center;
     gap: 3px;
-}
-
-.tab-pane select {
-    padding: 14px 20px;
-    border-radius: 30px;
-}
-
-.tab-content {
-    margin-top: 15px;
 }
 
 .f1 {
@@ -453,7 +439,6 @@ h2 {
     margin: auto;
 }
 
-
 /* .logo-carol .owl-item.active:nth-child(2) {
     background-color: #fff;
 } */
@@ -462,16 +447,14 @@ h2 {
 # Footer - Css
 --------------------------------------------------------------*/
 
-#footer {
-    background-color: #1c2d37;
-    padding: 40px;
-}
+/* #footer { */
+/*     background-color: #1c2d37; */
+/*     padding: 40px; */
+/* } */
 
-#footer .container {
-    background-color: #c0cdd1;
-    padding: 40px 12px 0px 12px;
-    border-radius: 20px;
-}
+/* #footer .container { */
+/*     background-color: #c0cdd1; */
+/* } */
 
 .news__form {
     display: flex;
@@ -498,30 +481,30 @@ input[type="email"] {
     border-radius: 15px;
 }
 
-#footer li a {
-    text-decoration: none;
-    color: #000;
-    display: flex;
-    align-items: center;
-}
+/* #footer li a { */
+/*     text-decoration: none; */
+/*     color: #000; */
+/*     display: flex; */
+/*     align-items: center; */
+/* } */
 
-#footer ul li {
-    list-style: none;
-    margin: 15px 0;
-}
+/* #footer ul li { */
+/*     list-style: none; */
+/*     margin: 15px 0; */
+/* } */
 
-#footer ul {
-    margin: 0;
-    padding: 0;
-}
+/* #footer ul { */
+/*     margin: 0; */
+/*     padding: 0; */
+/* } */
 
-.icon-text1 li a i {
-    border: 1px solid;
-    padding: 8px 10px;
-    border-radius: 50px;
-    margin-right: 12px;
-    height: 39px;
-}
+/* .icon-text1 li a i { */
+/*     border: 1px solid; */
+/*     padding: 8px 10px; */
+/*     border-radius: 50px; */
+/*     margin-right: 12px; */
+/*     height: 39px; */
+/* } */
 
 #footer h3 {
     font-size: 23px;
@@ -536,15 +519,16 @@ input[type="email"] {
     margin: 0 4px;
 }
 
-.footer-privacy {
-    display: flex;
-    gap: 20px;
-    float: right;
-}
+/* .footer-privacy { */
+/*     display: flex; */
+/*     gap: 20px; */
+/*     /* float: right; */
+*/
+/* } */
 
-.copyright {
-    background-color: #a4b5ba;
-}
+/* .copyright { */
+/*     background-color: #a4b5ba; */
+/* } */
 
 .copyright {
     border-radius: 0 0 20px 20px;
@@ -576,7 +560,10 @@ input[type="email"] {
 .form-style-1 {
     margin: 10px auto;
     padding: 10px 0px 0px 0px;
-    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font:
+        13px "Lucida Sans Unicode",
+        "Lucida Grande",
+        sans-serif;
 }
 
 .form-style-1 li {
@@ -1384,12 +1371,13 @@ select {
     background-image:
         /* top layer: 50%-black overlay */
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        /* bottom layer: your JPG */
-        url("../images/about/about us banner.jpg");
+        /* bottom layer: your JPG */ url("../images/about/about us banner.jpg");
 
     /* now separately declare how each layer behaves */
     background-repeat: no-repeat, no-repeat;
-    background-position: center center, center center;
+    background-position:
+        center center,
+        center center;
     background-size: cover, cover;
 
     height: 70vh;
@@ -1397,7 +1385,6 @@ select {
     align-items: center;
     text-align: center;
 }
-
 
 p {
     font-family: var(--default-font);
@@ -1671,7 +1658,6 @@ p {
     font-family: "Quicksand" !important;
 }
 
-
 /*Service*/
 .service-imgbox h3 {
     font-size: 24px;
@@ -1731,8 +1717,7 @@ p {
     background-image:
         /* top layer: 50%-black overlay */
         linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        /* bottom layer: your JPG */
-        url("../images/about/services\ banner.jpg");
+        /* bottom layer: your JPG */ url("../images/about/services\ banner.jpg");
     background-position: center center;
     background-size: cover;
     height: 70vh;
@@ -1769,7 +1754,7 @@ p {
     /* color: #fff; */
 }
 
-.call>a {
+.call > a {
     /* color: #fff !important; */
     font-size: 16px;
     text-decoration: none;
@@ -1777,7 +1762,7 @@ p {
 }
 
 .call i {
-    background: #00737F;
+    background: #00737f;
     color: #fff;
     width: 30px;
     height: 30px;
@@ -1833,7 +1818,7 @@ p {
     width: 125px;
     height: 50px;
     border: 0;
-    background: #00737F;
+    background: #00737f;
     color: #fff;
 }
 
@@ -1846,8 +1831,7 @@ p {
     background-image:
         /* top layer: 50%-black overlay */
         linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-        /* bottom layer: your JPG */
-        url("../images/about/contact\ banner.jpg");
+        /* bottom layer: your JPG */ url("../images/about/contact\ banner.jpg");
     background-position: center center;
     background-size: cover;
     height: 70vh;
@@ -1934,12 +1918,12 @@ p {
 
 .filter-btn {
     font-size: 16px;
-    background: #00737F;
+    background: #00737f;
     color: #fff;
     width: 140px;
     height: 50px;
     border-radius: 50px;
-    border: 1px solid #00737F;
+    border: 1px solid #00737f;
 }
 
 .priv3 {
@@ -1992,12 +1976,12 @@ p {
 
 .viewdetails-btn {
     font-size: 16px;
-    background: #00737F;
+    background: #00737f;
     color: #fff;
     width: 140px;
     height: 50px;
     border-radius: 50px;
-    border: 1px solid #00737F;
+    border: 1px solid #00737f;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2572,7 +2556,6 @@ button {
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 768px) {
-
     .header-view1 .nav-item .nav-link {
         color: #fff !important;
     }
@@ -2646,7 +2629,6 @@ button {
     .mob-1 {
         display: none;
     }
-
 
     .nav-link {
         font-size: 14px !important;

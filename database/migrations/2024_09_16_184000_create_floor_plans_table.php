@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('floor_plans', function (Blueprint $table) {
+        Schema::create('floorPlans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('developer_property_id')->constrained()->onDelete('cascade'); // Foreign key to developer_properties
             $table->string('category')->nullable(); // e.g., 'Typical Floor Plan'
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('floor_plans');
+        Schema::dropIfExists('floorPlans');
     }
 };

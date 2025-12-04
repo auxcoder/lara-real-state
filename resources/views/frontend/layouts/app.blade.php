@@ -31,7 +31,7 @@
                                 <a class="nav-link" href="{{ route('home') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('secondary_sale') }}">Seconadry Properties</a>
+                                <a class="nav-link" href="{{ route('secondarySale') }}">Seconadry Properties</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('offplan') }}">Off Plan</a>
