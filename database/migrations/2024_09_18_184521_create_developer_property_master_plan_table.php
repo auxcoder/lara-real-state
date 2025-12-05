@@ -10,10 +10,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('developer_property_master_plan', function (Blueprint $table) {
+        Schema::create('developer_property_masterPlan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('developer_property_id')->constrained()->onDelete('cascade');
-            $table->foreignId('master_plan_id')->constrained()->onDelete('cascade');
+            $table->foreignId('masterPlan_id')->constrained()->onDelete('cascade');
         });
     }
 
@@ -22,6 +22,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('developer_property_master_plan');
+        Schema::dropIfExists('developer_property_masterPlan');
     }
 };

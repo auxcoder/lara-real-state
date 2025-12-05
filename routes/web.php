@@ -20,15 +20,10 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\VisitorSubmissionController;
 use App\Http\Controllers\Admin\VendorRegistrationController;
-
-
-
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-
 use App\Http\Controllers\Auth\AuthController;
 
 /*
@@ -80,39 +75,39 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/properties', 'filter')->name('properties.index');
     Route::get('/properties/{location}', 'showPropertiesByLocation')->name('properties.byLocation');
     Route::get('/property-details/{slug}', 'projects')->name('projects');
-    Route::get('/about-us', 'about_us')->name('about_us');
+    Route::get('/about-us', 'aboutUs')->name('aboutUs');
     Route::get('/leadership', 'leadership')->name('leadership');
-    Route::get('/leadership/{slug}', 'leadership_detail')->name('leadership.detail');
+    Route::get('/leadership/{slug}', 'leadershipDetail')->name('leadership.detail');
 
     Route::get('/blog', 'blog')->name('blog');
     Route::get('/blog/{slug}', 'blogdetail')->name('blog.show');
 
     // Route::get('/vendors/registration', 'registration')->name('registration');
 
-    Route::get('/inner-blog', 'inner_blog')->name('inner_blog');
-    Route::get('/contact-us', 'contact_us')->name('contact_us');
+    Route::get('/inner-blog', 'innerBlog')->name('innerBlog');
+    Route::get('/contact-us', 'contactUs')->name('contactUs');
     Route::post('/contact/send', 'emailsend')->name('contact.send');
     Route::get('/offplan', 'offplan')->name('offplan');
-    Route::get('/developer-list', 'developer_list')->name('developer_list');
+    Route::get('/developer-list', 'developerList')->name('developerList');
     Route::get('/location', 'location')->name('location');
-    Route::get('/project-community', 'project_community')->name('project_community');
+    Route::get('/project-community', 'projectCommunity')->name('projectCommunity');
     Route::get('/service', 'service')->name('service');
-    Route::get('/secondary-sale', 'secondary_sale')->name('secondary_sale');
-    // Route::get('/property-details/{slug}', 'property_details')->name('property_details');
-    Route::get('/new-articles', 'new_articles')->name('new_articles');
+    Route::get('/secondary-sale', 'secondarySale')->name('secondarySale');
+    // Route::get('/property-details/{slug}', 'propertyDetails')->name('propertyDetails');
+    Route::get('/new-articles', 'newArticles')->name('newArticles');
     Route::get('/community/{id}', 'community')->name('community');
-    Route::get('/address-residence/{slug}', 'address_residence')->name('address_residence');
-    Route::get('/payment-plan/{slug}', 'payment_plan')->name('payment_plan');
-    Route::get('/location-map/{slug}', 'location_map')->name('location_map');
-    Route::get('/master-plan/{slug}', 'master_plan')->name('master_plan');
-    Route::get('/floor-plan/{slug}', 'floor_plan')->name('floor_plan');
-    Route::get('/community-page/{id}', 'community_page')->name('community_page');
-    Route::get('/developer-page/{id}', 'developer_page')->name('developer_page');
-    Route::get('/term-condition', 'TermCondition')->name('term-condition');
+    Route::get('/address-residence/{slug}', 'addressResidence')->name('addressResidence');
+    Route::get('/payment-plan/{slug}', 'paymentPlan')->name('paymentPlan');
+    Route::get('/location-map/{slug}', 'locationMap')->name('locationMap');
+    Route::get('/master-plan/{slug}', 'masterPlan')->name('masterPlan');
+    Route::get('/floor-plan/{slug}', 'floorPlan')->name('floorPlan');
+    Route::get('/community-page/{id}', 'communityPage')->name('communityPage');
+    Route::get('/developer-page/{id}', 'developerPage')->name('developerPage');
+    Route::get('/term-condition', 'termCondition')->name('term-condition');
     Route::get('/privacy-policy', 'PrivacyPolicy')->name(name: 'privacy-policy');
     // Route::get('/offplan/search',  'filter')->name('offplan_search');
-
 });
+
 Route::get('/complain', [FrontendController::class, 'showForm'])->name('complaint.form');
 Route::post('/complaint-submit', [FrontendController::class, 'submitForm'])->name('complaint.submit');
 Route::get('/search/offplan', [FrontendController::class, 'filter'])->name('offplan_search');
@@ -131,7 +126,6 @@ Route::middleware(['auth'])->group(function () {
 
 // Route::get('property/backfill-slugs', [AgentPropertyController::class, 'backfillSlugs'])->name('property.backfill-slugs');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('roles', RoleController::class);
     Route::resource('permission', PermissionController::class);
@@ -139,7 +133,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::resource('agents', AgentsController::class);
     Route::resource('property', AgentPropertyController::class);
     Route::resource('developers', DeveloperController::class);
-    Route::resource('Amenity', AmenityController::class);
+    Route::resource('amenity', AmenityController::class);
     Route::resource('master-plans', MasterPlanController::class);
     Route::resource('locations', LocationController::class);
     Route::resource('developer_properties', DeveloperPropertyController::class);
@@ -149,16 +143,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::resource('visitor-submissions', VisitorSubmissionController::class)->only(['index', 'show', 'destroy']);
     Route::resource('vendor-registrations', VendorRegistrationController::class)->only(['index', 'show']);
 });
-Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function () {
 
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'role:user']], function () {
     Route::get('user/dashboard', [UserController::class, 'user'])->name('user.dashboard');
 });
 
-Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:user|admin']], function () { });
-
-
-
-
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'role:user|admin']], function () {
+    Route::get('/profile', [UserController::class, 'showProfile']);
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

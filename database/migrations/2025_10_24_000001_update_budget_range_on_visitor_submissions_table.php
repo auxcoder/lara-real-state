@@ -1,16 +1,18 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Update budget_range to string to store human-readable labels.
      */
     public function up(): void
     {
-        DB::statement("ALTER TABLE visitor_submissions MODIFY budget_range VARCHAR(255) NULL");
+        Schema::table('visitor_submissions', function (Blueprint $table) {
+            $table->string('budget_range', 255)->nullable()->change();
+        });
     }
 
     /**
@@ -18,6 +20,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement("ALTER TABLE visitor_submissions MODIFY budget_range INT NULL");
+        Schema::table('visitor_submissions', function (Blueprint $table) {
+            $table->string('budget_range', 255)->nullable()->change();
+        });
     }
 };

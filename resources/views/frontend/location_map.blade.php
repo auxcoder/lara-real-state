@@ -8,11 +8,11 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{ asset('storage/' . $developer_property->location_map) }}" class="img-fluid"
+                        <img src="{{ asset('storage/' . $developer_property->locationMap) }}" class="img-fluid"
                             alt="{{ $developer_property->name }}">
                     </div>
                     <div class="col-md-6">
-                        <p>{{ $developer_property->location_map_description }}</p>
+                        <p>{{ $developer_property->locationMap_description }}</p>
                     </div>
                 </div>
             </div>

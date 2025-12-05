@@ -28,7 +28,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-6">
-                    <a href="{{ route('developer_list') }}">
+                    <a href="{{ route('developerList') }}">
                         <div class="tab-item1 active_bar">
                             <i class="bi bi-house"></i>
                             <h4 class="text-center">Developer</h4>
@@ -44,7 +44,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-6">
-                    <a href="{{ route('project_community') }}">
+                    <a href="{{ route('projectCommunity') }}">
                         <div class="tab-item1">
                             <i class="bi bi-hospital"></i>
                             <h4 class="text-center">Community</h4>
@@ -151,7 +151,7 @@
                     </div>
                     @foreach ($developers as $developer)
                     <div class="row list-one">
-                        <a href="{{ route('developer_page', $developer->id) }}">
+                        <a href="{{ route('developerPage', $developer->id) }}">
                             <div class="property-item d-flex align-items-center">
                                 <div class="col-md-5">
                                     <div class="property-img">

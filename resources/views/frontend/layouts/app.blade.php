@@ -31,7 +31,7 @@
                                 <a class="nav-link" href="{{ route('home') }}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('secondary_sale') }}">Seconadry Properties</a>
+                                <a class="nav-link" href="{{ route('secondarySale') }}">Seconadry Properties</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('offplan') }}">Off Plan</a>
@@ -62,10 +62,10 @@
         </div>
     </section>
     {{-- @php
-        $footerItems = app\Models\AgentProperty::where('developer_id', $developer_property->developer_id)
-            ->latest()
-            ->take(3)
-            ->get();
+    $footerItems = app\Models\AgentProperty::where('developer_id', $developer_property->developer_id)
+    ->latest()
+    ->take(3)
+    ->get();
     @endphp
     <section class="view-sec-02 sec-space">
         <div class="similer-vail mt-4">
@@ -73,22 +73,22 @@
                 <h2>Similar Availabilities in Resale Property</h2>
                 <div class="row mt-4">
                     @foreach ($footerItems as $footerItem)
-                        <div class="col-md-4">
-                            <div class="card1">
-                                <img src="{{ asset('storage/' . $footerItem->cover_image) }}" alt="Card image cap">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $footerItem->price }} AED</h5>
-                                    <ul class="card-detail">
-                                        <li>Bed
-                                            {{ $footerItem->propertyTypes->first()->unit_type }}</li>
-                                        <li>{{ $footerItem->community_name->name ?? '' }}</li>
-                                        <li>{{ $footerItem->propertyTypes->first()->size }} Sq. Ft.</li>
-                                    </ul>
-                                    <a class="btn-detail1" href="{{ route('projects', $footerItem->slug) }}">View
-                                        Deatils</a>
-                                </div>
+                    <div class="col-md-4">
+                        <div class="card1">
+                            <img src="{{ asset('storage/' . $footerItem->cover_image) }}" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $footerItem->price }} AED</h5>
+                                <ul class="card-detail">
+                                    <li>Bed
+                                        {{ $footerItem->propertyTypes->first()->unit_type }}</li>
+                                    <li>{{ $footerItem->community_name->name ?? '' }}</li>
+                                    <li>{{ $footerItem->propertyTypes->first()->size }} Sq. Ft.</li>
+                                </ul>
+                                <a class="btn-detail1" href="{{ route('projects', $footerItem->slug) }}">View
+                                    Deatils</a>
                             </div>
                         </div>
+                    </div>
                     @endforeach
 
                 </div>
@@ -126,8 +126,7 @@
             <div class="row ms-2">
                 <div class="col-md-4">
                     <a href="#"><img src="{{ asset('assets/img/logo-footer01.png') }}" alt=""></a>
-                    {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nisi in nisi semper, vel
-                        consectetur tellus ultricies.</p> --}}
+
                     <div class="foter-social-logo mt-4 mb-4">
                         <a href="#"><i class="fab fa-facebook-square"></i></a>
                         <a href="#"><i class="fab fa-twitter-square"></i></a>
@@ -135,6 +134,7 @@
                         <a href="#"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
+
                 <div class="col-md-3">
                     <h3>Get In Touch</h3>
                     <ul class="icon-text1">
@@ -145,6 +145,7 @@
                         <li><a href="mailto:info@thehr.ae"><i class="bi bi-envelope"></i> info@thehr.ae</a></li>
                     </ul>
                 </div>
+
                 <div class="col-md-2">
                     <h3>Quick links</h3>
                     <ul>
@@ -156,6 +157,7 @@
                         <li><a href="#"><i class="bi bi-arrow-right-short"></i>Villas</a></li>
                         </ul0>
                 </div>
+
                 <div class="col-md-3">
                     <h3>Contact Us</h3>
                     <ul>
@@ -175,6 +177,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="row copyright d-flex align-items-center mt-4">
                 <div class="col-md-6">
                     <p>Copyright © 2024, All rights reserved.</p>
@@ -190,12 +194,11 @@
         </div>
     </footer>
     <!-- Footer End -->
-
-
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    {{--
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    --}}
     <!-- Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 </body>

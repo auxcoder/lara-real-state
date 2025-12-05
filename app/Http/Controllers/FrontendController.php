@@ -17,20 +17,26 @@ use App\Models\MasterPlan;
 use App\Models\Product;
 use App\Models\Blog;
 use App\Models\TeamMember;
-use Config;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use Log;
 
 class FrontendController extends Controller
 {
+    private $property_types = ['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'];
+    private $provinces = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];
+    private $cities = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];
+    private $status = ['sold', 'available', ' off-market'];
+
     public function showForm()
     {
         return view('frontend.complaint');
     }
+
     public function registration()
     {
         return view('frontend.registration');
@@ -161,8 +167,6 @@ class FrontendController extends Controller
         return redirect()->back()->with('success', 'Registration submitted successfully.');
     }
 
-
-
     public function visitForm()
     {
         return view('frontend.visitor', [
@@ -204,8 +208,9 @@ class FrontendController extends Controller
 
         // Store files
         $storePdf = function ($file, $dir) {
-            if (!$file)
+            if (!$file) {
                 return null;
+            }
             $name = $dir . '_' . time() . '_' . uniqid() . '.pdf';
             return $file->storeAs('visitor_uploads/' . $dir, $name, 'public');
         };
@@ -263,12 +268,12 @@ class FrontendController extends Controller
         return redirect()->back()->with('success', 'Your request has been submitted successfully!');
     }
 
-
     public function index()
     {
         $developer_properties = DeveloperProperty::latest()->take(3)->get();
+        $property_types = array_diff($this->property_types, ['Commercial', 'Mall']);
 
-        return view('frontend.index', compact('developer_properties'));
+        return view('frontend.index', compact('developer_properties', 'property_types'));
     }
 
     public function projects($slug)
@@ -276,20 +281,24 @@ class FrontendController extends Controller
         $property = AgentProperty::with('propertygallery')->where('slug', $slug)->firstOrFail();
         return view('frontend.devPropertyDetails', compact('property'));
     }
-    public function about_us()
+
+    public function aboutUs()
     {
         return view('frontend.about-us');
     }
+
     public function leadership()
     {
         $teammembers = TeamMember::all();
         return view('frontend.leadership', compact("teammembers"));
     }
-    public function leadership_detail(string $slug)
+
+    public function leadershipDetail(string $slug)
     {
         $teammember = TeamMember::where('slug', $slug)->firstorfail();
-        return view('frontend.leadership_detail', compact("teammember"));
+        return view('frontend.leadershipDetail', compact("teammember"));
     }
+
     // public function blog()
     // {
     //     $currentLang = session('locale');
@@ -309,6 +318,7 @@ class FrontendController extends Controller
 
     //     return view('frontend.blog', $data);
     // }
+
     public function blog()
     {
         $locale = session('locale');
@@ -321,10 +331,9 @@ class FrontendController extends Controller
 
         return view('frontend.blog', compact('blogs'));
     }
+
     public function blogdetail($slug)
     {
-
-
         $data["blog"] = Blog::where("slug", $slug)->firstOrFail();
         // whereHas('translations', function ($query) use ($slug) {
         //     $query->where('slug', $slug);
@@ -335,7 +344,7 @@ class FrontendController extends Controller
     }
 
 
-    public function inner_blog()
+    public function innerBlog()
     {
         // $data['blog'] = Blog::find($id);
         $data['blogs'] = Blog::get();
@@ -343,7 +352,8 @@ class FrontendController extends Controller
         $data['developer_property'] = DeveloperProperty::first();
         return view('frontend.blog-detail', $data);
     }
-    public function contact_us()
+
+    public function contactUs()
     {
         return view('frontend.contact-us');
     }
@@ -356,10 +366,8 @@ class FrontendController extends Controller
             'phone' => 'required',
             'message' => 'required|string',
         ]);
+
         // Email send
-
-
-
         try {
             // Simple check: Ensure mailer host is set
             if (Config::get('mail.mailers.smtp.host') && Config::get('mail.mailers.smtp.username')) {
@@ -385,31 +393,28 @@ class FrontendController extends Controller
         $developer_property = DeveloperProperty::all();
         $developers = Developer::all();
 
-        \Log::info('Request Parameters: ', $request->all());
+        Log::info('Request Parameters: ', $request->all());
 
         // Paginate developer properties
         $properties = DeveloperProperty::paginate(5);
 
         // dd($minPrice, $maxPrice);  // For debugging
-
-
         // Return filtered data to the view
         return view('frontend.offplan', compact('properties', 'communities', 'developer_property', 'developers'));
     }
 
-
-
-    public function developer_list()
+    public function developerList()
     {
         $developers = Developer::get();
         return view('frontend.developer_list', compact('developers'));
     }
+
     public function location()
     {
         return view('frontend.location');
     }
 
-    public function project_community()
+    public function projectCommunity()
     {
         $comunities = Community::get();
         $totalcomunities = Community::count();
@@ -422,68 +427,68 @@ class FrontendController extends Controller
         return view('frontend.service', compact('developer_property'));
     }
 
-    public function secondary_sale()
+    public function secondarySale()
     {
         $properties = AgentProperty::paginate(5);
         return view('frontend.secondary_properties_sale', compact('properties'));
     }
 
-    public function new_articles()
+    public function newArticles()
     {
         return view('frontend.new_articles');
     }
 
-    public function property_details($slug)
+    public function propertyDetails($slug)
     {
         $property = AgentProperty::where('slug', $slug)->firstOrFail();
         return view('frontend.property_details', compact('property'));
     }
 
-    public function address_residence($slug)
+    public function addressResidence($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
         return view('frontend.address_residence', compact('developer_property'));
     }
 
-    public function payment_plan($slug)
+    public function paymentPlan($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
         return view('frontend.payment_plan', compact('developer_property'));
     }
 
-    public function location_map($slug)
+    public function locationMap($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
         return view('frontend.location_map', compact('developer_property'));
     }
 
-    public function master_plan($slug)
+    public function masterPlan($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
         return view('frontend.master_plan', compact('developer_property'));
     }
 
-    public function floor_plan($slug)
+    public function floorPlan($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
         return view('frontend.floor_plan', compact('developer_property'));
     }
 
-    public function community_page($id)
+    public function communityPage($id)
     {
         $community = Community::with('amenities')->findOrFail($id);
-        return view('frontend.community_page', compact('community'));
+        return view('frontend.communityPage', compact('community'));
     }
 
-    public function developer_page($id)
+    public function developerPage($id)
     {
-        $developers = Developer::with('developers_properties')->findOrFail($id);
-        \Log::info($developers->developers_properties()->toSql());
+        $developers = Developer::with('developersProperties')->findOrFail($id);
+        Log::info($developers->developersProperties()->toSql());
 
-        return view('frontend.developer_page', compact('developers'));
+        return view('frontend.developerPage', compact('developers'));
     }
 
-    public function TermCondition()
+    public function termCondition()
     {
         return view('frontend.term_condition');
     }
@@ -552,10 +557,10 @@ class FrontendController extends Controller
     {
         // dd($request->all(), $location);
         $request->validate([
-            'city' => ['nullable', 'string', Rule::in(['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'])],
-            'community' => ['nullable', 'string', Rule::in(['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'])],
-            'property_type' => ['nullable', 'string', Rule::in(['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'])],
-            'status' => ['nullable', 'string', Rule::in(['sold', 'available'])],
+            'city' => ['nullable', 'string', Rule::in($this->cities)],
+            'community' => ['nullable', 'string', Rule::in($this->provinces)],
+            'property_type' => ['nullable', 'string', Rule::in($this->property_types)],
+            'status' => ['nullable', 'string', Rule::in($this->status)],
         ]);
 
         $allowedLocations = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];
@@ -591,14 +596,12 @@ class FrontendController extends Controller
                 $query->where('property_type', $type)
                     ->where('location', $community);
                 $locationName = __("head_$type");
-            }
-            // If only type is provided
-            elseif ($type) {
+            } elseif ($type) {
+                // If only type is provided
                 $query->where('property_type', $type);
                 $locationName = __("head_$type");
-            }
-            // If only community is provided
-            elseif ($community) {
+            } elseif ($community) {
+                // If only community is provided
                 $query->where('location', $community);
                 $locationName = __($community);
             }
@@ -633,8 +636,10 @@ class FrontendController extends Controller
                     break;
             }
         }
+
         $properties = $query->get();
         // dd($properties);
+
         if ($type) {
             $bannerImage = $bannerImages[$type] ?? 'property-details/bg.png';
         } elseif ($location) {

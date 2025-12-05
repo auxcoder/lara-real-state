@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Developer extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
 
-    public function developers_properties()
+    public function developersProperties()
     {
-        return $this->hasMany(DeveloperProperty::class,); 
+        return $this->hasMany(DeveloperProperty::class);
     }
 }

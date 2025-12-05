@@ -13,7 +13,7 @@
                              <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                          </li>
                          <li class="nav-item">
-                             <a class="nav-link" href="{{ route('about_us') }}">{{ __('About us') }}</a>
+                             <a class="nav-link" href="{{ route('aboutUs') }}">{{ __('About us') }}</a>
                          </li>
                          {{-- <li class="nav-item dropdown">
                              <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button"
@@ -21,7 +21,7 @@
                                  About
                              </a>
                              <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                 <li><a class="dropdown-item" href="{{ route('about_us') }}">About</a></li>
+                                 <li><a class="dropdown-item" href="{{ route('aboutUs') }}">About</a></li>
                                  <li><a class="dropdown-item" href="{{ route('leadership') }}">Leaders</a></li>
                              </ul>
                          </li> --}}
@@ -60,7 +60,7 @@
                              </a>
                              <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
                                  <li><a class="dropdown-item"
-                                         href="{{ route('contact_us') }}">{{ __('Contact us') }}</a></li>
+                                         href="{{ route('contactUs') }}">{{ __('Contact us') }}</a></li>
                                  <li><a class="dropdown-item"
                                          href="{{ route('complaint.form') }}">{{ __('Complaint Form') }}</a></li>
                                  <li><a class="dropdown-item"
@@ -111,7 +111,7 @@
                                          About
                                      </a>
                                      <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                         <li><a class="dropdown-item" href="{{ route('about_us') }}">About</a></li>
+                                         <li><a class="dropdown-item" href="{{ route('aboutUs') }}">About</a></li>
                                          <li><a class="dropdown-item" href="{{ route('leadership') }}">Leaders</a>
                                          </li>
                                      </ul>
@@ -149,7 +149,7 @@
                                          Contact Us
                                      </a>
                                      <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                         <li><a class="dropdown-item" href="{{ route('contact_us') }}">Contact Us</a>
+                                         <li><a class="dropdown-item" href="{{ route('contactUs') }}">Contact Us</a>
                                          </li>
                                          <li><a class="dropdown-item" href="{{ url('complain') }}">Complaint</a></li>
                                          <li><a class="dropdown-item" href="{{ url('visitor') }}">Visitor</a></li>
