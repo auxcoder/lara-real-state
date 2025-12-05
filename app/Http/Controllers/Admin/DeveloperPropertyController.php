@@ -13,6 +13,8 @@ use App\Models\Location;
 use App\Models\MasterPlan;
 use App\Models\PropertyType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class DeveloperPropertyController extends Controller
@@ -31,6 +33,7 @@ class DeveloperPropertyController extends Controller
         $communities = Community::all();
         return view('admin.developer_properties.create', compact('locations', 'communities', 'developers', 'master_plans', 'Amenity'));
     }
+
     public function edit($id)
     {
         $developerProperty = DeveloperProperty::with(['images', 'locations', 'propertyTypes', 'floorPlans', 'masterPlans', 'Amenity'])->findOrFail($id);
@@ -42,10 +45,11 @@ class DeveloperPropertyController extends Controller
 
         return view('admin.developer_properties.create', compact('developerProperty', 'developers', 'communities', 'master_plans', 'locations', 'Amenity'));
     }
+
     private function validateRequest(Request $request, $isUpdate = false)
     {
         $id = $request->route('developer_property') ?? $request->route('developer_properties') ?? null;
-        $slugRule = Rule::unique('developer_properties','slug');
+        $slugRule = Rule::unique('developer_properties', 'slug');
         if ($isUpdate && $id) {
             $slugRule = $slugRule->ignore($id);
         }
@@ -99,7 +103,7 @@ class DeveloperPropertyController extends Controller
         $this->validateRequest($request);
 
         // Start the database transaction
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             // Store the main developer property
@@ -195,12 +199,12 @@ class DeveloperPropertyController extends Controller
             }
 
             // Commit the transaction
-            \DB::commit();
+            DB::commit();
 
             return redirect()->route('developer_properties.index')->with('success', 'Property created successfully!');
         } catch (\Exception $e) {
             // Rollback the transaction on failure
-            \DB::rollBack();
+            DB::rollBack();
             throw $e;
             return redirect()->back()->withErrors(['error' => 'Failed to create property: ' . $e->getMessage()]);
         }
@@ -212,7 +216,7 @@ class DeveloperPropertyController extends Controller
         $this->validateRequest($request, true);
         // dd($request->all());
         // Start the database transaction
-        \DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $developerProperty = DeveloperProperty::findOrFail($id);
@@ -232,7 +236,7 @@ class DeveloperPropertyController extends Controller
                 'construction_percentage' => $request->construction_percentage,
                 'community' => $request->community,
                 // Update images only if they are present
-                'logo' => $this->updateFile($request, 'logo', $developerProperty->logo),  
+                'logo' => $this->updateFile($request, 'logo', $developerProperty->logo),
                 'cover_image' => $this->updateFile($request, 'cover_image', $developerProperty->cover_image),
                 'master_plan_image' => $this->updateFile($request, 'master_plan_image', $developerProperty->master_plan_image),
                 'location_map' => $this->updateFile($request, 'location_map', $developerProperty->location_map),
@@ -256,7 +260,6 @@ class DeveloperPropertyController extends Controller
                         'image' => $imagePath,
                     ]);
                 }
-
                 // Optionally, delete the old images if they were not included in the new upload
             }
 
@@ -310,12 +313,12 @@ class DeveloperPropertyController extends Controller
             }
 
             // Commit the transaction
-            \DB::commit();
+            DB::commit();
 
             return redirect()->route('developer_properties.index')->with('success', 'Property updated successfully!');
         } catch (\Exception $e) {
             // Rollback the transaction on failure
-            \DB::rollBack();
+            DB::rollBack();
             return redirect()->back()->withErrors(['error' => 'Failed to update property: ' . $e->getMessage()]);
         }
     }
@@ -349,8 +352,9 @@ class DeveloperPropertyController extends Controller
         if ($request->hasFile($fieldName)) {
             // Delete old file if it exists
             if ($oldFilePath) {
-                \Storage::disk('public')->delete($oldFilePath);
+                Storage::disk('public')->delete($oldFilePath);
             }
+
             return $this->uploadFile($request, $fieldName);
         }
         return $oldFilePath; // Return old file path if no new file is uploaded

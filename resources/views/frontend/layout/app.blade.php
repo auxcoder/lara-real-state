@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title', 'The H Real Estate | UAE Property Experts')</title>
     <meta name="title" content="@yield('title', 'The H Real Estate | UAE Property Experts')">
-    <meta name="description" content="@yield('description', 'Trusted UAE real estate company offering expert property solutions. Find luxury or affordable homes tailored to your needs with us.')">
+    <meta name="description"
+        content="@yield('description', 'Trusted UAE real estate company offering expert property solutions. Find luxury or affordable homes tailored to your needs with us.')">
     <meta name="keywords" content="" />
     @if (app()->getLocale() == 'ar')
-        <meta name="direction" content="rtl">
+    <meta name="direction" content="rtl">
     @endif
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHSHZHZEWD"></script>
@@ -40,9 +41,9 @@
     <!-- Include Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     @if (app()->getLocale() == 'ar')
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
     @else
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     @endif
 
     <!-- Include Summernote CSS -->
@@ -51,7 +52,7 @@
 
 </head>
 
-<body>
+<body class="bg-light">
 
     @include('frontend.layout.header')
 
@@ -137,10 +138,10 @@
     @if (session('info'))
         toastr.info("{{ session('info') }}")
     @endif
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            toastr.error("{{ $error }}")
-        @endforeach
+    @if ($errors -> any())
+        @foreach($errors -> all() as $error)
+    toastr.error("{{ $error }}")
+    @endforeach
     @endif
 </script>
 @stack('scripts')

@@ -109,7 +109,7 @@
                 <div class="row mt-4">
                     <div class="col-md-4">
                         <div class="property-box1">
-                            <a href="{{ route('property_details', $property->slug) }}"><img src="assets/img/similer-01.png"
+                            <a href="{{ route('propertyDetails', $property->slug) }}"><img src="assets/img/similer-01.png"
                                     alt=""></a>
                             <h4 class="mt-4">Alpina house</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum urna vel velit
@@ -125,7 +125,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="property-box1">
-                            <a href="{{ route('property_details', $property->slug) }}"><img src="assets/img/similer-01.png"
+                            <a href="{{ route('propertyDetails', $property->slug) }}"><img src="assets/img/similer-01.png"
                                     alt=""></a>
                             <h4 class="mt-4">Alpina house</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum urna vel velit
@@ -141,7 +141,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="property-box1">
-                            <a href="{{ route('property_details', $property->slug) }}"><img src="assets/img/similer-01.png"
+                            <a href="{{ route('propertyDetails', $property->slug) }}"><img src="assets/img/similer-01.png"
                                     alt=""></a>
                             <h4 class="mt-4">Alpina house</h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed elementum urna vel velit

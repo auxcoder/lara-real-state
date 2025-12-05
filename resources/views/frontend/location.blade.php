@@ -28,7 +28,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-6">
-                    <a href="{{ route('developer_list') }}">
+                    <a href="{{ route('developerList') }}">
                         <div class="tab-item1">
                             <i class="bi bi-house"></i>
                             <h4 class="text-center">Developer</h4>
@@ -44,7 +44,7 @@
                     </a>
                 </div>
                 <div class="col-md-3 col-6">
-                    <a href="{{ route('project_community') }}">
+                    <a href="{{ route('projectCommunity') }}">
                         <div class="tab-item1">
                             <i class="bi bi-hospital"></i>
                             <h4 class="text-center">Community</h4>

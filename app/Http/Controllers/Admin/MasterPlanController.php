@@ -59,5 +59,4 @@ class MasterPlanController extends Controller
         $masterPlan->delete();
         return response()->json(['success' => true]);
     }
-
 }

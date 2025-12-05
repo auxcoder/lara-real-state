@@ -41,8 +41,8 @@ class DeveloperPropertyFactory extends Factory
             'community' => $this->faker->city,
             'logo' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
             'cover_image' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
-            'master_plan_image' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
-            'location_map' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
+            'masterPlan_image' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
+            'locationMap' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
             'key_highlights' => implode(',', $this->faker->words(rand(3, 7))),
         ];
     }

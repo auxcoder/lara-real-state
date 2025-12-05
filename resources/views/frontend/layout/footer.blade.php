@@ -15,22 +15,34 @@
     .goog-te-gadget-icon {
         display: none !important;
     }
-
-    /* Adjust body position to avoid gap */
-    body {
-        top: 0px !important;
-    }
 </style>
 
-<footer id="footer">
+<footer id="footer" class="mb-4">
     <div class="container">
-        <div class="row ms-2">
+        <div class="row rounded-3 bg-dark-subtle p-3">
+            <div class="col-md-2">
+                <h3>{{ __('Quick links') }}</h3>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="{{ route('service') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Services') }}</a>
+                    </li>
+                    {{-- <li><a href="{{ route('blog') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Blogs') }}</a>
+                        --}}
+                    </li>
+                    <li><a href="{{ route('properties.byLocation', 'Residential') }}"><i
+                                class="bi bi-arrow-right-short"></i>{{ __('Residential') }}</a></li>
+                    {{--<li><a href="{{ route('properties.byLocation', 'Commercial') }}"><i
+                                class="bi bi-arrow-right-short"></i>{{ __('Commercial') }}</a></li>
+                    <li><a href="{{ route('properties.byLocation', 'Mall') }}"><i class="bi bi-arrow-right-short"></i>
+                            {{ __('Mall') }}</a></li> --}}
+                    <li><a href="{{ route('properties.byLocation', 'Villa') }}"><i
+                                class="bi bi-arrow-right-short"></i>{{ __('Villa') }}</a></li>
+                </ul>
+            </div>
+
             <div class="col-md-4 first-col">
-                <a href="{{ route('home') }}"><img src="{{ asset('assets/img/logo-footer02.png') }}" alt="Footer Logo"
-                        title="The H Real Estate Logo" class="footer-logo"></a>
-                {{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod nisi in nisi semper, vel
-                    consectetur tellus ultricies.</p> --}}
-                <div class="foter-social-logo mt-4 mb-4">
+                {{-- <a href="{{ route('home') }}"><img src="{{ asset('assets/img/logo-footer02.png') }}"
+                        alt="Footer Logo" title="The H Real Estate Logo" class="footer-logo"></a> --}}
+                {{-- <div class="foter-social-logo mt-4 mb-4">
                     <a href="https://www.facebook.com/thehr.ae/" target="_blank" rel="noopener noreferrer">
                         <i class="fab fa-facebook-square"></i>
                     </a>
@@ -44,17 +56,14 @@
                         rel="noopener noreferrer">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    {{-- <a href="https://www.snapchat.com/add/thehr.ae" target="_blank" rel="noopener noreferrer">
-                        <i class="fa-brands fa-square-snapchat"></i>
-                    </a> --}}
                     <a href="https://www.youtube.com/channel/UC5LC_NCFImIkl0onSY65vXw" target="_blank"
                         rel="noopener noreferrer">
                         <i class="fa-brands fa-square-youtube"></i>
                     </a>
-
-                </div>
+                </div> --}}
             </div>
-            <div class="col-md-3">
+
+            {{-- <div class="col-md-3">
                 <h3>{{ __('Get In Touch') }}</h3>
                 <ul class="icon-text1">
                     <li>
@@ -68,40 +77,25 @@
                     <li><a href="tel:022222040"><i class="bi bi-telephone-outbound-fill"></i> 022222040</a></li>
                     <li><a href="mailto:info@thehr.ae"><i class="bi bi-envelope"></i> info@thehr.ae</a></li>
                 </ul>
-            </div>
-            <div class="col-md-2">
-                <h3>{{ __('Quick links') }}</h3>
-                <ul>
-                    <li><a href="{{ route('service') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Services') }}</a>
-                    </li>
-                    <li><a href="{{ route('blog') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Blogs') }}</a>
-                    </li>
-                    <li><a href="{{ route('properties.byLocation', 'Residential') }}"><i
-                                class="bi bi-arrow-right-short"></i>{{ __('Residential') }}</a></li>
-                    <li><a href="{{ route('properties.byLocation', 'Commercial') }}"><i
-                                class="bi bi-arrow-right-short"></i>{{ __('Commercial') }}</a></li>
-                    <li><a href="{{ route('properties.byLocation', 'Mall') }}"><i
-                                class="bi bi-arrow-right-short"></i>{{ __('Mall') }}</a></li>
-                    <li><a href="{{ route('properties.byLocation', 'Villa') }}"><i
-                                class="bi bi-arrow-right-short"></i>{{ __('Villa') }}</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
+            </div> --}}
+
+            {{-- <div class="col-md-3">
                 <h3>{{ __('Contact us') }}</h3>
                 <ul>
-                    <li><a href="{{ route('contact_us') }}"><i
-                                class="bi bi-arrow-right-short"></i>{{ __('Contact us') }}</a></li>
-                    <li><a href="{{ route('complaint.form') }}"><i
-                                class="bi bi-arrow-right-short"></i>{{ __('Complaint Form') }}</a>
+                    <li><a href="{{ route('contactUs') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Contact us')
+                            }}</a></li>
+                    <li><a href="{{ route('complaint.form') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Complaint
+                            Form') }}</a>
                     </li>
-                    <li><a href="{{ route('visitor.form') }}"><i
-                                class="bi bi-arrow-right-short"></i>{{ __('Visitor Form') }}</a></li>
-                    <li><a href="{{ route('registration.form') }}"><i
-                                class="bi bi-arrow-right-short"></i>{{ __('Register as vendor') }}</a></li>
+                    <li><a href="{{ route('visitor.form') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Visitor
+                            Form') }}</a></li>
+                    <li><a href="{{ route('registration.form') }}"><i class="bi bi-arrow-right-short"></i>{{
+                            __('Register as vendor') }}</a></li>
                 </ul>
-            </div>
+            </div> --}}
         </div>
-        <div class="row mt-4 d-flex align-items-center ms-2">
+
+        {{-- <div class="row mt-4 d-flex align-items-center ms-2">
             <div class="col-md-6">
                 <h2>{{ __('Newsletter To Get Updated the Latest News') }}</h2>
             </div>
@@ -111,16 +105,20 @@
                     <button class="news__btn">{{ __('Subscribe Now') }}</button>
                 </div>
             </div>
-        </div>
-        <div class="row copyright d-flex align-items-center mt-4">
+        </div> --}}
+
+        <div class="row d-flex align-items-center mt-3 small">
             <div class="col-md-6">
-                <p>{{ __('Copyright © 2025, All rights reserved.') }}</p>
+                {{ __('Copyright © 2025, All rights reserved.') }}
             </div>
-            <div class="col-md-6">
-                <ul class="footer-privacy">
-                    <li><a href="{{ route('term-condition') }}">{{ __('Terms of Service') }}</a></li>
-                    <li><a href="{{ route('privacy-policy') }}">{{ __('Privacy Policy') }}</a></li>
-                    <li><a href="#">{{ __('Cookies') }}</a></li>
+
+            <div class="col-md-6 text-end">
+                <ul class="list-unstyled mb-0">
+                    <li class="list-inline-item"><a href="{{ route('term-condition') }}">{{ __('Terms of Service')
+                            }}</a></li>
+                    <li class="list-inline-item"><a href="{{ route('privacy-policy') }}">{{ __('Privacy Policy') }}</a>
+                    </li>
+                    <li class="list-inline-item"><a href="#">{{ __('Cookies') }}</a></li>
                 </ul>
             </div>
         </div>

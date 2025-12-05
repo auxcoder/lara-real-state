@@ -7,8 +7,8 @@
                     <h3>Payment Plan</h3>
                     <p>Binghatti Dawn presents flexible payment plans by Binghatti Developers tailored to meet the diverse
                         needs of prospective homeowners.</p>
-                    @if (!empty($developer_property->payment_plan))
-                        @foreach ($developer_property->payment_plan as $index => $paymentPlan)
+                    @if (!empty($developer_property->paymentPlan))
+                        @foreach ($developer_property->paymentPlan as $index => $paymentPlan)
                             <h3>{{ $index + 1 }}- {{ $paymentPlan['heading'] }}</h3>
                             <table class="table">
                                 <thead>

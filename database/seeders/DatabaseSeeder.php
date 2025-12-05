@@ -8,8 +8,8 @@ use App\Models\DeveloperProperty;
 use App\Models\Location;
 use App\Models\MasterPlan;
 use App\Models\User;
-use Hash;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
@@ -63,6 +63,5 @@ class DatabaseSeeder extends Seeder
         //     ->withRelations() // This will create and attach master plans, locations, and Amenity
         //     ->count(1)
         //     ->create();
-
     }
 }

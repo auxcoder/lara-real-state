@@ -8,12 +8,12 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <img src="{{ asset('storage/' . $developer_property->master_plan_image) }}" class="img-fluid"
+                        <img src="{{ asset('storage/' . $developer_property->masterPlan_image) }}" class="img-fluid"
                             alt="{{ $developer_property->name }}">
                     </div>
                     <div class="col-md-6">
                         {{-- @dd( $developer_property) --}}
-                        <p>{{ $developer_property->master_plan_description }}</p>
+                        <p>{{ $developer_property->masterPlan_description }}</p>
                     </div>
                 </div>
             </div>

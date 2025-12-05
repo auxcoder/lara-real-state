@@ -100,9 +100,9 @@
                 <div class="col-12">
                     <label class="form-label">Payment Plans</label>
                     <div id="paymentPlansContainer">
-                        {{-- @dd($developerProperty->payment_plan) --}}
-                        @if (isset($developerProperty) && $developerProperty->payment_plan)
-                            @foreach ($developerProperty->payment_plan as $planIndex => $paymentPlan)
+                        {{-- @dd($developerProperty->paymentPlan) --}}
+                        @if (isset($developerProperty) && $developerProperty->paymentPlan)
+                            @foreach ($developerProperty->paymentPlan as $planIndex => $paymentPlan)
                                 <div class="payment-plan mb-4">
                                     <div class="d-flex justify-content-between align-items-center mb-2">
                                         <h3>Payment Plan {{ $planIndex + 1 }}</h3>
@@ -112,7 +112,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">Plan Heading</label>
                                         <input type="text" class="form-control"
-                                            name="payment_plans[{{ $planIndex }}][heading]"
+                                            name="paymentPlans[{{ $planIndex }}][heading]"
                                             value="{{ $paymentPlan['heading'] }}" placeholder="Enter Payment Plan Heading"
                                             required>
                                     </div>
@@ -130,19 +130,19 @@
                                                 <tr>
                                                     <td>
                                                         <input type="text"
-                                                            name="payment_plans[{{ $planIndex }}][installments][{{ $instIndex }}][installment]"
+                                                            name="paymentPlans[{{ $planIndex }}][installments][{{ $instIndex }}][installment]"
                                                             class="form-control" value="{{ $installment['installment'] }}"
                                                             placeholder="Installment" required>
                                                     </td>
                                                     <td>
                                                         <input type="number"
-                                                            name="payment_plans[{{ $planIndex }}][installments][{{ $instIndex }}][payment]"
+                                                            name="paymentPlans[{{ $planIndex }}][installments][{{ $instIndex }}][payment]"
                                                             class="form-control" value="{{ $installment['payment'] }}"
                                                             placeholder="Payment (%)" required>
                                                     </td>
                                                     <td>
                                                         <input type="text"
-                                                            name="payment_plans[{{ $planIndex }}][installments][{{ $instIndex }}][milestone]"
+                                                            name="paymentPlans[{{ $planIndex }}][installments][{{ $instIndex }}][milestone]"
                                                             class="form-control" value="{{ $installment['milestone'] }}"
                                                             placeholder="Milestone" required>
                                                     </td>
@@ -167,7 +167,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Plan Heading</label>
-                                    <input type="text" class="form-control" name="payment_plans[0][heading]"
+                                    <input type="text" class="form-control" name="paymentPlans[0][heading]"
                                         placeholder="Enter Payment Plan Heading" required>
                                 </div>
                                 <table class="table">
@@ -183,15 +183,15 @@
                                         <tr>
                                             <td>
                                                 <input type="text"
-                                                    name="payment_plans[0][installments][0][installment]"
+                                                    name="paymentPlans[0][installments][0][installment]"
                                                     class="form-control" placeholder="Installment" required>
                                             </td>
                                             <td>
-                                                <input type="number" name="payment_plans[0][installments][0][payment]"
+                                                <input type="number" name="paymentPlans[0][installments][0][payment]"
                                                     class="form-control" placeholder="Payment (%)" required>
                                             </td>
                                             <td>
-                                                <input type="text" name="payment_plans[0][installments][0][milestone]"
+                                                <input type="text" name="paymentPlans[0][installments][0][milestone]"
                                                     class="form-control" placeholder="Milestone" required>
                                             </td>
                                             <td>
@@ -291,34 +291,34 @@
                 </div>
 
                 <div class="col-md-6">
-                    <label for="master_plan_image" class="form-label">Master Plan Image</label>
-                    <input type="file" accept="image/*" class="form-control" id="master_plan_image"
-                        name="master_plan_image">
-                    @if (isset($developerProperty) && $developerProperty->master_plan_image)
-                        <img src="{{ asset('storage/' . $developerProperty->master_plan_image) }}"
+                    <label for="masterPlan_image" class="form-label">Master Plan Image</label>
+                    <input type="file" accept="image/*" class="form-control" id="masterPlan_image"
+                        name="masterPlan_image">
+                    @if (isset($developerProperty) && $developerProperty->masterPlan_image)
+                        <img src="{{ asset('storage/' . $developerProperty->masterPlan_image) }}"
                             alt="Master Plan Image" class="img-thumbnail mt-2" style="max-width: 150px;">
                     @endif
                 </div>
 
                 <div class="col-md-6">
-                    <label for="location_map" class="form-label">Location Map</label>
-                    <input type="file" accept="image/*" class="form-control" id="location_map" name="location_map">
-                    @if (isset($developerProperty) && $developerProperty->location_map)
-                        <img src="{{ asset('storage/' . $developerProperty->location_map) }}" alt="Location Map"
+                    <label for="locationMap" class="form-label">Location Map</label>
+                    <input type="file" accept="image/*" class="form-control" id="locationMap" name="locationMap">
+                    @if (isset($developerProperty) && $developerProperty->locationMap)
+                        <img src="{{ asset('storage/' . $developerProperty->locationMap) }}" alt="Location Map"
                             class="img-thumbnail mt-2" style="max-width: 150px;">
                     @endif
                 </div>
 
                 <div class="col-md-6">
-                    <label for="master_plan_description">Master Plan Description</label>
-                    <textarea name="master_plan_description" id="master_plan_description" cols="30" rows="10"
-                        class="form-control" required>{{ isset($developerProperty) ? $developerProperty->master_plan_description : '' }}</textarea>
+                    <label for="masterPlan_description">Master Plan Description</label>
+                    <textarea name="masterPlan_description" id="masterPlan_description" cols="30" rows="10"
+                        class="form-control" required>{{ isset($developerProperty) ? $developerProperty->masterPlan_description : '' }}</textarea>
                 </div>
 
                 <div class="col-md-6">
-                    <label for="location_map_description">Location Map Description</label>
-                    <textarea name="location_map_description" id="location_map_description" cols="30" rows="10"
-                        class="form-control" required>{{ isset($developerProperty) ? $developerProperty->location_map_description : '' }}</textarea>
+                    <label for="locationMap_description">Location Map Description</label>
+                    <textarea name="locationMap_description" id="locationMap_description" cols="30" rows="10"
+                        class="form-control" required>{{ isset($developerProperty) ? $developerProperty->locationMap_description : '' }}</textarea>
                 </div>
 
 
@@ -451,7 +451,7 @@
 
 
                 <div class="col-12">
-                    <label for="floor_plans" class="form-label">Floor Plans</label>
+                    <label for="floorPlans" class="form-label">Floor Plans</label>
                     <table class="table" id="floorPlansTable">
                         <thead>
                             <tr>
@@ -468,17 +468,17 @@
                             @if (isset($developerProperty) && $developerProperty->floorPlans)
                                 @foreach ($developerProperty->floorPlans as $index => $floorPlan)
                                     <tr>
-                                        <td><input type="text" name="floor_plans[{{ $index }}][category]"
+                                        <td><input type="text" name="floorPlans[{{ $index }}][category]"
                                                 class="form-control" value="{{ $floorPlan->category }}" required></td>
-                                        <td><input type="text" name="floor_plans[{{ $index }}][unit_type]"
+                                        <td><input type="text" name="floorPlans[{{ $index }}][unit_type]"
                                                 class="form-control" value="{{ $floorPlan->unit_type }}"></td>
-                                        <td><input type="text" name="floor_plans[{{ $index }}][floor_details]"
+                                        <td><input type="text" name="floorPlans[{{ $index }}][floor_details]"
                                                 class="form-control" value="{{ $floorPlan->floor_details }}"></td>
-                                        <td><input type="text" name="floor_plans[{{ $index }}][sizes]"
+                                        <td><input type="text" name="floorPlans[{{ $index }}][sizes]"
                                                 class="form-control" value="{{ $floorPlan->sizes }}"></td>
-                                        <td><input type="text" name="floor_plans[{{ $index }}][type]"
+                                        <td><input type="text" name="floorPlans[{{ $index }}][type]"
                                                 class="form-control" value="{{ $floorPlan->type }}"></td>
-                                        <td><input type="file" name="floor_plans[{{ $index }}][image]"
+                                        <td><input type="file" name="floorPlans[{{ $index }}][image]"
                                                 class="form-control"></td>
                                         <td><button type="button" class="btn btn-danger remove-floor-plan">-</button>
                                         </td>
@@ -486,14 +486,14 @@
                                 @endforeach
                             @else
                                 <tr>
-                                    <td><input type="text" name="floor_plans[0][category]" class="form-control"
+                                    <td><input type="text" name="floorPlans[0][category]" class="form-control"
                                             required></td>
-                                    <td><input type="text" name="floor_plans[0][unit_type]" class="form-control"></td>
-                                    <td><input type="text" name="floor_plans[0][floor_details]" class="form-control">
+                                    <td><input type="text" name="floorPlans[0][unit_type]" class="form-control"></td>
+                                    <td><input type="text" name="floorPlans[0][floor_details]" class="form-control">
                                     </td>
-                                    <td><input type="text" name="floor_plans[0][sizes]" class="form-control"></td>
-                                    <td><input type="text" name="floor_plans[0][type]" class="form-control"></td>
-                                    <td><input type="file" name="floor_plans[0][image]" class="form-control"></td>
+                                    <td><input type="text" name="floorPlans[0][sizes]" class="form-control"></td>
+                                    <td><input type="text" name="floorPlans[0][type]" class="form-control"></td>
+                                    <td><input type="file" name="floorPlans[0][image]" class="form-control"></td>
                                     <td><button type="button" class="btn btn-danger remove-floor-plan">-</button></td>
                                 </tr>
                             @endif
@@ -504,20 +504,20 @@
                 </div>
 
                 <div class="col-12">
-                    <label for="floor_plan_description">Floor Plan Description</label>
-                    <textarea name="floor_plan_description" id="floor_plan_description" cols="30" rows="10"
-                        class="form-control" required>{{ isset($developerProperty) ? $developerProperty->floor_plan_description : '' }}</textarea>
+                    <label for="floorPlan_description">Floor Plan Description</label>
+                    <textarea name="floorPlan_description" id="floorPlan_description" cols="30" rows="10"
+                        class="form-control" required>{{ isset($developerProperty) ? $developerProperty->floorPlan_description : '' }}</textarea>
 
                 </div>
 
 
                 <div class="col-md-6">
-                    <label for="master_plan" class="form-label">Master Plan</label>
-                    <select class="form-select select2" id="master_plan" name="master_plan_id[]" multiple>
-                        @foreach ($master_plans as $master_plan)
-                            <option value="{{ $master_plan->id }}"
-                                {{ isset($developerProperty) && $developerProperty->masterPlans->contains($master_plan->id) ? 'selected' : '' }}>
-                                {{ $master_plan->name }}</option>
+                    <label for="masterPlan" class="form-label">Master Plan</label>
+                    <select class="form-select select2" id="masterPlan" name="masterPlan_id[]" multiple>
+                        @foreach ($masterPlans as $masterPlan)
+                            <option value="{{ $masterPlan->id }}"
+                                {{ isset($developerProperty) && $developerProperty->masterPlans->contains($masterPlan->id) ? 'selected' : '' }}>
+                                {{ $masterPlan->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -573,7 +573,7 @@
 
             // Initialize payment plan index based on existing plans
             var paymentPlanIndex =
-                {{ isset($developerProperty) && $developerProperty->payment_plans ? $developerProperty->payment_plans->count() : 1 }};
+                {{ isset($developerProperty) && $developerProperty->paymentPlans ? $developerProperty->paymentPlans->count() : 1 }};
 
             // Add Payment Plan
             $('#addPaymentPlan').click(function() {
@@ -585,7 +585,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Plan Heading</label>
-                <input type="text" class="form-control" name="payment_plans[${paymentPlanIndex}][heading]" placeholder="Enter Payment Plan Heading" required>
+                <input type="text" class="form-control" name="paymentPlans[${paymentPlanIndex}][heading]" placeholder="Enter Payment Plan Heading" required>
             </div>
             <table class="table">
                 <thead>
@@ -599,13 +599,13 @@
                 <tbody>
                     <tr>
                         <td>
-                            <input type="text" name="payment_plans[${paymentPlanIndex}][installments][0][installment]" class="form-control" placeholder="Installment" required>
+                            <input type="text" name="paymentPlans[${paymentPlanIndex}][installments][0][installment]" class="form-control" placeholder="Installment" required>
                         </td>
                         <td>
-                            <input type="number" name="payment_plans[${paymentPlanIndex}][installments][0][payment]" class="form-control" placeholder="Payment (%)" required>
+                            <input type="number" name="paymentPlans[${paymentPlanIndex}][installments][0][payment]" class="form-control" placeholder="Payment (%)" required>
                         </td>
                         <td>
-                            <input type="text" name="payment_plans[${paymentPlanIndex}][installments][0][milestone]" class="form-control" placeholder="Milestone" required>
+                            <input type="text" name="paymentPlans[${paymentPlanIndex}][installments][0][milestone]" class="form-control" placeholder="Milestone" required>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm remove-installment">Remove</button>
@@ -627,10 +627,10 @@
                 $('#paymentPlansContainer .payment-plan').each(function(index) {
                     $(this).find('h3').text('Payment Plan ' + (index + 1));
                     // Update input names
-                    $(this).find('input[name^="payment_plans"]').each(function() {
+                    $(this).find('input[name^="paymentPlans"]').each(function() {
                         var name = $(this).attr('name');
-                        var newName = name.replace(/payment_plans\[\d+\]/,
-                            `payment_plans[${index}]`);
+                        var newName = name.replace(/paymentPlans\[\d+\]/,
+                            `paymentPlans[${index}]`);
                         $(this).attr('name', newName);
                     });
                     // Update installment names
@@ -652,13 +652,13 @@
                 var newInstallment = `
         <tr>
             <td>
-                <input type="text" name="payment_plans[${planIdx}][installments][${installmentCount}][installment]" class="form-control" placeholder="Installment" required>
+                <input type="text" name="paymentPlans[${planIdx}][installments][${installmentCount}][installment]" class="form-control" placeholder="Installment" required>
             </td>
             <td>
-                <input type="number" name="payment_plans[${planIdx}][installments][${installmentCount}][payment]" class="form-control" placeholder="Payment (%)" required>
+                <input type="number" name="paymentPlans[${planIdx}][installments][${installmentCount}][payment]" class="form-control" placeholder="Payment (%)" required>
             </td>
             <td>
-                <input type="text" name="payment_plans[${planIdx}][installments][${installmentCount}][milestone]" class="form-control" placeholder="Milestone" required>
+                <input type="text" name="paymentPlans[${planIdx}][installments][${installmentCount}][milestone]" class="form-control" placeholder="Milestone" required>
             </td>
             <td>
                 <button type="button" class="btn btn-danger btn-sm remove-installment">Remove</button>
@@ -743,12 +743,12 @@
             $('.add-floor-plan').click(function() {
                 $('#floorPlansTable tbody').append(`
                     <tr>
-                        <td><input type="text" name="floor_plans[${floorPlanIndex}][category]" class="form-control" required></td>
-                        <td><input type="text" name="floor_plans[${floorPlanIndex}][unit_type]" class="form-control"></td>
-                        <td><input type="text" name="floor_plans[${floorPlanIndex}][floor_details]" class="form-control"></td>
-                        <td><input type="text" name="floor_plans[${floorPlanIndex}][sizes]" class="form-control"></td>
-                        <td><input type="text" name="floor_plans[${floorPlanIndex}][type]" class="form-control"></td>
-                        <td><input type="file" name="floor_plans[${floorPlanIndex}][image]" class="form-control"></td>
+                        <td><input type="text" name="floorPlans[${floorPlanIndex}][category]" class="form-control" required></td>
+                        <td><input type="text" name="floorPlans[${floorPlanIndex}][unit_type]" class="form-control"></td>
+                        <td><input type="text" name="floorPlans[${floorPlanIndex}][floor_details]" class="form-control"></td>
+                        <td><input type="text" name="floorPlans[${floorPlanIndex}][sizes]" class="form-control"></td>
+                        <td><input type="text" name="floorPlans[${floorPlanIndex}][type]" class="form-control"></td>
+                        <td><input type="file" name="floorPlans[${floorPlanIndex}][image]" class="form-control"></td>
                         <td><button type="button" class="btn btn-danger remove-floor-plan">-</button></td>
                     </tr>
                 `);
