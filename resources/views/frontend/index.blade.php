@@ -5,8 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="title" content="The H Real Estate | Trusted UAE Property Experts">
-    <title>The H Real Estate | Trusted UAE Property Experts</title>
-    <link rel="canonical" href="https://thehr.ae/" />
+    <title>The UX Real Estate</title>
+    <link rel="canonical" href="https://real.uxcrafters.com/" />
     <meta name="description"
         content="Find your perfect property with The H Real Estate. Trusted UAE experts in residential, commercial, and luxury real estate solutions." />
     <meta name="keywords" content="" />
@@ -18,12 +18,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHSHZHZEWD"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
         function gtag() {
             dataLayer.push(arguments);
         }
         gtag('js', new Date());
-
         gtag('config', 'G-NHSHZHZEWD');
     </script>
     <!-- Favicons -->
@@ -45,9 +43,11 @@
             <div class="container d-block">
                 <div class="row align-items-center">
                     <div class="col-md-2 col-6">
-                        <a class="navbar-brand" href="/"><img src="{{ asset('assets/img/image 10.png') }}" alt="logo"
-                                class="logo" title="Logo"></a>
+                        <a class="navbar-brand" href="/">
+                            <img src="{{ asset('assets/img/logo-w.png') }}" alt="logo" class="logo" title="Logo">
+                        </a>
                     </div>
+
                     <div class="col-md-8 col-lg-7 mob-1">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
@@ -254,10 +254,11 @@
             <div class="container p-4 rounded-3 shadow bg-light">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="form10">
-                            <h3>{{ __('WHAT ARE YOU LOOKING FOR?') }}</h3>
-                            <p>{{ __('(Easily find the house of your choice)') }}</p>
+                        <div class="le5 d-flex gap-3 align-items-end mb-2">
+                            <h2 class="le-title mb-0">{{ __('WHAT ARE YOU LOOKING FOR?') }}</h2>
+                            {{-- <p class="card-text">{{ __('(Easily find the house of your choice)') }}</p> --}}
                         </div>
+
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
@@ -344,7 +345,7 @@
         </div>
     </section>
 
-    <section>
+    {{-- <section>
         <div class="sec-3">
             <div class="container p-4 rounded-3 shadow">
                 <div class="row">
@@ -396,7 +397,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     {{-- <section>
         <div class="sec-4">
@@ -459,14 +460,14 @@
 
     <!-- Sec 5 -->
     <section>
-        <div class="sec-5">
-            <div class="container p-4 rounded-3 shadow">
+        <div class="sec-5 my-4">
+            <div class="container p-4">
                 <div class="row align-items-center">
-                    <div class="col-md-6 col-7">
+                    <div class="col-12">
                         <div class="le5">
                             <h2 class="le-title">{{ __('Browse by property type') }}</h2>
                             <p class="card-text">
-                                {{-- {{ __('Handpicked projects for you') }} --}}
+                                {{ __('Handpicked projects for you') }}
                             </p>
                         </div>
                     </div>
@@ -476,35 +477,19 @@
                             <a href="">All Properties</a>
                         </div> --}}
                     </div>
+                    {{-- {!! print_r($var, true) !!} --}}
 
                     <div class="d-flex justify-content-center">
                         <div class="owl-carousel type-carol owl-theme mt-4">
+                            @foreach ($property_types as $type)
                             <div class="item">
-                                <img src="{{ asset('assets/img/Residential.webp') }}" alt="Residential"
-                                    title="Residential" />
-                                <a href="{{ route('properties.byLocation', 'Residential') }}">
-                                    <h4>{{ __('Residential') }}</h4>
+                                <img class="rounded-3" src="{{ asset('assets/img/' . $type . '.webp') }}"
+                                    alt="{{ $type }}" title="{{ $type }}" />
+                                <a href="{{ route('properties.byLocation', $type) }}">
+                                    <h4>{{ __( $type ) }}</h4>
                                 </a>
                             </div>
-                            <div class="item">
-                                <img src="{{ asset('assets/img/commercial.webp') }}" alt="Commercial"
-                                    title="Commercial" />
-                                <a href="{{ route('properties.byLocation', 'Commercial') }}">
-                                    <h4>{{ __('Commercial') }}</h4>
-                                </a>
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('assets/img/mall.webp') }}" alt="Mall" title="Mall" />
-                                <a href="{{ route('properties.byLocation', 'Mall') }}">
-                                    <h4>{{ __('Mall') }}</h4>
-                                </a>
-                            </div>
-                            <div class="item">
-                                <img src="{{ asset('assets/img/villa.webp') }}" alt="Villa" title="Villa" />
-                                <a href="{{ route('properties.byLocation', 'Villa') }}">
-                                    <h4>{{ __('Villa') }}</h4>
-                                </a>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

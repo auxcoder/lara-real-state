@@ -27,6 +27,11 @@ use Illuminate\Support\Facades\Storage;
 
 class FrontendController extends Controller
 {
+    private $property_types = ['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'];
+    private $provinces = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];
+    private $cities = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];
+    private $status = ['sold', 'available', ' off-market'];
+
     public function showForm()
     {
         return view('frontend.complaint');
@@ -266,8 +271,9 @@ class FrontendController extends Controller
     public function index()
     {
         $developer_properties = DeveloperProperty::latest()->take(3)->get();
+        $property_types = array_diff($this->property_types, ['Commercial', 'Mall']);
 
-        return view('frontend.index', compact('developer_properties'));
+        return view('frontend.index', compact('developer_properties', 'property_types'));
     }
 
     public function projects($slug)
@@ -551,10 +557,10 @@ class FrontendController extends Controller
     {
         // dd($request->all(), $location);
         $request->validate([
-            'city' => ['nullable', 'string', Rule::in(['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'])],
-            'community' => ['nullable', 'string', Rule::in(['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'])],
-            'property_type' => ['nullable', 'string', Rule::in(['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'])],
-            'status' => ['nullable', 'string', Rule::in(['sold', 'available'])],
+            'city' => ['nullable', 'string', Rule::in($this->cities)],
+            'community' => ['nullable', 'string', Rule::in($this->provinces)],
+            'property_type' => ['nullable', 'string', Rule::in($this->property_types)],
+            'status' => ['nullable', 'string', Rule::in($this->status)],
         ]);
 
         $allowedLocations = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];

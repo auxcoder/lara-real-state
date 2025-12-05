@@ -15,16 +15,11 @@
     .goog-te-gadget-icon {
         display: none !important;
     }
-
-    /* Adjust body position to avoid gap */
-    body {
-        top: 0px !important;
-    }
 </style>
 
 <footer id="footer" class="mb-4">
     <div class="container">
-        <div class="row ms-2 rounded-3 bg-dark-subtle p-3">
+        <div class="row rounded-3 bg-dark-subtle p-3">
             <div class="col-md-2">
                 <h3>{{ __('Quick links') }}</h3>
                 <ul class="list-unstyled mb-0">
