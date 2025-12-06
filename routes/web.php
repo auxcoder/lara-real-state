@@ -38,7 +38,7 @@ Route::get('/login', function () {
 });
 
 Route::get('/lang/{lang}', function ($lang) {
-    if (! in_array($lang, ['en', 'ar'])) {
+    if (! in_array($lang, ['en', 'es', 'ar'])) {
         abort(400);
     }
     session(['locale' => $lang]);

@@ -62,9 +62,9 @@
                      <div class="offcanvas offcanvas-end bg-secondary secondary-1" id="navbarOffcanvas" tabindex="-1"
                          aria-labelledby="offcanvasNavbarLabel">
                          <div class="offcanvas-header">
-                             <a class="navbar-brand" href="/"><img
-                                     src="{{ asset('assets/img/logo-footer01.png') }}" alt="logo"
-                                     class="logo" /></a>
+                             <a class="navbar-brand" href="/">
+                                 <img src="{{ asset('assets/img/logo-footer01.png') }}" alt="logo" class="logo" />
+                             </a>
                              <button type="button" class="btn-close btn-close-white text-reset"
                                  data-bs-dismiss="offcanvas" aria-label="Close"></button>
                          </div>
@@ -128,7 +128,7 @@
                                      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                      <div class="d-inline ms-2">
                                          <a href="{{ route('lang.switch', 'en') }}">EN</a> |
-                                         <a href="{{ route('lang.switch', 'ar') }}">ع</a>
+                                         <a href="{{ route('lang.switch', 'es') }}">ES</a>
                                      </div>
                                  </li>
                              </ul>

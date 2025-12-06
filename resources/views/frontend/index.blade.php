@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 
 @section('content')
-<section>
+<section class="mt-5">
     <div class="hero cover-image-banner py-5">
         <div class="row py-5">
             <div class="container">
@@ -12,15 +12,13 @@
                     </p>
                 </div>
 
-                {{-- <div class="social-link mob-1 social @if (app()->getLocale() == 'ar') arb @endif"> --}}
-                    {{-- <a href="https://www.facebook.com/thehr.ae/"><i class="bi bi-facebook"></i></a> --}}
-                    {{-- <a href="https://x.com/TheHrealestate2"><i class="bi bi-twitter"></i></a> --}}
-                    {{-- <a href="https://www.instagram.com/thehr.ae/"><i class="bi bi-instagram"></i></a> --}}
-                    {{-- <a href="https://www.linkedin.com/company/the-h-real-estate/"><i
-                            class="bi bi-linkedin"></i></a> --}}
-                    {{-- <a href="https://www.youtube.com/channel/UC5LC_NCFImIkl0onSY65vXw"><i --}} {{--
-                            class="bi bi-youtube"></i></a> --}}
-                    {{-- </div> --}}
+                {{-- <div class="d-flex gap-2 social"> --}}
+                {{--     <a href="https://www.facebook.com/thehr.ae/"><i class="bi bi-facebook"></i></a> --}}
+                {{--     <a href="https://x.com/TheHrealestate2"><i class="bi bi-twitter"></i></a> --}}
+                {{--     <a href="https://www.instagram.com/thehr.ae/"><i class="bi bi-instagram"></i></a> --}}
+                {{--     <a href="https://www.linkedin.com/company/the-h-real-estate/"><i class="bi bi-linkedin"></i></a> --}}
+                {{--     <a href="https://www.youtube.com/channel/UC5LC_NCFImIkl0onSY65vXw"><i class="bi bi-youtube"></i></a> --}}
+                {{-- </div> --}}
             </div>
         </div>
     </div>
@@ -88,8 +86,8 @@
     </div>
 </section>
 
-<section class="my-3">
-    <div class="container p-4 rounded-3 shadow">
+<section class="my-4">
+    <div class="container p-4 rounded-3 shadow bg-light">
         <div class="row align-items-center">
             <div class="col-12">
                 <h3 class="m-0 lh-1">{{ __('Popular Locations') }}</h3>
@@ -113,7 +111,7 @@
 </section>
 
 <section class="my-4">
-    <div class="container p-4 rounded-3 shadow">
+    <div class="container p-4 rounded-3 shadow bg-light">
         <div class="row align-items-center">
             <div class="col-12">
                 <h3 class="m-0 lh-1">{{ __('Browse by property type') }}</h3>
