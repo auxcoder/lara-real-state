@@ -8,23 +8,19 @@ use App\Http\Controllers\Admin\CommunityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DeveloperController;
 use App\Http\Controllers\Admin\DeveloperPropertyController;
-use App\Http\Controllers\Admin\LibraryController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\MasterPlanController;
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\TeacherDashboardController;
-use App\Http\Controllers\Admin\StudentDashboardController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TeamController;
-use App\Http\Controllers\Admin\VisitorSubmissionController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VendorRegistrationController;
+use App\Http\Controllers\Admin\VisitorSubmissionController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\ProfileController;
+// use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TestEmailController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,36 +38,23 @@ Route::get('/login', function () {
 });
 
 Route::get('/lang/{lang}', function ($lang) {
-    if (!in_array($lang, ['en', 'ar'])) {
+    if (! in_array($lang, ['en', 'ar'])) {
         abort(400);
     }
     session(['locale' => $lang]);
+
     return back();
 })->name('lang.switch');
 
-Route::get('/test-email', function () {
-    try {
-        \Illuminate\Support\Facades\Mail::raw('This is a test email from Property Marketplace. If you received this, your SMTP configuration is working correctly!', function ($message) {
-            $message->to('dcsyedfaraz@gmail.com')
-                ->subject('SMTP Test Email - Property Marketplace');
-        });
+Route::get('/test-email', [TestEmailController::class, 'sendTestEmail'])->name('test.email');
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Test email sent successfully! Check your inbox at test@example.com'
-        ]);
-    } catch (\Exception $e) {
-        return response()->json([
-            'success' => false,
-            'message' => 'Failed to send email: ' . $e->getMessage()
-        ], 500);
-    }
-})->name('test.email');
-
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
 
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
+
+    Route::post('/subscribe', 'subscribe')->name('blog');
+
     Route::get('/properties', 'filter')->name('properties.index');
     Route::get('/properties/{location}', 'showPropertiesByLocation')->name('properties.byLocation');
     Route::get('/property-details/{slug}', 'projects')->name('projects');

@@ -227,6 +227,5 @@
         </div>
 
         <!-- Include Bootstrap 5 JS and dependencies (Place before closing </body> tag) -->
-
     </div>
 @endsection

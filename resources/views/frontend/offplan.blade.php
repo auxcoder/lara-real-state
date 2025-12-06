@@ -35,90 +35,82 @@ break;
 @section('description', $metaDescription)
 @section('content')
 
-{{--<style>
+<style>
     .propdetails-banner {
         background-repeat: no-repeat, no-repeat;
         background-position: center center, center center;
         background-size: cover, cover;
-
-        height: 70vh;
-        display: flex;
-        align-items: center;
-        text-align: center;
     }
-</style> --}}
+</style>
 <section class="propdetails-banner" style="background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
         url('{{ asset(" assets/images/$bannerImage") }}');">
-    <div class="container">
-        <h2 class="serviceh2">
+    <div class="container py-3">
+        <h2 class="text-center text-white m-0">
             {{ __('propdetails.banner.title', ['location' => $locationName ?? ($location ?? '')]) }}
         </h2>
-        <p class="banner-p">
-            {{ __('propdetails.banner.description') }}
-        </p>
     </div>
 </section>
 
-<section class="about-main">
+<section class="bg-light">
     <div class="container">
         <div class="contact-main project-main">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4"
                     <form id="filter-form" method="GET"
                         data-base-url="{{ route('properties.byLocation', ['location' => '__LOCATION__']) }}"
                         class="filter-form">
+                        <div class="mb-3">
+                            <label for="community" class="form-label">{{ __('filter.heading') }}</label>
+                            <select id="community" name="community" class="form-select mb-1" >
+                                {{-- <option selected>{{ __('filter.city') }}</option> --}}
+                                <option selected value="Dubai" {{ request('city')=='Dubai' ? 'selected' : '' }}>
+                                    {{ __('filter.city.Dubai') }}</option>
+                                <option value="Abu Dhabi" {{ request('city')=='Abu Dhabi' ? 'selected' : '' }}>
+                                    {{ __('filter.city.AbuDhabi') }}</option>
+                                <option value="Sharjah" {{ request('city')=='Sharjah' ? 'selected' : '' }}>
+                                    {{ __('filter.city.Sharjah') }}</option>
+                                <option value="Al Ain" {{ request('city')=='Al Ain' ? 'selected' : '' }}>
+                                    {{ __('filter.city.AlAin') }}</option>
+                                <option value="Fujairah" {{ request('city')=='Fujairah' ? 'selected' : '' }}>
+                                    {{ __('filter.city.Fujairah') }}</option>
+                                <option value="Ras Al Khaimah" {{ request('city')=='Ras Al Khaimah' ? 'selected' : '' }}>
+                                    {{ __('filter.city.RAK') }}</option>
+                            </select>
 
-                        <h4 class="contact1a">{{ __('filter.heading') }}</h4>
+                            <select id="property_type" name="property_type" class="form-select" >
+                                <option disabled selected>{{ __('filter.property_type') }}</option>
+                                <option value="Residential" {{ request('property_type')=='Residential' ? 'selected' : '' }}>
+                                    {{ __('filter.property_type.Residential') }}</option>
+                                <option value="Commercial" {{ request('property_type')=='Commercial' ? 'selected' : '' }}>
+                                    {{ __('filter.property_type.Commercial') }}</option>
+                                <option value="Mall" {{ request('property_type')=='Mall' ? 'selected' : '' }}>
+                                    {{ __('filter.property_type.Mall') }}</option>
+                                <option value="Villa" {{ request('property_type')=='Villa' ? 'selected' : '' }}>
+                                    {{ __('filter.property_type.Villa') }}</option>
+                            </select>
+                        </div>
 
-                        <select id="community" name="community">
-                            {{-- <option selected>{{ __('filter.city') }}</option> --}}
-                            <option selected value="Dubai" {{ request('city')=='Dubai' ? 'selected' : '' }}>
-                                {{ __('filter.city.Dubai') }}</option>
-                            <option value="Abu Dhabi" {{ request('city')=='Abu Dhabi' ? 'selected' : '' }}>
-                                {{ __('filter.city.AbuDhabi') }}</option>
-                            <option value="Sharjah" {{ request('city')=='Sharjah' ? 'selected' : '' }}>
-                                {{ __('filter.city.Sharjah') }}</option>
-                            <option value="Al Ain" {{ request('city')=='Al Ain' ? 'selected' : '' }}>
-                                {{ __('filter.city.AlAin') }}</option>
-                            <option value="Fujairah" {{ request('city')=='Fujairah' ? 'selected' : '' }}>
-                                {{ __('filter.city.Fujairah') }}</option>
-                            <option value="Ras Al Khaimah" {{ request('city')=='Ras Al Khaimah' ? 'selected' : '' }}>
-                                {{ __('filter.city.RAK') }}</option>
-                        </select>
-
-                        <select id="property_type" name="property_type">
-                            <option disabled selected>{{ __('filter.property_type') }}</option>
-                            <option value="Residential" {{ request('property_type')=='Residential' ? 'selected' : '' }}>
-                                {{ __('filter.property_type.Residential') }}</option>
-                            <option value="Commercial" {{ request('property_type')=='Commercial' ? 'selected' : '' }}>
-                                {{ __('filter.property_type.Commercial') }}</option>
-                            <option value="Mall" {{ request('property_type')=='Mall' ? 'selected' : '' }}>
-                                {{ __('filter.property_type.Mall') }}</option>
-                            <option value="Villa" {{ request('property_type')=='Villa' ? 'selected' : '' }}>
-                                {{ __('filter.property_type.Villa') }}</option>
-                        </select>
-
-                        <h4 class="contact1a">{{ __('status') }}</h4>
-                        <select name="status">
-                            <option disabled selected>{{ __('filter.status.select') }}</option>
-                            <option value="sold" {{ request('status')=='sold' ? 'selected' : '' }}>
-                                {{ __('filter.status.sold') }}</option>
-                            <option value="available" {{ request('status')=='available' ? 'selected' : '' }}>
-                                {{ __('filter.status.available') }}</option>
-                        </select>
-
-                        <button type="submit" class="filter-btn">
+                        <div class="mb-3">
+                            <label for="community" class="form-label">{{ __('status') }}</label>
+                            <select id="status" name="status" class="form-select" >
+                                <option disabled selected>{{ __('filter.status.select') }}</option>
+                                <option value="sold" {{ request('status')=='sold' ? 'selected' : '' }}>
+                                    {{ __('filter.status.sold') }}</option>
+                                <option value="available" {{ request('status')=='available' ? 'selected' : '' }}>
+                                    {{ __('filter.status.available') }}</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
                             {{ __('filter.button.search') }}
                         </button>
                     </form>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     @if (isset($location))
-                    <form method="GET" action="{{ route('properties.byLocation', $location) }}" class="search-form">
-
-                        <select name="sort" onchange="this.form.submit()">
+                    <form method="GET" action="{{ route('properties.byLocation', $location) }}" class="search-form d-flex gap-2">
+                        <select name="sort" onchange="this.form.submit()" class="form-select w-25 form-select-sm">
                             <option value="">{{ __('sort.heading') }}</option>
                             <option value="newest" {{ request('sort')=='newest' ? 'selected' : '' }}>
                                 {{ __('sort.newest') }}
@@ -136,19 +128,21 @@ break;
                             </option>
                         </select>
 
-                        <input type="text" placeholder="{{ '    ' . __('sort.search_placeholder') }}" />
+                        <input class="w-75" type="text" placeholder="{{ '    ' . __('sort.search_placeholder') }}" />
                     </form>
                     @endif
 
                     @forelse ($properties as $project)
                     <img src="{{ asset('storage/' . $project->main_image) }}" class="property-image" />
+
                     @if (!is_null($project->price))
-                    <h4 class="property-price">AED {{ number_format($project->price) }}</h4>
+                        <h4 class="">AED {{ number_format($project->price) }}</h4>
                     @else
-                    <h4 class="property-price">{{ __('properties.contact_for_price') }}</h4>
+                        <h4 class="">{{ __('properties.contact_for_price') }}</h4>
                     @endif
-                    <p class="property-det" style="color: white;   ">
-                    </p>
+
+                    <p class="property-det" style="color: white;   "></p>
+
                     <div class="details">
                         {{-- <img src="{{ asset('/assets/images/projects/location.png') }}" width="30" /> --}}
                         <i class="fa-solid fa-location-dot"></i>
@@ -177,23 +171,22 @@ break;
                     <a href="{{ route('projects', $project->slug) }}" class="viewdetails-btn mb-3 text-white">
                         {{ __('filter.button.details') }}
                     </a>
+
                     <hr>
+
                     @empty
-                    <p>{{ __('projects.none') }}</p>
+
+                    <div class="my-3">
+                        <p>{{ __('projects.none') }}</p>
+                    </div>
+
                     @endforelse
                 </div>
             </div>
         </div>
 
-        <div class="about-3">
-            <div class="container">
-                <h3 class="about3a">{{ __('notify.heading') }}</h3>
-                <p class="about3b">{{ __('notify.description') }}</p>
-                <form>
-                    <input type="email" placeholder="{{ __('notify.email_placeholder') }}" name="email" />
-                    <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                </form>
-            </div>
+       <div class="my-3 shadow-sm">
+            <x-subscribe-signup />
         </div>
     </div>
 </section>

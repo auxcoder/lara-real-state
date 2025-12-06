@@ -1,7 +1,5 @@
 # Property Marketplace
 
-![Property Marketplace banner](public/assets/img/project-img1.png)
-
 A modern real estate listing platform built with Laravel. This project powers a marketplace where agents and developers showcase properties and potential buyers can search and explore listings in a beautiful interface.
 
 ## Features
@@ -45,10 +43,6 @@ php artisan serve
 ```bash
 ./vendor/bin/phpunit
 ```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 

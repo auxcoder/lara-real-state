@@ -171,7 +171,7 @@
                     <h2>{{ __('Newsletter To Get Updated the Latest News') }}</h2>
                 </div>
                 <div class="col-md-6">
-                    <div class="news__form">
+                    <div class="d-flex gap-3">
                         <input type="email" placeholder="{{ __('notify.email_placeholder') }}" />
                         <button class="news__btn">{{ __('Subscribe Now') }}</button>
                     </div>
