@@ -7,7 +7,8 @@
         <h2 class="serviceh2">Terms & Condition</h2>
     </div>
 </section>
-<section class="about-main">
+
+<section class="">
     <div class="container">
         <div class="privacy-main">
             <h3 class="priv3">Terms of Use</h3>

@@ -1,4 +1,4 @@
-<div class="p-3 bg-light-subtle rounded-3 row">
+<div class="p-3 bg-body-secondary rounded-3 row">
     <h3 class="text-center">{{ __('notify.heading') }}</h3>
     <p class="">{{ __('notify.description') }}</p>
 

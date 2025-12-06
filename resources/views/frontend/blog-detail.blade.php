@@ -8,7 +8,7 @@
         </div>
     </section> --}}
 
-    <section class="about-main">
+    <section>
         <div class="container">
             <div class="blog-inner">
                 <div class="row">

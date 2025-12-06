@@ -3,7 +3,7 @@
 @section('description', 'Browse our selection of properties for sale across UAE. Find your perfect home with competitive prices and excellent locations.')
 @section('content')
     <!-- Bread Crumb -->
-    <section class="sec-001 bread-crumb">
+    <section class="sec-001">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

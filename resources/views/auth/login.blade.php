@@ -134,22 +134,18 @@
     <!-- END wrapper -->
 
     <!-- Vendor -->
-    <script src="/assets/libs/jquery/jquery.min.js"></script>
-    <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="/assets/libs/jquery/jquery.min.js"></script> --}}
+    {{-- <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
     <script src="/assets/libs/simplebar/simplebar.min.js"></script>
     <script src="/assets/libs/node-waves/waves.min.js"></script>
-    <script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script>
-    <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script>
+    {{-- <script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script> --}}
+    {{-- <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script> --}}
     <script src="/assets/libs/feather-icons/feather.min.js"></script>
 
     <!-- App js-->
-    <script src="/assets/js/app.js"></script>
+    {{-- <script src="/assets/js/app.js"></script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/js-flash-message@1.0.8/index.min.js"></script>
-
-
-
-
 </body>
 
 <!-- Mirrored from zoyothemes.com/kadso/html/auth-login by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Jul 2024 10:45:01 GMT -->

@@ -4,32 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Mail\ComplaintMail;
 use App\Mail\ContactForm;
-use App\Mail\VisitorMail;
 use App\Mail\VendorRegistrationMail;
+use App\Mail\VisitorMail;
 use App\Models\AgentProperty;
+use App\Models\Blog;
 use App\Models\Community;
 use App\Models\Developer;
 use App\Models\DeveloperProperty;
-use App\Models\FloorPlan;
 use App\Models\Information;
-use App\Models\Location;
-use App\Models\MasterPlan;
-use App\Models\Product;
-use App\Models\Blog;
 use App\Models\TeamMember;
 use DB;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class FrontendController extends Controller
 {
     private $property_types = ['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'];
-    private $provinces = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];
-    private $cities = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];
+
+    private $cities = ['Leon', 'Cantabria', 'Asturias', 'Galicia', 'Vasque', 'Catalunya'];
+
     private $status = ['sold', 'available', ' off-market'];
 
     public function showForm()
@@ -63,7 +60,7 @@ class FrontendController extends Controller
 
         // Prepare data for the email
         $data = [
-            'full_name' => $validated['first_name'] . ' ' . $validated['last_name'],
+            'full_name' => $validated['first_name'].' '.$validated['last_name'],
             'phone_number' => $validated['phone_number'],
             'email' => $validated['email'],
             'building_villa' => $validated['building_villa'],
@@ -82,8 +79,9 @@ class FrontendController extends Controller
             //     Log::warning('SMTP configuration not available. Email not sent.');
             // }
         } catch (\Exception $e) {
-            Log::error('Failed to send email: ' . $e->getMessage());
+            Log::error('Failed to send email: '.$e->getMessage());
         }
+
         // Redirect back with success message
         return redirect()->back()->with('success', 'Your complaint has been submitted successfully.');
     }
@@ -109,24 +107,24 @@ class FrontendController extends Controller
         // File uploads
         $tradeLicensePath = $request->file('trade_license')->storeAs(
             'uploads/trade_licenses',
-            'trade_license_' . time() . '.' . $request->file('trade_license')->extension(),
+            'trade_license_'.time().'.'.$request->file('trade_license')->extension(),
             'public'
         );
 
         $emiratesIdPath = $request->file('emirates_id')->storeAs(
             'uploads/emirates_ids',
-            'emirates_id_' . time() . '.' . $request->file('emirates_id')->extension(),
+            'emirates_id_'.time().'.'.$request->file('emirates_id')->extension(),
             'public'
         );
 
         $passportPath = $request->file('passport')->storeAs(
             'uploads/passports',
-            'passport_' . time() . '.' . $request->file('passport')->extension(),
+            'passport_'.time().'.'.$request->file('passport')->extension(),
             'public'
         );
 
         // Database Insertion
-        $registration = new Information();
+        $registration = new Information;
         $registration->name = $validated['name'];
         $registration->email = $validated['email'];
         $registration->phone_number = $validated['phone_number'];
@@ -161,7 +159,7 @@ class FrontendController extends Controller
             //     Log::warning('Vendor registration email skipped because SMTP settings are incomplete.');
             // }
         } catch (\Exception $e) {
-            Log::error('Failed to send vendor registration email: ' . $e->getMessage());
+            Log::error('Failed to send vendor registration email: '.$e->getMessage());
         }
 
         return redirect()->back()->with('success', 'Registration submitted successfully.');
@@ -208,11 +206,12 @@ class FrontendController extends Controller
 
         // Store files
         $storePdf = function ($file, $dir) {
-            if (!$file) {
+            if (! $file) {
                 return null;
             }
-            $name = $dir . '_' . time() . '_' . uniqid() . '.pdf';
-            return $file->storeAs('visitor_uploads/' . $dir, $name, 'public');
+            $name = $dir.'_'.time().'_'.uniqid().'.pdf';
+
+            return $file->storeAs('visitor_uploads/'.$dir, $name, 'public');
         };
 
         $passportPath = $storePdf($request->file('passport'), 'passport');
@@ -223,7 +222,7 @@ class FrontendController extends Controller
         $ecbPath = $storePdf($request->file('etihad_credit_bureau'), 'etihad_credit_bureau');
 
         // Persist to DB
-        $submission = new \App\Models\VisitorSubmission();
+        $submission = new \App\Models\VisitorSubmission;
         $submission->name = $validated['name'];
         $submission->email = $validated['email'];
         $submission->phone_number = $validated['phone_number'];
@@ -272,13 +271,15 @@ class FrontendController extends Controller
     {
         $developer_properties = DeveloperProperty::latest()->take(3)->get();
         $property_types = array_diff($this->property_types, ['Commercial', 'Mall']);
+        $locations = $this->cities;
 
-        return view('frontend.index', compact('developer_properties', 'property_types'));
+        return view('frontend.index', compact('developer_properties', 'property_types', 'locations'));
     }
 
     public function projects($slug)
     {
         $property = AgentProperty::with('propertygallery')->where('slug', $slug)->firstOrFail();
+
         return view('frontend.devPropertyDetails', compact('property'));
     }
 
@@ -290,13 +291,15 @@ class FrontendController extends Controller
     public function leadership()
     {
         $teammembers = TeamMember::all();
-        return view('frontend.leadership', compact("teammembers"));
+
+        return view('frontend.leadership', compact('teammembers'));
     }
 
     public function leadershipDetail(string $slug)
     {
         $teammember = TeamMember::where('slug', $slug)->firstorfail();
-        return view('frontend.leadershipDetail', compact("teammember"));
+
+        return view('frontend.leadershipDetail', compact('teammember'));
     }
 
     // public function blog()
@@ -326,7 +329,7 @@ class FrontendController extends Controller
         $blogs = Blog::with([
             'translations' => function ($q) use ($locale) {
                 $q->where('locale', $locale);
-            }
+            },
         ])->latest()->paginate(9);
 
         return view('frontend.blog', compact('blogs'));
@@ -334,15 +337,15 @@ class FrontendController extends Controller
 
     public function blogdetail($slug)
     {
-        $data["blog"] = Blog::where("slug", $slug)->firstOrFail();
+        $data['blog'] = Blog::where('slug', $slug)->firstOrFail();
         // whereHas('translations', function ($query) use ($slug) {
         //     $query->where('slug', $slug);
         // })->firstOrFail();
         $data['blogs'] = Blog::get();
         $data['developer_property'] = DeveloperProperty::first();
+
         return view('frontend.blog-detail', $data);
     }
-
 
     public function innerBlog()
     {
@@ -350,6 +353,7 @@ class FrontendController extends Controller
         $data['blogs'] = Blog::get();
         // $developer_properties = DeveloperProperty::latest()->take(3)->get();
         $data['developer_property'] = DeveloperProperty::first();
+
         return view('frontend.blog-detail', $data);
     }
 
@@ -376,8 +380,9 @@ class FrontendController extends Controller
                 Log::warning('SMTP configuration not available. Email not sent.');
             }
         } catch (\Exception $e) {
-            Log::error('Failed to send email: ' . $e->getMessage());
+            Log::error('Failed to send email: '.$e->getMessage());
         }
+
         return back()->with('success', 'Your message has been sent successfully!');
     }
 
@@ -406,6 +411,7 @@ class FrontendController extends Controller
     public function developerList()
     {
         $developers = Developer::get();
+
         return view('frontend.developer_list', compact('developers'));
     }
 
@@ -418,18 +424,21 @@ class FrontendController extends Controller
     {
         $comunities = Community::get();
         $totalcomunities = Community::count();
+
         return view('frontend.community', compact('comunities', 'totalcomunities'));
     }
 
     public function service()
     {
         $developer_property = DeveloperProperty::get();
+
         return view('frontend.service', compact('developer_property'));
     }
 
     public function secondarySale()
     {
         $properties = AgentProperty::paginate(5);
+
         return view('frontend.secondary_properties_sale', compact('properties'));
     }
 
@@ -441,42 +450,49 @@ class FrontendController extends Controller
     public function propertyDetails($slug)
     {
         $property = AgentProperty::where('slug', $slug)->firstOrFail();
+
         return view('frontend.property_details', compact('property'));
     }
 
     public function addressResidence($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+
         return view('frontend.address_residence', compact('developer_property'));
     }
 
     public function paymentPlan($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+
         return view('frontend.payment_plan', compact('developer_property'));
     }
 
     public function locationMap($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+
         return view('frontend.location_map', compact('developer_property'));
     }
 
     public function masterPlan($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+
         return view('frontend.master_plan', compact('developer_property'));
     }
 
     public function floorPlan($slug)
     {
         $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+
         return view('frontend.floor_plan', compact('developer_property'));
     }
 
     public function communityPage($id)
     {
         $community = Community::with('amenities')->findOrFail($id);
+
         return view('frontend.communityPage', compact('community'));
     }
 
@@ -497,7 +513,6 @@ class FrontendController extends Controller
     {
         return view('frontend.privacy');
     }
-
 
     public function filter(Request $request)
     {
@@ -525,7 +540,7 @@ class FrontendController extends Controller
         }
 
         if ($request->filled('field3')) {
-            $query->where('name', 'LIKE', '%' . $request->input('field3') . '%');
+            $query->where('name', 'LIKE', '%'.$request->input('field3').'%');
         }
 
         if ($request->has('sort')) {
@@ -558,7 +573,7 @@ class FrontendController extends Controller
         // dd($request->all(), $location);
         $request->validate([
             'city' => ['nullable', 'string', Rule::in($this->cities)],
-            'community' => ['nullable', 'string', Rule::in($this->provinces)],
+            'community' => ['nullable', 'string', Rule::in($this->cities)],
             'property_type' => ['nullable', 'string', Rule::in($this->property_types)],
             'status' => ['nullable', 'string', Rule::in($this->status)],
         ]);

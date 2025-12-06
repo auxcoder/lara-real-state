@@ -27,8 +27,8 @@
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Summernote CSS & JS -->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet"> --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script> --}}
     {{-- Select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -286,11 +286,11 @@
     </footer>
     <!-- Vendor -->
     {{-- <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script> --}}
-    <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script> --}}
     <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
     <script src="{{ asset('assets/libs/node-waves/waves.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/libs/waypoints/lib/jquery.waypoints.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/libs/jquery.counterup/jquery.counterup.min.js') }}"></script> --}}
     <script src="{{ asset('assets/libs/feather-icons/feather.min.js') }}"></script>
 
     <!-- Apexcharts JS -->
@@ -321,34 +321,34 @@
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
             $('.select2').select2();
-            $('#description').summernote({
-                height: 200, // Set the height of the editor
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-            $('.description').summernote({
-                height: 200, // Set the height of the editor
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    ['insert', ['link', 'picture', 'video']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
+            // $('#description').summernote({
+            //     height: 200, // Set the height of the editor
+            //     toolbar: [
+            //         ['style', ['style']],
+            //         ['font', ['bold', 'italic', 'underline', 'clear']],
+            //         ['fontname', ['fontname']],
+            //         ['fontsize', ['fontsize']],
+            //         ['color', ['color']],
+            //         ['para', ['ul', 'ol', 'paragraph']],
+            //         ['table', ['table']],
+            //         ['insert', ['link', 'picture', 'video']],
+            //         ['view', ['fullscreen', 'codeview', 'help']]
+            //     ]
+            // });
+            // $('.description').summernote({
+            //     height: 200, // Set the height of the editor
+            //     toolbar: [
+            //         ['style', ['style']],
+            //         ['font', ['bold', 'italic', 'underline', 'clear']],
+            //         ['fontname', ['fontname']],
+            //         ['fontsize', ['fontsize']],
+            //         ['color', ['color']],
+            //         ['para', ['ul', 'ol', 'paragraph']],
+            //         ['table', ['table']],
+            //         ['insert', ['link', 'picture', 'video']],
+            //         ['view', ['fullscreen', 'codeview', 'help']]
+            //     ]
+            // });
         });
 
         document.addEventListener("DOMContentLoaded", function() {
