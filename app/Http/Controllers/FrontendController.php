@@ -12,6 +12,7 @@ use App\Models\Community;
 use App\Models\Developer;
 use App\Models\DeveloperProperty;
 use App\Models\Information;
+use App\Models\Location;
 use App\Models\TeamMember;
 // use DB;
 use Illuminate\Http\Request;
@@ -153,6 +154,7 @@ class FrontendController extends Controller
         ];
 
         try {
+            // FIX: store mail to address out of code, system setting
             Mail::to('info@thehr.ae')->send(new VendorRegistrationMail($emailData));
             // if (Config::get('mail.mailers.smtp.host') && Config::get('mail.mailers.smtp.username')) {
             // } else {
@@ -271,9 +273,10 @@ class FrontendController extends Controller
     {
         $developer_properties = DeveloperProperty::latest()->take(3)->get();
         $property_types = array_diff($this->property_types, ['Commercial', 'Mall']);
-        $locations = $this->cities;
+        $cities = $this->cities;
+        $communities = Location::all()->toArray();
 
-        return view('frontend.index', compact('developer_properties', 'property_types', 'locations'));
+        return view('frontend.index', compact('developer_properties', 'property_types', 'cities', 'communities'));
     }
 
     public function projects($slug)
@@ -550,15 +553,16 @@ class FrontendController extends Controller
 
     public function showPropertiesByLocation(Request $request, $location)
     {
-        // dd($request->all(), $location);
+        $allCommunities = Location::all();
+        $slugs = array_column($allCommunities->toArray(), 'slug');
         $request->validate([
             'city' => ['nullable', 'string', Rule::in($this->cities)],
-            'community' => ['nullable', 'string', Rule::in($this->cities)],
+            'community' => ['nullable', 'string', Rule::in($slugs)],
             'property_type' => ['nullable', 'string', Rule::in($this->property_types)],
             'status' => ['nullable', 'string', Rule::in($this->status)],
         ]);
 
-        $allowedLocations = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'];
+        $allowedLocations = ['galicia', 'cantabria', 'asturias', 'euskadi', 'aragon',  'catalunya', 'navarra', 'rioja', 'valencia'];
         $allowedTypes = ['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'];
 
         $allowedAll = array_merge($allowedLocations, $allowedTypes);
@@ -576,7 +580,8 @@ class FrontendController extends Controller
         $type = $request->query('property_type'); // e.g. “Residential”
         $status = $request->query('status'); // e.g. “Residential”
         $community = $request->query('community');
-        // $communities = Community::all();
+        $communities = $allCommunities->whereIn('slug', $allowedLocations)->sortBy('name');
+        // dd($request->all(), $location, $communities);
         // $developers = Developer::all();
 
         $query = AgentProperty::query();
@@ -646,7 +651,7 @@ class FrontendController extends Controller
 
         return view('frontend.offplan', compact(
             'properties',
-            // 'communities',
+            'communities',
             // 'developers',
             'location',
             'locationName',

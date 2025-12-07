@@ -1,24 +1,14 @@
 @extends('frontend.layout.app')
 
 @section('content')
-<section class="mt-5">
+<section class="">
     <div class="hero cover-image-banner py-5">
         <div class="row py-5">
             <div class="container">
                 <div class="col-lg-8">
                     <h1>{{ __('Modern Apartments Exclusive Listing') }}</h1>
-                    <p>
-                        {{ __('Get the features you in all the property we offer at the best price you can get') }}
-                    </p>
+                    <p>{{ __('Get the features you in all the property we offer at the best price you can get') }}</p>
                 </div>
-
-                {{-- <div class="d-flex gap-2 social"> --}}
-                {{--     <a href="https://www.facebook.com/thehr.ae/"><i class="bi bi-facebook"></i></a> --}}
-                {{--     <a href="https://x.com/TheHrealestate2"><i class="bi bi-twitter"></i></a> --}}
-                {{--     <a href="https://www.instagram.com/thehr.ae/"><i class="bi bi-instagram"></i></a> --}}
-                {{--     <a href="https://www.linkedin.com/company/the-h-real-estate/"><i class="bi bi-linkedin"></i></a> --}}
-                {{--     <a href="https://www.youtube.com/channel/UC5LC_NCFImIkl0onSY65vXw"><i class="bi bi-youtube"></i></a> --}}
-                {{-- </div> --}}
             </div>
         </div>
     </div>
@@ -96,12 +86,16 @@
                 </p>
             </div>
 
-            <div class="card-group mt-2">
-                @foreach ($locations as $place)
-                <div class="col card">
-                    <img class="card-img-top" src="{{ asset('assets/img/' . $place . '.webp') }}" alt="{{ $place }} picture" title="{{ $place }}" />
-                    <div class="card-body">
-                        <a class="" href="{{ route('properties.byLocation', $place) }}">{{ __($place) }}</a>
+            <div class="row row-cols-1 row-cols-md-6 g-1 mt-1">
+                @foreach ($communities as $community)
+                <div class="col">
+                    <div class="card h-100">
+                        {{-- {!! print_r($community['slug'], true) !!} --}}
+
+                        <a class="small lh-sm" href="{{ route('properties.byLocation', $community['slug']) }}">
+                            <img class="card-img-top" src="{{ asset('assets/img/flags/' . $community['image']) }}"
+                                alt="{{ $community['name'] }} flag" title="{{ $community['name'] }}" />
+                        </a>
                     </div>
                 </div>
                 @endforeach
@@ -119,8 +113,6 @@
                     {{ __('Handpicked projects for you') }}
                 </p>
             </div>
-
-            {{-- {!! print_r($var, true) !!} --}}
 
             <div class="card-group mt-2">
                 @foreach ($property_types as $type)

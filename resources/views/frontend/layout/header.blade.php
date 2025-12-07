@@ -1,10 +1,10 @@
  <header class="header">
-     <nav class="navbar navbar-light fixed-top bg-light navbar-expand-lg z-5">
+     <nav class="navbar navbar-light bg-light navbar-expand-lg z-5">
          <div class="container d-block">
              <div class="row align-items-center">
                  <div class="col-md-2 col-6">
-                     <a class="navbar-brand" href="/">LISTING
-                         {{-- <img src="{{ asset('assets/img/x.png') }}" alt="logo" class="logo" title="Logo" /> --}}
+                     <a class="navbar-brand" href="/">
+                         <img src="{{ asset('assets/img/logo-countryside-g.jpg') }}" alt="logo" class="logo" title="Logo" />
                      </a>
                  </div>
 
@@ -63,7 +63,7 @@
                          aria-labelledby="offcanvasNavbarLabel">
                          <div class="offcanvas-header">
                              <a class="navbar-brand" href="/">
-                                 <img src="{{ asset('assets/img/logo-footer01.png') }}" alt="logo" class="logo" />
+                                 <img src="{{ asset('assets/img/logo-countryside-g.jpg') }}" alt="logo" class="logo" />
                              </a>
                              <button type="button" class="btn-close btn-close-white text-reset"
                                  data-bs-dismiss="offcanvas" aria-label="Close"></button>

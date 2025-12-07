@@ -48,32 +48,22 @@ if (isset($location)) {
     </div>
 </section>
 
-<section class="bg-light">
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-md-3"
+<section class="my-3">
+    <div class="container">
+        <div class="row bg-light p-3 rounded-3">
+            <div class="col-md-3
                 <form id="filter-form" method="GET"
                     data-base-url="{{ route('properties.byLocation', ['location' => '__LOCATION__']) }}"
                     class="filter-form">
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <label for="community" class="form-label">{{ __('filter.heading') }}</label>
-                        <select id="community" name="community" class="form-select mb-1" >
-                            {{-- <option selected>{{ __('filter.city') }}</option> --}}
-                            <option selected value="Dubai" {{ request('city')=='Dubai' ? 'selected' : '' }}>
-                                {{ __('filter.city.Dubai') }}</option>
-                            <option value="Abu Dhabi" {{ request('city')=='Abu Dhabi' ? 'selected' : '' }}>
-                                {{ __('filter.city.AbuDhabi') }}</option>
-                            <option value="Sharjah" {{ request('city')=='Sharjah' ? 'selected' : '' }}>
-                                {{ __('filter.city.Sharjah') }}</option>
-                            <option value="Al Ain" {{ request('city')=='Al Ain' ? 'selected' : '' }}>
-                                {{ __('filter.city.AlAin') }}</option>
-                            <option value="Fujairah" {{ request('city')=='Fujairah' ? 'selected' : '' }}>
-                                {{ __('filter.city.Fujairah') }}</option>
-                            <option value="Ras Al Khaimah" {{ request('city')=='Ras Al Khaimah' ? 'selected' : '' }}>
-                                {{ __('filter.city.RAK') }}</option>
+                        <select id="community" name="community" class="form-select form-select-sm mb-1" >
+                            @foreach ($communities as $community)
+                            <option value="$community->slug" {{ request('location') == $community->slug? 'selected' : '' }}>{{ $community->name }}</option>
+                            @endforeach
                         </select>
 
-                        <select id="property_type" name="property_type" class="form-select" >
+                        <select id="property_type" name="property_type" class="form-select form-select-sm">
                             <option disabled selected>{{ __('filter.property_type') }}</option>
                             <option value="Residential" {{ request('property_type')=='Residential' ? 'selected' : '' }}>
                                 {{ __('filter.property_type.Residential') }}</option>
@@ -86,16 +76,15 @@ if (isset($location)) {
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="community" class="form-label">{{ __('status') }}</label>
-                        <select id="status" name="status" class="form-select" >
+                    <div class="mb-2">
+                        <label for="status" class="form-label">{{ __('status') }}</label>
+                        <select id="status" name="status" class="form-select form-select-sm">
                             <option disabled selected>{{ __('filter.status.select') }}</option>
-                            <option value="sold" {{ request('status')=='sold' ? 'selected' : '' }}>
-                                {{ __('filter.status.sold') }}</option>
-                            <option value="available" {{ request('status')=='available' ? 'selected' : '' }}>
-                                {{ __('filter.status.available') }}</option>
+                            <option value="sold" {{ request('status')=='sold' ? 'selected' : '' }}>{{ __('filter.status.sold') }}</option>
+                            <option value="available" {{ request('status')=='available' ? 'selected' : '' }}>{{ __('filter.status.available') }}</option>
                         </select>
                     </div>
+
                     <button type="submit" class="btn btn-primary btn-sm">
                         {{ __('filter.button.search') }}
                     </button>
