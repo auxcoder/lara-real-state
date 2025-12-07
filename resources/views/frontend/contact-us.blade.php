@@ -26,7 +26,8 @@
             </p>
         </div>
     </section>
-    <section class="about-main">
+
+    <section class="">
         <div class="container">
             <div class="contact-main">
                 <div class="row">

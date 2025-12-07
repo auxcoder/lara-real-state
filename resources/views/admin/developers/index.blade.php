@@ -1,6 +1,5 @@
 @extends('admin.layout.master')
 
-
 @section('content')
     <div class="container">
         <a href="{{ route('developers.create') }}" class="btn btn-primary mb-3">Add Developer</a>

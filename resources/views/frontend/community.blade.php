@@ -4,7 +4,7 @@
 world-class amenities and strategic locations.')
 @section('content')
 <!-- Bread Crumb -->
-<section class="sec-001 bread-crumb">
+<section class="sec-001">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

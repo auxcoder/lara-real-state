@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 @section('content')
  <!-- Bread Crumb -->
- <section class="sec-001 bread-crumb">
+ <section class="sec-001">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -84,7 +84,7 @@
                             <a href="#"><i class="bi bi-play"></i></a>
                         </div>
                     </div>
-                    <a class="btn10 mt-4" href="#">View More</a>
+                    <a class="btn btn-primary mt-4" href="#">View More</a>
                 </div>
             </div>
         </div>

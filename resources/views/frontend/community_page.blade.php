@@ -1,15 +1,13 @@
 @extends('frontend.layout.app')
+
 @section('content')
     <!-- Bread Crumb -->
-    <section class="sec-001 bread-crumb">
+    <section class="sec-001">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-
-
                     <h1 class="text-center">{{ $community->name }}</h1>
                     <p class="text-center"><a href="/">Home</a> / <a href="#">Services</a></p>
-
                 </div>
             </div>
     </section>

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('team_members', function (Blueprint $table) {
-  			$table->text('experience')->nullable()->after('description'); // Adding a new experience field
+            $table->text('experience')->nullable()->after('description'); // Adding a new experience field
             $table->text('languages')->nullable()->after('experience'); // Adding a new experience field
-  
+
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
     {
         Schema::table('team_members', function (Blueprint $table) {
             //
-			$table->dropColumn('experience'); // Remove column if rolling back
-			$table->dropColumn('languages'); // Remove column if rolling back
+            $table->dropColumn('experience'); // Remove column if rolling back
+            $table->dropColumn('languages'); // Remove column if rolling back
         });
     }
 };

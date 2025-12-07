@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 @section('title', 'The H Real Estate | Complaint Form')
 @section('content')
-    <section class="sec-001 bread-crumb">
+    <section class="sec-001">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -227,6 +227,5 @@
         </div>
 
         <!-- Include Bootstrap 5 JS and dependencies (Place before closing </body> tag) -->
-
     </div>
 @endsection

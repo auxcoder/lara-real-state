@@ -31,5 +31,4 @@ return new class extends Migration
             $table->dropColumn('locationMap_description');
         });
     }
-
 };

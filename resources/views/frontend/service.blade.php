@@ -5,20 +5,19 @@
 
 @section('content')
     <section class="service">
-        <div class="container">
-            <h2 class="serviceh2">{{ __('Services') }}</h2>
-            <p class="banner-p">
+        <div class="text-center py-5">
+            <h2 class="text-white">{{ __('Services') }}</h2>
+            <p class="text-white">
                 {{ __('We are a full-service real estate company in UAE that is able to assist you with all your real estate needs.') }}
             </p>
         </div>
     </section>
-    <section class="about-main">
+
+    <section class="">
         <div class="container">
             <div class="service1 d-flex justify-content-center">
                 <div class="service-imgbox">
                     <a href="#">
-                        <img src="{{ asset('assets/images/service/s1.png') }}" alt="Property Management"
-                            title="Property Management" />
                         <h3>{{ __('Property Management') }}</h3>
                         {{-- <p>{{ __('Experienced real estate professionals on our team can help you manage your properties efficiently.') }}</p> --}}
                     </a>
@@ -39,8 +38,6 @@
                 </div> --}}
                 <div class="service-imgbox">
                     <a href="#">
-                        <img src="{{ asset('assets/images/service/s6.jpg') }}" alt="Facility Management"
-                            title="Facility Management" />
                         <h3>{{ __('Facility Management') }}</h3>
                         {{-- <p>{{ __('What makes Property Angel the best NRI Property Management.') }}</p> --}}
                     </a>
@@ -53,6 +50,7 @@
                     </a>
                 </div> --}}
             </div>
+
             <div class="about-3">
                 {{-- <div class="container">
                     <h3 class="about3a">{{ __('Be the first to know.') }}</h3>

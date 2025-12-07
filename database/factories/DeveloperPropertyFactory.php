@@ -24,7 +24,7 @@ class DeveloperPropertyFactory extends Factory
     public function definition(): array
     {
         $directory = 'public/storage/images';
-        if (!is_dir($directory)) {
+        if (! is_dir($directory)) {
             mkdir($directory, 0755, true);
         }
 
@@ -39,13 +39,14 @@ class DeveloperPropertyFactory extends Factory
             'down_percentage' => $this->faker->randomFloat(2, 0, 100),
             'construction_percentage' => $this->faker->randomFloat(2, 0, 100),
             'community' => $this->faker->city,
-            'logo' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
-            'cover_image' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
-            'masterPlan_image' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
-            'locationMap' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false),
+            'logo' => 'images/'.$this->faker->image('public/storage/images', 640, 480, null, false),
+            'cover_image' => 'images/'.$this->faker->image('public/storage/images', 640, 480, null, false),
+            'masterPlan_image' => 'images/'.$this->faker->image('public/storage/images', 640, 480, null, false),
+            'locationMap' => 'images/'.$this->faker->image('public/storage/images', 640, 480, null, false),
             'key_highlights' => implode(',', $this->faker->words(rand(3, 7))),
         ];
     }
+
     public function withRelations()
     {
         return $this->afterCreating(function (DeveloperProperty $developerProperty) {

@@ -21,7 +21,7 @@
         </div>
     </section>
 
-    <section class="about-main">
+    <section class="">
         <div class="container-fluid">
             {{-- <div class="about1">
                 <div class="row align-items-center">

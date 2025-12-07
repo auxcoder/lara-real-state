@@ -4,18 +4,20 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
 @endpush
+
 @section('content')
-    <section class="sec-001 bread-crumb"
+    <section class="py-5 cover-image-banner"
         style="background-image: url('{{ asset('assets/images/about/visitor banner.jpg') }}');">
-        <div class="container">
+        <div class="container text-white">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="text-center">{{ __('Visitor Form') }}</h1>
-                    <p class="text-center"><a href="/">{{ __('Home') }}</a> / <a
-                            href="#">{{ __('Visitor Form') }}</a></p>
+                    <p class="text-center"><a href="/" class="text-white">{{ __('Home') }}</a> / <span>{{ __('Visitor Form') }}</span></p>
                 </div>
             </div>
+        </div>
     </section>
+
     <div class="container mt-5">
         @if (session('success'))
             <div class="alert alert-success">
@@ -33,15 +35,15 @@
             </div>
         @endif
 
-
         <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="card shadow-sm">
-                        <div class="card-header text-white" style="background-color:#007681">
-                            <h4 class="mb-0">{{ __('Submit a Request of Visitor') }}</h4>
-                        </div>
                         <div class="card-body">
+                            <div class="card-title" >
+                                <h4 class="mb-0">{{ __('Submit a Request of Visitor') }}</h4>
+                            </div>
+
                             <form action="{{ route('visitor.submit') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
@@ -139,8 +141,7 @@
                                 </div>
                                 <!-- Submit Button -->
                                 <div class="d-grid">
-                                    <button type="submit" style="background-color:#007681; border: #007681"
-                                        class="btn btn-dark btn-lg">{{ __('Submit Request') }}</button>
+                                    <button type="submit" class="btn btn-dark">{{ __('Submit Request') }}</button>
                                 </div>
                             </form>
 
