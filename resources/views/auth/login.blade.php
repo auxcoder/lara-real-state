@@ -15,9 +15,9 @@
         <div class="row align-items-center justify-content-center vh-100">
             <div class="col-md-4 col-xl-4 col-lg-4">
                 <div class="text-center">
-                    {{-- <div class="mb-4">
-                         <img class="auth-logo" src="{{ asset('assets/img/logo.png') }}" alt="logo-dark" class="mx-auto" height="80" />
-                    </div> --}}
+                    <div class="mb-4">
+                         <img class="auth-logo" src="{{ asset('assets/img/logo-countryside-c.jpeg') }}" alt="logo-dark" class="mx-auto" height="150" />
+                    </div>
 
                     <div class="mb-3">
                         <h3 class="text-dark fs-20 fw-medium mb-2">
