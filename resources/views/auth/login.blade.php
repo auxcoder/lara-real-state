@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
     <meta charset="utf-8" />
     <title>Log In </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc." />
-    <meta name="author" content="Zoyothemes" />
+    <meta name="description" content="Login page" />
+    <meta name="author" content="Auxcoder" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
@@ -16,7 +16,9 @@
             <div class="col-md-4 col-xl-4 col-lg-4">
                 <div class="text-center">
                     <div class="mb-4">
-                         <img class="auth-logo" src="{{ asset('assets/img/logo-countryside-c.jpeg') }}" alt="logo-dark" class="mx-auto" height="150" />
+                        <a class='text-decoration-none' href='{{ route('home') }}'>
+                            <img class="auth-logo" src="{{ asset('assets/img/logo-countryside-c.jpeg') }}" alt="logo-dark" class="mx-auto" height="150" />
+                        </a>
                     </div>
 
                     <div class="mb-3">
