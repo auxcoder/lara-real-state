@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('team_members', function (Blueprint $table) {
             //
-			$table->string('image')->nullable();
+            $table->string('image')->nullable();
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('team_members', function (Blueprint $table) {
             //
-			 $table->dropColumn('image'); 
+            $table->dropColumn('image');
         });
     }
 };
