@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::table('team_members', function (Blueprint $table) {
             //
-			$table->text('NID')->nullable()->after('languages'); // Adding a new experience field
+            $table->text('NID')->nullable()->after('languages'); // Adding a new experience field
             $table->text('descripton')->nullable()->after('NID'); // Adding a new experience field
-  
+
         });
     }
 
@@ -26,9 +26,9 @@ return new class extends Migration
     {
         Schema::table('team_members', function (Blueprint $table) {
             //
-			$table->dropColumn('NID'); // Remove column if rolling back
-			$table->dropColumn('descripton'); // Remove column if rolling back
-      
+            $table->dropColumn('NID'); // Remove column if rolling back
+            $table->dropColumn('descripton'); // Remove column if rolling back
+
         });
     }
 };

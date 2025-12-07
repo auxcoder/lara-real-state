@@ -15,15 +15,14 @@
             color: #fff;
         }
     </style>
-    <section class="propdetails-banner"
-        style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('{{ $bannerImage }}');">
+    <section class="propdetails-banner" style="background-image: url('{{ $bannerImage }}');">
         <div class="container">
             <h2 class="serviceh2">@lang('properties.property_detail')</h2>
             <p class="banner-p">@lang('properties.banner_description')</p>
         </div>
     </section>
 
-    <section class="about-main">
+    <section class="">
         <div class="container">
             <div class="contact-main">
                 <div class="row">
@@ -99,18 +98,6 @@
                     </div>
                 </div>
             </div>
-
-            {{-- <div class="about-3">
-                <div class="container">
-                    <h3 class="about3a">Be the first to know.</h3>
-                    <p class="about3b">We invite you to register below and we’ll be in touch with exclusive updates and
-                        announcements about pre-leasing opportunities.</p>
-                    <form>
-                        <input type="email" placeholder="Enter Your Email Address" name="email" />
-                        <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
-                    </form>
-                </div>
-            </div> --}}
         </div>
     </section>
 @endsection

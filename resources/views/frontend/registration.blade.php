@@ -1,18 +1,19 @@
 @extends('frontend.layout.app')
-@section('title', 'The H Real Estate | Registration Form')
+@section('title', 'The UX Real Estate | Registration Form')
+
 @section('content')
-    <section class="sec-001 bread-crumb"
+    <section class="cover-image-banner"
         style="background-image: url('{{ asset('assets/images/about/vendor banner.jpg') }}');">
-        <div class="container">
+        <div class="container py-5 text-white">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="text-center">{{ __('Register as vendor') }}</h1>
-                    <p class="text-center"><a href="/">{{ __('Home') }}</a> / <a
-                            href="#">{{ __('Register as vendor') }}</a></p>
+                    <p class="text-center"><a href="/" class="text-white">{{ __('Home') }}</a> / <span class="text-white">{{ __('Register as vendor') }}</span>
                 </div>
             </div>
     </section>
-    <div class="container mt-5">
+
+    <div class="container my-5">
 
         @if (session('success'))
             <div class="alert alert-success">
@@ -23,16 +24,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow-sm">
-                    <div class="card-header text-white text-center" style="background-color: #007681;">
-                        <h4>{{ __('Submit Your Information') }}</h4>
-                    </div>
-
-
-
                     <div class="card-body">
+                        <h3 class="card-title">{{ __('Submit Your Information') }}</h3>
+
                         <form method="POST" action="{{ route('registration.submit') }}" enctype="multipart/form-data">
                             @csrf
-
                             <!-- Name -->
                             <div class="form-group row mb-3">
                                 <label for="name"

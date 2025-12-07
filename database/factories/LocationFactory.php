@@ -18,7 +18,7 @@ class LocationFactory extends Factory
     {
         return [
             'name' => $this->faker->city, // Generates a fake city name
-            'image' => 'images/' . $this->faker->image('public/storage/images', 640, 480, null, false), // Generates a random image
+            'image' => 'images/'.$this->faker->image('public/storage/images', 640, 480, null, false), // Generates a random image
         ];
     }
 }

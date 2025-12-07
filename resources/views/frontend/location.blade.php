@@ -4,7 +4,7 @@
 @section('content')
 
  <!-- Bread Crumb -->
-  <section class="sec-001 bread-crumb">
+<section class="sec-001">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -12,6 +12,7 @@
                 <p class="text-center"><a href="/">Home</a> / <a href="#">Offplan Projects</a></p>
             </div>
         </div>
+    </div>
 </section>
 <!-- Bread Crumb End -->
 
