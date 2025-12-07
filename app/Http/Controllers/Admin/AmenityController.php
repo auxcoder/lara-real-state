@@ -8,14 +8,13 @@ use App\Models\Community;
 use Illuminate\Http\Request;
 use Storage;
 
-
 class AmenityController extends Controller
 {
     public function index()
     {
-        // Retrieve all Amenity
         $Amenity = Amenity::all();
         $communities = Community::all();
+
         return view('admin.amenities.index', compact('Amenity', 'communities'));
     }
 
@@ -36,7 +35,6 @@ class AmenityController extends Controller
             'description' => 'required|string',
         ]);
 
-
         // Store the logo and save the path
         $imagePath = $request->file('logo')->store('logos', 'public');
 
@@ -46,7 +44,6 @@ class AmenityController extends Controller
             'logo' => $imagePath,
             'description' => $request->description,
         ]);
-
 
         return redirect()->route('Amenity.index')->with('success', 'Amenity created successfully.');
     }
@@ -60,6 +57,7 @@ class AmenityController extends Controller
     public function edit($id)
     {
         $amenity = Amenity::findOrFail($id);
+
         // Show the edit form
         return view('admin.amenities.edit', compact('amenity'));
     }
@@ -107,4 +105,3 @@ class AmenityController extends Controller
         return redirect()->route('Amenity.index')->with('success', 'Amenity deleted successfully.');
     }
 }
-
