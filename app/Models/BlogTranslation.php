@@ -10,7 +10,8 @@ class BlogTranslation extends Model
     use HasFactory;
 
     protected $guarded = [];
-    public $timestamps = false; // 👈 ADD THIS LINE
+
+    public $timestamps = false; //  ADD THIS LINE
 
     public function blog()
     {

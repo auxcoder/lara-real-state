@@ -13,7 +13,7 @@ use App\Models\Developer;
 use App\Models\DeveloperProperty;
 use App\Models\Information;
 use App\Models\TeamMember;
-use DB;
+// use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
@@ -302,26 +302,6 @@ class FrontendController extends Controller
         return view('frontend.leadershipDetail', compact('teammember'));
     }
 
-    // public function blog()
-    // {
-    //     $currentLang = session('locale');
-
-    //     $query = Blog::orderBy('created_at', 'desc');
-
-    //     switch ($currentLang) {
-    //         case 'ar':
-    //             $query->where('target_audience', 'UAE');
-    //             break;
-    //         default:
-    //             $query->where('target_audience', 'International');
-    //             break;
-    //     }
-
-    //     $data['blogs'] = $query->paginate(10);
-
-    //     return view('frontend.blog', $data);
-    // }
-
     public function blog()
     {
         $locale = session('locale');
@@ -335,7 +315,7 @@ class FrontendController extends Controller
         return view('frontend.blog', compact('blogs'));
     }
 
-    public function blogdetail($slug)
+    public function blogDetail($slug)
     {
         $data['blog'] = Blog::where('slug', $slug)->firstOrFail();
         // whereHas('translations', function ($query) use ($slug) {
@@ -362,7 +342,7 @@ class FrontendController extends Controller
         return view('frontend.contact-us');
     }
 
-    public function emailsend(Request $request)
+    public function emailSend(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255',

@@ -63,13 +63,13 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/leadership/{slug}', 'leadershipDetail')->name('leadership.detail');
 
     Route::get('/blog', 'blog')->name('blog');
-    Route::get('/blog/{slug}', 'blogdetail')->name('blog.show');
+    Route::get('/blog/{slug}', 'blogDetail')->name('blog.show');
 
     // Route::get('/vendors/registration', 'registration')->name('registration');
 
     Route::get('/inner-blog', 'innerBlog')->name('innerBlog');
     Route::get('/contact-us', 'contactUs')->name('contactUs');
-    Route::post('/contact/send', 'emailsend')->name('contact.send');
+    Route::post('/contact/send', 'emailSend')->name('contact.send');
     Route::get('/offplan', 'offplan')->name('offplan');
     Route::get('/developer-list', 'developerList')->name('developerList');
     Route::get('/location', 'location')->name('location');

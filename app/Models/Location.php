@@ -10,6 +10,7 @@ class Location extends Model
     use HasFactory;
 
     protected $guarded = [];
+
     public function developerProperties()
     {
         return $this->belongsToMany(DeveloperProperty::class, 'developer_property_location')
