@@ -85,7 +85,7 @@
         <div class="container">
             <div class="row ms-2">
                 <div class="col-md-4">
-                    <a href="#"><img src="{{ asset('assets/img/logo-footer01.png') }}" alt=""></a>
+                    <a href="#"><img src="{{ asset('assets/img/logo-countryside-g.jpg') }}" alt=""></a>
 
                     <div class="foter-social-logo mt-4 mb-4">
                         <a href="#"><i class="fab fa-facebook-square"></i></a>
