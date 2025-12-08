@@ -8,14 +8,13 @@ use App\Models\Community;
 use Illuminate\Http\Request;
 use Storage;
 
-
 class AmenityController extends Controller
 {
     public function index()
     {
-        // Retrieve all Amenity
         $Amenity = Amenity::all();
         $communities = Community::all();
+
         return view('admin.amenities.index', compact('Amenity', 'communities'));
     }
 
@@ -36,7 +35,6 @@ class AmenityController extends Controller
             'description' => 'required|string',
         ]);
 
-
         // Store the logo and save the path
         $imagePath = $request->file('logo')->store('logos', 'public');
 
@@ -47,19 +45,19 @@ class AmenityController extends Controller
             'description' => $request->description,
         ]);
 
-
-        return redirect()->route('Amenity.index')->with('success', 'Amenity created successfully.');
+        return redirect()->route('amenity.index')->with('success', 'Amenity created successfully.');
     }
 
     public function show(Amenity $amenity)
     {
         // Show a single Amenity
-        return view('admin.Amenity.show', compact('amenity'));
+        return view('admin.amenity.show', compact('amenity'));
     }
 
     public function edit($id)
     {
         $amenity = Amenity::findOrFail($id);
+
         // Show the edit form
         return view('admin.amenities.edit', compact('amenity'));
     }
@@ -94,7 +92,7 @@ class AmenityController extends Controller
             $amenity->communities()->sync($request->community_ids);
         }
 
-        return redirect()->route('Amenity.index')->with('success', 'Amenity updated successfully.');
+        return redirect()->route('amenity.index')->with('success', 'Amenity updated successfully.');
     }
 
     public function destroy($id)
@@ -104,7 +102,6 @@ class AmenityController extends Controller
         Storage::disk('public')->delete($Amenity->logo);
         $Amenity->delete();
 
-        return redirect()->route('Amenity.index')->with('success', 'Amenity deleted successfully.');
+        return redirect()->route('amenity.index')->with('success', 'Amenity deleted successfully.');
     }
 }
-
