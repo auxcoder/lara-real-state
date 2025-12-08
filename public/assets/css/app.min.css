@@ -14099,24 +14099,6 @@ fieldset:disabled .btn {
     transition: all 0.1s ease-out;
 }
 
-.nav-second-level li a {
-    padding: 8px 20px;
-    color: #2f384f;
-    display: block;
-    position: relative;
-    transition: all 0.4s;
-    font-size: 0.875rem;
-}
-
-.nav-second-level li a:focus,
-.nav-second-level li a:hover {
-    color: #07c;
-}
-
-.nav-second-level li.active > a {
-    color: #07c;
-}
-
 .menu-arrow {
     transition: transform 0.15s;
     position: absolute;
@@ -14270,10 +14252,6 @@ li.menuitem-active > a:not(.collapsed) > span.menu-arrow {
 .page-title-box .page-title-right {
     float: right;
     margin-top: 22px;
-}
-
-.page-title-box .breadcrumb {
-    padding-top: 5px;
 }
 
 @media (max-width: 767.98px) {
@@ -15331,10 +15309,6 @@ body.loading {
     font-size: 14px;
     margin-bottom: 28px;
     color: #6c757d;
-}
-
-.pricing-box .plan-stats {
-    margin-bottom: 32px;
 }
 
 .pricing-box .plan-stats li {
