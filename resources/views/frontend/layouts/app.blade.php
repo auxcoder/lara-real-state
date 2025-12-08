@@ -7,7 +7,7 @@
     <title>View Properties</title>
     <meta name="description" content="" />
     <meta name="keywords" content="" />
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo-footer01.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo-countryside-fav.png') }}">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 </head>
@@ -56,8 +56,6 @@
         </div>
     </section> --}}
 
-
-
     <!-- Logo Carousel Start -->
     {{-- <section>
         <div class="sec-7">
@@ -80,6 +78,7 @@
             </div>
         </div>
     </section> --}}
+
     <!-- Footer Start -->
     <footer id="footer">
         <div class="container">

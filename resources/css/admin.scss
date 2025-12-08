@@ -1,0 +1,59 @@
+// 1. DEFINE YOUR CUSTOM COLORS/VARIABLES
+$primary: #205154;
+$secondary: #222222;
+$ternary: #ffdb49;
+$success: #1e8449;
+$info: #49c3e9;
+$warning: #ff9d49;
+$danger: #d0362d; //  #ff4136;
+$light: #eaeff2;
+// $dark: $gray-900;
+
+$spacer: 1.25rem; // Optional: Adjusting default spacing scale
+
+// 2. Import the main Bootstrap Sass file
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+// 3. Your custom SCSS styles go below this import
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body[data-menu-color="dark"] .app-sidebar-menu {
+    background-color: var(--bs-dark);
+    box-shadow: none;
+}
+.app-sidebar-menu {
+    height: 100%;
+    background: var(--bs-light);
+    // bottom: 0;
+    // padding-top: 70px;
+    // transition: all 0.1s ease-out;
+    // top: 0;
+    // box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.04);
+
+    .logo-box {
+        width: 260px;
+        transition: all 0.1s ease-out;
+    }
+}
+
+#sidebarWrapper {
+    width: 260px;
+    position: fixed;
+    height: 100vh;
+}
+
+#contentWrapper {
+    position: absolute;
+    width: 100%;
+    left: 260px;
+}
+
+@media print {
+    .topbar-custom {
+        display: none !important;
+    }
+}

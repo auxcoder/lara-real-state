@@ -25,18 +25,11 @@
         gtag('config', 'G-NHSHZHZEWD');
     </script>
     <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo-footer01.png') }}">
-    <!-- Font Awesome 5+ -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/logo-countryside-fav.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
-    <!-- Bootstrap Files -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" /> --}}
-    {{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" /> --}}
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"> --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <!-- Include Bootstrap CSS -->
-    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     {{-- @if (app()->getLocale() == 'ar') --}}
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css" rel="stylesheet"> --}}
     {{-- @else --}}
