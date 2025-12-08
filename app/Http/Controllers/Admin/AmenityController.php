@@ -45,13 +45,13 @@ class AmenityController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect()->route('Amenity.index')->with('success', 'Amenity created successfully.');
+        return redirect()->route('amenity.index')->with('success', 'Amenity created successfully.');
     }
 
     public function show(Amenity $amenity)
     {
         // Show a single Amenity
-        return view('admin.Amenity.show', compact('amenity'));
+        return view('admin.amenity.show', compact('amenity'));
     }
 
     public function edit($id)
@@ -92,7 +92,7 @@ class AmenityController extends Controller
             $amenity->communities()->sync($request->community_ids);
         }
 
-        return redirect()->route('Amenity.index')->with('success', 'Amenity updated successfully.');
+        return redirect()->route('amenity.index')->with('success', 'Amenity updated successfully.');
     }
 
     public function destroy($id)
@@ -102,6 +102,6 @@ class AmenityController extends Controller
         Storage::disk('public')->delete($Amenity->logo);
         $Amenity->delete();
 
-        return redirect()->route('Amenity.index')->with('success', 'Amenity deleted successfully.');
+        return redirect()->route('amenity.index')->with('success', 'Amenity deleted successfully.');
     }
 }

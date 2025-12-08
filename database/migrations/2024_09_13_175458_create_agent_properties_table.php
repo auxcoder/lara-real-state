@@ -35,7 +35,7 @@ return new class extends Migration
         Schema::create('property_translations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('property_id')->constrained('agent_properties')->onDelete('cascade');
-            $table->string('locale')->index(); // 'en', 'ar', etc.
+            $table->string('locale')->index(); // 'en', 'ar', 'es', etc.
             $table->string('title');
             $table->text('description')->nullable();
             $table->unique(['property_id', 'locale']);

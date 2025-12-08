@@ -1,6 +1,5 @@
 @extends('admin.layout.master')
 
-
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
@@ -17,16 +16,16 @@
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Name:</strong>
-            {{ $user->name }}
+            <strong>Name:</strong> {{ $user->name }}
         </div>
     </div>
+
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Email:</strong>
-            {{ $user->email }}
+            <strong>Email:</strong> {{ $user->email }}
         </div>
     </div>
+
     {{-- <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Roles:</strong>
@@ -36,6 +35,6 @@
                 @endforeach
             @endif
         </div>
-    </div>
-</div> --}}
+    </div> --}}
+</div>
 @endsection

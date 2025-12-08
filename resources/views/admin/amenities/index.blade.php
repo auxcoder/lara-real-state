@@ -5,7 +5,8 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Amenity List</h1>
-                <a href="{{ route('Amenity.create') }}" class="btn btn-primary mb-3">Add Amenity</a>
+
+                <a href="{{ route('amenity.create') }}" class="btn btn-primary mb-3">Add Amenity</a>
 
                 <table class="table table-bordered">
                     <thead>

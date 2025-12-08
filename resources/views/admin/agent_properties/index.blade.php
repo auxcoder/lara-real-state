@@ -5,12 +5,12 @@
         <h1>Properties</h1>
         <a href="{{ route('property.create') }}" class="btn btn-primary mb-3">Add New Property</a>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-compact">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Title</th>
-                    <th>Location</th>           
+                    <th>Location</th>
                     <th>Type</th>
                     <th>Price</th>
                     <th>Area (sq meter)</th>

@@ -13,43 +13,47 @@ $spacer: 1.25rem; // Optional: Adjusting default spacing scale
 
 // 2. Import the main Bootstrap Sass file
 @import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
 
 // 3. Your custom SCSS styles go below this import
+html {
+    position: relative;
+    min-height: 100%;
+}
 
 body[data-menu-color="dark"] .app-sidebar-menu {
     background-color: var(--bs-dark);
     box-shadow: none;
 }
 .app-sidebar-menu {
-    width: 260px;
+    height: 100%;
     background: var(--bs-light);
-    bottom: 0;
-    padding-top: 70px;
-    position: fixed;
-    transition: all 0.1s ease-out;
-    top: 0;
-    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.04);
+    // bottom: 0;
+    // padding-top: 70px;
+    // transition: all 0.1s ease-out;
+    // top: 0;
+    // box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.04);
 
     .logo-box {
-        height: 70px;
         width: 260px;
-        position: fixed;
-        padding: 0 20px;
-        top: 0;
         transition: all 0.1s ease-out;
+    }
+}
 
-        .logo {
-            // line-height: 70px;
-            span.logo-sm {
-                display: none;
-            }
-            span.logo-lg {
-                display: block;
-            }
-        }
+#sidebarWrapper {
+    width: 260px;
+    position: fixed;
+    height: 100vh;
+}
 
-        .logo-light {
-            display: none;
-        }
+#contentWrapper {
+    position: absolute;
+    width: 100%;
+    left: 260px;
+}
+
+@media print {
+    .topbar-custom {
+        display: none !important;
     }
 }
