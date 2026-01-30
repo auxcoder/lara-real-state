@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
@@ -16,12 +17,17 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $status
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AgentProperty> $properties
+ * @property-read int|null $properties_count
  * @method static \Illuminate\Database\Eloquent\Builder|Agents active()
  * @method static \Illuminate\Database\Eloquent\Builder|Agents newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Agents newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Agents onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Agents query()
  * @method static \Illuminate\Database\Eloquent\Builder|Agents whereBio($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Agents whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Agents whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Agents whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Agents whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Agents whereLicenseNumber($value)
@@ -30,16 +36,23 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Agents whereProfileImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Agents whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Agents whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Agents withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Agents withoutTrashed()
  * @mixin \Eloquent
  */
 class Agents extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $guarded = [];
 
     public function scopeActive($query)
     {
         return $query->where('status', 'active');
+    }
+
+    public function properties()
+    {
+        return $this->hasMany(AgentProperty::class, 'agent_id');
     }
 }

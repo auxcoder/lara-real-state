@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property int $id
  * @property string $name
+ * @property string $slug
  * @property string $email
  * @property string $position
  * @property string $description
+ * @property string|null $experience
+ * @property string|null $languages
+ * @property string|null $NID
+ * @property string|null $descripton
  * @property string|null $facebook
  * @property string|null $twitter
  * @property string|null $linkedin
@@ -18,12 +23,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $image
- * @property string|null $experience
- * @property string|null $languages
- * @property string|null $NID
- * @property string|null $descripton
  * @property string $specialties
- * @property string $slug
  * @method static \Illuminate\Database\Eloquent\Builder|TeamMember newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TeamMember newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|TeamMember query()

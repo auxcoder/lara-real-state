@@ -43,6 +43,7 @@ class AgentPropertyController extends Controller
 
         // Validate incoming request
         $request->validate([
+            'agent_id' => 'required|exists:agents,id',
             'title' => 'required|array',
             'title.*' => 'required|string|max:255',
 
@@ -69,6 +70,7 @@ class AgentPropertyController extends Controller
 
         // Create the new property
         $property = new AgentProperty();
+        $property->agent_id = $request->agent_id;
         $property->location = $request->location;
         $property->property_type = $request->property_type;
         $property->transaction_type = $request->transaction_type;
@@ -137,6 +139,7 @@ class AgentPropertyController extends Controller
         $locales = ['en', 'ar'];
 
         $request->validate([
+            'agent_id' => 'required|exists:agents,id',
             'title' => 'required|array',
             'title.*' => 'required|string|max:255',
 
@@ -161,6 +164,7 @@ class AgentPropertyController extends Controller
         ]);
 
         $property = AgentProperty::findOrFail($id);
+        $property->agent_id = $request->agent_id;
         $property->location = $request->location;
         $property->property_type = $request->property_type;
         $property->transaction_type = $request->transaction_type;
