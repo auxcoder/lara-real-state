@@ -1,6 +1,6 @@
  <div class="app-sidebar-menu">
      <div class="h-100" data-simplebar>
-         <div id="sidebarMenu">
+         <div id="sidebarMenu" class="bg-dark">
              <div class="w-100 bg-primary">
                  <a class='d-block mx-auto ms-3' href='{{ route('home') }}'>
                     <img src="{{ asset('assets/img/logo-countryside-g.jpg') }}" alt="" height="70">
@@ -28,15 +28,24 @@
                              </span>
                          </a>
                          <div class="collapse {{ request()->routeIs(['users.*', 'roles.*', 'permission.*']) ? 'show' : '' }}" id="sidebarExpages">
-                             <ul class="nav-second-level">
-                                 {{-- <li class="{{ request()->routeIs('permission.*') ? 'menuitem-active' : '' }}">
-                                         <a href='{{ route('permission.index') }}'>Permmision</a>
-                                     </li>
-                                     <li class="{{ request()->routeIs('roles.*') ? 'menuitem-active' : '' }}">
-                                         <a href='{{ route('roles.index') }}'>Roles</a>
-                                     </li> --}}
-                                 <li class=" {{ request()->routeIs('users.*') ? 'menuitem-active' : '' }}">
-                                     <a class="text-white" href='{{ route('users.index') }}'>User Management</a>
+                             <ul class="nav-second-level list-unstyled ms-2">
+                                 <li class="{{ request()->routeIs('permission.*') ? 'menuitem-active' : '' }}">
+                                     <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('permission.index') }}'>
+                                         <i class="bi bi-person-lock"></i>
+                                         Permmision
+                                     </a>
+                                 </li>
+                                 <li class="{{ request()->routeIs('roles.*') ? 'menuitem-active' : '' }}">
+                                     <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('roles.index') }}'>
+                                         <i class="bi bi-person-rolodex"></i>
+                                         Roles
+                                     </a>
+                                 </li>
+                                 <li class="{{ request()->routeIs('users.*') ? 'menuitem-active' : '' }}">
+                                     <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('users.index') }}'>
+                                         <i class="bi bi-person-plus"></i>
+                                         User Management
+                                     </a>
                                  </li>
                              </ul>
                          </div>
@@ -65,13 +74,13 @@
                          <i class="bi bi-users"></i>
                          <span> Agents </span>
                      </a>
+                 </li>
+                 <li class="{{ request()->routeIs('blogs.*') ? 'menuitem-active' : '' }}">
+                    <a href='{{ route('blogs.index') }}'>
+                        <i class="bi bi-file-text"></i>
+                        <span>Blog</span>
+                    </a>
                  </li> --}}
-                 {{-- <li class="{{ request()->routeIs('blogs.*') ? 'menuitem-active' : '' }}"> --}}
-                 {{--     <a href='{{ route('blogs.index') }}'> --}}
-                 {{--         <i class="bi bi-file-text"></i> --}}
-                 {{--         <span>Blog</span> --}}
-                 {{--     </a> --}}
-                 {{-- </li> --}}
                  <li class="nav-item {{ request()->routeIs('Amenity.*') ? 'menuitem-active' : '' }}">
                      <a class="nav-link text-white" href="{{ route('amenity.index') }}">
                          <i class="bi bi-star"></i>
@@ -96,24 +105,24 @@
                          <span>Communities</span>
                      </a>
                  </li>
-                 {{-- <li class="{{ request()->routeIs('team.*') ? 'menuitem-active' : '' }}"> --}}
-                 {{--     <a href='{{ route('team.index') }}'> --}}
-                 {{--         <i class="bi bi-microsoft-teams"></i> --}}
-                 {{--         <span>Team</span> --}}
-                 {{--     </a> --}}
-                 {{-- </li> --}}
-                {{-- <li class="{{ request()->routeIs('visitor-submissions.*') ? 'menuitem-active' : '' }}"> --}}
-                {{--     <a href='{{ route('visitor-submissions.index') }}'> --}}
-                {{--         <i class="bi bi-inbox"></i> --}}
-                {{--         <span> Visitor Submissions </span> --}}
-                {{--     </a> --}}
-                {{-- </li> --}}
-                {{-- <li class="{{ request()->routeIs('vendor-registrations.*') ? 'menuitem-active' : '' }}"> --}}
-                {{--     <a href='{{ route('vendor-registrations.index') }}'> --}}
-                {{--         <i class="bi bi-people"></i> --}}
-                {{--         <span> Vendor Registrations </span> --}}
-                {{--     </a> --}}
-                {{-- </li> --}}
+                 {{-- <li class="{{ request()->routeIs('team.*') ? 'menuitem-active' : '' }}">
+                     <a href='{{ route('team.index') }}'>
+                         <i class="bi bi-microsoft-teams"></i>
+                         <span>Team</span>
+                     </a>
+                 </li>
+                 <li class="{{ request()->routeIs('visitor-submissions.*') ? 'menuitem-active' : '' }}">
+                     <a href='{{ route('visitor-submissions.index') }}'>
+                         <i class="bi bi-inbox"></i>
+                         <span> Visitor Submissions </span>
+                     </a>
+                 </li>
+                 <li class="{{ request()->routeIs('vendor-registrations.*') ? 'menuitem-active' : '' }}">
+                     <a href='{{ route('vendor-registrations.index') }}'>
+                         <i class="bi bi-people"></i>
+                         <span> Vendor Registrations </span>
+                     </a>
+                </li>--}}
                 <li class="nav-item">
                     <a class="nav-link text-white" href='{{ route('logout') }}' class="text-danger ">
                         <i class="bi bi-box-arrow-right"></i>

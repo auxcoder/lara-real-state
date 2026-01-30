@@ -21,37 +21,45 @@ html {
     min-height: 100%;
 }
 
-body[data-menu-color="dark"] .app-sidebar-menu {
-    background-color: var(--bs-dark);
-    box-shadow: none;
-}
-.app-sidebar-menu {
-    height: 100%;
-    background: var(--bs-light);
-    // bottom: 0;
-    // padding-top: 70px;
-    // transition: all 0.1s ease-out;
-    // top: 0;
-    // box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.04);
+// body[data-menu-color="dark"] #sidebarWrapper {
+//     background-color: var(--bs-dark);
+//     box-shadow: none;
+// }
 
-    .logo-box {
-        width: 260px;
-        transition: all 0.1s ease-out;
+#wrapper {
+    overflow-x: hidden;
+}
+#sidebarWrapper {
+    min-height: 100vh;
+    margin-left: -15rem; /* This hides it initially on smaller screens */
+    width: 15rem; /* Set your desired sidebar width */
+    color: white; /* Text color for the menu */
+    position: fixed; /* Make the sidebar fixed */
+    transition: margin 0.25s ease-out;
+    z-index: 1000; /* Ensure it's above other elements */
+
+    .nav-second-level li a {
+        padding: 8px 20px;
+        transition: all 0.4s;
+        font-size: 0.875rem;
     }
 }
-
-#sidebarWrapper {
-    width: 260px;
-    position: fixed;
-    height: 100vh;
-}
-
 #contentWrapper {
-    position: absolute;
-    width: 100%;
-    left: 260px;
+    min-width: 100vw;
 }
-
+@media (min-width: 992px) {
+    #sidebarWrapper {
+        margin-left: 0;
+    }
+    #contentWrapper {
+        min-width: 0;
+        width: 100%;
+        margin-left: 15rem; /* Shift content to make space for the fixed sidebar */
+    }
+    .main-content {
+        padding-left: 1.5rem; /* Adjust padding for spacing */
+    }
+}
 @media print {
     .topbar-custom {
         display: none !important;

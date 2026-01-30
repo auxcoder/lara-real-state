@@ -28,8 +28,8 @@
 </head>
 
 <body data-menu-color="dark" data-sidebar="default">
-    <div class="d-flex w-100">
-        <div id="sidebarWrapper">
+    <div id="wrapper">
+        <div id="sidebarWrapper" class="bg-dark">
             @include('admin.layout.sidebar')
         </div>
 

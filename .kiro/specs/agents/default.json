@@ -1,0 +1,3 @@
+{
+    "resources": ["file://.kiro/specs/**/*.md", "file://.kiro/steering/**/*"]
+}
