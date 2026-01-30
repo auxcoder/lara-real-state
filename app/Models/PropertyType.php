@@ -30,5 +30,10 @@ class PropertyType extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'developer_property_id',
+        'property_type',
+        'unit_type',
+        'size',
+    ];
 }

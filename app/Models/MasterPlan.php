@@ -16,5 +16,8 @@ class MasterPlan extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'image',
+    ];
 }

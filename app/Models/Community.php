@@ -39,7 +39,12 @@ class Community extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'description',
+        'feature_description',
+        'image',
+    ];
 
     protected $table = 'communities';
 

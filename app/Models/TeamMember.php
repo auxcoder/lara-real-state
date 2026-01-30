@@ -51,5 +51,16 @@ class TeamMember extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'email',
+        'position',
+        'description',
+        'facebook',
+        'twitter',
+        'linkedin',
+        'instagram',
+        'slug',
+        'image',
+    ];
 }

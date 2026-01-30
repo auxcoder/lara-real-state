@@ -87,7 +87,28 @@ class DeveloperProperty extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'developer_id',
+        'slug',
+        'name',
+        'location',
+        'status',
+        'bedrooms',
+        'bathrooms',
+        'price',
+        'description',
+        'key_highlights',
+        'paymentPlan',
+        'handover_date',
+        'handover_percentage',
+        'down_percentage',
+        'construction_percentage',
+        'logo',
+        'cover_image',
+        'community',
+        'masterPlan_image',
+        'locationMap',
+    ];
 
     protected $casts = [
         'paymentPlan' => 'array',

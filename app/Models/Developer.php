@@ -42,7 +42,14 @@ class Developer extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'logo',
+        'description',
+        'status',
+    ];
 
     public function developersProperties()
     {

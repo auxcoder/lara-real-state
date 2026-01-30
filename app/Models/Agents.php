@@ -44,7 +44,15 @@ class Agents extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'profile_image',
+        'license_number',
+        'bio',
+        'status',
+    ];
 
     public function scopeActive($query)
     {

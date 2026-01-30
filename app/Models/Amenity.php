@@ -38,7 +38,11 @@ class Amenity extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name',
+        'logo',
+        'description',
+    ];
 
     public function developerProperties()
     {

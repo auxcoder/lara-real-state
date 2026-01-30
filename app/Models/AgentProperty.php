@@ -54,7 +54,19 @@ class AgentProperty extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'agent_id',
+        'slug',
+        'location',
+        'property_type',
+        'transaction_type',
+        'price',
+        'area',
+        'bedrooms',
+        'bathrooms',
+        'main_image',
+        'status',
+    ];
 
     protected $table = 'agent_properties';
 
