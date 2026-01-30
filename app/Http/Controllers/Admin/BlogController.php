@@ -10,6 +10,11 @@ use Str;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Blog::class, 'blog');
+    }
+
     public function index()
     {
         $blogs = Blog::get();

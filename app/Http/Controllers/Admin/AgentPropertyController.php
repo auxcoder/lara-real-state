@@ -20,7 +20,9 @@ class AgentPropertyController extends Controller
 {
     public function __construct(
         private AgentPropertyService $propertyService
-    ) {}
+    ) {
+        $this->authorizeResource(AgentProperty::class, 'property');
+    }
 
     /**
      * Display a listing of the property.
