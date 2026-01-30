@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAgentPropertyRequest;
+use App\Http\Requests\UpdateAgentPropertyRequest;
 use App\Models\AgentProperty;
 use App\Models\Agents;
 use App\Models\PropertyGalleryImages;
@@ -36,37 +38,10 @@ class AgentPropertyController extends Controller
     /**
      * Store a newly created property in the database.
      */
-    public function store(Request $request)
+    public function store(StoreAgentPropertyRequest $request)
     {
         // dd($request->all());
         $locales = ['en', 'ar']; // Add more if needed
-
-        // Validate incoming request
-        $request->validate([
-            'agent_id' => 'required|exists:agents,id',
-            'title' => 'required|array',
-            'title.*' => 'required|string|max:255',
-
-            'description' => 'nullable|array',
-            'description.*' => 'nullable|string',
-
-            'location' => 'required|string|max:255',
-            'property_type' => 'required|in:Residential,Commercial,Off-Plan,Mall,Villa',
-            'transaction_type' => 'required|in:Rent,Sale',
-
-            'price' => 'nullable|numeric',
-            'area' => 'required|numeric',
-            'bedrooms' => 'nullable|integer',
-            'bathrooms' => 'nullable|integer',
-
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif',
-
-            'status' => 'required|in:available,sold',
-            'slug' => ['required', 'alpha_dash', Rule::unique('agent_properties', 'slug')],
-            // 'target_audience' => 'required|in:UAE,International',
-        ]);
 
         // Create the new property
         $property = new AgentProperty();
@@ -134,34 +109,9 @@ class AgentPropertyController extends Controller
     /**
      * Update the specified property in the database.
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAgentPropertyRequest $request, $id)
     {
         $locales = ['en', 'ar'];
-
-        $request->validate([
-            'agent_id' => 'required|exists:agents,id',
-            'title' => 'required|array',
-            'title.*' => 'required|string|max:255',
-
-            'description' => 'nullable|array',
-            'description.*' => 'nullable|string',
-
-            'location' => 'required|string|max:255',
-            'property_type' => 'required|in:Residential,Commercial,Off-Plan,Mall,Villa',
-            'transaction_type' => 'required|in:Rent,Sale',
-
-            'price' => 'nullable|numeric',
-            'area' => 'required|numeric',
-            'bedrooms' => 'nullable|integer',
-            'bathrooms' => 'nullable|integer',
-
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif',
-
-            'status' => 'required|in:available,sold',
-            'slug' => ['required', 'alpha_dash', Rule::unique('agent_properties', 'slug')->ignore($id)],
-        ]);
 
         $property = AgentProperty::findOrFail($id);
         $property->agent_id = $request->agent_id;
