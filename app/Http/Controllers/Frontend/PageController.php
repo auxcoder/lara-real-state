@@ -7,10 +7,14 @@ use App\Models\Community;
 use App\Models\Developer;
 use App\Models\DeveloperProperty;
 use App\Models\TeamMember;
+use App\Services\CacheService;
 use Illuminate\Support\Facades\Log;
 
 class PageController extends Controller
 {
+    public function __construct(
+        private CacheService $cache
+    ) {}
     public function aboutUs()
     {
         return view('frontend.about-us');
@@ -18,7 +22,7 @@ class PageController extends Controller
 
     public function leadership()
     {
-        $teammembers = TeamMember::all();
+        $teammembers = $this->cache->getTeamMembers();
 
         return view('frontend.leadership', compact('teammembers'));
     }
@@ -64,7 +68,7 @@ class PageController extends Controller
 
     public function projectCommunity()
     {
-        $comunities = Community::get();
+        $comunities = $this->cache->getCommunities();
         $totalcomunities = Community::count();
 
         return view('frontend.community', compact('comunities', 'totalcomunities'));
@@ -72,7 +76,7 @@ class PageController extends Controller
 
     public function developerList()
     {
-        $developers = Developer::get();
+        $developers = $this->cache->getDevelopers();
 
         return view('frontend.developer_list', compact('developers'));
     }

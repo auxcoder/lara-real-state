@@ -8,6 +8,7 @@ use App\Models\Community;
 use App\Models\Developer;
 use App\Models\DeveloperProperty;
 use App\Models\Location;
+use App\Services\CacheService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -16,12 +17,16 @@ class PropertyController extends Controller
     protected $property_types = ['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'];
     protected $cities = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman'];
 
+    public function __construct(
+        private CacheService $cache
+    ) {}
+
     public function index()
     {
         $developer_properties = DeveloperProperty::latest()->take(3)->get();
         $property_types = array_diff($this->property_types, ['Commercial', 'Mall']);
         $cities = $this->cities;
-        $communities = Location::all()->toArray();
+        $communities = $this->cache->getLocations()->toArray();
 
         return view('frontend.index', compact('developer_properties', 'property_types', 'cities', 'communities'));
     }
@@ -72,8 +77,8 @@ class PropertyController extends Controller
         }
 
         $properties = $query->paginate(20)->appends($request->except('page'));
-        $communities = Community::all();
-        $developers = Developer::all();
+        $communities = $this->cache->getCommunities();
+        $developers = $this->cache->getDevelopers();
         $search = $request->input('field3');
 
         return view('frontend.offplan', compact('properties', 'search', 'communities', 'developers'));
@@ -87,9 +92,9 @@ class PropertyController extends Controller
 
     public function offplan(Request $request)
     {
-        $communities = Community::all();
+        $communities = $this->cache->getCommunities();
         $developer_property = DeveloperProperty::all();
-        $developers = Developer::all();
+        $developers = $this->cache->getDevelopers();
 
         Log::info('Request Parameters: ', $request->all());
 
