@@ -11,16 +11,22 @@ class PermissionController extends Controller
 {
     public function index()
     {
+        $this->authorize('manage permissions');
+        
         $permissions = Permission::latest()->paginate(15);
         return view('admin.permission.index', compact('permissions'));
     }
     public function create()
     {
+        $this->authorize('manage permissions');
+        
         $data['permissions'] = Permission::get();
         return view('admin.permission.create', $data);
     }
     public function store(Request $request)
     {
+        $this->authorize('manage permissions');
+        
         $this->validate($request, [
             'name' => 'required',
         ]);
@@ -35,12 +41,16 @@ class PermissionController extends Controller
 
     public function edit($id)
     {
+        $this->authorize('manage permissions');
+        
         $permission = Permission::find($id);
         return view('admin.permission.edit', compact('permission'));
     }
 
     public function update(Request $request, $id)
     {
+        $this->authorize('manage permissions');
+        
         $this->validate($request, [
             'name' => 'required',
         ]);
@@ -56,6 +66,8 @@ class PermissionController extends Controller
     }
     public function destroy($id)
     {
+        $this->authorize('manage permissions');
+        
         $permission = Permission::findOrFail($id);
         $permission->delete();
 

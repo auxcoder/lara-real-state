@@ -37,7 +37,7 @@ class PermissionSeeder extends Seeder
             'create developers',
             'edit developers',
             'delete developers',
-            // agentes
+            // agents
             'view agents',
             'create agents',
             'edit agents',
@@ -47,6 +47,26 @@ class PermissionSeeder extends Seeder
             'create amenities',
             'edit amenities',
             'delete amenities',
+            // master plans
+            'view master plans',
+            'create master plans',
+            'edit master plans',
+            'delete master plans',
+            // locations
+            'view locations',
+            'create locations',
+            'edit locations',
+            'delete locations',
+            // team
+            'view team',
+            'create team',
+            'edit team',
+            'delete team',
+            // visitor submissions
+            'view visitor submissions',
+            'delete visitor submissions',
+            // vendor registrations
+            'view vendor registrations',
             // users
             'view users',
             'create users',

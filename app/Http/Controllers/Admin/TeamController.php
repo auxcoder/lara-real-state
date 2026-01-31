@@ -10,17 +10,22 @@ class TeamController extends Controller
 {
     public function index()
     {
+        $this->authorize('view team');
+        
         $members = TeamMember::latest()->paginate(15);
         return view('admin.team.index', compact('members'));
     }
 
     public function create()
     {
+        $this->authorize('create team');
+        
         return view('admin.team.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create team');
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:team_members,email',
@@ -50,11 +55,14 @@ class TeamController extends Controller
 
     public function edit(TeamMember $team)
     {
+        $this->authorize('edit team');
+        
         return view('admin.team.edit', compact('team'));
     }
 
     public function update(Request $request, TeamMember $team)
     {
+        $this->authorize('edit team');
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:team_members,email,' . $team->id,
@@ -90,6 +98,8 @@ class TeamController extends Controller
 
     public function destroy(TeamMember $team)
     {
+        $this->authorize('delete team');
+        
         $team->delete();
 
         if (request()->header('HX-Request')) {
