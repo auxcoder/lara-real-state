@@ -226,4 +226,16 @@ return [
     'Nationality' => 'Nacionalitat',
     'Contact Person' => 'Persona de Contacte',
     'Rent For' => 'Lloguer Per',
+    
+    // Spanish Cities (Catalan names where different)
+    'Madrid' => 'Madrid',
+    'Barcelona' => 'Barcelona',
+    'Valencia' => 'València',
+    'Sevilla' => 'Sevilla',
+    'Zaragoza' => 'Saragossa',
+    'Málaga' => 'Màlaga',
+    'Murcia' => 'Múrcia',
+    'Palma de Mallorca' => 'Palma de Mallorca',
+    'Bilbao' => 'Bilbao',
+    'Alicante' => 'Alacant',
 ];

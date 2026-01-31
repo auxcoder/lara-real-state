@@ -16,6 +16,7 @@ use App\Models\Location;
 use App\Models\TeamMember;
 // use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -26,7 +27,12 @@ class FrontendController extends Controller
 {
     private $property_types = ['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'];
 
-    private $cities = ['Leon', 'Cantabria', 'Asturias', 'Galicia', 'Vasque', 'Catalunya'];
+    private $cities;
+
+    public function __construct()
+    {
+        $this->cities = config('locations.major_cities', ['Madrid', 'Barcelona', 'Valencia', 'Sevilla']);
+    }
 
     private $status = ['sold', 'available', ' off-market'];
 
@@ -416,9 +422,12 @@ class FrontendController extends Controller
 
     public function secondarySale()
     {
-        $properties = AgentProperty::with(['agent:id,name', 'translations'])
-            ->select('id', 'agent_id', 'name', 'price', 'bedrooms', 'bathrooms', 'area', 'image', 'slug')
-            ->paginate(5);
+        $page = request()->get('page', 1);
+        $properties = Cache::remember("agent_properties.page.{$page}", 3600, function() {
+            return AgentProperty::with(['agent:id,name', 'translations'])
+                ->select('id', 'agent_id', 'name', 'price', 'bedrooms', 'bathrooms', 'area', 'image', 'slug')
+                ->paginate(5);
+        });
 
         return view('frontend.secondary_properties_sale', compact('properties'));
     }

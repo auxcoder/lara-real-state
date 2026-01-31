@@ -225,4 +225,16 @@ return [
     'Nationality' => 'Nationality',
     'Contact Person' => 'Contact Person',
     'Rent For' => 'Rent For',
+    
+    // Spanish Cities
+    'Madrid' => 'Madrid',
+    'Barcelona' => 'Barcelona',
+    'Valencia' => 'Valencia',
+    'Sevilla' => 'Sevilla',
+    'Zaragoza' => 'Zaragoza',
+    'Málaga' => 'Málaga',
+    'Murcia' => 'Murcia',
+    'Palma de Mallorca' => 'Palma de Mallorca',
+    'Bilbao' => 'Bilbao',
+    'Alicante' => 'Alicante',
 ];

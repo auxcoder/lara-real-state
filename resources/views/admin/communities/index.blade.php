@@ -124,9 +124,9 @@
                             <label for="location" class="form-label">Select Location:</label>
                             <select id="location" class="form-select" name="location" required>
                                 <option value="">Choose location...</option>
-                                <option value="Dubai">Dubai</option>
-                                <option value="Abu Dhabi">Abu Dhabi</option>
-                                <option value="Sharjah">Sharjah</option>
+                                @foreach(config('locations.major_cities', ['Madrid', 'Barcelona', 'Valencia', 'Sevilla']) as $city)
+                                    <option value="{{ $city }}">{{ $city }}</option>
+                                @endforeach
                                 <option value="Al Ain">Al Ain</option>
                                 <option value="Fujairah">Fujairah</option>
                             </select>
