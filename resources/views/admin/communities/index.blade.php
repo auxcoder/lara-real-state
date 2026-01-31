@@ -86,16 +86,21 @@
                                         @endif
 
                                         <div class="mb-3">
-                                            <label for="amenities" class="form-label">Select Amenities:</label>
-                                            <select class="form-select amenities" id="amenitiess" name="amenities[]"
-                                                multiple>
+                                            <label class="form-label">Select Amenities:</label>
+                                            <div class="border rounded p-2" style="max-height: 200px; overflow-y: auto;">
                                                 @foreach ($amenities as $amenity)
-                                                    <option value="{{ $amenity->id }}"
-                                                        {{ in_array($amenity->id, $community->amenities->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                                        {{ $amenity->name }}
-                                                    </option>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" 
+                                                               name="amenities[]" 
+                                                               value="{{ $amenity->id }}" 
+                                                               id="edit_amenity_{{ $community->id }}_{{ $amenity->id }}"
+                                                               {{ in_array($amenity->id, $community->amenities->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                                        <label class="form-check-label" for="edit_amenity_{{ $community->id }}_{{ $amenity->id }}">
+                                                            {{ $amenity->name }}
+                                                        </label>
+                                                    </div>
                                                 @endforeach
-                                            </select>
+                                            </div>
                                         </div>
 
                                         <div class="mb-3">
@@ -166,12 +171,20 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="amenities" class="form-label">Select Amenities:</label>
-                                <select class="form-control amenities" id="amenities" name="amenities[]" multiple>
+                                <label class="form-label">Select Amenities:</label>
+                                <div class="border rounded p-2" style="max-height: 200px; overflow-y: auto;">
                                     @foreach ($amenities as $amenit)
-                                        <option value="{{ $amenit->id }}">{{ $amenit->name }}</option>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" 
+                                                   name="amenities[]" 
+                                                   value="{{ $amenit->id }}" 
+                                                   id="create_amenity_{{ $amenit->id }}">
+                                            <label class="form-check-label" for="create_amenity_{{ $amenit->id }}">
+                                                {{ $amenit->name }}
+                                            </label>
+                                        </div>
                                     @endforeach
-                                </select>
+                                </div>
                             </div>
 
                             <div class="mb-3">
@@ -194,19 +207,4 @@
             </div>
         </div>
     </div>
-@endsection
-@section('scripts')
-    <script>
-        $('#communityModal').on('shown.bs.modal', function() {
-            $('.amenities').select2({
-                dropdownParent: $('#communityModal') // Attach dropdown to modal
-            });
-        });
-        $('div[id^="editModal"]').on('shown.bs.modal', function() {
-            const modalId = $(this).attr('id'); // Get the modal ID dynamically
-            $('.amenities').select2({
-                dropdownParent: $('#' + modalId) // Attach dropdown to the modal dynamically
-            });
-        });
-    </script>
 @endsection

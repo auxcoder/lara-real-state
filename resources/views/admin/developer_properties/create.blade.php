@@ -42,7 +42,7 @@
 
             <div class="col-md-6">
                 <label for="developer_id" class="form-label">Developer</label>
-                <select class="form-select select2" name="developer_id" id="developer_id" required>
+                <select class="form-select" name="developer_id" id="developer_id" required>
                     @foreach ($developers as $developer)
                         <option value="{{ $developer->id }}"
                             {{ isset($developerProperty) && $developerProperty->developer_id == $developer->id ? 'selected' : '' }}>
@@ -349,7 +349,7 @@
                             @foreach ($developerProperty->locations as $index => $location)
                                 <tr>
                                     <td>
-                                        <select class="form-select select2"
+                                        <select class="form-select"
                                             name="locations[{{ $index }}][location_id]">
                                             @foreach ($locations as $loc)
                                                 <option value="{{ $loc->id }}"
@@ -367,7 +367,7 @@
                         @else
                             <tr>
                                 <td>
-                                    <select class="form-select select2" name="locations[0][location_id]">
+                                    <select class="form-select" name="locations[0][location_id]">
                                         @foreach ($locations as $location)
                                             <option value="{{ $location->id }}">{{ $location->name }}</option>
                                         @endforeach
@@ -524,7 +524,7 @@
 
             <div class="col-md-6">
                 <label for="masterPlan" class="form-label">Master Plan</label>
-                <select class="form-select select2" id="masterPlan" name="masterPlan_id[]" multiple>
+                <select class="form-select" id="masterPlan" name="masterPlan_id[]" multiple>
                     @foreach ($masterPlans as $masterPlan)
                         <option value="{{ $masterPlan->id }}"
                             {{ isset($developerProperty) && $developerProperty->masterPlans->contains($masterPlan->id) ? 'selected' : '' }}>
@@ -535,7 +535,7 @@
 
             <div class="col-md-6">
                 <label for="Amenity" class="form-label">Amenity</label>
-                <select class="form-select select2" id="Amenity" name="amenity_ids[]" multiple>
+                <select class="form-select" id="Amenity" name="amenity_ids[]" multiple>
                     @foreach ($Amenity as $amenity)
                         <option value="{{ $amenity->id }}"
                             {{ isset($developerProperty) && $developerProperty->Amenity->contains($amenity->id) ? 'selected' : '' }}>
@@ -739,7 +739,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>
-                <select class="form-select select2" name="locations[${locationIndex}][location_id]">
+                <select class="form-select" name="locations[${locationIndex}][location_id]">
                     @foreach ($locations as $location)
                         <option value="{{ $location->id }}">{{ $location->name }}</option>
                     @endforeach
@@ -750,9 +750,6 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         tbody.appendChild(row);
         locationIndex++;
-        if (window.jQuery && window.jQuery.fn.select2) {
-            jQuery(row).find('.select2').select2();
-        }
     });
 
     document.querySelector('#locationsTable')?.addEventListener('click', function(e) {
