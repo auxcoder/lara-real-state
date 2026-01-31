@@ -96,7 +96,6 @@ class PropertyController extends Controller
         $developer_property = DeveloperProperty::all();
         $developers = $this->cache->getDevelopers();
 
-        Log::info('Request Parameters: ', $request->all());
 
         $properties = DeveloperProperty::paginate(5);
 

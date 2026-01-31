@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <x-admin.page-header 
-        title="Developers" 
+        :title="__('Developers')" 
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Developers']
+            ['label' => __('Developers')]
         ]" 
     />
 
@@ -23,12 +23,12 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Logo</th>
-                        <th>Status</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Phone') }}</th>
+                        <th>{{ __('Logo') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +59,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted py-4">No developers found</td>
+                            <td colspan="6" class="text-center text-muted py-4">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -6,7 +6,7 @@
         title="Properties"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Properties']
+            ['label' => __('Properties')]
         ]"
     />
 
@@ -23,14 +23,14 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Location</th>
+                        <th>{{ __('ID') }}</th>
+                        <th>{{ __('Title') }}</th>
+                        <th>{{ __('Location') }}</th>
                         <th>Type</th>
-                        <th>Price</th>
+                        <th>{{ __('Price') }}</th>
                         <th>Area (sq meter)</th>
-                        <th>Status</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('Status') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -63,7 +63,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="py-4 text-center text-muted">No properties found</td>
+                            <td colspan="8" class="py-4 text-center text-muted">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

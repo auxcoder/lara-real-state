@@ -14,6 +14,8 @@ class UserController extends Controller
 {
     public function index()
     {
+        $this->authorize('view users');
+        
         $data['users'] = User::with('roles')->latest()->paginate(15);
         return view('admin.users.index', $data);
     }
@@ -24,6 +26,8 @@ class UserController extends Controller
 
     public function create()
     {
+        $this->authorize('create users');
+        
         $roles = Role::select(['id', 'name'])->get();
         return view('admin.users.create', compact('roles'));
     }
@@ -45,7 +49,6 @@ class UserController extends Controller
             $input['password'] = Hash::make($input['password']);
 
             $users = User::create($input);
-            // dd($request->input('roles'));
             $roles = $request->input('roles');
 
             if (is_array($roles)) {
@@ -56,7 +59,7 @@ class UserController extends Controller
 
             DB::commit();
             return redirect()->route('users.index')
-                ->with('success', 'User Create successfully');
+                ->with('success', __('success.created', ['item' => __('Users')]));
 
         } catch (\Exception $e) {
             DB::rollback();
@@ -68,6 +71,8 @@ class UserController extends Controller
     //User Show
     public function show($id)
     {
+        $this->authorize('view users');
+        
         $user = User::findOrFail($id);
         $roles = $user->getRoleNames(); // Check if roles are retrieved correctly
 
@@ -76,6 +81,8 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        $this->authorize('edit users');
+        
         $user = User::find($id);
         $roles = Role::select('id', 'name')->get();
         $userRole = $user->roles->pluck('name', 'name')->all();
@@ -110,6 +117,8 @@ class UserController extends Controller
     }
     public function destroy($id)
     {
+        $this->authorize('delete users');
+        
         User::find($id)->delete();
 
         if (request()->header('HX-Request')) {

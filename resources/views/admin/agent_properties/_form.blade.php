@@ -1,5 +1,5 @@
 @php
-$locales = ['en' => 'English', 'ar' => 'Arabic'];
+$locales = ['en' => 'English', 'es' => 'Spanish', 'ca' => 'Catalan'];
 @endphp
 
 <!-- Language Tabs -->

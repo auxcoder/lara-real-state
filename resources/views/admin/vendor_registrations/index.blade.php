@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <x-admin.page-header 
-        title="Vendor Registrations" 
+        :title="__('Vendor Registrations')" 
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Vendor Registrations']
+            ['label' => __('Vendor Registrations')]
         ]" 
     />
 
@@ -15,13 +15,13 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Contact Person</th>
-                        <th>Submitted</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('ID') }}</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Phone') }}</th>
+                        <th>{{ __('Contact Person') }}</th>
+                        <th>{{ __('Created At') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,14 +34,16 @@
                             <td>{{ $registration->contact_person_name }}</td>
                             <td>{{ $registration->created_at->format('M d, Y H:i') }}</td>
                             <td class="text-end">
-                                <a href="{{ route('vendor-registrations.show', $registration) }}" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-eye me-1"></i>View
-                                </a>
+                                @can('view vendor registrations')
+                                    <a href="{{ route('vendor-registrations.show', $registration) }}" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-eye me-1"></i>View
+                                    </a>
+                                @endcan
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center text-muted py-4">No registrations found</td>
+                            <td colspan="7" class="text-center text-muted py-4">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <x-admin.page-header
-        title="Developer Properties"
+        :title="__('Properties')"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Developer Properties']
@@ -23,10 +23,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Developer</th>
-                        <th>Status</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Developers') }}</th>
+                        <th>{{ __('Status') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>

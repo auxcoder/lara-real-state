@@ -10,12 +10,16 @@ class MasterPlanController extends Controller
 {
     public function index()
     {
+        $this->authorize('view master plans');
+        
         $masterPlans = MasterPlan::latest()->paginate(15);
         return view('admin.master_plans.index', compact('masterPlans'));
     }
 
     public function edit(MasterPlan $masterPlan)
     {
+        $this->authorize('edit master plans');
+        
         if (request()->header('HX-Request')) {
             return view('admin.master_plans._edit_form', compact('masterPlan'));
         }
@@ -24,6 +28,7 @@ class MasterPlanController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create master plans');
         $request->validate([
             'name' => 'required|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -72,6 +77,8 @@ class MasterPlanController extends Controller
 
     public function destroy(MasterPlan $masterPlan)
     {
+        $this->authorize('delete master plans');
+        
         $masterPlan->delete();
 
         if (request()->header('HX-Request')) {

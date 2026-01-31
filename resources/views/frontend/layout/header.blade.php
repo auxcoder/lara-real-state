@@ -44,12 +44,9 @@
                      </ul>
                  </div>
 
-                 <div class="col-md-3 mob-1">
+                 <div class="col-md-3 mob-1 d-flex align-items-center justify-content-end gap-2">
                      <a class="text-uppercase small" href="{{ route('login') }}">{{ __('Login') }}</a>
-                     <div class="d-inline px-2 border fw-bold ms-2">
-                         <a href="{{ route('lang.switch', 'en') }}">EN</a> |
-                         <a href="{{ route('lang.switch', 'es') }}">ES</a>
-                     </div>
+                     <x-language-switcher />
                  </div>
 
                  <div class="col-6 col-md-10 d-lg-none d-md-block">

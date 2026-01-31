@@ -3,14 +3,24 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class SetLocale
 {
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        $locale = session('locale', config('app.locale'));
-        App::setLocale($locale);
+        $locale = $request->segment(1);
+        $supportedLocales = config('app.supported_locales', ['en']);
+
+        if (in_array($locale, $supportedLocales)) {
+            App::setLocale($locale);
+            Session::put('locale', $locale);
+        } elseif (Session::has('locale')) {
+            App::setLocale(Session::get('locale'));
+        }
+
         return $next($request);
     }
 }

@@ -206,7 +206,7 @@ class DeveloperPropertyController extends Controller
             // Commit the transaction
             DB::commit();
 
-            return redirect()->route('developer_properties.index')->with('success', 'Property created successfully!');
+            return redirect()->route('developer_properties.index')->with('success', __('success.created', ['item' => __('Properties')]));
         } catch (\Exception $e) {
             // Rollback the transaction on failure
             DB::rollBack();
@@ -219,7 +219,6 @@ class DeveloperPropertyController extends Controller
     {
         // Validate the request
         $this->validateRequest($request, true);
-        // dd($request->all());
         // Start the database transaction
         DB::beginTransaction();
 
@@ -320,7 +319,7 @@ class DeveloperPropertyController extends Controller
             // Commit the transaction
             DB::commit();
 
-            return redirect()->route('developer_properties.index')->with('success', 'Property updated successfully!');
+            return redirect()->route('developer_properties.index')->with('success', __('success.updated', ['item' => __('Properties')]));
         } catch (\Exception $e) {
             // Rollback the transaction on failure
             DB::rollBack();
