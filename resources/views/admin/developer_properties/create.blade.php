@@ -11,7 +11,7 @@
         ]" 
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <form action="{{ route('developer_properties.store') }}" method="POST" enctype="multipart/form-data" @submit="validateSlug($event)">
             @csrf
             <div class="row g-3">

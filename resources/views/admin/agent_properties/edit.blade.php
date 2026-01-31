@@ -2,21 +2,21 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Edit Property" 
+    <x-admin.page-header
+        title="Edit Property"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Properties', 'url' => route('property.index')],
             ['label' => 'Edit']
-        ]" 
+        ]"
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4" borderless>
         <form action="{{ route('property.update', $property->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             @include('admin.agent_properties._form')
-            
+
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-success">
                     <i class="bi bi-check-circle me-1"></i>Update Property

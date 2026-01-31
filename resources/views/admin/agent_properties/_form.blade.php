@@ -16,7 +16,7 @@ $locales = ['en' => 'English', 'ar' => 'Arabic'];
 </ul>
 
 <!-- Language Fields -->
-<div class="mb-4 tab-content" id="langTabsContent">
+<div class="my-3 tab-content" id="langTabsContent">
     @foreach ($locales as $locale => $label)
     <div class="fade tab-pane @if ($loop->first) show active @endif" id="lang-{{ $locale }}" role="tabpanel">
         <div class="mb-3">
@@ -103,7 +103,7 @@ $locales = ['en' => 'English', 'ar' => 'Arabic'];
 
 <div class="mb-3">
     <label class="form-label">Price</label>
-    <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" step="0.01" 
+    <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" step="0.01"
         value="{{ old('price', isset($property) ? $property->price : '') }}">
     @error('price')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -112,7 +112,7 @@ $locales = ['en' => 'English', 'ar' => 'Arabic'];
 
 <div class="mb-3">
     <label class="form-label">Area (sq meter)</label>
-    <input type="number" class="form-control @error('area') is-invalid @enderror" name="area" step="0.01" 
+    <input type="number" class="form-control @error('area') is-invalid @enderror" name="area" step="0.01"
         value="{{ old('area', isset($property) ? $property->area : '') }}">
     @error('area')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -121,7 +121,7 @@ $locales = ['en' => 'English', 'ar' => 'Arabic'];
 
 <div class="mb-3">
     <label class="form-label">No. Bedrooms</label>
-    <input type="number" class="form-control @error('bedrooms') is-invalid @enderror" name="bedrooms" 
+    <input type="number" class="form-control @error('bedrooms') is-invalid @enderror" name="bedrooms"
         value="{{ old('bedrooms', isset($property) ? $property->bedrooms : '') }}">
     @error('bedrooms')
         <div class="invalid-feedback">{{ $message }}</div>
@@ -130,7 +130,7 @@ $locales = ['en' => 'English', 'ar' => 'Arabic'];
 
 <div class="mb-3">
     <label class="form-label">No. Bathrooms</label>
-    <input type="number" class="form-control @error('bathrooms') is-invalid @enderror" name="bathrooms" 
+    <input type="number" class="form-control @error('bathrooms') is-invalid @enderror" name="bathrooms"
         value="{{ old('bathrooms', isset($property) ? $property->bathrooms : '') }}">
     @error('bathrooms')
         <div class="invalid-feedback">{{ $message }}</div>

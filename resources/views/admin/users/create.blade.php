@@ -11,7 +11,7 @@
         ]" 
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <form action="{{ route('users.store') }}" method="POST">
             @csrf
             @include('admin.users._form')

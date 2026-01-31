@@ -11,7 +11,7 @@
         ]"
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <form action="{{ route('Amenity.update', $amenity->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')

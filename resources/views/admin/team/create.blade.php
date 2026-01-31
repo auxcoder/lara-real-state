@@ -10,7 +10,7 @@
     ]"
 />
 
-<x-admin.card>
+<x-admin.card class="mb-4">
     <form action="{{ route('team.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
         @csrf
         <div class="mb-3">

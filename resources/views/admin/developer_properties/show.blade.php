@@ -11,7 +11,7 @@
         ]" 
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <x-slot name="actions">
             @can('update', $developer)
                 <a href="{{ route('developer_properties.edit', $developer->id) }}" class="btn btn-primary btn-sm">

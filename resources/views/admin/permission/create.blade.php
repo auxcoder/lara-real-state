@@ -11,7 +11,7 @@
         ]" 
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <form action="{{ route('permission.store') }}" method="POST">
             @csrf
             <div class="mb-3">

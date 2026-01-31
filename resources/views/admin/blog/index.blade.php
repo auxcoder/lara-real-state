@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Blogs" 
+    <x-admin.page-header
+        title="Blogs"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Blogs']
-        ]" 
+        ]"
     />
 
     <x-admin.card>
@@ -38,7 +38,7 @@
                                 <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->translate()->title }}" width="80" class="rounded">
                             </td>
                             <td class="text-end">
-                                <x-admin.crud-actions 
+                                <x-admin.crud-actions
                                     :editRoute="route('blogs.edit', $blog->id)"
                                     :deleteRoute="route('blogs.destroy', $blog->id)"
                                 />
@@ -46,12 +46,12 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-4">No blogs found</td>
+                            <td colspan="4" class="py-4 text-center text-muted">No blogs found</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
-            
+
             @if($blogs->hasPages())
                 <div class="mt-3">
                     {{ $blogs->links() }}

@@ -11,7 +11,7 @@
         ]" 
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <form action="{{ route('roles.store') }}" method="POST">
             @csrf
             @include('admin.roles._form')

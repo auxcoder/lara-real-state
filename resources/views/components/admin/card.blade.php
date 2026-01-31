@@ -1,8 +1,8 @@
-@props(['title' => null])
+@props(['title' => null, 'class' => '', 'borderless' => false])
 
-<div class="card shadow-sm">
+<div class="card {{ $borderless ? 'border-0 shadow-none' : 'shadow-sm' }} {{ $class }}">
     @if($title || isset($actions))
-        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <div class="card-header {{ $borderless ? 'border-0 bg-transparent' : 'bg-white' }} d-flex justify-content-between align-items-center">
             @if($title)
                 <h5 class="card-title mb-0">{{ $title }}</h5>
             @endif

@@ -2,20 +2,20 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Add New Property" 
+    <x-admin.page-header
+        title="Add New Property"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Properties', 'url' => route('property.index')],
             ['label' => 'Create']
-        ]" 
+        ]"
     />
 
     <x-admin.card>
         <form action="{{ route('property.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @include('admin.agent_properties._form')
-            
+
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-success">
                     <i class="bi bi-check-circle me-1"></i>Create Property

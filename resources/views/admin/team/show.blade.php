@@ -19,7 +19,7 @@
     </div>
 </x-admin.page-header>
 
-<x-admin.card>
+<x-admin.card class="mb-4">
     <div class="row">
         <div class="col-md-4">
             @if($team->image)

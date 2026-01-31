@@ -1,12 +1,12 @@
 @props(['title', 'breadcrumbs' => []])
 
-<div class="row mb-4">
+<div class="row my-4">
     <div class="col-12">
         <div class="page-title-box">
-            <h4 class="page-title mb-2">{{ $title }}</h4>
+            <h4 class="mb-1 page-title">{{ $title }}</h4>
             @if(count($breadcrumbs) > 0)
                 <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0">
+                    <ol class="mb-0 breadcrumb">
                         @foreach($breadcrumbs as $crumb)
                             <li class="breadcrumb-item {{ $loop->last ? 'active' : '' }}">
                                 @if($loop->last)

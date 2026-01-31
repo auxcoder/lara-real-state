@@ -11,7 +11,7 @@
         ]" 
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <x-slot name="actions">
             <a href="{{ route('Amenity.edit', $amenity->id) }}" class="btn btn-primary btn-sm">
                 <i class="bi bi-pencil me-1"></i>Edit

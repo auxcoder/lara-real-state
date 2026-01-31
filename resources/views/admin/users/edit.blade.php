@@ -11,7 +11,7 @@
         ]" 
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <form action="{{ route('users.update', $user->id) }}" method="POST">
             @csrf
             @method('PUT')

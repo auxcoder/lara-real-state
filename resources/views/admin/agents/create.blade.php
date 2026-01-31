@@ -11,7 +11,7 @@
         ]" 
     />
 
-    <x-admin.card>
+    <x-admin.card class="mb-4">
         <form action="{{ route('agents.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">

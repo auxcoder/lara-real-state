@@ -10,7 +10,7 @@
     ]"
 />
 
-<x-admin.card>
+<x-admin.card class="mb-4">
     <form action="{{ route('team.update', $team->id) }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
         @csrf
         @method('PUT')

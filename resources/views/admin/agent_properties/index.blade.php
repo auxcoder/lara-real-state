@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Properties" 
+    <x-admin.page-header
+        title="Properties"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Properties']
-        ]" 
+        ]"
     />
 
     <x-admin.card>
@@ -49,12 +49,12 @@
                             </td>
                             <td>{{ $property->area }}</td>
                             <td>
-                                <span class="badge bg-{{ $property->status === 'available' ? 'success' : 'secondary' }}">
+                                <span class="bg- badge{{ $property->status === 'available' ? 'success' : 'secondary' }}">
                                     {{ ucfirst($property->status) }}
                                 </span>
                             </td>
                             <td class="text-end">
-                                <x-admin.crud-actions 
+                                <x-admin.crud-actions
                                     :showRoute="route('property.show', $property->id)"
                                     :editRoute="route('property.edit', $property->id)"
                                     :deleteRoute="route('property.destroy', $property->id)"
@@ -63,7 +63,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center text-muted py-4">No properties found</td>
+                            <td colspan="8" class="py-4 text-center text-muted">No properties found</td>
                         </tr>
                     @endforelse
                 </tbody>
