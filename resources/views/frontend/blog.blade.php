@@ -25,7 +25,7 @@
         }
     </style>
     <!-- Hero Banner Section -->
-    <section class="banners bg-primary text-white py-5">
+    <section class="py-5 text-white bg-primary banners">
         <div class="container">
             <div class="text-center">
                 <h2 class="bannerh2">{{ __('Blogs') }}</h2>
@@ -37,14 +37,14 @@
     <section class="py-5 bg-light">
         <div class="container">
             <!-- Blog Grid -->
-            <div class="row g-4 mb-5">
+            <div class="row mb-5 g-4">
                 @forelse ($blogs as $blog)
                     <div class="col-lg-4 col-md-6">
-                        <article class="card h-100 shadow-sm border-0 hover-card">
+                        <article class="card border-0 shadow-sm h-100 hover-card">
                             <!-- Blog Image -->
                             <div class="position-relative overflow-hidden">
                                 <img src="{{ $blog->image ? asset('storage/' . $blog->image) : 'https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg' }}"
-                                    alt="{{ $blog->translate()?->title }}" class=" blog-image"
+                                    alt="{{ $blog->translate()?->title }}" class="blog-image"
                                     style="height: 200px; object-fit: cover;" />
                                 {{-- <div class="position-absolute top-0 end-0 m-3">
                                     <span class="badge bg-primary rounded-pill">{{ __('Blogs') }}</span>
@@ -52,18 +52,18 @@
                             </div>
 
                             <!-- Blog Content -->
-                            <div class="card-body d-flex flex-column">
-                                <div class="d-flex align-items-center text-muted mb-3">
-                                    <i class="fas fa-calendar-alt me-2"></i>
+                            <div class="d-flex flex-column card-body">
+                                <div class="d-flex align-items-center mb-3 text-muted">
+                                    <i class="fa-calendar-alt fas me-2"></i>
                                     <small>{{ $blog->created_at->format('F j, Y') }}</small>
                                 </div>
-                                <h3 class="card-title h5 fw-bold text-dark mb-3">
+                                <h3 class="mb-3 text-dark card-title fw-bold h5">
                                     <a href="{{ route('blog.show', $blog->slug) }}">
                                         {{ $blog->translate()?->title }}
                                     </a>
                                 </h3>
 
-                                <p class="card-text text-muted mb-4 flex-grow-1">
+                                <p class="flex-grow-1 mb-4 text-muted card-text">
                                     {{ Str::limit(strip_tags($blog->translate()?->description), 120) }}
                                 </p>
 
@@ -72,7 +72,7 @@
                                     <a href="{{ route('blog.show', $blog->slug) }}"
                                         class="btn-outline-primary btn-sm">
                                         {{ __('Read More') }}
-                                        <i class="fas fa-arrow-right ms-1"></i>
+                                        <i class="fa-arrow-right fas ms-1"></i>
                                     </a>
                                 </div>
                             </div>
@@ -81,11 +81,11 @@
                 @empty
                     <!-- Empty State -->
                     <div class="col-12">
-                        <div class="text-center py-5">
-                            <div class="card border-0 shadow-sm mx-auto" style="max-width: 400px;">
-                                <div class="card-body p-5">
-                                    <i class="fas fa-file-alt fa-3x text-muted mb-3"></i>
-                                    <h3 class="h4 fw-bold text-dark mb-3">{{ __('No blogs yet') }}</h3>
+                        <div class="py-5 text-center">
+                            <div class="mx-auto card border-0 shadow-sm" style="max-width: 400px;">
+                                <div class="p-5 card-body">
+                                    <i class="mb-3 text-muted fa-3x fa-file-alt fas"></i>
+                                    <h3 class="mb-3 text-dark fw-bold h4">{{ __('No blogs yet') }}</h3>
                                     <p class="text-muted">{{ __('Stay tuned') }}</p>
                                 </div>
                             </div>

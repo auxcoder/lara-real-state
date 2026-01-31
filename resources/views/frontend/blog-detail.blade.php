@@ -12,7 +12,7 @@
         <div class="container">
             <div class="blog-inner">
                 <div class="row">
-                    <div class="col-md-12 col-lg-9 p-5">
+                    <div class="col-lg-9 col-md-12 p-5">
                         <div class="blog-text">
                               <img src="{{ $blog->image ? asset('storage/' . $blog->image) : 'https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg' }}"
 
@@ -59,7 +59,7 @@
                     <form method="POST" action="#">
                         @csrf
                         <input type="email" placeholder="{{ __('notify.email_placeholder') }}" name="email" required />
-                        <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                        <button type="submit"><i class="fa-paper-plane fa-solid"></i></button>
                     </form>
                 </div>
             </div>

@@ -1,15 +1,5 @@
-// 1. DEFINE YOUR CUSTOM COLORS/VARIABLES
-$primary: #205154;
-$secondary: #222222;
-$ternary: #ffdb49;
-$success: #1e8449;
-$info: #49c3e9;
-$warning: #ff9d49;
-$danger: #d0362d; //  #ff4136;
-$light: #eaeff2;
-// $dark: $gray-900;
-
-$spacer: 1.25rem; // Optional: Adjusting default spacing scale
+// 1. Import Bootstrap variable overrides
+@import "variables";
 
 // 2. Import the main Bootstrap Sass file
 @import "bootstrap/scss/bootstrap";

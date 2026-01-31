@@ -11,7 +11,7 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        $permissions = Permission::all();
+        $permissions = Permission::latest()->paginate(15);
         return view('admin.permission.index', compact('permissions'));
     }
     public function create()
@@ -58,6 +58,10 @@ class PermissionController extends Controller
     {
         $permission = Permission::findOrFail($id);
         $permission->delete();
+
+        if (request()->header('HX-Request')) {
+            return response('', 200);
+        }
 
         return redirect()->route('permission.index')->with('success', 'Permission deleted successfully.');
     }

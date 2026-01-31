@@ -1,87 +1,58 @@
 @extends('admin.layout.master')
+
 @section('content')
+<div class="container">
+    <x-admin.page-header 
+        title="Roles" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Roles']
+        ]" 
+    />
 
-<div class="content-page">
-<div class="content">
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\Role::class)
+                <a href="{{ route('roles.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Add Role
+                </a>
+            @endcan
+        </x-slot>
 
-    <!-- Start Content-->
-    <div class="container-xxl">
-
-        <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
-            <div class="flex-grow-1">
-                <h4 class="fs-18 fw-semibold m-0">List</h4>
-            </div>
-
-            <div class="text-end">
-                <ol class="breadcrumb m-0 py-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                    <li class="breadcrumb-item active">List</li>
-                </ol>
-            </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($roles as $role)
+                        <tr>
+                            <td>{{ $role->id }}</td>
+                            <td>{{ $role->name }}</td>
+                            <td class="text-end">
+                                <x-admin.crud-actions 
+                                    :showRoute="route('roles.show', $role->id)"
+                                    :editRoute="route('roles.edit', $role->id)"
+                                    :deleteRoute="route('roles.destroy', $role->id)"
+                                />
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center text-muted py-4">No roles found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
 
-
-        @if(Session::has('error'))
-  <p class="alert alert-info">{{ Session::get('error') }}</p>
-  @endif
-
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
+        <div class="mt-3">
+            {{ $roles->links() }}
         </div>
-    @endif
-
-        <!-- Datatables  -->
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-
-                    <div class="card-header">
-                        <h5 class="card-title mb-0">Roles List</h5>
-                    <a href="/admin/roles/create" class="btn btn-primary mt-3">Create</a>
-
-                    </div><!-- end card header -->
-
-                    <div class="card-body">
-                        <table id="datatable" class="table table-bordered dt-responsive table-responsive nowrap">
-                            <thead>
-                            <tr>
-                            <th>S.No</th>
-                            <th>Roles</th>
-                            <th>Action</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $id = 1
-                                @endphp
-                                @foreach ($roles as $role)
-                                <tr>
-                                    <td>{{ $id++ }}</td>
-                                    <td>{{ $role->name }}</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
-
-                                    </td>
-                                    <td>
-                                        <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-danger" onclick="return confirm('Are You Sure You Want To delete This?')">Delete</button>
-                                        </form>
-                                    </td>
-
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
+    </x-admin.card>
 </div>
 @endsection

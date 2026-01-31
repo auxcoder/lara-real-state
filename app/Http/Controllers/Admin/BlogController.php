@@ -10,9 +10,14 @@ use Str;
 
 class BlogController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Blog::class, 'blog');
+    }
+
     public function index()
     {
-        $blogs = Blog::get();
+        $blogs = Blog::with('translations')->latest()->paginate(15);
         return view('admin.blog.index', compact('blogs'));
     }
 

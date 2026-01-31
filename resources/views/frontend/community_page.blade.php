@@ -70,12 +70,12 @@
         <div class="sec-7">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-12 me-auto text-center content2">
+                    <div class="col-md-12 text-center content2 me-auto">
                         <h2>Discover Modern New comunitiesments.</h2>
                         <p>Select your property type from our list of featured comunitiesers</p>
                     </div>
                 </div>
-                <div class="owl-carousel logo-carol owl-theme mt-4">
+                <div class="mt-4 logo-carol owl-carousel owl-theme">
                     <div class="item"><img src="{{ asset('assets/img/logo01.png') }}" alt="" /></div>
                     <div class="item"><img src="{{ asset('assets/img/logo02.png') }}" alt="" /></div>
                     <div class="item"><img src="{{ asset('assets/img/logo03.png') }}" alt="" /></div>

@@ -9,9 +9,14 @@ use Illuminate\Support\Facades\Storage;
 
 class DeveloperController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Developer::class, 'developer');
+    }
+
     public function index()
     {
-        $developers = Developer::all();
+        $developers = Developer::latest()->paginate(15);
         return view('admin.developers.index', compact('developers'));
     }
 

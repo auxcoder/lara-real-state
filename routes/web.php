@@ -3,7 +3,7 @@
 use App\Http\Controllers\Admin\AgentPropertyController;
 use App\Http\Controllers\Admin\AgentsController;
 use App\Http\Controllers\Admin\AmenityController;
-use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\CommunityController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DeveloperController;
@@ -18,6 +18,10 @@ use App\Http\Controllers\Admin\VendorRegistrationController;
 use App\Http\Controllers\Admin\VisitorSubmissionController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\Frontend\PropertyController;
+use App\Http\Controllers\Frontend\BlogController;
+use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\FormController;
 // use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TestEmailController;
 use Illuminate\Support\Facades\Route;
@@ -50,56 +54,58 @@ Route::get('/test-email', [TestEmailController::class, 'sendTestEmail'])->name('
 
 require __DIR__.'/auth.php';
 
-Route::controller(FrontendController::class)->group(function () {
+// Property routes
+Route::controller(PropertyController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-
-    Route::post('/subscribe', 'subscribe')->name('blog');
-
     Route::get('/properties', 'filter')->name('properties.index');
-    Route::get('/properties/{location}', 'showPropertiesByLocation')->name('properties.byLocation');
-    Route::get('/property-details/{slug}', 'projects')->name('projects');
-    Route::get('/about-us', 'aboutUs')->name('aboutUs');
-    Route::get('/leadership', 'leadership')->name('leadership');
-    Route::get('/leadership/{slug}', 'leadershipDetail')->name('leadership.detail');
-
-    Route::get('/blog', 'blog')->name('blog');
-    Route::get('/blog/{slug}', 'blogDetail')->name('blog.show');
-
-    // Route::get('/vendors/registration', 'registration')->name('registration');
-
-    Route::get('/inner-blog', 'innerBlog')->name('innerBlog');
-    Route::get('/contact-us', 'contactUs')->name('contactUs');
-    Route::post('/contact/send', 'emailSend')->name('contact.send');
+    Route::get('/properties/{location}', 'showByLocation')->name('properties.byLocation');
+    Route::get('/property-details/{slug}', 'show')->name('projects');
     Route::get('/offplan', 'offplan')->name('offplan');
-    Route::get('/developer-list', 'developerList')->name('developerList');
-    Route::get('/location', 'location')->name('location');
-    Route::get('/project-community', 'projectCommunity')->name('projectCommunity');
-    Route::get('/service', 'service')->name('service');
+    Route::get('/search/offplan', 'filter')->name('offplan_search');
     Route::get('/secondary-sale', 'secondarySale')->name('secondarySale');
-    // Route::get('/property-details/{slug}', 'propertyDetails')->name('propertyDetails');
-    Route::get('/new-articles', 'newArticles')->name('newArticles');
-    Route::get('/community/{id}', 'community')->name('community');
     Route::get('/address-residence/{slug}', 'addressResidence')->name('addressResidence');
     Route::get('/payment-plan/{slug}', 'paymentPlan')->name('paymentPlan');
     Route::get('/location-map/{slug}', 'locationMap')->name('locationMap');
     Route::get('/master-plan/{slug}', 'masterPlan')->name('masterPlan');
     Route::get('/floor-plan/{slug}', 'floorPlan')->name('floorPlan');
-    Route::get('/community-page/{id}', 'communityPage')->name('communityPage');
-    Route::get('/developer-page/{id}', 'developerPage')->name('developerPage');
-    Route::get('/term-condition', 'termCondition')->name('term-condition');
-    Route::get('/privacy-policy', 'PrivacyPolicy')->name(name: 'privacy-policy');
-    // Route::get('/offplan/search',  'filter')->name('offplan_search');
 });
 
-Route::get('/complain', [FrontendController::class, 'showForm'])->name('complaint.form');
-Route::post('/complaint-submit', [FrontendController::class, 'submitForm'])->name('complaint.submit');
-Route::get('/search/offplan', [FrontendController::class, 'filter'])->name('offplan_search');
+// Blog routes
+Route::controller(BlogController::class)->group(function () {
+    Route::get('/blog', 'index')->name('blog');
+    Route::get('/blog/{slug}', 'show')->name('blog.show');
+    Route::get('/inner-blog', 'inner')->name('innerBlog');
+    Route::get('/new-articles', 'latest')->name('newArticles');
+});
 
-Route::get('/visitor', [FrontendController::class, 'visitForm'])->name('visitor.form');
-Route::post('/visitor-submit', [FrontendController::class, 'submitVisit'])->name('visitor.submit');
+// Page routes
+Route::controller(PageController::class)->group(function () {
+    Route::get('/about-us', 'aboutUs')->name('aboutUs');
+    Route::get('/leadership', 'leadership')->name('leadership');
+    Route::get('/leadership/{slug}', 'leadershipDetail')->name('leadership.detail');
+    Route::get('/contact-us', 'contactUs')->name('contactUs');
+    Route::get('/faqs', 'faqs')->name('faqs');
+    Route::get('/service', 'service')->name('service');
+    Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
+    Route::get('/term-condition', 'termCondition')->name('term-condition');
+    Route::get('/location', 'location')->name('location');
+    Route::get('/project-community', 'projectCommunity')->name('projectCommunity');
+    Route::get('/developer-list', 'developerList')->name('developerList');
+    Route::get('/developer-page/{id}', 'developerPage')->name('developerPage');
+    Route::get('/community/{id}', 'communityPage')->name('community');
+    Route::get('/community-page/{id}', 'communityPage')->name('communityPage');
+});
 
-Route::get('/vendors/registration', [FrontendController::class, 'registration'])->name('registration.form');
-Route::post('/vendors/registration-submit', [FrontendController::class, 'submitRegistration'])->name('registration.submit');
+// Form routes
+Route::controller(FormController::class)->group(function () {
+    Route::get('/complain', 'showComplaint')->name('complaint.form');
+    Route::post('/complaint-submit', 'submitComplaint')->name('complaint.submit');
+    Route::get('/visitor', 'showVisitor')->name('visitor.form');
+    Route::post('/visitor-submit', 'submitVisitor')->name('visitor.submit');
+    Route::get('/vendors/registration', 'showRegistration')->name('registration.form');
+    Route::post('/vendors/registration-submit', 'submitRegistration')->name('registration.submit');
+    Route::post('/contact/send', 'sendContact')->name('contact.send');
+});
 
 // Dashboard and Logout routes
 Route::middleware(['auth'])->group(function () {
@@ -110,6 +116,7 @@ Route::middleware(['auth'])->group(function () {
 // Route::get('property/backfill-slugs', [AgentPropertyController::class, 'backfillSlugs'])->name('property.backfill-slugs');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('slugify', [AgentPropertyController::class, 'slugify'])->name('slugify');
     Route::resource('roles', RoleController::class);
     Route::resource('permission', PermissionController::class);
     Route::resource('users', UserController::class);
@@ -121,7 +128,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], func
     Route::resource('locations', LocationController::class);
     Route::resource('developer_properties', DeveloperPropertyController::class);
     Route::resource('communities', CommunityController::class);
-    Route::resource('blogs', BlogController::class);
+    Route::resource('blogs', AdminBlogController::class);
     Route::resource('team', TeamController::class);
     Route::resource('visitor-submissions', VisitorSubmissionController::class)->only(['index', 'show', 'destroy']);
     Route::resource('vendor-registrations', VendorRegistrationController::class)->only(['index', 'show']);

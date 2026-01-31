@@ -1,17 +1,17 @@
 @extends('frontend.layout.app')
 @section('title', 'Top Developers | The H Real Estate UAE')
 @section('description', 'Discover leading property developers in UAE. Browse our curated list of trusted developers offering quality residential and commercial projects.')
-@section('content')
 
-  <!-- Bread Crumb -->
-   <section class="sec-001">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center">Developer List</h1>
-                <p class="text-center"><a href="/">Home</a> / <a href="#">Offplan Projects</a></p>
-            </div>
+@section('content')
+<!-- Bread Crumb -->
+<section class="sec-001">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="text-center">Developer List</h1>
+            <p class="text-center"><a href="/">Home</a> / <a href="#">Offplan Projects</a></p>
         </div>
+    </div>
 </section>
 <!-- Bread Crumb End -->
 
@@ -19,7 +19,7 @@
     <div class="sec-community-003">
         <div class="container">
             <div class="row d-flex align-items-center list-mob1">
-                <div class="col-md-3 col-6">
+                <div class="col-6 col-md-3">
                     <a href="{{ route('offplan') }}">
                         <div class="tab-item1">
                             <i class="bi bi-building"></i>
@@ -27,15 +27,15 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3 col-6">
+                <div class="col-6 col-md-3">
                     <a href="{{ route('developerList') }}">
-                        <div class="tab-item1 active_bar">
+                        <div class="active_bar tab-item1">
                             <i class="bi bi-house"></i>
                             <h4 class="text-center">Developer</h4>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3 col-6">
+                <div class="col-6 col-md-3">
                     <a href="{{ route('location') }}">
                         <div class="tab-item1">
                             <i class="bi bi-geo-alt"></i>
@@ -43,7 +43,7 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3 col-6">
+                <div class="col-6 col-md-3">
                     <a href="{{ route('projectCommunity') }}">
                         <div class="tab-item1">
                             <i class="bi bi-hospital"></i>
@@ -75,7 +75,7 @@
                         <h5>Recent Projects</h5>
                         <div class="row mt-4">
                             <a href="#">
-                                <div class="properties-item-recent d-flex align-items-center gap-2">
+                                <div class="d-flex align-items-center gap-2 properties-item-recent">
                                     <div class="col-md-4">
                                         <div class="property-item-img">
                                             <img src="./assets/img/recent-img.png" alt="property"
@@ -95,7 +95,7 @@
                         </div>
                         <div class="row mt-3">
                             <a href="#">
-                                <div class="properties-item-recent d-flex align-items-center gap-2">
+                                <div class="d-flex align-items-center gap-2 properties-item-recent">
                                     <div class="col-md-4">
                                         <div class="property-item-img">
                                             <img src="./assets/img/recent-img.png" alt="property"
@@ -114,7 +114,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="detail link-col1">
+                    <div class="link-col1 detail">
                         <h5>Poperty Details</h5>
                         <p><a href="#">Apartment</a>
                             <a href="#">Commercial Plot </a>
@@ -152,7 +152,7 @@
                     @foreach ($developers as $developer)
                     <div class="row list-one">
                         <a href="{{ route('developerPage', $developer->id) }}">
-                            <div class="property-item d-flex align-items-center">
+                            <div class="d-flex align-items-center property-item">
                                 <div class="col-md-5">
                                     <div class="property-img">
                                         <img src="{{ asset('storage/' .$developer->logo) }}" alt="property"
@@ -189,14 +189,14 @@
     <div class="sec-7">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 me-auto text-center content2">
+                <div class="col-md-12 text-center content2 me-auto">
                     <h2>Discover Modern New developments.</h2>
                     <p>
                         Select your property type from our list of featured developers
                     </p>
                 </div>
             </div>
-            <div class="owl-carousel logo-carol owl-theme mt-4">
+            <div class="mt-4 logo-carol owl-carousel owl-theme">
                 <div class="item"><img src="assets/img/logo01.png" alt="" /></div>
                 <div class="item"><img src="assets/img/logo02.png" alt="" /></div>
                 <div class="item"><img src="assets/img/logo03.png" alt="" /></div>

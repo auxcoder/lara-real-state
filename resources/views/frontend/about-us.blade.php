@@ -131,7 +131,7 @@
                     <p class="about3b">{{ __('subscribe_text') }}</p>
                     <form>
                         <input type="email" placeholder="{{ __('email_placeholder') }}" name="email" />
-                        <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                        <button type="submit"><i class="fa-paper-plane fa-solid"></i></button>
                     </form>
                 </div>
             </div>

@@ -2,62 +2,66 @@
 
 @section('content')
 <div class="container">
-    <h1>Blog</h1>
+    <x-admin.page-header
+        title="Blogs"
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Blogs']
+        ]"
+    />
 
-    <a href="{{ route('blogs.create') }}" class="btn btn-primary mb-3">Create New Blog</a>
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\Blog::class)
+                <a href="{{ route('blogs.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Create New Blog
+                </a>
+            @endcan
+        </x-slot>
 
-    @if (session('status'))
-        <div class="alert alert-success">{{ session('status') }}</div>
-    @endif
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($blogs as $blog)
+                        <tr>
+                            <td>{{ $blog->id }}</td>
+                            <td>{{ $blog->translate()->title }}</td>
+                            <td>
+                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->translate()->title }}" width="80" class="rounded">
+                            </td>
+                            <td class="text-end">
+                                <x-admin.crud-actions
+                                    :editRoute="route('blogs.edit', $blog->id)"
+                                    :deleteRoute="route('blogs.destroy', $blog->id)"
+                                />
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="py-4 text-center text-muted">No blogs found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Blog Image</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($blogs  as $blog)
-                <tr>
-                    <td>{{ $blog->id }}</td>
-                    <td>{{ $blog->translate()->title }}</td>
-                    <td>
-                        <img src="{{ asset('storage/' . $blog->image) }}"
-                        alt="{{ $blog->image }}" width="100">
-                    </td>
-
-                    <td>
-                        <a href="{{ route('blogs.edit', $blog->id) }}"
-                            class="btn btn-warning btn-sm">Edit</a>
-
-                        <!-- Delete Button (will trigger SweetAlert) -->
-                        <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST"
-                            class="d-inline" onsubmit="return confirmDelete(event)">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">No blog found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-
-
+            @if($blogs->hasPages())
+                <div class="mt-3">
+                    {{ $blogs->links() }}
+                </div>
+            @endif
+        </div>
+    </x-admin.card>
 </div>
-
-<script>
-    // SweetAlert confirmation for delete
-    function confirmDelete(event) {
-        event.preventDefault(); // Prevent form submission
-
+@endsection
+        event.preventDefault();
         Swal.fire({
             title: 'Are you sure?',
             text: 'You won\'t be able to revert this!',
@@ -67,7 +71,7 @@
             cancelButtonText: 'No, cancel!',
         }).then((result) => {
             if (result.isConfirmed) {
-                event.target.submit(); // Submit the form if confirmed
+                event.target.submit();
             }
         });
     }

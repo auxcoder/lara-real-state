@@ -10,12 +10,17 @@ use Validator;
 
 class AgentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Agents::class, 'agent');
+    }
+
     /**
      * Display a listing of the admin.agents.
      */
     public function index()
     {
-        $agents = Agents::all();
+        $agents = Agents::with('properties')->latest()->paginate(15);
         return view('admin.agents.index', compact('agents'));
     }
 

@@ -10,6 +10,11 @@ use Storage;
 
 class CommunityController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Community::class, 'community');
+    }
+
     public function index()
     {
         $communities = Community::all();

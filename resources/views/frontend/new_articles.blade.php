@@ -9,6 +9,7 @@
                 <p class="text-center"><a href="/">Home</a> / <a href="#">News & Articles</a></p>
             </div>
         </div>
+    </div>
 </section>
 <!-- Bread Crumb End -->
 
@@ -20,7 +21,7 @@
                 <div class="col-md-7">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="news-img-cont back-img1">
+                            <div class="back-img1 news-img-cont">
                                 <h6>21 Properties</h6>
                                 <h5>Apartment </h5>
                                 <div class="btn-ico">
@@ -28,7 +29,7 @@
                                     <a href="#"><i class="bi bi-play"></i></a>
                                 </div>
                             </div>
-                            <div class="news-img-cont back-img5 mt-3">
+                            <div class="mt-3 back-img5 news-img-cont">
                                 <h6>21 Properties</h6>
                                 <h5>Apartment </h5>
                                 <div class="btn-ico">
@@ -36,7 +37,7 @@
                                     <a href="#"><i class="bi bi-play"></i></a>
                                 </div>
                             </div>
-                            <div class="news-img-cont back-img4 mt-3">
+                            <div class="mt-3 back-img4 news-img-cont">
                             <h6>21 Properties</h6>
                             <h5>Apartment </h5>
                             <div class="btn-ico">
@@ -48,7 +49,7 @@
 
 
                     <div class="col-md-6">
-                        <div class="news-img-cont back-img2 mt-3">
+                        <div class="mt-3 back-img2 news-img-cont">
                             <h6>21 Properties</h6>
                             <h5>Apartment </h5>
                             <div class="btn-ico">
@@ -56,7 +57,7 @@
                                 <a href="#"><i class="bi bi-play"></i></a>
                             </div>
                         </div>
-                        <div class="news-img-cont back-img3 mt-3">
+                        <div class="mt-3 back-img3 news-img-cont">
                             <h6>21 Properties</h6>
                             <h5>Apartment </h5>
                             <div class="btn-ico">
@@ -76,7 +77,7 @@
                             feugiat ante aliquam id. Donec tincidunt eu est sit amet tempor. Sed ut accumsan
                             magna, sed facilisis elit. Proin dapibus et elit ac </p>
                     </div>
-                    <div class="news-img-cont back-img6 mt-3">
+                    <div class="mt-3 back-img6 news-img-cont">
                         <h6>21 Properties</h6>
                         <h5>Apartment </h5>
                         <div class="btn-ico">
@@ -84,7 +85,7 @@
                             <a href="#"><i class="bi bi-play"></i></a>
                         </div>
                     </div>
-                    <a class="btn btn-primary mt-4" href="#">View More</a>
+                    <a class="mt-4 btn btn-primary" href="#">View More</a>
                 </div>
             </div>
         </div>
@@ -170,18 +171,17 @@
     </div>
 </section>
 
-
 <!-- Logo Carousel Start -->
 <section>
     <div class="sec-7">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 me-auto text-center content2">
+                <div class="col-md-12 text-center content2 me-auto">
                     <h2>Discover Modern New developments.</h2>
                     <p>Select your property type from our list of featured developers</p>
                 </div>
             </div>
-            <div class="owl-carousel logo-carol owl-theme mt-4">
+            <div class="mt-4 logo-carol owl-carousel owl-theme">
                 <div class="item"><img src="{{ asset('assets/img/logo01.png') }}" alt="" /></div>
                 <div class="item"><img src="{{ asset('assets/img/logo02.png') }}" alt="" /></div>
                 <div class="item"><img src="{{ asset('assets/img/logo03.png') }}" alt="" /></div>

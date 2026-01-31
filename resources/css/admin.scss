@@ -1,19 +1,35 @@
-// 1. DEFINE YOUR CUSTOM COLORS/VARIABLES
-$primary: #205154;
-$secondary: #222222;
-$ternary: #ffdb49;
-$success: #1e8449;
-$info: #49c3e9;
-$warning: #ff9d49;
-$danger: #d0362d; //  #ff4136;
-$light: #eaeff2;
-// $dark: $gray-900;
-
-$spacer: 1.25rem; // Optional: Adjusting default spacing scale
+// 1. Import Bootstrap variable overrides
+@import "variables";
 
 // 2. Import the main Bootstrap Sass file
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
+
+// HTMX Loading States & Animations
+.htmx-indicator {
+    display: none;
+}
+
+.htmx-request .htmx-indicator,
+.htmx-request.htmx-indicator {
+    display: inline-block;
+}
+
+.htmx-swapping {
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+}
+
+.htmx-settling {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
+}
+
+tr.htmx-swapping {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 500ms ease-out;
+}
 
 // 3. Your custom SCSS styles go below this import
 html {
@@ -45,19 +61,19 @@ html {
     }
 }
 #contentWrapper {
-    min-width: 100vw;
+    width: 100%;
+    transition: margin 0.25s ease-out;
 }
 @media (min-width: 992px) {
     #sidebarWrapper {
         margin-left: 0;
     }
     #contentWrapper {
-        min-width: 0;
-        width: 100%;
-        margin-left: 15rem; /* Shift content to make space for the fixed sidebar */
+        margin-left: 15rem;
+        width: calc(100% - 15rem); /* Adjust width to account for sidebar */
     }
     .main-content {
-        padding-left: 1.5rem; /* Adjust padding for spacing */
+        padding-left: 1.5rem;
     }
 }
 @media print {

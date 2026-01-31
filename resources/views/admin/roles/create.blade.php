@@ -1,60 +1,29 @@
 @extends('admin.layout.master')
+
 @section('content')
-<!-- Start Content-->
-<div class="content-page">
-    <div class="content">
+<div class="container">
+    <x-admin.page-header 
+        title="Add Role" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Roles', 'url' => route('roles.index')],
+            ['label' => 'Create']
+        ]" 
+    />
 
-        <!-- Start Content-->
-        <div class="container-xxl">
-
-            <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
-                <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Role Form</h4>
-                </div>
-
-                <div class="text-end">
-                    <ol class="breadcrumb m-0 py-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Role Form</li>
-                    </ol>
-                </div>
+    <x-admin.card class="mb-4">
+        <form action="{{ route('roles.store') }}" method="POST">
+            @csrf
+            @include('admin.roles._form')
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle me-1"></i>Create Role
+                </button>
+                <a href="{{ route('roles.index') }}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-1"></i>Cancel
+                </a>
             </div>
-
-            @if(Session::has('error'))
-            <p class="alert alert-info">{{ Session::get('error') }}</p>
-            @endif
-
-              @if ($message = Session::get('success'))
-                  <div class="alert alert-success">
-                      <p>{{ $message }}</p>
-                  </div>
-              @endif
-
-            <!-- General Form -->
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h5 class="card-title mb-0">Create Form</h5>
-                        </div><!-- end card header -->
-
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form action="{{ route('roles.store') }}" method="POST">
-                                        @csrf
-                                        <div class="form-group">
-                                            <strong>Name:</strong>
-                                            <input name="name" placeholder="Name" class="form-control my-4" required>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
-                </div><!-- end card header -->
-            </div>
-        </div>
-    </div>
-
-</div>
-</div>
+        </form>
+    </x-admin.card>
 </div>
 @endsection

@@ -11,16 +11,18 @@
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans text-gray-900 antialiased">
-    <div class="d-flex flex-column justify-content-center items-center pt-6 sm:pt-0 bg-light">
-        <div>
+<body class="bg-light">
+    <div class="d-flex flex-column justify-content-center align-items-center min-vh-100 py-5">
+        <div class="mb-4">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-muted" />
+                <x-application-logo class="text-muted" style="width: 5rem; height: 5rem;" />
             </a>
         </div>
 
-        <div class="w-100 mt-6 px-6 py-4 bg-white shadow-md overflow-hidden rounded-3">
-            {{ $slot }}
+        <div class="card shadow-sm" style="max-width: 500px; width: 100%;">
+            <div class="card-body p-4">
+                {{ $slot }}
+            </div>
         </div>
     </div>
 </body>

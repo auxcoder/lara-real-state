@@ -50,14 +50,13 @@ if (isset($location)) {
 
 <section class="my-3">
     <div class="container">
-        <div class="row bg-light p-3 rounded-3">
-            <div class="col-md-3
-                <form id="filter-form" method="GET"
+        <div class="row p-3 bg-light rounded-3">
+            <div class="col-md-3 <form id="filter-form" method="GET"
                     data-base-url="{{ route('properties.byLocation', ['location' => '__LOCATION__']) }}"
                     class="filter-form">
                     <div class="mb-2">
                         <label for="community" class="form-label">{{ __('filter.heading') }}</label>
-                        <select id="community" name="community" class="form-select form-select-sm mb-1" >
+                        <select id="community" name="community" class="mb-1 form-select form-select-sm" >
                             @foreach ($communities as $community)
                             <option value="$community->slug" {{ request('location') == $community->slug? 'selected' : '' }}>{{ $community->name }}</option>
                             @endforeach
@@ -93,8 +92,13 @@ if (isset($location)) {
 
             <div class="col-md-9">
                 @if (isset($location))
-                <form method="GET" action="{{ route('properties.byLocation', $location) }}" class="search-form d-flex gap-2">
-                    <select name="sort" onchange="this.form.submit()" class="form-select w-25 form-select-sm">
+                <div class="d-flex gap-2 search-form mb-3">
+                    <select name="sort" 
+                            class="w-25 form-select form-select-sm"
+                            hx-get="{{ route('properties.byLocation', $location) }}"
+                            hx-trigger="change"
+                            hx-target="#property-list"
+                            hx-indicator="#sort-spinner">
                         <option value="">{{ __('sort.heading') }}</option>
                         <option value="newest" {{ request('sort')=='newest' ? 'selected' : '' }}>
                             {{ __('sort.newest') }}
@@ -102,20 +106,18 @@ if (isset($location)) {
                         <option value="oldest" {{ request('sort')=='oldest' ? 'selected' : '' }}>
                             {{ __('sort.oldest') }}
                         </option>
-                        <option value="price_high_to_low" {{ request('sort')=='price_high_to_low' ? 'selected' : ''
-                            }}>
+                        <option value="price_high_to_low" {{ request('sort')=='price_high_to_low' ? 'selected' : '' }}>
                             {{ __('sort.price_high_to_low') }}
                         </option>
-                        <option value="price_low_to_high" {{ request('sort')=='price_low_to_high' ? 'selected' : ''
-                            }}>
+                        <option value="price_low_to_high" {{ request('sort')=='price_low_to_high' ? 'selected' : '' }}>
                             {{ __('sort.price_low_to_high') }}
                         </option>
                     </select>
-
-                    <input class="w-75" type="text" placeholder="{{ '    ' . __('sort.search_placeholder') }}" />
-                </form>
+                    <span id="sort-spinner" class="htmx-indicator spinner-border spinner-border-sm"></span>
+                </div>
                 @endif
 
+                <div id="property-list">
                 @forelse ($properties as $project)
                 <img src="{{ asset('storage/' . $project->main_image) }}" class="property-image" />
 
@@ -129,14 +131,14 @@ if (isset($location)) {
 
                 <div class="details">
                     {{-- <img src="{{ asset('/assets/images/projects/location.png') }}" width="30" /> --}}
-                    <i class="fa-solid fa-location-dot"></i>
+                    <i class="fa-location-dot fa-solid"></i>
                     <h4 class="property-price">{{ $project->location }}</h4>
 
                     @if ($project->bedrooms > 0)
                     <div class="icons">
                         {{-- <img src="{{ asset('/assets/images/projects/icon.png') }}" /> --}}
                         {{-- <img src="{{ asset('/assets/images/projects/bed.png') }}" /> --}}
-                        <i class="fa-solid fa-bed"></i>
+                        <i class="fa-bed fa-solid"></i>
                         {{ $project->bedrooms }}
 
                     </div>
@@ -146,13 +148,13 @@ if (isset($location)) {
                     <div class="icons">
                         {{-- <img src="{{ asset('/assets/images/projects/icon.png') }}" /> --}}
                         {{-- <img src="{{ asset('/assets/images/projects/bathtub.png') }}" /> --}}
-                        <i class="fa-solid fa-bath"></i>
+                        <i class="fa-bath fa-solid"></i>
                         {{ $project->bathrooms }}
                     </div>
                     @endif
                 </div>
 
-                <a href="{{ route('projects', $project->slug) }}" class="viewdetails-btn mb-3 text-white">
+                <a href="{{ route('projects', $project->slug) }}" class="mb-3 text-white viewdetails-btn">
                     {{ __('filter.button.details') }}
                 </a>
 
@@ -165,6 +167,7 @@ if (isset($location)) {
                 </div>
 
                 @endforelse
+                </div>
             </div>
         </div>
 
@@ -173,38 +176,5 @@ if (isset($location)) {
         </div>
     </div>
 </section>
-<script>
-    document.getElementById('filter-form').addEventListener('submit', function (e) {
-        e.preventDefault();
 
-        const type = document.getElementById('property_type').value || '';
-        const city = document.getElementById('community').value || '';
-        const status = document.getElementById('status')?.value || ''; // if you have a status filter
-
-        // Use city first, then type, as the __LOCATION__ placeholder
-        const mainFilter = city || type;
-
-        if (!mainFilter) {
-            return alert('Please select at least a city or a property type.');
-        }
-
-        // Get base URL from Blade
-        const template = this.dataset.baseUrl;
-        let actionUrl = template.replace('__LOCATION__', encodeURIComponent(mainFilter));
-
-        // Build query string only with non-empty filters
-        const params = new URLSearchParams();
-        if (city) params.append('city', city);
-        // alert('City: ' + city);
-        if (type) params.append('property_type', type);
-        if (status) params.append('status', status);
-
-        if (params.toString()) {
-            actionUrl += '?' + params.toString();
-        }
-
-        this.action = actionUrl;
-        this.submit();
-    });
-</script>
 @endsection

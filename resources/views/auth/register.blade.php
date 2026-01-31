@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <!-- Mirrored from zoyothemes.com/kadso/html/auth-register by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 01 Jul 2024 10:45:01 GMT -->
 <!-- Added by HTTrack -->
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
-
 <head>
-
     <meta charset="utf-8" />
     <title>Register | Kadso - Responsive Admin Dashboard Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,22 +13,17 @@
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico">
-    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
-
-    <!-- Icons -->
-    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-
+    @vite(['resources/css/admin.scss', 'resources/js/admin.js'])
 </head>
 
 <body class="bg-color">
-
     <!-- Begin page -->
     <div class="container-fluid">
         <div class="row vh-100">
             <div class="col-12">
                 <div class="p-0">
                     <div class="row d-flex align-items-center">
-                        <div class="col-md-6 col-xl-6 col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-xl-6">
                             <div class="row">
                                 <div class="col-md-6 mx-auto">
                                     <div class="mb-0 border-0">
@@ -44,9 +36,9 @@
                                                     </a>
                                                 </div>
 
-                                                <div class="auth-title-section mb-3">
-                                                    <h3 class="text-dark fs-20 fw-medium mb-2">Get's started</h3>
-                                                    <p class="text-dark text-capitalize fs-14 mb-0">Please enter your
+                                                <div class="mb-3 auth-title-section">
+                                                    <h3 class="mb-2 text-dark fs-20 fw-medium">Get's started</h3>
+                                                    <p class="mb-0 text-capitalize text-dark fs-14">Please enter your
                                                         details.</p>
                                                 </div>
                                             </div>
@@ -67,31 +59,31 @@
                                                     </div> --}}
                                                 @endif
                                                 @csrf
-                                                <div class="form-group mb-3">
+                                                <div class="mb-3 form-group">
                                                     <label for="username" class="form-label">Username</label>
                                                     <input class="form-control" name="name" type="text"
                                                         id="username" required="" placeholder="Enter your Username">
                                                 </div>
 
-                                                <div class="form-group mb-3">
+                                                <div class="mb-3 form-group">
                                                     <label for="emailaddress" class="form-label">Email address</label>
                                                     <input class="form-control" name="email" type="email"
                                                         id="emailaddress" required="" placeholder="Enter your email">
                                                 </div>
 
-                                                <div class="form-group mb-3">
+                                                <div class="mb-3 form-group">
                                                     <label for="password" class="form-label">Password</label>
                                                     <input class="form-control" name="password" type="password"
                                                         required="" id="password" placeholder="Enter your password">
                                                 </div>
 
-                                                <div class="form-group mb-3">
+                                                <div class="mb-3 form-group">
                                                     <label for="password" class="form-label">Confirmed Password</label>
                                                     <input class="form-control" name="password_confirmation" type="password"
                                                            required id="password" placeholder="Enter your confirmed password">
                                                 </div>
 
-                                                <div class="form-group d-flex mb-3">
+                                                <div class="d-flex mb-3 form-group">
                                                     <div class="col-12">
                                                         <div class="form-check">
                                                             <input type="checkbox" class="form-check-input"
@@ -104,7 +96,7 @@
                                                     </div><!--end col-->
                                                 </div>
 
-                                                <div class="form-group mb-0 row">
+                                                <div class="row mb-0 form-group">
                                                     <div class="col-12">
                                                         <div class="d-grid">
                                                             <button class="btn btn-primary" type="submit">
@@ -115,7 +107,7 @@
                                             </form>
                                             <div class="text-center text-muted">
                                                 <p class="mb-0">Already have an account ?<a
-                                                        class='text-primary ms-2 fw-medium' href='/login'>Login
+                                                        class='text-primary fw-medium ms-2' href='/login'>Login
                                                         here</a></p>
                                             </div>
                                         </div>
@@ -125,7 +117,7 @@
                         </div>
 
                         <div
-                            class="col-md-6 col-xl-6 col-lg-6 p-0 vh-100 d-flex justify-content-center account-page-bg">
+                            class="col-lg-6 col-md-6 col-xl-6 d-flex justify-content-center p-0 account-page-bg vh-100">
                         </div>
                     </div>
                 </div>
@@ -136,16 +128,8 @@
     <!-- END wrapper -->
 
     <!-- Vendor -->
-    {{-- <script src="/assets/libs/jquery/jquery.min.js"></script> --}}
-    {{-- <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
     <script src="/assets/libs/simplebar/simplebar.min.js"></script>
     <script src="/assets/libs/node-waves/waves.min.js"></script>
-    {{-- <script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script> --}}
-    {{-- <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script> --}}
-    <script src="/assets/libs/feather-icons/feather.min.js"></script>
-
-    <!-- App js-->
-    {{-- <script src="/assets/js/app.js"></script> --}}
 
 </body>
 

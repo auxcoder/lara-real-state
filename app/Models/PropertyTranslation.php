@@ -27,5 +27,10 @@ class PropertyTranslation extends Model
 
     public $timestamps = false;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'property_id',
+        'locale',
+        'title',
+        'description',
+    ];
 }

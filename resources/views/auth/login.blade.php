@@ -12,9 +12,9 @@
 </head>
 <body>
     <div class="container-fluid bg-light">
-        <div class="row align-items-center justify-content-center vh-100">
-            <div class="col-md-4 col-xl-4 col-lg-4">
-                <div class="text-center">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-lg-4 col-md-4 col-xl-4">
+                <div class="mx-auto text-center" style="max-width: 400px">
                     <div class="mb-4">
                         <a class='text-decoration-none' href='{{ route('home') }}'>
                             <img class="auth-logo" src="{{ asset('assets/img/logo-countryside-c.jpeg') }}" alt="logo-dark" class="mx-auto" height="150" />
@@ -22,18 +22,18 @@
                     </div>
 
                     <div class="mb-3">
-                        <h3 class="text-dark fs-20 fw-medium mb-2">
+                        <h3 class="mb-2 text-dark fs-20 fw-medium">
                             <a class='text-decoration-none' href='{{ route('home') }}'>Welcome back</a>
                         </h3>
-                        <p class="text-dark text-capitalize fs-14 mb-0">Please enter your details.</p>
+                        <p class="mb-0 text-capitalize text-dark fs-14">Please enter your details.</p>
                     </div>
                 </div>
 
-                <div class="x-auto" style="max-width: 400px">
+                <div class="mx-auto x-auto" style="max-width: 400px">
                     <form action="{{ route('login') }}" method="POST" class="my-4">
                         {{-- Display error message if exists --}}
                         @if ($errors->any())
-                            <div class="alert alert-danger alert-block">
+                            <div class="alert alert-block alert-danger">
                                 <button type="button" class="close"
                                     data-dismiss="alert">×</button>
                                 <strong>{{ $errors->first() }}</strong>
@@ -41,7 +41,7 @@
                         @endif
 
                         @csrf
-                        <div class="form-group mb-3">
+                        <div class="mb-3 form-group">
                             <label for="emailaddress" class="form-label">Email address</label>
                             <input class="form-control" type="email" id="emailaddress"
                                 name="email" required placeholder="Enter your email">
@@ -51,7 +51,7 @@
                         </div>
 
 
-                        <div class="form-group mb-3">
+                        <div class="mb-3 form-group">
                             <label for="password" class="form-label">Password</label>
                             <input class="form-control" type="password" id="password"
                                 name="password" required placeholder="Enter your password">
@@ -60,7 +60,7 @@
                             @enderror
                         </div>
 
-                        <div class="form-group d-flex mb-3">
+                        <div class="d-flex mb-3 form-group">
                             <div class="col-sm-6">
                                 <div class="form-check">
                                     <input type="checkbox" class="form-check-input"
@@ -80,7 +80,7 @@
                     </form>
 
                     <div class="text-center text-muted">
-                        Don't have an account ?<a class='text-primary ms-2 fw-medium' href='/register'>Sign Up</a>
+                        Don't have an account ?<a class='text-primary fw-medium ms-2' href='/register'>Sign Up</a>
                     </div>
                 </div>
             </div>

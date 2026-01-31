@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
+ * @property string|null $slug
  * @property int $developer_id
  * @property string $name
  * @property string $location
@@ -31,7 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $masterPlan_description
  * @property string|null $floorPlan_description
  * @property string|null $locationMap_description
- * @property string|null $slug
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Amenity> $amenity
  * @property-read int|null $amenity_count
  * @property-read \App\Models\Developer|null $developer
@@ -48,6 +50,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Database\Factories\DeveloperPropertyFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty query()
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereBathrooms($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereBedrooms($value)
@@ -55,6 +58,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereConstructionPercentage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereCoverImage($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereDeveloperId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereDownPercentage($value)
@@ -75,17 +79,53 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty withoutTrashed()
  * @mixin \Eloquent
  */
 class DeveloperProperty extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'developer_id',
+        'slug',
+        'name',
+        'location',
+        'status',
+        'bedrooms',
+        'bathrooms',
+        'price',
+        'description',
+        'key_highlights',
+        'paymentPlan',
+        'handover_date',
+        'handover_percentage',
+        'down_percentage',
+        'construction_percentage',
+        'logo',
+        'cover_image',
+        'community',
+        'masterPlan_image',
+        'locationMap',
+    ];
 
     protected $casts = [
         'paymentPlan' => 'array',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('status', 'available');
+    }
+
+    public function scopeByDeveloper($query, $developerId)
+    {
+        return $query->where('developer_id', $developerId);
+    }
 
     public function community()
     {

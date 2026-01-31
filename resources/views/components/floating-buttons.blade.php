@@ -1,12 +1,12 @@
-<div class="floating-buttons position-fixed d-flex flex-column gap-2 z-3" style="bottom: 20px; right: 20px;">
-    <div class="floating-button-container position-relative d-flex align-items-center ">
+<div class="position-fixed z-3 d-flex flex-column floating-buttons gap-2" style="bottom: 20px; right: 20px;">
+    <div class="position-relative d-flex align-items-center floating-button-container ">
         <a href="{{ route('visitor.form') }}"
-            class="btn btn-dark rounded-circle d-flex fs-4 align-items-center justify-content-center p-3"
+            class="d-flex justify-content-center align-items-center p-3 btn btn-dark rounded-circle fs-4"
             target="_blank">
-            <i class="fas fa-plus text-white"></i>
+            <i class="text-white fa-plus fas"></i>
         </a>
         <span
-            class="tooltip-text roudnded-2 position-absolute bg-white text-dark fw-bold text-nowrap px-2 py-1 shadow-sm small">
+            class="position-absolute px-2 py-1 text-dark text-nowrap bg-white shadow-sm fw-bold roudnded-2 small tooltip-text">
             Add Record
         </span>
     </div>
