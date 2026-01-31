@@ -1,11 +1,13 @@
 @extends('admin.layout.master')
 
 @section('content')
-<div class="container">
+<div class="container" x-data="developerPropertyForm()">
     <h1 class="mb-4">{{ isset($developerProperty) ? 'Edit Developer Property' : 'Add Developer Property' }}</h1>
     <form
         action="{{ isset($developerProperty) ? route('developer_properties.update', $developerProperty->id) : route('developer_properties.store') }}"
-        method="POST" enctype="multipart/form-data">
+        method="POST"
+        enctype="multipart/form-data"
+        @submit="validateSlug($event)">
         @csrf
         @if (isset($developerProperty))
             @method('PUT')
@@ -13,17 +15,26 @@
         <div class="row g-3">
             <div class="col-md-6">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="name" name="name"
-                        value="{{ isset($developerProperty) ? $developerProperty->name : '' }}"
-                        placeholder="Property Name" required>
+                    <input type="text"
+                           class="form-control"
+                           id="name"
+                           name="name"
+                           value="{{ isset($developerProperty) ? $developerProperty->name : '' }}"
+                           placeholder="Property Name"
+                           @input="updateSlug($event)"
+                           required>
                     <label for="name">Property Name</label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="slug" name="slug"
-                        value="{{ isset($developerProperty) ? $developerProperty->slug : '' }}"
-                        placeholder="Slug (auto-generated)">
+                    <input type="text"
+                           class="form-control"
+                           id="slug"
+                           name="slug"
+                           value="{{ isset($developerProperty) ? $developerProperty->slug : '' }}"
+                           placeholder="Slug (auto-generated)"
+                           @input="markSlugEdited()">
                     <label for="slug">Slug</label>
                     <div class="invalid-feedback">Slug must be lowercase letters, numbers, and hyphens only.</div>
                 </div>
@@ -103,7 +114,7 @@
                     {{-- @dd($developerProperty->paymentPlan) --}}
                     @if (isset($developerProperty) && $developerProperty->paymentPlan)
                         @foreach ($developerProperty->paymentPlan as $planIndex => $paymentPlan)
-                            <div class="payment-plan mb-4">
+                            <div class="mb-4 payment-plan">
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                     <h3>Payment Plan {{ $planIndex + 1 }}</h3>
                                     <button type="button" class="btn btn-danger btn-sm remove-payment-plan">Remove
@@ -154,12 +165,12 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                <button type="button" class="btn btn-success btn-sm add-installment">Add
+                                <button type="button" class="btn btn-sm btn-success add-installment">Add
                                     Installment</button>
                             </div>
                         @endforeach
                     @else
-                        <div class="payment-plan mb-4">
+                        <div class="mb-4 payment-plan">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <h3>Payment Plan 1</h3>
                                 <button type="button" class="btn btn-danger btn-sm remove-payment-plan">Remove
@@ -201,12 +212,12 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-success btn-sm add-installment">Add
+                            <button type="button" class="btn btn-sm btn-success add-installment">Add
                                 Installment</button>
                         </div>
                     @endif
                 </div>
-                <button type="button" class="btn btn-primary mt-2" id="addPaymentPlan">Add Payment Plan</button>
+                <button type="button" class="mt-2 btn btn-primary" id="addPaymentPlan">Add Payment Plan</button>
             </div>
 
 
@@ -252,7 +263,7 @@
                 <input type="file" accept="image/*" class="form-control" id="logo" name="logo">
                 @if (isset($developerProperty) && $developerProperty->logo)
                     <img src="{{ asset('storage/' . $developerProperty->logo) }}" alt="Logo"
-                        class="img-thumbnail mt-2" style="max-width: 150px;">
+                        class="mt-2 img-thumbnail" style="max-width: 150px;">
                 @endif
             </div>
 
@@ -261,7 +272,7 @@
                 <input type="file" accept="image/*" class="form-control" id="cover_image" name="cover_image">
                 @if (isset($developerProperty) && $developerProperty->cover_image)
                     <img src="{{ asset('storage/' . $developerProperty->cover_image) }}" alt="Cover Image"
-                        class="img-thumbnail mt-2" style="max-width: 150px;">
+                        class="mt-2 img-thumbnail" style="max-width: 150px;">
                 @endif
             </div>
 
@@ -296,7 +307,7 @@
                     name="masterPlan_image">
                 @if (isset($developerProperty) && $developerProperty->masterPlan_image)
                     <img src="{{ asset('storage/' . $developerProperty->masterPlan_image) }}"
-                        alt="Master Plan Image" class="img-thumbnail mt-2" style="max-width: 150px;">
+                        alt="Master Plan Image" class="mt-2 img-thumbnail" style="max-width: 150px;">
                 @endif
             </div>
 
@@ -305,7 +316,7 @@
                 <input type="file" accept="image/*" class="form-control" id="locationMap" name="locationMap">
                 @if (isset($developerProperty) && $developerProperty->locationMap)
                     <img src="{{ asset('storage/' . $developerProperty->locationMap) }}" alt="Location Map"
-                        class="img-thumbnail mt-2" style="max-width: 150px;">
+                        class="mt-2 img-thumbnail" style="max-width: 150px;">
                 @endif
             </div>
 
@@ -400,7 +411,7 @@
                                     <td>
 
                                         <select name="property_types[{{ $index }}][property_type]"
-                                            class="form-select form-control" required>
+                                            class="form-control form-select" required>
                                             <option value="" disabled selected
                                                 {{ old('property_types.' . $index . '.property_type', $propertyType->property_type) ? '' : 'selected' }}>
                                                 Property Type
@@ -425,7 +436,7 @@
                         @else
                             <tr>
                                 <td>
-                                    <select name="property_types[0][property_type]" class="form-select form-control"
+                                    <select name="property_types[0][property_type]" class="form-control form-select"
                                         required>
                                         <option value="" disabled>Property Type
                                         </option>
@@ -535,16 +546,22 @@
         </div>
 
         <button type="submit"
-            class="btn btn-primary mt-4">{{ isset($developerProperty) ? 'Update' : 'Submit' }}</button>
+            class="mt-4 btn btn-primary">{{ isset($developerProperty) ? 'Update' : 'Submit' }}</button>
     </form>
 </div>
 @endsection
 
 @section('scripts')
 <script>
-    $(document).ready(function() {
-        // Slug generation/validation
-        function slugify(str) {
+document.addEventListener('alpine:init', () => {
+    Alpine.data('developerPropertyForm', () => ({
+        slugEdited: false,
+
+        init() {
+            // Slug generation with HTMX is handled in the template
+        },
+
+        slugify(str) {
             return (str || '')
                 .toString()
                 .normalize('NFKD')
@@ -554,209 +571,238 @@
                 .trim()
                 .replace(/[\s_-]+/g, '-')
                 .replace(/^-+|-+$/g, '');
-        }
-        const $name = $('#name');
-        const $slug = $('#slug');
-        let slugEdited = false;
-        $name.on('input', function(){ if(!slugEdited){ $slug.val(slugify($(this).val())); } });
-        $slug.on('input', function(){ slugEdited = true; });
-        function isValidSlug(v){ return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(v); }
-        $('form').on('submit', function(e){
-            const v = ($slug.val() || '').trim();
-            if(v && !isValidSlug(v)){
-                $slug.addClass('is-invalid');
-                e.preventDefault();
-            } else {
-                $slug.removeClass('is-invalid');
+        },
+
+        updateSlug(event) {
+            if (!this.slugEdited) {
+                const slugInput = document.getElementById('slug');
+                slugInput.value = this.slugify(event.target.value);
             }
-        });
+        },
 
-        // Initialize payment plan index based on existing plans
-        var paymentPlanIndex = {{ isset($developerProperty) && $developerProperty->paymentPlans ? $developerProperty->paymentPlans->count() : 1 }};
+        markSlugEdited() {
+            this.slugEdited = true;
+        },
 
-        // Add Payment Plan
-        $('#addPaymentPlan').click(function() {
-            var newPaymentPlan = `
-    <div class="payment-plan mb-4">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-            <h3>Payment Plan ${paymentPlanIndex + 1}</h3>
-            <button type="button" class="btn btn-danger btn-sm remove-payment-plan">Remove Plan</button>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Plan Heading</label>
-            <input type="text" class="form-control" name="paymentPlans[${paymentPlanIndex}][heading]" placeholder="Enter Payment Plan Heading" required>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Installment</th>
-                    <th>Payment (%)</th>
-                    <th>Milestone</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <input type="text" name="paymentPlans[${paymentPlanIndex}][installments][0][installment]" class="form-control" placeholder="Installment" required>
-                    </td>
-                    <td>
-                        <input type="number" name="paymentPlans[${paymentPlanIndex}][installments][0][payment]" class="form-control" placeholder="Payment (%)" required>
-                    </td>
-                    <td>
-                        <input type="text" name="paymentPlans[${paymentPlanIndex}][installments][0][milestone]" class="form-control" placeholder="Milestone" required>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger btn-sm remove-installment">Remove</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <button type="button" class="btn btn-success btn-sm add-installment">Add Installment</button>
-    </div>
-`;
-            $('#paymentPlansContainer').append(newPaymentPlan);
-            paymentPlanIndex++;
-        });
+        validateSlug(event) {
+            const slugInput = document.getElementById('slug');
+            const value = (slugInput.value || '').trim();
+            const isValid = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value);
 
-        // Remove Payment Plan
-        $(document).on('click', '.remove-payment-plan', function() {
-            $(this).closest('.payment-plan').remove();
-            // Re-index payment plans
-            $('#paymentPlansContainer .payment-plan').each(function(index) {
-                $(this).find('h3').text('Payment Plan ' + (index + 1));
-                // Update input names
-                $(this).find('input[name^="paymentPlans"]').each(function() {
-                    var name = $(this).attr('name');
-                    var newName = name.replace(/paymentPlans\[\d+\]/,
-                        `paymentPlans[${index}]`);
-                    $(this).attr('name', newName);
-                });
-                // Update installment names
-                $(this).find('input[name*="[installments]"]').each(function(instIndex) {
-                    var name = $(this).attr('name');
-                    var newName = name.replace(/installments\[\d+\]/,
-                        `installments[${instIndex}]`);
-                    $(this).attr('name', newName);
-                });
-            });
-            paymentPlanIndex = $('#paymentPlansContainer .payment-plan').length;
-        });
+            if (value && !isValid) {
+                slugInput.classList.add('is-invalid');
+                event.preventDefault();
+            } else {
+                slugInput.classList.remove('is-invalid');
+            }
+        }
+    }));
+});
 
-        // Add Installment within a Payment Plan
-        $(document).on('click', '.add-installment', function() {
-            var paymentPlanDiv = $(this).closest('.payment-plan');
-            var planIdx = paymentPlanDiv.index();
-            var installmentCount = paymentPlanDiv.find('tbody tr').length;
-            var newInstallment = `
-    <tr>
-        <td>
-            <input type="text" name="paymentPlans[${planIdx}][installments][${installmentCount}][installment]" class="form-control" placeholder="Installment" required>
-        </td>
-        <td>
-            <input type="number" name="paymentPlans[${planIdx}][installments][${installmentCount}][payment]" class="form-control" placeholder="Payment (%)" required>
-        </td>
-        <td>
-            <input type="text" name="paymentPlans[${planIdx}][installments][${installmentCount}][milestone]" class="form-control" placeholder="Milestone" required>
-        </td>
-        <td>
-            <button type="button" class="btn btn-danger btn-sm remove-installment">Remove</button>
-        </td>
-    </tr>
-`;
-            paymentPlanDiv.find('tbody').append(newInstallment);
-        });
+// Key Highlights
+document.addEventListener('DOMContentLoaded', function() {
+    const highlightsTable = document.getElementById('keyHighlightsTable');
 
-        // Remove Installment
-        $(document).on('click', '.remove-installment', function() {
-            $(this).closest('tr').remove();
-        });
-        // Location Add Row
-        var locationIndex = {{ isset($developerProperty) ? $developerProperty->locations->count() : 1 }};
-        $('.add-location').click(function() {
-            $('#locationsTable tbody').append(`
-                <tr>
-                    <td>
-                        <select class="form-select select2" name="locations[${locationIndex}][location_id]">
-                            @foreach ($locations as $location)
-                                <option value="{{ $location->id }}">{{ $location->name }}</option>
-                            @endforeach
-                        </select>
-                    </td>
-                    <td><input type="number" name="locations[${locationIndex}][distance]" class="form-control" required></td>
-                    <td><button type="button" class="btn btn-danger remove-location">-</button></td>
-                </tr>
-            `);
-            locationIndex++;
-            $('.select2').select2(); // Reinitialize select2 for new rows
-        });
-
-        $(document).on('click', '.remove-location', function() {
-            $(this).closest('tr').remove();
-        });
-
-        // Property Type Add Row
-        var propertyTypeIndex =
-            {{ isset($developerProperty) ? $developerProperty->propertyTypes->count() : 1 }};
-        $('.add-property-type').click(function() {
-            $('#propertyTypesTable tbody').append(`
-                <tr>
-                    <td>
-                        <select name="property_types[${propertyTypeIndex}][property_type]" class="form-select form-control" required>
-                            <option value="" disabled selected>Property Type</option>
-                            <option value="Residential">Residential</option>
-                            <option value="Commercial">Commercial</option>
-                            <option value="Off-Plan"">Off-Plan</option>
-                            <option value="Mall">Mall</option>
-                            <option value="Villa">Villa</option>
-                        </select>
-                    </td>
-                    <td><input type="text" name="property_types[${propertyTypeIndex}][unit_type]" class="form-control"></td>
-                    <td><input type="text" name="property_types[${propertyTypeIndex}][size]" class="form-control"></td>
-                    <td><button type="button" class="btn btn-danger remove-property-type">-</button></td>
-                </tr>
-            `);
-            propertyTypeIndex++;
-        });
-
-        $(document).on('click', '.remove-property-type', function() {
-            $(this).closest('tr').remove();
-        });
-
-        // Key Highlight Add Row
-        $('.add-key-highlight').click(function() {
-            $('#keyHighlightsTable tbody').append(`
-                <tr>
-                    <td><input type="text" name="key_highlights[]" class="form-control"></td>
-                    <td><button type="button" class="btn btn-danger remove-key-highlight">-</button></td>
-                </tr>
-            `);
-        });
-
-        $(document).on('click', '.remove-key-highlight', function() {
-            $(this).closest('tr').remove();
-        });
-
-        // Floor Plan Add Row
-        var floorPlanIndex = {{ isset($developerProperty) ? $developerProperty->floorPlans->count() : 1 }};
-        $('.add-floor-plan').click(function() {
-            $('#floorPlansTable tbody').append(`
-                <tr>
-                    <td><input type="text" name="floorPlans[${floorPlanIndex}][category]" class="form-control" required></td>
-                    <td><input type="text" name="floorPlans[${floorPlanIndex}][unit_type]" class="form-control"></td>
-                    <td><input type="text" name="floorPlans[${floorPlanIndex}][floor_details]" class="form-control"></td>
-                    <td><input type="text" name="floorPlans[${floorPlanIndex}][sizes]" class="form-control"></td>
-                    <td><input type="text" name="floorPlans[${floorPlanIndex}][type]" class="form-control"></td>
-                    <td><input type="file" name="floorPlans[${floorPlanIndex}][image]" class="form-control"></td>
-                    <td><button type="button" class="btn btn-danger remove-floor-plan">-</button></td>
-                </tr>
-            `);
-            floorPlanIndex++;
-        });
-
-        $(document).on('click', '.remove-floor-plan', function() {
-            $(this).closest('tr').remove();
-        });
+    document.querySelector('.add-key-highlight')?.addEventListener('click', function() {
+        const tbody = highlightsTable.querySelector('tbody');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><input type="text" name="key_highlights[]" class="form-control" placeholder="Highlight"></td>
+            <td><button type="button" class="btn btn-danger remove-key-highlight">-</button></td>
+        `;
+        tbody.appendChild(row);
     });
+
+    highlightsTable.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-key-highlight')) e.target.closest('tr').remove();
+    });
+
+    // Payment Plans
+    let paymentPlanIndex = {{ isset($developerProperty) && $developerProperty->paymentPlans ? $developerProperty->paymentPlans->count() : 1 }};
+
+    document.getElementById('addPaymentPlan')?.addEventListener('click', function() {
+        const container = document.getElementById('paymentPlansContainer');
+        const planDiv = document.createElement('div');
+        planDiv.className = 'payment-plan mb-4';
+        planDiv.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3>Payment Plan ${paymentPlanIndex + 1}</h3>
+                <button type="button" class="btn btn-danger btn-sm remove-payment-plan">Remove Plan</button>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Plan Heading</label>
+                <input type="text" class="form-control" name="paymentPlans[${paymentPlanIndex}][heading]" placeholder="Enter Payment Plan Heading" required>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Installment</th>
+                        <th>Payment (%)</th>
+                        <th>Milestone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="paymentPlans[${paymentPlanIndex}][installments][0][installment]" class="form-control" placeholder="Installment" required></td>
+                        <td><input type="number" name="paymentPlans[${paymentPlanIndex}][installments][0][payment]" class="form-control" placeholder="Payment (%)" required></td>
+                        <td><input type="text" name="paymentPlans[${paymentPlanIndex}][installments][0][milestone]" class="form-control" placeholder="Milestone" required></td>
+                        <td><button type="button" class="btn btn-danger btn-sm remove-installment">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-success btn-sm add-installment">Add Installment</button>
+        `;
+        container.appendChild(planDiv);
+        paymentPlanIndex++;
+    });
+
+    document.getElementById('paymentPlansContainer')?.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-payment-plan')) {
+            e.target.closest('.payment-plan').remove();
+            reindexPaymentPlans();
+        }
+
+        if (e.target.classList.contains('add-installment')) {
+            const planDiv = e.target.closest('.payment-plan');
+            const planIdx = Array.from(planDiv.parentElement.children).indexOf(planDiv);
+            const tbody = planDiv.querySelector('tbody');
+            const instCount = tbody.querySelectorAll('tr').length;
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="text" name="paymentPlans[${planIdx}][installments][${instCount}][installment]" class="form-control" placeholder="Installment" required></td>
+                <td><input type="number" name="paymentPlans[${planIdx}][installments][${instCount}][payment]" class="form-control" placeholder="Payment (%)" required></td>
+                <td><input type="text" name="paymentPlans[${planIdx}][installments][${instCount}][milestone]" class="form-control" placeholder="Milestone" required></td>
+                <td><button type="button" class="btn btn-danger btn-sm remove-installment">Remove</button></td>
+            `;
+            tbody.appendChild(row);
+        }
+
+        if (e.target.classList.contains('remove-installment')) {
+            const tbody = e.target.closest('tbody');
+            if (tbody.querySelectorAll('tr').length > 1) {
+                e.target.closest('tr').remove();
+                reindexInstallments(tbody);
+            }
+        }
+    });
+
+    function reindexPaymentPlans() {
+        document.querySelectorAll('.payment-plan').forEach((plan, index) => {
+            plan.querySelector('h3').textContent = `Payment Plan ${index + 1}`;
+            plan.querySelectorAll('input[name^="paymentPlans"]').forEach(input => {
+                input.name = input.name.replace(/paymentPlans\[\d+\]/, `paymentPlans[${index}]`);
+            });
+            reindexInstallments(plan.querySelector('tbody'));
+        });
+        paymentPlanIndex = document.querySelectorAll('.payment-plan').length;
+    }
+
+    function reindexInstallments(tbody) {
+        tbody.querySelectorAll('tr').forEach((row, index) => {
+            row.querySelectorAll('input[name*="[installments]"]').forEach(input => {
+                input.name = input.name.replace(/installments\[\d+\]/, `installments[${index}]`);
+            });
+        });
+    }
+
+    // Amenities
+    let amenityIndex = {{ isset($developerProperty) ? $developerProperty->amenities->count() : 1 }};
+    document.querySelector('.add-amenity')?.addEventListener('click', function() {
+        const tbody = document.querySelector('#amenitiesTable tbody');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <select class="form-select" name="amenities[${amenityIndex}][amenity_id]">
+                    @foreach ($amenities as $amenity)
+                        <option value="{{ $amenity->id }}">{{ $amenity->name }}</option>
+                    @endforeach
+                </select>
+            </td>
+            <td><button type="button" class="btn btn-danger remove-amenity">-</button></td>
+        `;
+        tbody.appendChild(row);
+        amenityIndex++;
+    });
+
+    document.querySelector('#amenitiesTable')?.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-amenity')) {
+            e.target.closest('tr').remove();
+        }
+    });
+
+    // Locations
+    let locationIndex = {{ isset($developerProperty) ? $developerProperty->locations->count() : 1 }};
+    document.querySelector('.add-location')?.addEventListener('click', function() {
+        const tbody = document.querySelector('#locationsTable tbody');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>
+                <select class="form-select select2" name="locations[${locationIndex}][location_id]">
+                    @foreach ($locations as $location)
+                        <option value="{{ $location->id }}">{{ $location->name }}</option>
+                    @endforeach
+                </select>
+            </td>
+            <td><input type="number" name="locations[${locationIndex}][distance]" class="form-control" required></td>
+            <td><button type="button" class="btn btn-danger remove-location">-</button></td>
+        `;
+        tbody.appendChild(row);
+        locationIndex++;
+        if (window.jQuery && window.jQuery.fn.select2) {
+            jQuery(row).find('.select2').select2();
+        }
+    });
+
+    document.querySelector('#locationsTable')?.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-location')) {
+            e.target.closest('tr').remove();
+        }
+    });
+
+    // Property Types
+    let propertyTypeIndex = {{ isset($developerProperty) ? $developerProperty->propertyTypes->count() : 1 }};
+    document.querySelector('.add-property-type')?.addEventListener('click', function() {
+        const tbody = document.querySelector('#propertyTypesTable tbody');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><input type="text" name="propertyTypes[${propertyTypeIndex}][type]" class="form-control" required></td>
+            <td><input type="text" name="propertyTypes[${propertyTypeIndex}][size]" class="form-control"></td>
+            <td><button type="button" class="btn btn-danger remove-property-type">-</button></td>
+        `;
+        tbody.appendChild(row);
+        propertyTypeIndex++;
+    });
+
+    document.querySelector('#propertyTypesTable')?.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-property-type')) {
+            e.target.closest('tr').remove();
+        }
+    });
+
+    // Floor Plans
+    let floorPlanIndex = {{ isset($developerProperty) ? $developerProperty->floorPlans->count() : 1 }};
+    document.querySelector('.add-floor-plan')?.addEventListener('click', function() {
+        const tbody = document.querySelector('#floorPlansTable tbody');
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td><input type="text" name="floorPlans[${floorPlanIndex}][category]" class="form-control" required></td>
+            <td><input type="text" name="floorPlans[${floorPlanIndex}][unit_type]" class="form-control"></td>
+            <td><input type="text" name="floorPlans[${floorPlanIndex}][floor_details]" class="form-control"></td>
+            <td><input type="text" name="floorPlans[${floorPlanIndex}][sizes]" class="form-control"></td>
+            <td><input type="text" name="floorPlans[${floorPlanIndex}][type]" class="form-control"></td>
+            <td><input type="file" name="floorPlans[${floorPlanIndex}][image]" class="form-control"></td>
+            <td><button type="button" class="btn btn-danger remove-floor-plan">-</button></td>
+        `;
+        tbody.appendChild(row);
+        floorPlanIndex++;
+    });
+
+    document.querySelector('#floorPlansTable')?.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-floor-plan')) {
+            e.target.closest('tr').remove();
+        }
+    });
+});
 </script>
-@endsection
