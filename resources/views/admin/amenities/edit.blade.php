@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Edit Amenity" 
+    <x-admin.page-header
+        title="Edit Amenity"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Amenities', 'url' => route('amenity.index')],
             ['label' => 'Edit']
-        ]" 
+        ]"
     />
 
     <x-admin.card>
@@ -22,6 +22,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
             <div class="mb-3">
                 <label for="logo" class="form-label">Logo</label>
                 @if($amenity->logo)
@@ -35,6 +36,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="3">{{ old('description', $amenity->description) }}</textarea>
@@ -42,6 +44,7 @@
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
             <div class="mb-3">
                 <label for="community_ids" class="form-label">Communities</label>
                 <select name="community_ids[]" id="community_ids" class="form-select" multiple size="5">
@@ -53,6 +56,7 @@
                 </select>
                 <small class="text-muted">Hold Ctrl/Cmd to select multiple</small>
             </div>
+
             <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-success">
                     <i class="bi bi-check-circle me-1"></i>Update Amenity
