@@ -12,7 +12,7 @@
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\Amenity::class)
+            @can('create amenities')
                 <a href="{{ route('amenity.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Add Amenity
                 </a>

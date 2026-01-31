@@ -42,6 +42,11 @@ class PermissionSeeder extends Seeder
             'create agents',
             'edit agents',
             'delete agents',
+            // amenities
+            'view amenities',
+            'create amenities',
+            'edit amenities',
+            'delete amenities',
             // users
             'view users',
             'create users',

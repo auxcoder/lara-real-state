@@ -12,6 +12,8 @@ class AmenityController extends Controller
 {
     public function index()
     {
+        $this->authorize('view amenities');
+        
         $Amenity = Amenity::latest()->paginate(15);
         $communities = Community::all();
 
@@ -20,7 +22,8 @@ class AmenityController extends Controller
 
     public function create()
     {
-        // Return the create view
+        $this->authorize('create amenities');
+        
         return view('admin.amenities.create');
     }
 
@@ -50,15 +53,17 @@ class AmenityController extends Controller
 
     public function show(Amenity $amenity)
     {
-        // Show a single Amenity
+        $this->authorize('view amenities');
+        
         return view('admin.amenity.show', compact('amenity'));
     }
 
     public function edit($id)
     {
+        $this->authorize('edit amenities');
+        
         $amenity = Amenity::findOrFail($id);
 
-        // Show the edit form
         return view('admin.amenities.edit', compact('amenity'));
     }
 
@@ -97,6 +102,8 @@ class AmenityController extends Controller
 
     public function destroy($id)
     {
+        $this->authorize('delete amenities');
+        
         $Amenity = Amenity::findOrFail($id);
         Storage::disk('public')->delete($Amenity->logo);
         $Amenity->delete();
