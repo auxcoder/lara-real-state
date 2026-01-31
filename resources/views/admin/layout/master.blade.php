@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>The H Real Estate</title>
     <link rel="shortcut icon" href="{{ asset('assets/img/logo-countryside-fav.png') }}">
-    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
     @vite(['resources/css/admin.scss', 'resources/js/admin.js'])
 </head>
 
@@ -95,7 +94,7 @@
 
                                                 <div class="d-flex align-items-center mt-2">
                                                     <div class="notify-sub-icon">
-                                                        <i class="text-dark mdi mdi-download-box"></i>
+                                                        <i class="text-dark bi bi-download"></i>
                                                     </div>
 
                                                     <div>
@@ -193,19 +192,19 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userProfileDropdown">
                                     <li class='dropdown-item' href='pages-profile.html'>
-                                        <i class="align-middle mdi mdi-account-circle-outline"></i>
+                                        <i class="align-middle bi bi-person-circle"></i>
                                         <span>My Account</span>
                                     </li>
 
                                     <li class='dropdown-item' href='auth-lock-screen.html'>
-                                        <i class="align-middle fs-16 mdi mdi-lock-outline"></i>
+                                        <i class="align-middle fs-16 bi bi-lock"></i>
                                         <span>Lock Screen</span>
                                     </li>
 
                                     {{-- <div class="dropdown-divider"></div> --}}
 
                                     <li class='dropdown-item' href='{{ route('logout') }}'>
-                                        <i class="align-middle fs-16 mdi mdi-location-exit"></i>
+                                        <i class="align-middle fs-16 bi bi-box-arrow-right"></i>
                                         <span>Logout</span>
                                     </li>
                                 </ul>
@@ -243,7 +242,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="text-center text-muted col fs-13">
-                            &copy; {{ date('Y') }} - Made with <span class="text-danger mdi mdi-heart"></span> by <a
+                            &copy; {{ date('Y') }} - Made with <span class="text-danger bi bi-heart-fill"></span> by <a
                                 href="#!" class="text-reset fw-semibold">Auxcoder</a>
                         </div>
                     </div>
