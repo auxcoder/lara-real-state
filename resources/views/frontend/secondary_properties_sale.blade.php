@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
-@section('title', 'Properties For Sale | The H Real Estate UAE')
-@section('description', 'Browse our selection of properties for sale across UAE. Find your perfect home with competitive prices and excellent locations.')
+@section('title', 'Properties For Sale | {{ config('company.name') }}')
+@section('description', 'Browse our selection of properties for sale en toda España. Find your perfect home with competitive prices and excellent locations.')
 @section('content')
 <!-- Bread Crumb -->
 <section class="sec-001">

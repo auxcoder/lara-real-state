@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
-@section('title', 'Frequently Asked Questions | The H Real Estate UAE')
-@section('description', 'Find answers to common questions about UAE real estate, property investment, and our services. Get expert guidance from The H Real Estate team.')
+@section('title', 'Frequently Asked Questions | {{ config('company.name') }}')
+@section('description', 'Find answers to common questions about inmobiliaria en España, property investment, and our services. Get expert guidance from {{ config('company.name') }} team.')
 @section('content')
 <section class="faqbg1">
     <div class="faq-item-bg">

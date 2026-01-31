@@ -124,9 +124,9 @@
                             <label for="location" class="form-label">Select Location:</label>
                             <select id="location" class="form-select" name="location" required>
                                 <option value="">Choose location...</option>
-                                <option value="Dubai">Dubai</option>
-                                <option value="Abu Dhabi">Abu Dhabi</option>
-                                <option value="Sharjah">Sharjah</option>
+                                @foreach(config('locations.major_cities', ['Madrid', 'Barcelona', 'Valencia', 'Sevilla']) as $city)
+                                    <option value="{{ $city }}">{{ $city }}</option>
+                                @endforeach
                                 <option value="Al Ain">Al Ain</option>
                                 <option value="Fujairah">Fujairah</option>
                             </select>
@@ -201,10 +201,7 @@
                                 <label for="location" class="form-label">Select Location:</label>
                                 <select class="form-select" name="location" required>
                                     <option value="">Choose location...</option>
-                                    @php
-                                        $locations = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah'];
-                                    @endphp
-                                    @foreach ($locations as $location)
+                                    @foreach(config('locations.major_cities') as $location)
                                         <option value="{{ $location }}" {{ $community->location == $location ? 'selected' : '' }}>
                                             {{ $location }}
                                         </option>
@@ -288,16 +285,7 @@
                                         <div class="mb-3">
                                             <label for="location" class="form-label">Select Location:</label>
                                             <select id="location" class="form-select" name="location">
-                                                @php
-                                                    $locations = [
-                                                        'Dubai',
-                                                        'Abu Dhabi',
-                                                        'Sharjah',
-                                                        'Al Ain',
-                                                        'Fujairah',
-                                                    ];
-                                                @endphp
-                                                @foreach ($locations as $location)
+                                                @foreach(config('locations.major_cities') as $location)
                                                     <option value="{{ $location }}"
                                                         {{ $community->location == $location ? 'selected' : '' }}>
                                                         {{ $location }}

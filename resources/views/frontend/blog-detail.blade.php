@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-@section('title', $blog->translate()?->title . ' | The H Real Estate Blog')
+@section('title', $blog->translate()?->title . ' | Blog {{ config('company.name') }}')
 @section('description', \Illuminate\Support\Str::limit(strip_tags($blog->translate()?->description), 160))
 @section('content')
     {{-- <section class="blog-banner">

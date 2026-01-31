@@ -62,4 +62,28 @@ class CacheService
     {
         Cache::forget('team_members.all');
     }
+
+    public function getAgentProperties(int $perPage = 5)
+    {
+        $page = request()->get('page', 1);
+        return Cache::remember("agent_properties.page.{$page}", self::TTL, function() use ($perPage) {
+            return \App\Models\AgentProperty::with(['agent:id,name', 'translations'])
+                ->select('id', 'agent_id', 'name', 'price', 'bedrooms', 'bathrooms', 'area', 'image', 'slug')
+                ->paginate($perPage);
+        });
+    }
+
+    public function getDeveloperProperties(int $perPage = 5)
+    {
+        $page = request()->get('page', 1);
+        return Cache::remember("developer_properties.page.{$page}", self::TTL, function() use ($perPage) {
+            return \App\Models\DeveloperProperty::with(['developer:id,name', 'propertyTypes:id,name', 'locations:id,name'])
+                ->paginate($perPage);
+        });
+    }
+
+    public function clearProperties(): void
+    {
+        Cache::flush(); // Clear all property caches (simple approach)
+    }
 }

@@ -1,31 +1,27 @@
 @extends('frontend.layout.app')
 
 @php
-$metaTitle = 'Properties | The H Real Estate UAE';
-$metaDescription = 'Explore our comprehensive collection of properties across UAE. Find residential, commercial, and
-luxury properties that match your requirements.';
+$companyName = config('company.name');
+$metaTitle = "Properties | {$companyName}";
+$metaDescription = 'Explore our comprehensive collection of properties en toda España. Find residential, commercial, and luxury properties that match your requirements.';
 
 if (isset($location)) {
     switch ($location) {
         case 'Residential':
-        $metaTitle = 'Residential Properties | The H Real Estate UAE';
-        $metaDescription = 'Explore luxury and affordable residential properties in the UAE with The H Real Estate. Find the
-        perfect home tailored to your lifestyle.';
+        $metaTitle = "Residential Properties | {$companyName}";
+        $metaDescription = "Explore luxury and affordable residential properties in España con {$companyName}. Find the perfect home tailored to your lifestyle.";
         break;
     case 'Commercial':
-        $metaTitle = 'Commercial Properties | The H Real Estate UAE';
-        $metaDescription = 'Invest in UAE\'s best commercial properties with The H Real Estate. Offices, retail, and business
-        spaces designed for growth and success.';
+        $metaTitle = "Commercial Properties | {$companyName}";
+        $metaDescription = "Invest in España's best commercial properties with {$companyName}. Offices, retail, and business spaces designed for growth and success.";
         break;
     case 'Mall':
-        $metaTitle = 'Mall Properties | The H Real Estate UAE';
-        $metaDescription = 'Discover prime mall spaces across the UAE. The H Real Estate connects you with premium retail
-        opportunities in vibrant shopping destinations.';
+        $metaTitle = "Mall Properties | {$companyName}";
+        $metaDescription = "Discover prime mall spaces across España. {$companyName} connects you with premium retail opportunities in vibrant shopping destinations.";
     break;
         case 'Villa':
-        $metaTitle = 'Villas in UAE | The H Real Estate Experts';
-        $metaDescription = 'Luxury villas with modern design and comfort. The H Real Estate offers exclusive villa listings for
-        families seeking elegance and space.';
+        $metaTitle = "Villas en España | {$companyName}";
+        $metaDescription = "Luxury villas with modern design and comfort. {$companyName} offers exclusive villa listings for families seeking elegance and space.";
         break;
     }
 }
