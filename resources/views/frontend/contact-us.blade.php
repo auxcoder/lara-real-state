@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
-@section('title', 'Contact The H Real Estate | UAE Property Experts')
-@section('description', 'Get in touch with The H Real Estate for trusted property guidance. Reach us for residential, commercial, and luxury real estate solutions.')
+@section('title', 'Contacto ' . config('company.name') . ' | ' . config('company.tagline'))
+@section('description', 'Ponte en contacto con ' . config('company.name') . ' para asesoramiento inmobiliario de confianza. Contáctanos para soluciones inmobiliarias residenciales, comerciales y de lujo.')
 @section('content')
 @if (app()->getLocale() == 'ar')
     <style>
@@ -22,7 +22,7 @@
     <div class="container">
         <h2 class="serviceh2">{{ __('Contact us') }}</h2>
         <p class="banner-p">
-            {{ __('We are a full-service real estate company in UAE that is able to assist you with all your real estate needs.') }}
+            {{ __('We are a full-service real estate company en España that is able to assist you with all your real estate needs.') }}
         </p>
     </div>
 </section>
@@ -32,11 +32,11 @@
         <div class="contact-main">
             <div class="row">
                 <div class="col-md-6">
-                    <h4 class="contact1a">{{ __('h_real_estate') }}</h4>
-                    <p class="contact1b">Khalifa Park Area - Zone 1 - Ministries Complex - Abu Dhabi</p>
+                    <h4 class="contact1a">{{ config('company.name') }}</h4>
+                    <p class="contact1b">{{ config('company.address.street') }}, {{ config('company.address.city') }}, {{ config('company.address.postal_code') }}</p>
                     <div class="call">
                         <i class="fa-phone fa-solid"></i>
-                        <a href="#">022222040</a>
+                        <a href="tel:{{ config('company.contact.phone') }}">{{ config('company.contact.phone') }}</a>
                     </div>
                     <div class="call">
                         <i class="fa-envelope fa-solid"></i>

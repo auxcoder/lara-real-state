@@ -54,11 +54,38 @@ return [
     ],
 
     'major_cities' => [
+        // Northern Spain (prioritized)
+        'Bilbao',
+        'San Sebastián',
+        'Santander',
+        'Oviedo',
+        'Gijón',
+        'A Coruña',
+        'Vigo',
+        'Pamplona',
+        'Vitoria-Gasteiz',
+        'Burgos',
+        'León',
+        'Logroño',
+        
+        // Central Spain
         'Madrid',
+        'Zaragoza',
+        'Valladolid',
+        'Salamanca',
+        
+        // Eastern Spain
         'Barcelona',
         'Valencia',
+        'Alicante',
+        'Palma de Mallorca',
+        
+        // Southern Spain
         'Sevilla',
-        'Zaragoza',
         'Málaga',
+        'Granada',
+        'Córdoba',
+        'Cádiz',
+        'Murcia',
     ],
 ];

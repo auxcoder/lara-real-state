@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-@section('title', 'The UX Real Estate | Registration Form')
+@section('title', config('company.name') . ' | Registration Form')
 
 @section('content')
 <section class="cover-image-banner"

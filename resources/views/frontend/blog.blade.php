@@ -1,7 +1,7 @@
 @extends('frontend.layout.app')
 
-@section('title', 'Real Estate Insights | The H Real Estate Blog')
-@section('description', 'Stay updated with property news, investment tips, and market trends in UAE real estate. Expert insights from The H Real Estate team.')
+@section('title', 'Real Estate Insights | Blog {{ config('company.name') }}')
+@section('description', 'Stay updated with property news, investment tips, and market trends in inmobiliaria en España. Expert insights from {{ config('company.name') }} team.')
 
 @section('content')
     <style>
