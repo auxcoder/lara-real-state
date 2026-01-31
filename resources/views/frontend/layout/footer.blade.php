@@ -17,11 +17,11 @@
     }
 </style>
 
-<footer class="mb-4 container">
-    <div class="row rounded-3 bg-dark-subtle p-3">
+<footer class="container mb-4">
+    <div class="row p-3 bg-dark-subtle rounded-3">
         <div class="col-md-3">
             <h4>{{ __('Quick links') }}</h4>
-            <ul class="list-unstyled mb-0 small">
+            <ul class="mb-0 list-unstyled small">
                 <li><a href="{{ route('properties.byLocation', 'Villa') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Villa') }}</a></li>
                 <li><a href="{{ route('service') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Services') }}</a></li>
             </ul>
@@ -29,7 +29,7 @@
 
         <div class="col-md-3">
             <h4>{{ __('Get In Touch') }}</h4>
-            <ul class="list-unstyled mb-0 small">
+            <ul class="mb-0 list-unstyled small">
                 <li>
                     <a href="https://www.google.com/maps/dir/?api=1&destination=" target="_blank" rel="noopener noreferrer">
                         <i class="bi bi-geo-alt-fill"></i>
@@ -43,7 +43,7 @@
 
         <div class="col-md-3">
             <h4>{{ __('Contact us') }}</h4>
-            <ul class="list-unstyled mb-0 small">
+            <ul class="mb-0 list-unstyled small">
                 <li><a href="{{ route('contactUs') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Contact us')}}</a></li>
                 <li><a href="{{ route('complaint.form') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Complaint Form') }}</a></li>
                 <li><a href="{{ route('visitor.form') }}"><i class="bi bi-arrow-right-short"></i>{{ __('Visitor Form') }}</a></li>
@@ -69,7 +69,7 @@
         </div>
 
         <div class="col-md-6 text-end">
-            <ul class="list-unstyled mb-0">
+            <ul class="mb-0 list-unstyled">
                 <li class="list-inline-item"><a href="{{ route('term-condition') }}">{{ __('Terms of Service')
                         }}</a></li>
                 <li class="list-inline-item"><a href="{{ route('privacy-policy') }}">{{ __('Privacy Policy') }}</a>

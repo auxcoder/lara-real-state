@@ -7,15 +7,15 @@
         <!-- Start Content-->
         <div class="container-xxl">
 
-            <div class="py-3 d-flex align-items-sm-center flex-sm-row flex-column">
+            <div class="d-flex flex-column flex-sm-row align-items-sm-center py-3">
                 <div class="flex-grow-1">
-                    <h4 class="fs-18 fw-semibold m-0">Premission Form</h4>
+                    <h4 class="m-0 fs-18 fw-semibold">Premission Form</h4>
                 </div>
 
                 <div class="text-end">
-                    <ol class="breadcrumb m-0 py-0">
+                    <ol class="m-0 py-0 breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Forms</a></li>
-                        <li class="breadcrumb-item active">Premission Form</li>
+                        <li class="active breadcrumb-item">Premission Form</li>
                     </ol>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     <div class="card">
 
                         <div class="card-header">
-                            <h5 class="card-title mb-0">Create Form</h5>
+                            <h5 class="mb-0 card-title">Create Form</h5>
                         </div><!-- end card header -->
 
                         <div class="card-body">
@@ -46,7 +46,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <strong>Name:</strong>
-                                            <input name="name" placeholder="Name" class="form-control my-4" required>
+                                            <input name="name" placeholder="Name" class="my-4 form-control" required>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Submit</button>
                                     </form>

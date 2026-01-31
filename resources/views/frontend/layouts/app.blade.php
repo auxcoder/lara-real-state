@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" />
 </head>
 
-<body class="view-properties-page page-id-101">
+<body class="page-id-101 view-properties-page">
     @include('frontend.layout.header')
 
     <section>
@@ -86,11 +86,11 @@
                 <div class="col-md-4">
                     <a href="#"><img src="{{ asset('assets/img/logo-countryside-g.jpg') }}" alt=""></a>
 
-                    <div class="foter-social-logo mt-4 mb-4">
-                        <a href="#"><i class="fab fa-facebook-square"></i></a>
-                        <a href="#"><i class="fab fa-twitter-square"></i></a>
-                        <a href="#"><i class="fab fa-instagram-square"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <div class="mb-4 mt-4 foter-social-logo">
+                        <a href="#"><i class="fa-facebook-square fab"></i></a>
+                        <a href="#"><i class="fa-twitter-square fab"></i></a>
+                        <a href="#"><i class="fa-instagram-square fab"></i></a>
+                        <a href="#"><i class="fa-linkedin fab"></i></a>
                     </div>
                 </div>
 
@@ -125,7 +125,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="row mt-4 d-flex align-items-center ms-2">
+            <div class="row d-flex align-items-center mt-4 ms-2">
                 <div class="col-md-6">
                     <h2>{{ __('Newsletter To Get Updated the Latest News') }}</h2>
                 </div>
@@ -138,7 +138,7 @@
             </div>
 
 
-            <div class="row copyright d-flex align-items-center mt-4">
+            <div class="row d-flex align-items-center mt-4 copyright">
                 <div class="col-md-6">
                     <p>Copyright © 2024, All rights reserved.</p>
                 </div>

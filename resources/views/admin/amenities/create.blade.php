@@ -1,6 +1,5 @@
 @extends('admin.layout.master')
 
-
 @section('content')
     <div class="container">
         <div class="row">

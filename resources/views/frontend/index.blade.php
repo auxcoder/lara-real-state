@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="">
-    <div class="hero cover-image-banner py-5">
+    <div class="py-5 cover-image-banner hero">
         <div class="row py-5">
             <div class="container">
                 <div class="col-lg-8">
@@ -15,10 +15,10 @@
 </section>
 
 <section class="mt-4" >
-    <div class="container p-4 rounded-3 shadow bg-light">
+    <div class="container p-4 bg-light rounded-3 shadow">
         <div class="row">
             <div class="col-lg-12">
-                <div class="d-flex gap-3 align-items-end mb-2">
+                <div class="d-flex align-items-end mb-2 gap-3">
                     <h2 class="mb-0">{{ __('WHAT ARE YOU LOOKING FOR?') }}</h2>
                     {{-- <p class="card-text">{{ __('(Easily find the house of your choice)') }}</p> --}}
                 </div>
@@ -40,7 +40,7 @@
                 </ul>
 
                 <div class="mt-3">
-                    <div class="tab-pane active" id="home">
+                    <div class="active tab-pane" id="home">
                         <form method="GET" id="state-form"
                             data-base-url="{{ route('properties.byLocation', ['location' => '__LOCATION__']) }}">
                             {{-- @csrf --}}
@@ -77,22 +77,22 @@
 </section>
 
 <section class="my-4">
-    <div class="container p-4 rounded-3 shadow bg-light">
+    <div class="container p-4 bg-light rounded-3 shadow">
         <div class="row align-items-center">
             <div class="col-12">
                 <h3 class="m-0 lh-1">{{ __('Popular Locations') }}</h3>
-                <p class="card-text text-muted">
+                <p class="text-muted card-text">
                     {{ __('Most popular properties locations') }}
                 </p>
             </div>
 
-            <div class="row row-cols-1 row-cols-md-6 g-1 mt-1">
+            <div class="row row-cols-1 row-cols-md-6 mt-1 g-1">
                 @foreach ($communities as $community)
                 <div class="col">
                     <div class="card h-100">
                         {{-- {!! print_r($community['slug'], true) !!} --}}
 
-                        <a class="small lh-sm" href="{{ route('properties.byLocation', $community['slug']) }}">
+                        <a class="lh-sm small" href="{{ route('properties.byLocation', $community['slug']) }}">
                             <img class="card-img-top" src="{{ asset('assets/img/flags/' . $community['image']) }}"
                                 alt="{{ $community['name'] }} flag" title="{{ $community['name'] }}" />
                         </a>
@@ -105,23 +105,23 @@
 </section>
 
 <section class="my-4">
-    <div class="container p-4 rounded-3 shadow bg-light">
+    <div class="container p-4 bg-light rounded-3 shadow">
         <div class="row align-items-center">
             <div class="col-12">
                 <h3 class="m-0 lh-1">{{ __('Browse by property type') }}</h3>
-                <p class="card-text text-muted">
+                <p class="text-muted card-text">
                     {{ __('Handpicked projects for you') }}
                 </p>
             </div>
 
-            <div class="card-group mt-2">
+            <div class="mt-2 card-group">
                 @foreach ($property_types as $type)
                 <div class="card">
                     <img class="card-img-top" src="{{ asset('assets/img/' . $type . '.webp') }}" alt="{{ $type }}" title="{{ $type }}" />
                             <div class="card-footer">
-                        <div class="item-thumb position-relative">
+                        <div class="position-relative item-thumb">
                             <a class="bg-dark w-100" href="{{ route('properties.byLocation', $type) }}">
-                                <p class="m-0 px-2 py-1 w-100 text-center text-white" >{{ __( $type ) }}</p>
+                                <p class="m-0 px-2 py-1 text-center text-white w-100" >{{ __( $type ) }}</p>
                             </a>
                         </div>
                     </div>

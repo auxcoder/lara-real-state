@@ -50,14 +50,13 @@ if (isset($location)) {
 
 <section class="my-3">
     <div class="container">
-        <div class="row bg-light p-3 rounded-3">
-            <div class="col-md-3
-                <form id="filter-form" method="GET"
+        <div class="row p-3 bg-light rounded-3">
+            <div class="col-md-3 <form id="filter-form" method="GET"
                     data-base-url="{{ route('properties.byLocation', ['location' => '__LOCATION__']) }}"
                     class="filter-form">
                     <div class="mb-2">
                         <label for="community" class="form-label">{{ __('filter.heading') }}</label>
-                        <select id="community" name="community" class="form-select form-select-sm mb-1" >
+                        <select id="community" name="community" class="mb-1 form-select form-select-sm" >
                             @foreach ($communities as $community)
                             <option value="$community->slug" {{ request('location') == $community->slug? 'selected' : '' }}>{{ $community->name }}</option>
                             @endforeach
@@ -93,8 +92,8 @@ if (isset($location)) {
 
             <div class="col-md-9">
                 @if (isset($location))
-                <form method="GET" action="{{ route('properties.byLocation', $location) }}" class="search-form d-flex gap-2">
-                    <select name="sort" onchange="this.form.submit()" class="form-select w-25 form-select-sm">
+                <form method="GET" action="{{ route('properties.byLocation', $location) }}" class="d-flex gap-2 search-form">
+                    <select name="sort" onchange="this.form.submit()" class="w-25 form-select form-select-sm">
                         <option value="">{{ __('sort.heading') }}</option>
                         <option value="newest" {{ request('sort')=='newest' ? 'selected' : '' }}>
                             {{ __('sort.newest') }}
@@ -129,14 +128,14 @@ if (isset($location)) {
 
                 <div class="details">
                     {{-- <img src="{{ asset('/assets/images/projects/location.png') }}" width="30" /> --}}
-                    <i class="fa-solid fa-location-dot"></i>
+                    <i class="fa-location-dot fa-solid"></i>
                     <h4 class="property-price">{{ $project->location }}</h4>
 
                     @if ($project->bedrooms > 0)
                     <div class="icons">
                         {{-- <img src="{{ asset('/assets/images/projects/icon.png') }}" /> --}}
                         {{-- <img src="{{ asset('/assets/images/projects/bed.png') }}" /> --}}
-                        <i class="fa-solid fa-bed"></i>
+                        <i class="fa-bed fa-solid"></i>
                         {{ $project->bedrooms }}
 
                     </div>
@@ -146,13 +145,13 @@ if (isset($location)) {
                     <div class="icons">
                         {{-- <img src="{{ asset('/assets/images/projects/icon.png') }}" /> --}}
                         {{-- <img src="{{ asset('/assets/images/projects/bathtub.png') }}" /> --}}
-                        <i class="fa-solid fa-bath"></i>
+                        <i class="fa-bath fa-solid"></i>
                         {{ $project->bathrooms }}
                     </div>
                     @endif
                 </div>
 
-                <a href="{{ route('projects', $project->slug) }}" class="viewdetails-btn mb-3 text-white">
+                <a href="{{ route('projects', $project->slug) }}" class="mb-3 text-white viewdetails-btn">
                     {{ __('filter.button.details') }}
                 </a>
 
@@ -173,6 +172,7 @@ if (isset($location)) {
         </div>
     </div>
 </section>
+
 <script>
     document.getElementById('filter-form').addEventListener('submit', function (e) {
         e.preventDefault();
