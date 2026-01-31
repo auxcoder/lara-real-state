@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Add Amenity</h1>
-                <form action="{{ route('Amenity.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('amenity.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>

@@ -1,3 +1,6 @@
+@extends('admin.layout.master')
+
+@section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -9,7 +12,7 @@
 
     <div class="card">
         <div class="card-body table-responsive">
-            <table class="table table-striped align-middle">
+            <table class="align-middle table table-striped">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -31,7 +34,7 @@
                             <td>{{ $registration->contact_person_name }}</td>
                             <td>{{ $registration->created_at->format('Y-m-d H:i') }}</td>
                             <td>
-                                <a class="btn btn-sm btn-primary"
+                                <a class="btn btn-primary btn-sm"
                                     href="{{ route('vendor-registrations.show', $registration) }}">View</a>
                             </td>
                         </tr>
@@ -48,3 +51,4 @@
         </div>
     </div>
 </div>
+@endsection
