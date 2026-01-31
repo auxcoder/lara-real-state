@@ -89,7 +89,6 @@ class FrontendController extends Controller
 
     public function submitRegistration(Request $request)
     {
-        // dd($request->all());
         $validated = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|unique:information,email',
@@ -103,7 +102,6 @@ class FrontendController extends Controller
             'contact_person_name' => 'required|string|max:255',
             'office_address' => 'required|string|max:500',
         ]);
-        // dd($validated);
 
         // File uploads
         $tradeLicensePath = $request->file('trade_license')->storeAs(
@@ -381,12 +379,10 @@ class FrontendController extends Controller
         $developer_property = DeveloperProperty::all();
         $developers = Developer::all();
 
-        Log::info('Request Parameters: ', $request->all());
 
         // Paginate developer properties
         $properties = DeveloperProperty::paginate(5);
 
-        // dd($minPrice, $maxPrice);  // For debugging
         // Return filtered data to the view
         return view('frontend.offplan', compact('properties', 'communities', 'developer_property', 'developers'));
     }
@@ -420,7 +416,9 @@ class FrontendController extends Controller
 
     public function secondarySale()
     {
-        $properties = AgentProperty::paginate(5);
+        $properties = AgentProperty::with(['agent:id,name', 'translations'])
+            ->select('id', 'agent_id', 'name', 'price', 'bedrooms', 'bathrooms', 'area', 'image', 'slug')
+            ->paginate(5);
 
         return view('frontend.secondary_properties_sale', compact('properties'));
     }
@@ -432,35 +430,45 @@ class FrontendController extends Controller
 
     public function propertyDetails($slug)
     {
-        $property = AgentProperty::where('slug', $slug)->firstOrFail();
+        $property = AgentProperty::with(['agent', 'propertygallery', 'translations'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         return view('frontend.property_details', compact('property'));
     }
 
     public function addressResidence($slug)
     {
-        $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+        $developer_property = DeveloperProperty::with(['developer', 'propertyTypes', 'locations', 'Amenity', 'images'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         return view('frontend.address_residence', compact('developer_property'));
     }
 
     public function paymentPlan($slug)
     {
-        $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+        $developer_property = DeveloperProperty::with(['developer:id,name'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         return view('frontend.payment_plan', compact('developer_property'));
     }
 
     public function locationMap($slug)
     {
-        $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+        $developer_property = DeveloperProperty::with(['locations'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         return view('frontend.location_map', compact('developer_property'));
     }
 
     public function masterPlan($slug)
     {
-        $developer_property = DeveloperProperty::where('slug', $slug)->firstOrFail();
+        $developer_property = DeveloperProperty::with(['masterPlans'])
+            ->where('slug', $slug)
+            ->firstOrFail();
 
         return view('frontend.master_plan', compact('developer_property'));
     }
@@ -581,7 +589,6 @@ class FrontendController extends Controller
         $status = $request->query('status'); // e.g. “Residential”
         $community = $request->query('community');
         $communities = $allCommunities->whereIn('slug', $allowedLocations)->sortBy('name');
-        // dd($request->all(), $location, $communities);
         // $developers = Developer::all();
 
         $query = AgentProperty::query();
@@ -638,13 +645,11 @@ class FrontendController extends Controller
         }
 
         $properties = $query->get();
-        // dd($properties);
 
         if ($type) {
             $bannerImage = $bannerImages[$type] ?? 'property-details/bg.png';
         } elseif ($location) {
             $bannerImage = $bannerImages[$location] ?? 'property-details/bg.png';
-            // dd($bannerImage);
         } else {
             $bannerImage = 'property-details/bg.png';
         }

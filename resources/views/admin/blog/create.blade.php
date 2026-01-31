@@ -12,7 +12,7 @@
     />
 
     @php
-        $locales = ['en' => 'English', 'ar' => 'Arabic'];
+        $locales = ['en' => 'English', 'es' => 'Spanish', 'ca' => 'Catalan'];
     @endphp
 
     <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data">

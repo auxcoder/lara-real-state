@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <x-admin.page-header 
-        title="Communities" 
+        :title="__('Communities')" 
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Communities']
+            ['label' => __('Communities')]
         ]" 
     />
 
@@ -23,10 +23,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Image</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Description') }}</th>
+                        <th>{{ __('Image') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-4">No communities found</td>
+                            <td colspan="4" class="text-center text-muted py-4">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -77,7 +77,7 @@
                 <form action="{{ route('communities.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="communityModalLabel">Add Community</h5>
+                        <h5 class="modal-title" id="communityModalLabel">{{ __('Add') }} {{ __('Communities') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -135,7 +135,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Community</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Add') }} {{ __('Communities') }}</button>
                     </div>
                 </form>
             </div>
@@ -328,7 +328,7 @@
                     <form action="{{ route('communities.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-header">
-                            <h5 class="modal-title" id="communityModalLabel">Add Community</h5>
+                            <h5 class="modal-title" id="communityModalLabel">{{ __('Add') }} {{ __('Communities') }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -382,7 +382,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add Community</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Add') }} {{ __('Communities') }}</button>
                         </div>
                     </form>
                 </div>

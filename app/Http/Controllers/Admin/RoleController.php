@@ -31,7 +31,7 @@ class RoleController extends Controller
 
         $role = Role::create(['name' => $request->input('name')]);
 
-        return redirect()->back()->with('success','Role created successfully');
+        return redirect()->back()->with('success', __('success.created', ['item' => __('Roles')]));
     }
 
     public function show($id){
@@ -65,7 +65,7 @@ class RoleController extends Controller
         $role->save();
 
         return redirect()->route('roles.index')
-        ->with('success','Role updated successfully');
+        ->with('success', __('success.updated', ['item' => __('Roles')]));
 }
 
     public function destroy($id){

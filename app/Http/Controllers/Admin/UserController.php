@@ -49,7 +49,6 @@ class UserController extends Controller
             $input['password'] = Hash::make($input['password']);
 
             $users = User::create($input);
-            // dd($request->input('roles'));
             $roles = $request->input('roles');
 
             if (is_array($roles)) {
@@ -60,7 +59,7 @@ class UserController extends Controller
 
             DB::commit();
             return redirect()->route('users.index')
-                ->with('success', 'User Create successfully');
+                ->with('success', __('success.created', ['item' => __('Users')]));
 
         } catch (\Exception $e) {
             DB::rollback();

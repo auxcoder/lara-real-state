@@ -19,7 +19,6 @@ class CommunityController extends Controller
     {
         $communities = Community::all();
         $amenities = Amenity::all();
-        // dd($amenities) ;
         return view('admin.communities.index', compact('communities', 'amenities'));
     }
 
@@ -50,7 +49,7 @@ class CommunityController extends Controller
         $community->amenities()->attach($request['amenities']);
 
 
-        return redirect()->route('communities.index')->with('success', 'Community created successfully.');
+        return redirect()->route('communities.index')->with('success', __('success.created', ['item' => __('Communities')]));
     }
 
     public function update(Request $request, Community $community)
@@ -85,7 +84,7 @@ class CommunityController extends Controller
         if ($request->filled('amenities')) {
             $community->amenities()->sync($request->input('amenities', []));
         }
-        return redirect()->route('communities.index')->with('success', 'Community updated successfully.');
+        return redirect()->route('communities.index')->with('success', __('success.updated', ['item' => __('Communities')]));
     }
 
     public function destroy(Community $community)
@@ -93,7 +92,7 @@ class CommunityController extends Controller
         Storage::disk('public')->delete($community->image);
         $community->amenities()->detach();
         $community->delete();
-        return redirect()->route('communities.index')->with('success', 'Community deleted successfully.');
+        return redirect()->route('communities.index')->with('success', __('success.deleted', ['item' => __('Communities')]));
     }
 
 }

@@ -75,7 +75,7 @@ class BlogController extends Controller
 
             return redirect()
                 ->route('blogs.index')
-                ->with('success', 'Blog created successfully.');
+                ->with('success', __('success.created', ['item' => __('Blogs')]));
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -124,7 +124,7 @@ class BlogController extends Controller
             );
         }
 
-        return redirect()->route('blogs.index')->with('status', 'Blog updated successfully.');
+        return redirect()->route('blogs.index')->with('success', __('success.updated', ['item' => __('Blogs')]));
     }
 
     public function destroy(Blog $blog)

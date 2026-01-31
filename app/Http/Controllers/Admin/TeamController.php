@@ -49,7 +49,7 @@ class TeamController extends Controller
         $data['slug'] = Str::slug($request->name);
 
         TeamMember::create($data);
-        return redirect()->route('team.index')->with('success', 'Team member added!');
+        return redirect()->route('team.index')->with('success', __('success.created', ['item' => __('Team Members')]));
     }
 
 
@@ -92,7 +92,7 @@ class TeamController extends Controller
         $data['slug'] = Str::slug($request->name);
 
         $team->update($data);
-        return redirect()->route('team.index')->with('success', 'Team member updated!');
+        return redirect()->route('team.index')->with('success', __('success.updated', ['item' => __('Team Members')]));
     }
 
 
@@ -106,6 +106,6 @@ class TeamController extends Controller
             return response('', 200);
         }
 
-        return redirect()->route('team.index')->with('success', 'Team member deleted!');
+        return redirect()->route('team.index')->with('success', __('success.deleted', ['item' => __('Team Members')]));
     }
 }

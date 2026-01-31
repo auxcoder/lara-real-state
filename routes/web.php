@@ -42,7 +42,7 @@ Route::get('/login', function () {
 });
 
 Route::get('/lang/{lang}', function ($lang) {
-    if (! in_array($lang, ['en', 'es', 'ar'])) {
+    if (! in_array($lang, ['en', 'es', 'ca'])) {
         abort(400);
     }
     session(['locale' => $lang]);
@@ -97,7 +97,7 @@ Route::controller(PageController::class)->group(function () {
 });
 
 // Form routes
-Route::controller(FormController::class)->group(function () {
+Route::controller(FormController::class)->middleware('throttle:5,1')->group(function () {
     Route::get('/complain', 'showComplaint')->name('complaint.form');
     Route::post('/complaint-submit', 'submitComplaint')->name('complaint.submit');
     Route::get('/visitor', 'showVisitor')->name('visitor.form');

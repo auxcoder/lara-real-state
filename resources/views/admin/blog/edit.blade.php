@@ -4,7 +4,7 @@
     <x-admin.page-header title="Edit Blog" :breadcrumbs="[['label' => 'Dashboard', 'url' => route('admin.dashboard')], ['label' => 'Blogs', 'url' => route('blogs.index')], ['label' => 'Edit']]" />
 
     @php
-        $locales = ['en' => 'English', 'ar' => 'Arabic'];
+        $locales = ['en' => 'English', 'es' => 'Spanish', 'ca' => 'Catalan'];
     @endphp
 
     <form action="{{ route('blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data">

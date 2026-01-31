@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <x-admin.page-header
-        title="Blogs"
+        :title="__('Blogs')"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Blogs']
+            ['label' => __('Blogs')]
         ]"
     />
 
@@ -23,10 +23,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Image</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('ID') }}</th>
+                        <th>{{ __('Title') }}</th>
+                        <th>{{ __('Image') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="py-4 text-center text-muted">No blogs found</td>
+                            <td colspan="4" class="py-4 text-center text-muted">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

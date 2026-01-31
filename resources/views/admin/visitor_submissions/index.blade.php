@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <x-admin.page-header 
-        title="Visitor Submissions" 
+        :title="__('Visitor Submissions')" 
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Visitor Submissions']
+            ['label' => __('Visitor Submissions')]
         ]" 
     />
 
@@ -15,14 +15,14 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Nationality</th>
-                        <th>Rent For</th>
-                        <th>Submitted</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('ID') }}</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Phone') }}</th>
+                        <th>{{ __('Nationality') }}</th>
+                        <th>{{ __('Rent For') }}</th>
+                        <th>{{ __('Created At') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,14 +36,25 @@
                             <td>{{ $submission->payment_for_rent }}</td>
                             <td>{{ $submission->created_at->format('M d, Y H:i') }}</td>
                             <td class="text-end">
-                                <a href="{{ route('visitor-submissions.show', $submission) }}" class="btn btn-primary btn-sm">
-                                    <i class="bi bi-eye me-1"></i>View
-                                </a>
+                                @can('view visitor submissions')
+                                    <a href="{{ route('visitor-submissions.show', $submission) }}" class="btn btn-primary btn-sm">
+                                        <i class="bi bi-eye me-1"></i>View
+                                    </a>
+                                @endcan
+                                @can('delete visitor submissions')
+                                    <form action="{{ route('visitor-submissions.destroy', $submission) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this submission?')">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center text-muted py-4">No submissions found</td>
+                            <td colspan="8" class="text-center text-muted py-4">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

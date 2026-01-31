@@ -36,7 +36,7 @@ class PermissionController extends Controller
         Permission::create($input);
 
         return redirect()->route('permission.index')
-        ->with('success', 'Permission updated successfully');
+        ->with('success', __('success.updated', ['item' => __('Permissions')]));
     }
 
     public function edit($id)
@@ -62,7 +62,7 @@ class PermissionController extends Controller
         $user->update($input);
 
         return redirect()->route('permission.index')
-            ->with('success', 'Permission updated successfully');
+            ->with('success', __('success.updated', ['item' => __('Permissions')]));
     }
     public function destroy($id)
     {
@@ -75,7 +75,7 @@ class PermissionController extends Controller
             return response('', 200);
         }
 
-        return redirect()->route('permission.index')->with('success', 'Permission deleted successfully.');
+        return redirect()->route('permission.index')->with('success', __('success.deleted', ['item' => __('Permissions')]));
     }
 
 }

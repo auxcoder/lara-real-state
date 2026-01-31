@@ -59,7 +59,7 @@ class AgentPropertyController extends Controller
             $request->file('gallery_images', [])
         );
 
-        return redirect()->route('property.show', $property->id)->with('success', 'Property added successfully');
+        return redirect()->route('property.show', $property->id)->with('success', __('success.created', ['item' => __('Properties')]));
     }
 
 
@@ -100,7 +100,7 @@ class AgentPropertyController extends Controller
             $request->file('gallery_images', [])
         );
 
-        return redirect()->route('property.edit', $property->id)->with('success', 'Property updated successfully');
+        return redirect()->route('property.edit', $property->id)->with('success', __('success.updated', ['item' => __('Properties')]));
     }
 
 

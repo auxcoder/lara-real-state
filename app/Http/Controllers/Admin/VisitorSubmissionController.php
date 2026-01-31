@@ -30,7 +30,7 @@ class VisitorSubmissionController extends Controller
         $this->authorize('delete visitor submissions');
         
         $visitor_submission->delete();
-        return redirect()->route('visitor-submissions.index')->with('success', 'Submission deleted');
+        return redirect()->route('visitor-submissions.index')->with('success', __('success.deleted', ['item' => __('Visitor Submissions')]));
     }
 }
 
