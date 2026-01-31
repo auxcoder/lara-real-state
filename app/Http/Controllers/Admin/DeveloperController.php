@@ -16,7 +16,7 @@ class DeveloperController extends Controller
 
     public function index()
     {
-        $developers = Developer::all();
+        $developers = Developer::latest()->paginate(15);
         return view('admin.developers.index', compact('developers'));
     }
 

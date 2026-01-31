@@ -12,7 +12,7 @@ class AmenityController extends Controller
 {
     public function index()
     {
-        $Amenity = Amenity::all();
+        $Amenity = Amenity::latest()->paginate(15);
         $communities = Community::all();
 
         return view('admin.amenities.index', compact('Amenity', 'communities'));
@@ -97,10 +97,13 @@ class AmenityController extends Controller
 
     public function destroy($id)
     {
-        // Delete the Amenity
         $Amenity = Amenity::findOrFail($id);
         Storage::disk('public')->delete($Amenity->logo);
         $Amenity->delete();
+
+        if (request()->header('HX-Request')) {
+            return response('', 200);
+        }
 
         return redirect()->route('amenity.index')->with('success', 'Amenity deleted successfully.');
     }

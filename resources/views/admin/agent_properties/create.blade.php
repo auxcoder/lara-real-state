@@ -8,12 +8,11 @@
     @endphp
 
 
-    <div class="card mt-5">
+    <div class="mt-5 card">
         <div class="card-header">
             <h1>Add New Property</h1>
         </div>
         <div class="card-body">
-
             <form action="{{ route('property.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- Tabs Navigation -->
@@ -30,15 +29,23 @@
                 </ul>
 
                 <!-- Tabs Content -->
-                <div class="tab-content border border-top-0 mb-4" id="langTabsContent">
+                <div class="mb-4 tab-content" id="langTabsContent">
                     @foreach ($locales as $locale => $label)
-                    <div class="tab-pane fade @if ($loop->first) show active @endif" id="lang-{{ $locale }}"
+                    <div class="fade tab-pane @if ($loop->first) show active @endif" id="lang-{{ $locale }}"
                         role="tabpanel">
                         <!-- Title -->
                         <div class="mb-3">
                             <label class="form-label">Property Title ({{ strtoupper($locale) }})</label>
                             <input type="text" class="form-control" name="title[{{ $locale }}]"
-                                dir="{{ $locale === 'ar' ? 'rtl' : 'ltr' }}" value="{{ old(" title.$locale") }}">
+                                @if($locale === 'en')
+                                    hx-post="{{ route('slugify') }}"
+                                    hx-trigger="keyup changed delay:500ms"
+                                    hx-target="#slug"
+                                    hx-swap="outerHTML"
+                                    hx-include="[name='title[en]']"
+                                @endif
+                                dir="{{ $locale === 'ar' ? 'rtl' : 'ltr' }}"
+                                value="{{ old("title.$locale") }}">
                         </div>
                         <!-- Description -->
                         <div class="mb-3">
@@ -137,47 +144,4 @@
 @endsection
 
 @section('scripts')
-<script>
-    (function () {
-        const enTitle = document.querySelector('input[name="title[en]"]');
-        const slugInput = document.getElementById('slug');
-        let slugEdited = false;
-
-        function slugify(str) {
-            return (str || '')
-                .toString()
-                .normalize('NFKD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '')
-                .trim()
-                .replace(/[\s_-]+/g, '-')
-                .replace(/^-+|-+$/g, '');
-        }
-
-        if (enTitle && slugInput) {
-            enTitle.addEventListener('input', () => {
-                if (!slugEdited) slugInput.value = slugify(enTitle.value);
-            });
-            slugInput.addEventListener('input', () => {slugEdited = true;});
-        }
-
-        function isValidSlug(val) {
-            return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(val);
-        }
-
-        const form = document.querySelector('form');
-        if (form && slugInput) {
-            form.addEventListener('submit', (e) => {
-                const val = slugInput.value.trim();
-                if (val && !isValidSlug(val)) {
-                    slugInput.classList.add('is-invalid');
-                    e.preventDefault();
-                } else {
-                    slugInput.classList.remove('is-invalid');
-                }
-            });
-        }
-    })();
-</script>
 @endsection

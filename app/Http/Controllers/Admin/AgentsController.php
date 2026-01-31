@@ -20,7 +20,7 @@ class AgentsController extends Controller
      */
     public function index()
     {
-        $agents = Agents::all();
+        $agents = Agents::with('properties')->latest()->paginate(15);
         return view('admin.agents.index', compact('agents'));
     }
 

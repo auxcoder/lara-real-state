@@ -26,14 +26,21 @@
                     <td>{{ $member->position }}</td>
                     <td>
                         <a href="{{ route('team.edit', $member->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                        <form action="{{ route('team.destroy', $member->id) }}" method="POST" style="display:inline;">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Delete this member?')">Delete</button>
-                        </form>
+                        <button type="button" class="btn btn-danger btn-sm"
+                                hx-delete="{{ route('team.destroy', $member->id) }}"
+                                hx-confirm="Delete {{ $member->name }}?"
+                                hx-target="closest tr"
+                                hx-swap="outerHTML swap:1s">
+                            Delete
+                        </button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    
+    <div class="mt-3">
+        {{ $members->links() }}
+    </div>
 </div>
 @endsection

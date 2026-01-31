@@ -10,13 +10,18 @@ class LocationController extends Controller
 {
     public function index()
     {
-        $Locations = Location::all();
+        $Locations = Location::latest()->paginate(15);
         return view('admin.location.index', compact('Locations'));
     }
-    public function edit(Location $Location)
+
+    public function edit(Location $location)
     {
-        return response()->json(['success' => true, 'Location' => $Location]);
+        if (request()->header('HX-Request')) {
+            return view('admin.location._edit_form', compact('location'));
+        }
+        return response()->json(['success' => true, 'location' => $location]);
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -27,15 +32,20 @@ class LocationController extends Controller
 
         $imagePath = $request->file('image')->store('images', 'public');
 
-        $Location = Location::create([
+        $location = Location::create([
             'name' => $request->name,
             'image' => $imagePath,
             'description' => $request->description,
         ]);
 
-        return response()->json(['success' => true, 'location' => $Location]);
+        if (request()->header('HX-Request')) {
+            return view('admin.location._row', compact('location'));
+        }
+
+        return response()->json(['success' => true, 'location' => $location]);
     }
-    public function update(Request $request, Location $Location)
+
+    public function update(Request $request, Location $location)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -43,21 +53,31 @@ class LocationController extends Controller
             'description' => 'required|string|max:225',
         ]);
 
-        $Location->name = $request->name;
+        $location->name = $request->name;
+        $location->description = $request->description;
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('images', 'public');
-            $Location->image = $imagePath;
+            $location->image = $imagePath;
         }
 
-        $Location->save();
+        $location->save();
 
-        return response()->json(['success' => true, 'location' => $Location]);
+        if (request()->header('HX-Request')) {
+            return view('admin.location._row', compact('location'));
+        }
+
+        return response()->json(['success' => true, 'location' => $location]);
     }
-    public function destroy(Location $Location)
+
+    public function destroy(Location $location)
     {
-        $Location->delete();
+        $location->delete();
+
+        if (request()->header('HX-Request')) {
+            return response('', 200);
+        }
+
         return response()->json(['success' => true]);
     }
-
 }

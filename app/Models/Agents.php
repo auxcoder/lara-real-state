@@ -54,6 +54,12 @@ class Agents extends Model
         'status',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
+
     public function scopeActive($query)
     {
         return $query->where('status', 'active');

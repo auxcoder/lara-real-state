@@ -36,9 +36,16 @@
                         role="tabpanel">
                         <div class="mb-3">
                             <label class="form-label">Title ({{ strtoupper($locale) }})</label>
-                            <input type="text" class="form-control" name="title[{{ $locale }}]" value="{{ old("
-                                title.$locale", $property->translate($locale)?->title) }}"
-                            dir="{{ $locale === 'ar' ? 'rtl' : 'ltr' }}">
+                            <input type="text" class="form-control" name="title[{{ $locale }}]" 
+                                @if($locale === 'en')
+                                    hx-post="{{ route('slugify') }}"
+                                    hx-trigger="keyup changed delay:500ms"
+                                    hx-target="#slug"
+                                    hx-swap="outerHTML"
+                                    hx-include="[name='title[en]']"
+                                @endif
+                                value="{{ old("title.$locale", $property->translate($locale)?->title) }}"
+                                dir="{{ $locale === 'ar' ? 'rtl' : 'ltr' }}">
                         </div>
 
                         <div class="mb-3">
@@ -150,47 +157,4 @@
 @endsection
 
 @section('scripts')
-<script>
-    (function () {
-        const enTitle = document.querySelector('input[name="title[en]"]');
-        const slugInput = document.getElementById('slug');
-        let slugEdited = false;
-
-        function slugify(str) {
-            return (str || '')
-                .toString()
-                .normalize('NFKD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .toLowerCase()
-                .replace(/[^a-z0-9\s-]/g, '')
-                .trim()
-                .replace(/[\s_-]+/g, '-')
-                .replace(/^-+|-+$/g, '');
-        }
-
-        if (enTitle && slugInput) {
-            enTitle.addEventListener('input', () => {
-                if (!slugEdited) slugInput.value = slugify(enTitle.value);
-            });
-            slugInput.addEventListener('input', () => {slugEdited = true;});
-        }
-
-        function isValidSlug(val) {
-            return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(val);
-        }
-
-        const form = document.querySelector('form');
-        if (form && slugInput) {
-            form.addEventListener('submit', (e) => {
-                const val = slugInput.value.trim();
-                if (val && !isValidSlug(val)) {
-                    slugInput.classList.add('is-invalid');
-                    e.preventDefault();
-                } else {
-                    slugInput.classList.remove('is-invalid');
-                }
-            });
-        }
-    })();
-</script>
 @endsection

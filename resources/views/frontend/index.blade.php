@@ -41,10 +41,11 @@
 
                 <div class="mt-3">
                     <div class="active tab-pane" id="home">
-                        <form method="GET" id="state-form"
-                            data-base-url="{{ route('properties.byLocation', ['location' => '__LOCATION__']) }}">
-                            {{-- @csrf --}}
-
+                        <form method="GET" action="{{ route('offplan') }}"
+                              hx-get="{{ route('offplan') }}"
+                              hx-target="#property-results"
+                              hx-push-url="true"
+                              hx-indicator="#search-spinner">
                             <div class="d-flex gap-2">
                                 <select name="property_type" id="property_type" class="form-select">
                                     <option value="" hidden>{{ __('Select Property Type') }}</option>
@@ -66,6 +67,7 @@
                                 </select>
                                 <button type="submit" class="btn btn-link">
                                     <i class="bi bi-search"></i>
+                                    <span id="search-spinner" class="htmx-indicator spinner-border spinner-border-sm ms-1"></span>
                                 </button>
                             </div>
                         </form>
@@ -135,23 +137,4 @@
 
 {{-- <x-floating-buttons /> --}}
 
-<script>
-document.getElementById('state-form').addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    const type = document.getElementById('property_type').value;
-    const place = document.getElementById('community').value;
-    const filter = place || type;
-
-    if (!filter) {
-        return alert('Please select a property type or a location.');
-    }
-
-    // grab the Blade-generated template URL
-    const template = this.dataset.baseUrl;
-    // replace the placeholder with the real, encoded filter
-    this.action = template.replace('__LOCATION__', encodeURIComponent(filter));
-    this.submit();
-});
-</script>
 @endsection

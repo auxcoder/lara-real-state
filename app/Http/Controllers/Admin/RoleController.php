@@ -9,7 +9,7 @@ use Spatie\Permission\Models\Role;
 class RoleController extends Controller
 {
     public function index(){
-        $roles = Role::get();
+        $roles = Role::with('permissions')->latest()->paginate(15);
         return view('admin.roles.index', compact('roles'));
     }
 
@@ -59,6 +59,11 @@ class RoleController extends Controller
     public function destroy($id){
         $role = Role::find($id);
         $role->delete();
+
+        if (request()->header('HX-Request')) {
+            return response('', 200);
+        }
+
         return redirect()->back()->with('success','Role Deleted successfully');
     }
 

@@ -62,17 +62,23 @@
 
                                 </td>
                                 <td>
-                                    <form method="POST" action="{{ route('roles.destroy', $role->id) }}">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger" onclick="return confirm('Are You Sure You Want To delete This?')">Delete</button>
-                                    </form>
+                                    <button type="button" class="btn btn-danger"
+                                            hx-delete="{{ route('roles.destroy', $role->id) }}"
+                                            hx-confirm="Delete role {{ $role->name }}?"
+                                            hx-target="closest tr"
+                                            hx-swap="outerHTML swap:1s">
+                                        Delete
+                                    </button>
                                 </td>
 
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    
+                    <div class="mt-3">
+                        {{ $roles->links() }}
+                    </div>
                 </div>
             </div>
         </div>

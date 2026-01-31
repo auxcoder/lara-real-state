@@ -1,18 +1,24 @@
 @extends('admin.layout.master')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="page-title-box">
-                <h4 class="page-title">Vendor Registrations</h4>
-            </div>
-        </div>
+<div class="container">
+    {{-- Page Header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Vendor Registrations</h1>
     </div>
 
+    {{-- Success Message --}}
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
+
+    {{-- Data Table --}}
     <div class="card">
-        <div class="card-body table-responsive">
-            <table class="align-middle table table-striped">
+        <div class="card-body">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -21,7 +27,7 @@
                         <th>Phone</th>
                         <th>Contact Person</th>
                         <th>Submitted</th>
-                        <th>Action</th>
+                        <th class="text-end">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,20 +38,20 @@
                             <td>{{ $registration->email }}</td>
                             <td>{{ $registration->phone_number }}</td>
                             <td>{{ $registration->contact_person_name }}</td>
-                            <td>{{ $registration->created_at->format('Y-m-d H:i') }}</td>
-                            <td>
+                            <td>{{ $registration->created_at->format('M d, Y H:i') }}</td>
+                            <td class="text-end">
                                 <a class="btn btn-primary btn-sm"
                                     href="{{ route('vendor-registrations.show', $registration) }}">View</a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center">No registrations yet.</td>
+                            <td colspan="7" class="text-center text-muted py-4">No registrations yet.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
-            <div>
+            <div class="mt-3">
                 {{ $registrations->links() }}
             </div>
         </div>

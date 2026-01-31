@@ -1,17 +1,17 @@
-<nav x-data="{ open: false }" class="bg-light">
+<nav x-data="{ open: false }" class="bg-light border-bottom">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="d-flex justify-comntent-between h-16">
-            <div class="flex">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center" style="min-height: 4rem;">
+            <div class="d-flex align-items-center">
                 <!-- Logo -->
-                <div class="flex items-center shrink-0">
+                <div class="me-4">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                        <x-application-logo class="text-dark" style="height: 2.25rem; width: auto;" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="d-none d-sm-flex gap-3">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -19,15 +19,14 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="d-none d-sm-flex align-items-center">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                        <button class="btn btn-light btn-sm d-flex align-items-center gap-1">
                             <div>{{ Auth::user()->name }}</div>
 
-                            <div class="ms-1">
-                                <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+                            <div>
+                                <svg class="w-4 h-4 fill-current" style="width: 1rem; height: 1rem;" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"

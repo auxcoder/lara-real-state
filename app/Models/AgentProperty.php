@@ -68,7 +68,37 @@ class AgentProperty extends Model
         'status',
     ];
 
+    protected $casts = [
+        'price' => 'decimal:2',
+        'area' => 'decimal:2',
+        'bedrooms' => 'integer',
+        'bathrooms' => 'integer',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
+
     protected $table = 'agent_properties';
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('status', 'available');
+    }
+
+    public function scopeByType($query, $type)
+    {
+        return $query->where('property_type', $type);
+    }
+
+    public function scopeByLocation($query, $location)
+    {
+        return $query->where('location', $location);
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('status', 'available')->latest();
+    }
 
     public function agent()
     {

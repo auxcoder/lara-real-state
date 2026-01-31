@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['users'] = User::get();
+        $data['users'] = User::with('roles')->latest()->paginate(15);
         return view('admin.users.index', $data);
     }
     public function user()
@@ -111,6 +111,11 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
+
+        if (request()->header('HX-Request')) {
+            return response('', 200);
+        }
+
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
     }

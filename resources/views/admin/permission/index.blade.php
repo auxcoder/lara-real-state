@@ -63,17 +63,23 @@
                                             <a class="btn btn-primary" href="{{ route('permission.edit', $permission->id) }}">Edit</a>
                                         </td>
                                         <td>
-                                            <form method="POST" action="{{ route('permission.destroy', $permission->id) }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger"  onclick="return confirm('Are You sure you want to delete this?')">Delete</button>
-                                            </form>
+                                            <button type="button" class="btn btn-danger"
+                                                    hx-delete="{{ route('permission.destroy', $permission->id) }}"
+                                                    hx-confirm="Delete permission {{ $permission->name }}?"
+                                                    hx-target="closest tr"
+                                                    hx-swap="outerHTML swap:1s">
+                                                Delete
+                                            </button>
                                         </td>
 
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
+                            
+                            <div class="mt-3">
+                                {{ $permissions->links() }}
+                            </div>
                         </div>
 
                     </div>

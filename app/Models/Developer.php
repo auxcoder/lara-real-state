@@ -51,6 +51,12 @@ class Developer extends Model
         'status',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
+
     public function developersProperties()
     {
         return $this->hasMany(DeveloperProperty::class);

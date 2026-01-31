@@ -10,7 +10,7 @@ class TeamController extends Controller
 {
     public function index()
     {
-        $members = TeamMember::all();
+        $members = TeamMember::latest()->paginate(15);
         return view('admin.team.index', compact('members'));
     }
 
@@ -91,6 +91,11 @@ class TeamController extends Controller
     public function destroy(TeamMember $team)
     {
         $team->delete();
+
+        if (request()->header('HX-Request')) {
+            return response('', 200);
+        }
+
         return redirect()->route('team.index')->with('success', 'Team member deleted!');
     }
 }

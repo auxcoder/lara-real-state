@@ -50,18 +50,23 @@
 
                                 <a class="btn btn-primary"
                                     href="{{ route('users.edit', ['user' => $user->id]) }}">Edit</a>
-                                <form method="POST" action="{{ route('users.destroy', $user->id) }}">
-                                    @csrf
-                                    @method('delete')
-                                    <button class="btn btn-danger"
-                                        onclick="return confirm('Are You sure you want to delete this?')">Delete</button>
-                                </form>
+                                <button type="button" class="btn btn-danger"
+                                        hx-delete="{{ route('users.destroy', $user->id) }}"
+                                        hx-confirm="Delete user {{ $user->name }}?"
+                                        hx-target="closest tr"
+                                        hx-swap="outerHTML swap:1s">
+                                    Delete
+                                </button>
                             </td>
 
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            
+            <div class="mt-3">
+                {{ $users->links() }}
+            </div>
         </div>
     </div>
 </div>

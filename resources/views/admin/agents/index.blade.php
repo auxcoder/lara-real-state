@@ -69,6 +69,9 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="mt-3">
+                {{ $agents->links() }}
+            </div>
         </div>
     </div>
 </div>
