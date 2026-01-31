@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
-@section('title', 'Privacy Policy | The H Real Estate UAE')
-@section('description', 'Read our privacy policy to understand how The H Real Estate collects, uses, and protects your personal information when you use our services.')
+@section('title', 'Privacy Policy | {{ config('company.name') }}')
+@section('description', 'Read our privacy policy to understand how {{ config('company.name') }} collects, uses, and protects your personal information when you use our services.')
 
 @section('content')
 <section class="service">

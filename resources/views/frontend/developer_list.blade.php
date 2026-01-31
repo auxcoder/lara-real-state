@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
-@section('title', 'Top Developers | The H Real Estate UAE')
-@section('description', 'Discover leading property developers in UAE. Browse our curated list of trusted developers offering quality residential and commercial projects.')
+@section('title', 'Top Developers | {{ config('company.name') }}')
+@section('description', 'Discover leading property developers en España. Browse our curated list of trusted developers offering quality residential and commercial projects.')
 
 @section('content')
 <!-- Bread Crumb -->

@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
-@section('title', 'Communities | The H Real Estate UAE')
-@section('description', 'Explore premium communities across UAE. Discover residential and commercial communities with
+@section('title', 'Communities | {{ config('company.name') }}')
+@section('description', 'Explore premium communities en toda España. Discover residential and commercial communities with
 world-class amenities and strategic locations.')
 @section('content')
 <!-- Bread Crumb -->

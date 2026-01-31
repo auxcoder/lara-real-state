@@ -3,10 +3,10 @@
 @section('content')
 <div class="container">
     <x-admin.page-header 
-        title="Communities" 
+        :title="__('Communities')" 
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Communities']
+            ['label' => __('Communities')]
         ]" 
     />
 
@@ -23,10 +23,10 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Image</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Description') }}</th>
+                        <th>{{ __('Image') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-4">No communities found</td>
+                            <td colspan="4" class="text-center text-muted py-4">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -77,7 +77,7 @@
                 <form action="{{ route('communities.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                     @csrf
                     <div class="modal-header">
-                        <h5 class="modal-title" id="communityModalLabel">Add Community</h5>
+                        <h5 class="modal-title" id="communityModalLabel">{{ __('Add') }} {{ __('Communities') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -124,9 +124,9 @@
                             <label for="location" class="form-label">Select Location:</label>
                             <select id="location" class="form-select" name="location" required>
                                 <option value="">Choose location...</option>
-                                <option value="Dubai">Dubai</option>
-                                <option value="Abu Dhabi">Abu Dhabi</option>
-                                <option value="Sharjah">Sharjah</option>
+                                @foreach(config('locations.major_cities', ['Madrid', 'Barcelona', 'Valencia', 'Sevilla']) as $city)
+                                    <option value="{{ $city }}">{{ $city }}</option>
+                                @endforeach
                                 <option value="Al Ain">Al Ain</option>
                                 <option value="Fujairah">Fujairah</option>
                             </select>
@@ -135,7 +135,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Add Community</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Add') }} {{ __('Communities') }}</button>
                     </div>
                 </form>
             </div>
@@ -201,10 +201,7 @@
                                 <label for="location" class="form-label">Select Location:</label>
                                 <select class="form-select" name="location" required>
                                     <option value="">Choose location...</option>
-                                    @php
-                                        $locations = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah'];
-                                    @endphp
-                                    @foreach ($locations as $location)
+                                    @foreach(config('locations.major_cities') as $location)
                                         <option value="{{ $location }}" {{ $community->location == $location ? 'selected' : '' }}>
                                             {{ $location }}
                                         </option>
@@ -288,16 +285,7 @@
                                         <div class="mb-3">
                                             <label for="location" class="form-label">Select Location:</label>
                                             <select id="location" class="form-select" name="location">
-                                                @php
-                                                    $locations = [
-                                                        'Dubai',
-                                                        'Abu Dhabi',
-                                                        'Sharjah',
-                                                        'Al Ain',
-                                                        'Fujairah',
-                                                    ];
-                                                @endphp
-                                                @foreach ($locations as $location)
+                                                @foreach(config('locations.major_cities') as $location)
                                                     <option value="{{ $location }}"
                                                         {{ $community->location == $location ? 'selected' : '' }}>
                                                         {{ $location }}
@@ -328,7 +316,7 @@
                     <form action="{{ route('communities.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-header">
-                            <h5 class="modal-title" id="communityModalLabel">Add Community</h5>
+                            <h5 class="modal-title" id="communityModalLabel">{{ __('Add') }} {{ __('Communities') }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -382,7 +370,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Add Community</button>
+                            <button type="submit" class="btn btn-primary">{{ __('Add') }} {{ __('Communities') }}</button>
                         </div>
                     </form>
                 </div>

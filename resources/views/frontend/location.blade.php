@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
-@section('title', 'Property Locations | The H Real Estate UAE')
-@section('description', 'Find properties in prime locations across UAE. Explore residential and commercial properties in Dubai, Abu Dhabi, Sharjah, and other Emirates.')
+@section('title', 'Property Locations | {{ config('company.name') }}')
+@section('description', 'Find properties in prime locations en toda España. Explore residential and commercial properties in Madrid, Barcelona, Valencia y otras ciudades.')
 @section('content')
  <!-- Bread Crumb -->
 <section class="sec-001">

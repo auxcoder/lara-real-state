@@ -53,7 +53,7 @@ class DeveloperController extends Controller
             $developer->save();
             DB::commit();
 
-            return redirect()->route('developers.index')->with('success', 'Developer created successfully.');
+            return redirect()->route('developers.index')->with('success', __('success.created', ['item' => __('Developers')]));
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors('Error creating developer: ' . $e->getMessage());
@@ -100,7 +100,7 @@ class DeveloperController extends Controller
             $developer->save();
             DB::commit();
 
-            return redirect()->route('developers.index')->with('success', 'Developer updated successfully.');
+            return redirect()->route('developers.index')->with('success', __('success.updated', ['item' => __('Developers')]));
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors('Error updating developer: ' . $e->getMessage());
@@ -118,7 +118,7 @@ class DeveloperController extends Controller
             $developer->delete();
             DB::commit();
 
-            return redirect()->route('developers.index')->with('success', 'Developer deleted successfully.');
+            return redirect()->route('developers.index')->with('success', __('success.deleted', ['item' => __('Developers')]));
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors('Error deleting developer: ' . $e->getMessage());

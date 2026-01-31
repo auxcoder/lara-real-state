@@ -2,15 +2,17 @@
 
 @section('content')
 <x-admin.page-header 
-    title="Team Members" 
+    :title="__('Team Members')" 
     :breadcrumbs="[
         ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-        ['label' => 'Team Members']
+        ['label' => __('Team Members')]
     ]"
 >
-    <a href="{{ route('team.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus"></i> Add Member
-    </a>
+    @can('create team')
+        <a href="{{ route('team.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Add Member
+        </a>
+    @endcan
 </x-admin.page-header>
 
 <x-admin.card>
@@ -21,9 +23,9 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Position</th>
+                <th>{{ __('Name') }}</th>
+                <th>{{ __('Email') }}</th>
+                <th>{{ __('Position') }}</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -38,6 +40,8 @@
                             :item="$member"
                             route-prefix="team"
                             :show-view="true"
+                            editPermission="edit team"
+                            deletePermission="delete team"
                         />
                     </td>
                 </tr>

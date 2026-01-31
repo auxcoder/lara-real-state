@@ -3,18 +3,18 @@
 @section('content')
 <div class="container">
     <x-admin.page-header
-        title="Amenities"
+        :title="__('Amenities')"
         :breadcrumbs="[
-            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Amenities']
+            ['label' => __('Dashboard'), 'url' => route('admin.dashboard')],
+            ['label' => __('Amenities')]
         ]"
     />
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\Amenity::class)
+            @can('create amenities')
                 <a href="{{ route('amenity.create') }}" class="btn btn-primary">
-                    <i class="bi bi-plus-circle me-1"></i>Add Amenity
+                    <i class="bi bi-plus-circle me-1"></i>{{ __('Add') }} {{ __('Amenities') }}
                 </a>
             @endcan
         </x-slot>
@@ -23,11 +23,11 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Logo</th>
-                        <th>Description</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('ID') }}</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Logo') }}</th>
+                        <th>{{ __('Description') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,12 +42,14 @@
                                     :showRoute="route('Amenity.show', $amenity->id)"
                                     :editRoute="route('Amenity.edit', $amenity->id)"
                                     :deleteRoute="route('Amenity.destroy', $amenity->id)"
+                                    editPermission="edit amenities"
+                                    deletePermission="delete amenities"
                                 />
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="py-4 text-center text-muted">No amenities found</td>
+                            <td colspan="5" class="py-4 text-center text-muted">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

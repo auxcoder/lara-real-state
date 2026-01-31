@@ -72,7 +72,7 @@ class AgentsController extends Controller
             $agent->save();
 
             DB::commit();
-            return redirect()->route('agents.index')->with('success', 'Agent created successfully.');
+            return redirect()->route('agents.index')->with('success', __('success.created', ['item' => __('Agents')]));
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'An error occurred while creating the agent: ' . $e->getMessage());
@@ -143,7 +143,7 @@ class AgentsController extends Controller
             $agent->save();
 
             DB::commit();
-            return redirect()->route('agents.index')->with('success', 'Agent updated successfully.');
+            return redirect()->route('agents.index')->with('success', __('success.updated', ['item' => __('Agents')]));
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'An error occurred while updating the agent: ' . $e->getMessage());
@@ -165,7 +165,7 @@ class AgentsController extends Controller
             $agent->delete();
 
             DB::commit();
-            return redirect()->route('agents.index')->with('success', 'Agent deleted successfully.');
+            return redirect()->route('agents.index')->with('success', __('success.deleted', ['item' => __('Agents')]));
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('error', 'An error occurred while deleting the agent: ' . $e->getMessage());

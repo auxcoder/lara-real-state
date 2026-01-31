@@ -5,6 +5,10 @@
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
+.form-label {
+    font-weight: bold;
+}
+
 // HTMX Loading States & Animations
 .htmx-indicator {
     display: none;

@@ -1,14 +1,14 @@
 @extends('frontend.layout.app')
 
-@section('title', 'Real Estate Services | The H Real Estate UAE')
-@section('description', 'From buying and selling to project management, The H Real Estate provides professional, reliable services tailored to meet every client\'s needs.')
+@section('title', 'Real Estate Services | {{ config('company.name') }}')
+@section('description', 'From buying and selling to project management, {{ config('company.name') }} provides professional, reliable services tailored to meet every client\'s needs.')
 
 @section('content')
 <section class="service">
     <div class="py-5 text-center">
         <h2 class="text-white">{{ __('Services') }}</h2>
         <p class="text-white">
-            {{ __('We are a full-service real estate company in UAE that is able to assist you with all your real estate needs.') }}
+            {{ __('We are a full-service real estate company en España that is able to assist you with all your real estate needs.') }}
         </p>
     </div>
 </section>

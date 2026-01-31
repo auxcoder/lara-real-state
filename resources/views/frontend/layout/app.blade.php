@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'The H Real Estate | UAE Property Experts')</title>
-    <meta name="title" content="@yield('title', 'The H Real Estate | UAE Property Experts')">
+    <title>@yield('title', config('company.name') . ' | ' . config('company.tagline'))</title>
+    <meta name="title" content="@yield('title', config('company.name') . ' | ' . config('company.tagline'))">
     <meta name="description"
-        content="@yield('description', 'Trusted UAE real estate company offering expert property solutions. Find luxury or affordable homes tailored to your needs with us.')">
+        content="@yield('description', 'Empresa inmobiliaria de confianza en ' . config('company.country') . ' ofreciendo soluciones expertas en propiedades. Encuentra viviendas de lujo o asequibles adaptadas a tus necesidades.')">
     <meta name="keywords" content="" />
     {{-- @if (app()->getLocale() == "ar") --}}
     {{-- <meta name="direction" content="rtl"> --}}

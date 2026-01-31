@@ -3,12 +3,14 @@
 @section('content')
 <div class="container">
     <x-admin.page-header 
-        title="Locations" 
+        :title="__('Locations')" 
         :breadcrumbs="[
-            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Locations']
+            ['label' => __('Dashboard'), 'url' => route('admin.dashboard')],
+            ['label' => __('Locations')]
         ]">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add Location</button>
+        @can('create locations')
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">{{ __('Add') }} {{ __('Locations') }}</button>
+        @endcan
     </x-admin.page-header>
 
     @if (session('success'))
@@ -22,10 +24,10 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th class="text-end">Actions</th>
+                    <th>{{ __('ID') }}</th>
+                    <th>{{ __('Name') }}</th>
+                    <th>{{ __('Image') }}</th>
+                    <th class="text-end">{{ __('Actions') }}</th>
                 </tr>
             </thead>
             <tbody id="locationTable">

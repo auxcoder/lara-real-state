@@ -1,5 +1,5 @@
 @extends('frontend.layout.app')
-@section('title', 'The H Real Estate | Complaint Form')
+@section('title', '{{ config('company.name') }} | Complaint Form')
 @section('content')
 <section class="sec-001">
     <div class="container">

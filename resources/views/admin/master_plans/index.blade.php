@@ -3,28 +3,30 @@
 @section('content')
 <div class="container">
     <x-admin.page-header 
-        title="Master Plans" 
+        :title="__('Master Plans')" 
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
-            ['label' => 'Master Plans']
+            ['label' => __('Master Plans')]
         ]" 
     />
 
     <x-admin.card>
         <x-slot name="actions">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-                <i class="bi bi-plus-circle me-1"></i>Add Master Plan
-            </button>
+            @can('create master plans')
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                    <i class="bi bi-plus-circle me-1"></i>Add Master Plan
+                </button>
+            @endcan
         </x-slot>
 
         <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th class="text-end">Actions</th>
+                        <th>{{ __('ID') }}</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Image') }}</th>
+                        <th class="text-end">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody id="masterPlanTable">
@@ -32,7 +34,7 @@
                         @include('admin.master_plans._row', ['masterPlan' => $masterPlan])
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-4">No master plans found</td>
+                            <td colspan="4" class="text-center text-muted py-4">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

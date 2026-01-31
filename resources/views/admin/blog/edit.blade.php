@@ -4,7 +4,7 @@
     <x-admin.page-header title="Edit Blog" :breadcrumbs="[['label' => 'Dashboard', 'url' => route('admin.dashboard')], ['label' => 'Blogs', 'url' => route('blogs.index')], ['label' => 'Edit']]" />
 
     @php
-        $locales = ['en' => 'English', 'ar' => 'Arabic'];
+        $locales = ['en' => 'English', 'es' => 'Spanish', 'ca' => 'Catalan'];
     @endphp
 
     <form action="{{ route('blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data">
@@ -33,8 +33,8 @@
             <div class="mb-3">
                 <label class="form-label">Target Audience</label>
                 <div class="form-check">
-                    <input class="form-check-input @error('target_audience') is-invalid @enderror" type="radio" name="target_audience" id="target_uae" value="UAE" {{ old('target_audience', $blog->target_audience) == 'UAE' ? 'checked' : '' }}>
-                    <label class="form-check-label" for="target_uae">For UAE</label>
+                    <input class="form-check-input @error('target_audience') is-invalid @enderror" type="radio" name="target_audience" id="target_spain" value="Spain" {{ old('target_audience', $blog->target_audience) == 'Spain' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="target_spain">For Spain</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input @error('target_audience') is-invalid @enderror" type="radio" name="target_audience" id="target_international" value="International" {{ old('target_audience', $blog->target_audience) == 'International' ? 'checked' : '' }}>

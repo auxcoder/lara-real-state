@@ -1,5 +1,5 @@
 @php
-$locales = ['en' => 'English', 'ar' => 'Arabic'];
+$locales = ['en' => 'English', 'es' => 'Spanish', 'ca' => 'Catalan'];
 @endphp
 
 <!-- Language Tabs -->
@@ -63,7 +63,7 @@ $locales = ['en' => 'English', 'ar' => 'Arabic'];
     <label for="location" class="form-label">Location</label>
     <select class="form-control @error('location') is-invalid @enderror" id="location" name="location">
         <option value="" hidden>Select a location</option>
-        @foreach (['Dubai', 'Abu Dhabi', 'Sharjah', 'Al Ain', 'Fujairah', 'Ras Al Khaimah'] as $loc)
+        @foreach (config('locations.provinces', ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Málaga', 'Zaragoza']) as $loc)
         <option value="{{ $loc }}" {{ old('location', isset($property) ? $property->location : '') == $loc ? 'selected' : '' }}>
             {{ $loc }}
         </option>

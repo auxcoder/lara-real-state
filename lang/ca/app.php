@@ -1,0 +1,257 @@
+<?php
+
+return [
+    // Navigation
+    'Home' => 'Inici',
+    'About us' => 'Sobre nosaltres',
+    'Properties' => 'Propietats',
+    'Contact us' => 'Contacteu-nos',
+    'Services' => 'Serveis',
+    'Login' => 'Iniciar sessió',
+    'Blogs' => 'Blogs',
+    
+    // Property Types
+    'Residential' => 'Residencial',
+    'Commercial' => 'Comercial',
+    'Villa' => 'Villa',
+    'Rent' => 'Llogar',
+    'Buy' => 'Comprar',
+    
+    // Forms
+    'Complaint Form' => 'Formulari de Queixa',
+    'Visitor Form' => 'Formulari de Visitant',
+    'Register as vendor' => 'Registrar-se com a proveïdor',
+    'Submit a Complaint' => 'Enviar una Queixa',
+    'Submit a Request of Visitor' => 'Enviar una Sol·licitud de Visitant',
+    'Submit Your Information' => 'Envieu la vostra Informació',
+    'Name' => 'Nom',
+    'Email' => 'Correu electrònic',
+    'Your Name' => 'El vostre Nom',
+    'Tenant Full Name' => 'Nom Complet de l\'Inquilí',
+    
+    // About
+    'ABOUT US' => 'SOBRE NOSALTRES',
+    'intro' => 'Text d\'introducció',
+    'who_we_are_title' => 'Qui Som',
+    'who_we_are_text' => 'Descripció de qui som',
+    'services_title' => 'Els Nostres Serveis',
+    
+    // Properties
+    'Modern Apartments Exclusive Listing' => 'Apartaments Moderns Llistat Exclusiu',
+    'Get the features you in all the property we offer at the best price you can get' => 'Obteniu les característiques que voleu en totes les propietats que oferim al millor preu',
+    'WHAT ARE YOU LOOKING FOR?' => 'QUÈ ESTEU BUSCANT?',
+    'properties.property_detail' => 'Detall de la Propietat',
+    'properties.banner_description' => 'Troba la propietat dels teus somnis',
+    'properties.new_property' => 'Nova Propietat',
+    'properties.description' => 'Descripció',
+    'properties.location' => 'Ubicació',
+    'properties.contact_for_price' => 'Contactar per Preu',
+    'propdetails.banner.title' => 'Propietats a :location',
+    
+    // Filter
+    'filter.heading' => 'Filtrar Propietats',
+    'filter.property_type' => 'Seleccionar Tipus de Propietat',
+    'filter.property_type.Residential' => 'Residencial',
+    
+    // Footer
+    'Quick links' => 'Enllaços ràpids',
+    'Get In Touch' => 'Poseu-vos en Contacte',
+    'Subscribe Now' => 'Subscriviu-vos Ara',
+    
+    // Services
+    'Property Management' => 'Gestió de Propietats',
+    'Facility Management' => 'Gestió d\'Instal·lacions',
+    'We are a full-service real estate company in UAE that is able to assist you with all your real estate needs.' => 'Som una empresa immobiliària de servei complet als EAU que pot ajudar-vos amb totes les vostres necessitats immobiliàries.',
+    
+    // Contact
+    'h_real_estate' => 'H Béns Immobles',
+    'If you have any queries or you would like us to meet and discuss them, just fill in the form and we will get back to you.' => 'Si teniu alguna consulta o voleu que ens reunim per discutir-les, simplement ompliu el formulari i ens posarem en contacte amb vosaltres.',
+    
+    // Blog
+    'Read More' => 'Llegir Més',
+    'Be the first to know.' => 'Sigueu els primers a saber-ho.',
+    'We invite you to register below and we'll be in touch with exclusive updates and announcements about pre-leasing opportunities.' => 'Us convidem a registrar-vos a continuació i ens posarem en contacte amb actualitzacions exclusives i anuncis sobre oportunitats de pre-arrendament.',
+    'No blogs yet' => 'Encara no hi ha blogs',
+    'Stay tuned' => 'Estigueu atents',
+    
+    // Notifications
+    'notify.heading' => 'Mantingueu-vos Actualitzats',
+    'notify.description' => 'Subscriviu-vos al nostre butlletí',
+    'notify.email_placeholder' => 'Introduïu el vostre correu electrònic',
+    
+    // Common Actions
+    'Add' => 'Afegir',
+    'Edit' => 'Editar',
+    'Update' => 'Actualitzar',
+    'Delete' => 'Eliminar',
+    'Create' => 'Crear',
+    'View' => 'Veure',
+    'Back' => 'Tornar',
+    'Cancel' => 'Cancel·lar',
+    'Save' => 'Desar',
+    'Submit' => 'Enviar',
+    'Close' => 'Tancar',
+    'Actions' => 'Accions',
+    'Details' => 'Detalls',
+    'Show' => 'Mostrar',
+    'Remove' => 'Eliminar',
+    'Search' => 'Cercar',
+    'Filter' => 'Filtrar',
+    'Apply' => 'Aplicar',
+    'Reset' => 'Restablir',
+    'Clear' => 'Netejar',
+    'Select' => 'Seleccionar',
+    'Choose' => 'Triar',
+    'Upload' => 'Pujar',
+    'Download' => 'Descarregar',
+    'Browse' => 'Explorar',
+    'Export' => 'Exportar',
+    'Import' => 'Importar',
+    
+    // Common Fields
+    'Name' => 'Nom',
+    'Email' => 'Correu electrònic',
+    'Phone' => 'Telèfon',
+    'Address' => 'Adreça',
+    'City' => 'Ciutat',
+    'Country' => 'País',
+    'Description' => 'Descripció',
+    'Price' => 'Preu',
+    'Date' => 'Data',
+    'Time' => 'Hora',
+    'Status' => 'Estat',
+    'Password' => 'Contrasenya',
+    
+    // Status Values
+    'Active' => 'Actiu',
+    'Inactive' => 'Inactiu',
+    'Pending' => 'Pendent',
+    'Approved' => 'Aprovat',
+    'Rejected' => 'Rebutjat',
+    'Published' => 'Publicat',
+    'Draft' => 'Esborrany',
+    'Sale' => 'Venda',
+    
+    // Common Messages
+    'N/A' => 'N/D',
+    'All' => 'Tots',
+    
+    // Admin Panel
+    'Dashboard' => 'Tauler de Control',
+    'Properties' => 'Propietats',
+    'Agents' => 'Agents',
+    'Developers' => 'Desenvolupadors',
+    'Communities' => 'Comunitats',
+    'Amenities' => 'Comoditats',
+    'Locations' => 'Ubicacions',
+    'Master Plans' => 'Plans Mestres',
+    'Team Members' => 'Membres de l\'Equip',
+    'Users' => 'Usuaris',
+    'Roles' => 'Rols',
+    'Permissions' => 'Permisos',
+    'Vendor Registrations' => 'Registres de Proveïdors',
+    'Visitor Submissions' => 'Enviaments de Visitants',
+    'Settings' => 'Configuració',
+    'Logout' => 'Tancar Sessió',
+    
+    // Table Headers
+    'ID' => 'ID',
+    'Title' => 'Títol',
+    'Description' => 'Descripció',
+    'Image' => 'Imatge',
+    'Logo' => 'Logo',
+    'Status' => 'Estat',
+    'Created At' => 'Creat el',
+    'Updated At' => 'Actualitzat el',
+    'Phone' => 'Telèfon',
+    'Position' => 'Posició',
+    'Price' => 'Preu',
+    'Bedrooms' => 'Habitacions',
+    'Bathrooms' => 'Banys',
+    'Area' => 'Àrea',
+    
+    // Status (keeping existing)
+    'Active' => 'Actiu',
+    'Inactive' => 'Inactiu',
+    'Pending' => 'Pendent',
+    'Approved' => 'Aprovat',
+    'Rejected' => 'Rebutjat',
+    'Published' => 'Publicat',
+    'Draft' => 'Esborrany',
+    
+    // Messages
+    'success.created' => ':item creat correctament',
+    'success.updated' => ':item actualitzat correctament',
+    'success.deleted' => ':item eliminat correctament',
+    'error.not_found' => ':item no trobat',
+    'error.generic' => 'S\'ha produït un error. Si us plau, torneu-ho a intentar.',
+    'confirm.delete' => 'Esteu segur que voleu eliminar aquest :item?',
+    'no_records' => 'No s\'han trobat registres',
+    
+    // Validation
+    'required' => 'Aquest camp és obligatori',
+    'email.invalid' => 'Si us plau, introduïu un correu electrònic vàlid',
+    'phone.invalid' => 'Si us plau, introduïu un número de telèfon vàlid',
+    
+    'None' => 'Cap',
+    'Yes' => 'Sí',
+    'No' => 'No',
+    'OK' => 'D\'acord',
+    'Confirm' => 'Confirmar',
+    'Success' => 'Èxit',
+    'Error' => 'Error',
+    'Warning' => 'Advertència',
+    'Info' => 'Informació',
+    'Loading' => 'Carregant',
+    'Please wait' => 'Si us plau, espereu',
+    'Are you sure?' => 'Esteu segur?',
+    'No data' => 'Sense dades',
+    'No records' => 'Sense registres',
+    
+    // Auth
+    'Remember me' => 'Recorda\'m',
+    'Log In' => 'Iniciar sessió',
+    'Sign Up' => 'Registrar-se',
+    'Don\'t have an account ?' => 'No teniu un compte?',
+    'Forgot Password' => 'He oblidat la contrasenya',
+    
+    // Misc
+    'About' => 'Sobre',
+    'Team' => 'Equip',
+    'Blog' => 'Blog',
+    'Menu' => 'Menú',
+    'Pages' => 'Pàgines',
+    'Admin' => 'Administrador',
+    'User Management' => 'Gestió d\'Usuaris',
+    'Nationality' => 'Nacionalitat',
+    'Contact Person' => 'Persona de Contacte',
+    'Rent For' => 'Lloguer Per',
+    
+    // Spanish Cities (Catalan names where different)
+    'Madrid' => 'Madrid',
+    'Barcelona' => 'Barcelona',
+    'Valencia' => 'València',
+    'Sevilla' => 'Sevilla',
+    'Zaragoza' => 'Saragossa',
+    'Málaga' => 'Màlaga',
+    'Murcia' => 'Múrcia',
+    'Palma de Mallorca' => 'Palma de Mallorca',
+    'Bilbao' => 'Bilbao',
+    'Alicante' => 'Alacant',
+    'San Sebastián' => 'Sant Sebastià',
+    'Santander' => 'Santander',
+    'Oviedo' => 'Oviedo',
+    'Gijón' => 'Gijón',
+    'A Coruña' => 'La Corunya',
+    'Vigo' => 'Vigo',
+    'Pamplona' => 'Pamplona',
+    'Vitoria-Gasteiz' => 'Vitòria-Gasteiz',
+    'Burgos' => 'Burgos',
+    'León' => 'Lleó',
+    'Logroño' => 'Logronyo',
+    'Valladolid' => 'Valladolid',
+    'Salamanca' => 'Salamanca',
+    'Granada' => 'Granada',
+    'Córdoba' => 'Còrdova',
+    'Cádiz' => 'Cadis',
+];

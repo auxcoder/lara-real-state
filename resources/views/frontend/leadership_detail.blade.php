@@ -1,6 +1,6 @@
 @extends('frontend.layout.app')
-@section('title', $teammember->name . ' - ' . $teammember->position . ' | The H Real Estate UAE')
-@section('description', 'Learn more about ' . $teammember->name . ', ' . $teammember->position . ' at The H Real Estate. ' . \Illuminate\Support\Str::limit(strip_tags($teammember->description), 140))
+@section('title', $teammember->name . ' - ' . $teammember->position . ' | {{ config('company.name') }}')
+@section('description', 'Learn more about ' . $teammember->name . ', ' . $teammember->position . ' at {{ config('company.name') }}. ' . \Illuminate\Support\Str::limit(strip_tags($teammember->description), 140))
 
 @section('content')
 <style>

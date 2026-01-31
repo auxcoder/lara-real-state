@@ -8,22 +8,22 @@
              </div>
 
              <ul class="nav flex-column ms-3 pt-3">
-                 <li class="nav-item text-light">Menu</li>
+                 <li class="nav-item text-light">{{ __('Menu') }}</li>
 
                  <li class="nav-item">
                      <a class="nav-link text-white" href='{{ route('admin.dashboard') }}'>
                          <i class="bi bi-columns"></i>
-                         <span>Dashboard</span>
+                         <span>{{ __('Dashboard') }}</span>
                      </a>
                  </li>
 
-                 <li class="nav-item text-light">Pages</li>
+                 <li class="nav-item text-light">{{ __('Pages') }}</li>
                  @if (auth()->user()->hasRole('admin'))
                      <li class="{{ request()->routeIs(['users.*', 'roles.*', 'permission.*']) ? 'menuitem-active' : '' }} nav-item">
                          <a class="nav-link text-white d-flex gap-2" href="#sidebarExpages" data-bs-toggle="collapse">
                              <i class="bi bi-file-text"></i>
                              <span class="d-flex justify-content-between w-100">
-                                <span>Admin</span>
+                                <span>{{ __('Admin') }}</span>
                                 <span class="bi bi-caret-down"></span>
                              </span>
                          </a>
@@ -32,19 +32,19 @@
                                  <li class="{{ request()->routeIs('permission.*') ? 'menuitem-active' : '' }}">
                                      <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('permission.index') }}'>
                                          <i class="bi bi-person-lock"></i>
-                                         Permmision
+                                         {{ __('Permissions') }}
                                      </a>
                                  </li>
                                  <li class="{{ request()->routeIs('roles.*') ? 'menuitem-active' : '' }}">
                                      <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('roles.index') }}'>
                                          <i class="bi bi-person-rolodex"></i>
-                                         Roles
+                                         {{ __('Roles') }}
                                      </a>
                                  </li>
                                  <li class="{{ request()->routeIs('users.*') ? 'menuitem-active' : '' }}">
                                      <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('users.index') }}'>
                                          <i class="bi bi-person-plus"></i>
-                                         User Management
+                                         {{ __('Users') }}
                                      </a>
                                  </li>
                              </ul>
@@ -54,7 +54,7 @@
                  <li class="{{ request()->routeIs('property.*') ? 'menuitem-active' : '' }} nav-item">
                      <a class="nav-link text-white" href='{{ route('property.index') }}'>
                          <i class="bi bi-house"></i>
-                         <span>Properties</span>
+                         <span>{{ __('Properties') }}</span>
                      </a>
                  </li>
                  {{-- <li class="{{ request()->routeIs('developer_properties.*') ? 'menuitem-active' : '' }}">

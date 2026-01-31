@@ -58,12 +58,9 @@
                                 <select name="community" id="community" class="form-select">
                                     <option value="" hidden>{{ __('City, Neighborhood, or Community') }}
                                     </option>
-                                    <option value="Abu Dhabi">{{ __('Abu Dhabi') }}</option>
-                                    <option value="Dubai">{{ __('Dubai') }}</option>
-                                    <option value="Al Ain">{{ __('Al Ain') }}</option>
-                                    <option value="Sharjah">{{ __('Sharjah') }}</option>
-                                    <option value="Fujairah">{{ __('Fujairah') }}</option>
-                                    <option value="Ras Al Khaimah">{{ __('Ras Al Khaimah') }}</option>
+                                    @foreach(config('locations.major_cities', ['Madrid', 'Barcelona', 'Valencia', 'Sevilla', 'Málaga', 'Zaragoza']) as $city)
+                                        <option value="{{ $city }}">{{ __($city) }}</option>
+                                    @endforeach
                                 </select>
                                 <button type="submit" class="btn btn-link">
                                     <i class="bi bi-search"></i>

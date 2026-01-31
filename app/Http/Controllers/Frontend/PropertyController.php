@@ -15,11 +15,13 @@ use Illuminate\Support\Facades\Log;
 class PropertyController extends Controller
 {
     protected $property_types = ['Residential', 'Commercial', 'Off-Plan', 'Mall', 'Villa'];
-    protected $cities = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman'];
+    protected $cities;
 
     public function __construct(
         private CacheService $cache
-    ) {}
+    ) {
+        $this->cities = config('locations.major_cities', ['Madrid', 'Barcelona', 'Valencia', 'Sevilla']);
+    }
 
     public function index()
     {
@@ -96,7 +98,6 @@ class PropertyController extends Controller
         $developer_property = DeveloperProperty::all();
         $developers = $this->cache->getDevelopers();
 
-        Log::info('Request Parameters: ', $request->all());
 
         $properties = DeveloperProperty::paginate(5);
 
