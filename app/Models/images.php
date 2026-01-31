@@ -25,5 +25,8 @@ class Images extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'developer_property_id',
+        'image',
+    ];
 }

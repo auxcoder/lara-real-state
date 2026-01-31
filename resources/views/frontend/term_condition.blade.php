@@ -1,6 +1,7 @@
 @extends('frontend.layout.app')
 @section('title', 'Terms & Conditions | The H Real Estate UAE')
 @section('description', 'Read our terms and conditions to understand the rules and guidelines for using The H Real Estate services and website.')
+
 @section('content')
 <section class="service">
     <div class="container">

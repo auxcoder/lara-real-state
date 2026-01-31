@@ -1,15 +1,15 @@
  <header class="header">
-     <nav class="navbar navbar-light bg-light navbar-expand-lg z-5">
+     <nav class="z-5 bg-light navbar navbar-expand-lg navbar-light">
          <div class="container d-block">
              <div class="row align-items-center">
-                 <div class="col-md-2 col-6">
+                 <div class="col-6 col-md-2">
                      <a class="navbar-brand" href="/">
                          <img src="{{ asset('assets/img/logo-countryside-g.jpg') }}" alt="logo" class="logo" title="Logo" />
                      </a>
                  </div>
 
-                 <div class="col-md-8 col-lg-7 mob-1">
-                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                 <div class="col-lg-7 col-md-8 mob-1">
+                     <ul class="mb-2 mb-lg-0 navbar-nav me-auto">
                          <li class="nav-item">
                              <a class="nav-link" href="{{ route('home') }}">{{ __('Home') }}</a>
                          </li>
@@ -46,7 +46,7 @@
 
                  <div class="col-md-3 mob-1">
                      <a class="text-uppercase small" href="{{ route('login') }}">{{ __('Login') }}</a>
-                     <div class="d-inline ms-2 px-2 fw-bold border">
+                     <div class="d-inline px-2 border fw-bold ms-2">
                          <a href="{{ route('lang.switch', 'en') }}">EN</a> |
                          <a href="{{ route('lang.switch', 'es') }}">ES</a>
                      </div>
@@ -59,18 +59,18 @@
                          <span class="navbar-toggler-icon"></span>
                      </button>
 
-                     <div class="offcanvas offcanvas-end bg-secondary secondary-1" id="navbarOffcanvas" tabindex="-1"
+                     <div class="bg-secondary offcanvas offcanvas-end secondary-1" id="navbarOffcanvas" tabindex="-1"
                          aria-labelledby="offcanvasNavbarLabel">
                          <div class="offcanvas-header">
                              <a class="navbar-brand" href="/">
                                  <img src="{{ asset('assets/img/logo-countryside-g.jpg') }}" alt="logo" class="logo" />
                              </a>
-                             <button type="button" class="btn-close btn-close-white text-reset"
+                             <button type="button" class="text-reset btn-close btn-close-white"
                                  data-bs-dismiss="offcanvas" aria-label="Close"></button>
                          </div>
 
                          <div class="offcanvas-body">
-                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                             <ul class="mb-2 mb-lg-0 navbar-nav me-auto">
                                  <li class="nav-item">
                                      <a class="nav-link" href="{{ route('home') }}">Home</a>
                                  </li>

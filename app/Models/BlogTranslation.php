@@ -26,7 +26,13 @@ class BlogTranslation extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'blog_id',
+        'locale',
+        'title',
+        'slug',
+        'description',
+    ];
 
     public $timestamps = false; //  ADD THIS LINE
 

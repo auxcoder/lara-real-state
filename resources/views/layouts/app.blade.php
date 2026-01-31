@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="min-h-screen bg-light">
+    <div class="bg-light min-h-screen">
         @include('layouts.navigation')
 
         <!-- FIX: clear tailwinf classes -->

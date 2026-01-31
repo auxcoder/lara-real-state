@@ -19,6 +19,11 @@ use Illuminate\Validation\Rule;
 
 class DeveloperPropertyController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(DeveloperProperty::class, 'developer_property');
+    }
+
     public function index()
     {
         $developer_properties = DeveloperProperty::all();

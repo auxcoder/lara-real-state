@@ -3,10 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Amenity;
-use App\Models\DeveloperProperty;
-use App\Models\Location;
-use App\Models\MasterPlan;
+// use App\Models\Amenity;
+// use App\Models\DeveloperProperty;
+// use App\Models\Location;
+// use App\Models\MasterPlan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -19,47 +19,36 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        $roles = [
-            'admin',
-            'user',
-        ];
-
+        // Create roles if they don't exist
+        $roles = ['admin', 'user'];
         foreach ($roles as $role) {
-            Role::create(['name' => $role]);
+            Role::firstOrCreate(['name' => $role]);
         }
 
-        $user = User::create([
-            'name' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('12345678'),
-            'email_verified_at' => now(),
-        ]);
-        $user->assignRole('admin');
+        // Create admin user if doesn't exist
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name' => 'admin',
+                'password' => Hash::make('12345678'),
+                'email_verified_at' => now(),
+            ]
+        );
+        if (! $admin->hasRole('admin')) {
+            $admin->assignRole('admin');
+        }
 
-        $user = User::create([
-            'name' => 'user',
-            'email' => 'user@gmail.com',
-            'password' => Hash::make('12345678'),
-            'email_verified_at' => now(),
-        ]);
-        $user->assignRole('user');
-
-        // Location::factory(10)->create();
-
-        // // Create 5 master plans
-        // MasterPlan::factory(5)->create();
-
-        // // Create 15 Amenity
-        // Amenity::factory(15)->create();
-        // DeveloperProperty::factory()
-        //     ->withRelations() // This will create and attach master plans, locations, and Amenity
-        //     ->count(1)
-        //     ->create();
+        // Create regular user if doesn't exist
+        $user = User::firstOrCreate(
+            ['email' => 'user@gmail.com'],
+            [
+                'name' => 'user',
+                'password' => Hash::make('12345678'),
+                'email_verified_at' => now(),
+            ]
+        );
+        if (! $user->hasRole('user')) {
+            $user->assignRole('user');
+        }
     }
 }

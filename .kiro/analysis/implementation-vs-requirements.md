@@ -519,25 +519,25 @@ Route::prefix('api/v1')->group(function () {
 
 ### Critical Gaps
 
-1. **No RESTful API** (Requirement 8)
-   - Impact: Cannot be consumed by frontend frameworks or mobile apps
-   - Effort: Medium (2-3 days)
-   - Priority: HIGH if API is needed
+1. ✅ **Soft Deletes Implemented** (COMPLETED)
+   - Impact: Data can now be recovered if accidentally deleted
+   - Effort: DONE
+   - Priority: COMPLETED
 
 2. **No Agent-Property Relationship** (Requirement 1, 3)
    - Impact: Agents exist but serve no functional purpose
    - Effort: Low (1 day)
-   - Priority: MEDIUM
+   - Priority: HIGH
 
 3. **Simplified Status Workflow** (Requirement 6)
    - Impact: Cannot track draft or inactive properties
    - Effort: Low (1 day)
-   - Priority: LOW
-
-4. **No Soft Deletes** (Requirement 1)
-   - Impact: Data loss on deletion
-   - Effort: Low (1 day)
    - Priority: MEDIUM
+
+4. **Large Controller Anti-Pattern**
+   - Impact: FrontendController has 35+ methods, hard to maintain
+   - Effort: Medium (2-3 days)
+   - Priority: HIGH
 
 ---
 

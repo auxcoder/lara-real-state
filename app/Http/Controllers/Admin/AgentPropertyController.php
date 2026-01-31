@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAgentPropertyRequest;
+use App\Http\Requests\UpdateAgentPropertyRequest;
 use App\Models\AgentProperty;
 use App\Models\Agents;
+use App\Services\AgentPropertyService;
 use App\Models\PropertyGalleryImages;
 use DB;
 use Illuminate\Http\Request;
@@ -15,6 +18,12 @@ use Validator;
 
 class AgentPropertyController extends Controller
 {
+    public function __construct(
+        private AgentPropertyService $propertyService
+    ) {
+        $this->authorizeResource(AgentProperty::class, 'property');
+    }
+
     /**
      * Display a listing of the property.
      */
@@ -36,76 +45,18 @@ class AgentPropertyController extends Controller
     /**
      * Store a newly created property in the database.
      */
-    public function store(Request $request)
+    public function store(StoreAgentPropertyRequest $request)
     {
-        // dd($request->all());
-        $locales = ['en', 'ar']; // Add more if needed
+        $data = $request->validated();
+        $data['slug'] = $request->filled('slug') ? $request->slug : null;
+        $data['price'] = $request->filled('price') ? $request->price : null;
 
-        // Validate incoming request
-        $request->validate([
-            'title' => 'required|array',
-            'title.*' => 'required|string|max:255',
+        $property = $this->propertyService->create(
+            $data,
+            $request->file('main_image'),
+            $request->file('gallery_images', [])
+        );
 
-            'description' => 'nullable|array',
-            'description.*' => 'nullable|string',
-
-            'location' => 'required|string|max:255',
-            'property_type' => 'required|in:Residential,Commercial,Off-Plan,Mall,Villa',
-            'transaction_type' => 'required|in:Rent,Sale',
-
-            'price' => 'nullable|numeric',
-            'area' => 'required|numeric',
-            'bedrooms' => 'nullable|integer',
-            'bathrooms' => 'nullable|integer',
-
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif',
-
-            'status' => 'required|in:available,sold',
-            'slug' => ['required', 'alpha_dash', Rule::unique('agent_properties', 'slug')],
-            // 'target_audience' => 'required|in:UAE,International',
-        ]);
-
-        // Create the new property
-        $property = new AgentProperty();
-        $property->location = $request->location;
-        $property->property_type = $request->property_type;
-        $property->transaction_type = $request->transaction_type;
-        $property->price = $request->filled('price') ? $request->price : null;
-        $property->area = $request->area;
-        $property->bedrooms = $request->bedrooms;
-        $property->bathrooms = $request->bathrooms;
-        $property->status = $request->status;
-        if ($request->filled('slug')) {
-            $property->slug = $request->slug;
-        }
-        // $property->target_audience = $request->target_audience;
-
-
-        // Handle main image upload
-        if ($request->hasFile('main_image')) {
-            $property->main_image = $request->file('main_image')->store('properties/main', 'public');
-        }
-        // Save the property
-        $property->save();
-        // Save multilingual data (assuming you have a property_translations table)
-        foreach ($locales as $locale) {
-            $property->translations()->create([
-                'locale' => $locale,
-                'title' => $request->input("title.$locale"),
-                'description' => $request->input("description.$locale"),
-            ]);
-        }
-        // Handle Gallery Images
-        if ($request->hasFile('gallery_images')) {
-            foreach ($request->file('gallery_images') as $image) {
-                PropertyGalleryImages::create([
-                    'property_id' => $property->id,
-                    'image' => $image->store('gallery', 'public'),
-                ]);
-            }
-        }
         return redirect()->route('property.show', $property->id)->with('success', 'Property added successfully');
     }
 
@@ -132,84 +83,20 @@ class AgentPropertyController extends Controller
     /**
      * Update the specified property in the database.
      */
-    public function update(Request $request, $id)
+    public function update(UpdateAgentPropertyRequest $request, $id)
     {
-        $locales = ['en', 'ar'];
-
-        $request->validate([
-            'title' => 'required|array',
-            'title.*' => 'required|string|max:255',
-
-            'description' => 'nullable|array',
-            'description.*' => 'nullable|string',
-
-            'location' => 'required|string|max:255',
-            'property_type' => 'required|in:Residential,Commercial,Off-Plan,Mall,Villa',
-            'transaction_type' => 'required|in:Rent,Sale',
-
-            'price' => 'nullable|numeric',
-            'area' => 'required|numeric',
-            'bedrooms' => 'nullable|integer',
-            'bathrooms' => 'nullable|integer',
-
-            'main_image' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            'gallery_images' => 'nullable|array',
-            'gallery_images.*' => 'image|mimes:jpeg,png,jpg,gif',
-
-            'status' => 'required|in:available,sold',
-            'slug' => ['required', 'alpha_dash', Rule::unique('agent_properties', 'slug')->ignore($id)],
-        ]);
-
         $property = AgentProperty::findOrFail($id);
-        $property->location = $request->location;
-        $property->property_type = $request->property_type;
-        $property->transaction_type = $request->transaction_type;
-        $property->price = $request->filled('price') ? $request->price : null;
-        $property->area = $request->area;
-        $property->bedrooms = $request->bedrooms;
-        $property->bathrooms = $request->bathrooms;
-        $property->status = $request->status;
-        if ($request->filled('slug')) {
-            $property->slug = $request->slug;
-        }
+        
+        $data = $request->validated();
+        $data['slug'] = $request->filled('slug') ? $request->slug : $property->slug;
+        $data['price'] = $request->filled('price') ? $request->price : null;
 
-        // Handle Main Image
-        if ($request->hasFile('main_image')) {
-            // Optionally delete old image from storage
-            if ($property->main_image && \Storage::disk('public')->exists($property->main_image)) {
-                \Storage::disk('public')->delete($property->main_image);
-            }
-            $property->main_image = $request->file('main_image')->store('properties/main', 'public');
-        }
-
-        $property->save();
-
-        // Update Translations
-        foreach ($locales as $locale) {
-            $translation = $property->translations()->where('locale', $locale)->first();
-            if ($translation) {
-                $translation->update([
-                    'title' => $request->input("title.$locale"),
-                    'description' => $request->input("description.$locale"),
-                ]);
-            } else {
-                $property->translations()->create([
-                    'locale' => $locale,
-                    'title' => $request->input("title.$locale"),
-                    'description' => $request->input("description.$locale"),
-                ]);
-            }
-        }
-
-        // Handle Gallery Images
-        if ($request->hasFile('gallery_images')) {
-            foreach ($request->file('gallery_images') as $image) {
-                PropertyGalleryImages::create([
-                    'property_id' => $property->id,
-                    'image' => $image->store('gallery', 'public'),
-                ]);
-            }
-        }
+        $this->propertyService->update(
+            $property,
+            $data,
+            $request->file('main_image'),
+            $request->file('gallery_images', [])
+        );
 
         return redirect()->route('property.edit', $property->id)->with('success', 'Property updated successfully');
     }

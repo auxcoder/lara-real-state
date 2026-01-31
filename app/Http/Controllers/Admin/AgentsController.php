@@ -10,6 +10,11 @@ use Validator;
 
 class AgentsController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Agents::class, 'agent');
+    }
+
     /**
      * Display a listing of the admin.agents.
      */

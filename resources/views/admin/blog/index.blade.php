@@ -2,62 +2,70 @@
 
 @section('content')
 <div class="container">
-    <h1>Blog</h1>
+    {{-- Page Header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Blogs</h1>
+        @can('create', App\Models\Blog::class)
+            <a href="{{ route('blogs.create') }}" class="btn btn-primary">Create New Blog</a>
+        @endcan
+    </div>
 
-    <a href="{{ route('blogs.create') }}" class="btn btn-primary mb-3">Create New Blog</a>
-
-    @if (session('status'))
-        <div class="alert alert-success">{{ session('status') }}</div>
+    {{-- Success Message --}}
+    @if (session('success') || session('status'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') ?? session('status') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
     @endif
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Blog Image</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($blogs  as $blog)
-                <tr>
-                    <td>{{ $blog->id }}</td>
-                    <td>{{ $blog->translate()->title }}</td>
-                    <td>
-                        <img src="{{ asset('storage/' . $blog->image) }}"
-                        alt="{{ $blog->image }}" width="100">
-                    </td>
-
-                    <td>
-                        <a href="{{ route('blogs.edit', $blog->id) }}"
-                            class="btn btn-warning btn-sm">Edit</a>
-
-                        <!-- Delete Button (will trigger SweetAlert) -->
-                        <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST"
-                            class="d-inline" onsubmit="return confirmDelete(event)">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6" class="text-center">No blog found.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-
-
+    {{-- Data Table --}}
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Image</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($blogs as $blog)
+                        <tr>
+                            <td>{{ $blog->id }}</td>
+                            <td>{{ $blog->translate()->title }}</td>
+                            <td>
+                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->translate()->title }}" width="80" class="img-thumbnail">
+                            </td>
+                            <td class="text-end">
+                                @can('update', $blog)
+                                    <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-sm btn-warning" title="Edit">Edit</a>
+                                @endcan
+                                
+                                @can('delete', $blog)
+                                    <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete">Delete</button>
+                                    </form>
+                                @endcan
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">No blogs found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script>
-    // SweetAlert confirmation for delete
     function confirmDelete(event) {
-        event.preventDefault(); // Prevent form submission
-
+        event.preventDefault();
         Swal.fire({
             title: 'Are you sure?',
             text: 'You won\'t be able to revert this!',
@@ -67,7 +75,7 @@
             cancelButtonText: 'No, cancel!',
         }).then((result) => {
             if (result.isConfirmed) {
-                event.target.submit(); // Submit the form if confirmed
+                event.target.submit();
             }
         });
     }

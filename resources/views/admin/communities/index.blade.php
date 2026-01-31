@@ -1,63 +1,68 @@
 @extends('admin.layout.master')
 
 @section('content')
-    <div class="container mt-5">
-        <h2 class="mb-4">Communities</h2>
+<div class="container">
+    {{-- Page Header --}}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Communities</h1>
+        @can('create', App\Models\Community::class)
+            <a href="{{ route('communities.create') }}" class="btn btn-primary">Add Community</a>
+        @endcan
+    </div>
 
-        @if (session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+    {{-- Success Message --}}
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    @endif
 
-        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#communityModal">Add Community</button>
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Feature Description</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($communities as $community)
+    {{-- Data Table --}}
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <td>{{ $community->name }}</td>
-                        <td>{{ $community->description }}</td>
-                        <td>{{ $community->feature_description }}</td>
-                        <td><img src="{{ asset('storage/' . $community->image) }}" alt="{{ $community->name }}" width="100">
-                        </td>
-                        <td>
-                            <button class="btn btn-warning" data-bs-toggle="modal"
-                                data-bs-target="#editModal{{ $community->id }}">Edit</button>
-                            <form action="{{ route('communities.destroy', $community) }}" method="POST"
-                                style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th class="text-end">Actions</th>
                     </tr>
-
-                    <!-- Edit Modal -->
-                    <div class="modal fade" id="editModal{{ $community->id }}" tabindex="-1"
-                        aria-labelledby="editModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <form action="{{ route('communities.update', $community) }}" method="POST"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="editModalLabel">Edit Community</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label">Name</label>
-                                            <input type="text" name="name" class="form-control"
+                </thead>
+                <tbody>
+                    @forelse($communities as $community)
+                        <tr>
+                            <td>{{ $community->name }}</td>
+                            <td>{{ Str::limit($community->description, 50) }}</td>
+                            <td>
+                                <img src="{{ asset('storage/' . $community->image) }}" alt="{{ $community->name }}" width="80" class="img-thumbnail">
+                            </td>
+                            <td class="text-end">
+                                @can('update', $community)
+                                    <a href="{{ route('communities.edit', $community->id) }}" class="btn btn-sm btn-warning" title="Edit">Edit</a>
+                                @endcan
+                                
+                                @can('delete', $community)
+                                    <form action="{{ route('communities.destroy', $community) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete">Delete</button>
+                                    </form>
+                                @endcan
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">No communities found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@endsection
                                                 value="{{ $community->name }}" required>
                                         </div>
                                         <div class="mb-3">

@@ -8,9 +8,6 @@ ul {
     color: white;
     list-style: none;
 }
-
-/* @import "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"; */
-/* @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"; */
 @import "https://fonts.googleapis.com/css?family=Raleway:100,600";
 @import "https://fonts.googleapis.com/css?family=Open+Sans:300";
 
@@ -83,7 +80,7 @@ ul {
         </div>
     </section>
 
-<section id="team" class="about-main team content-section pt-5">
+<section id="team" class="pt-5 about-main content-section team">
   <div class="container">
     <div class="row text-center">
       <div class="col-md-12">
@@ -99,7 +96,7 @@ ul {
 		   <a href="{{route('leadership.detail',$team->slug)}}">
             <div class="team-member">
               <figure>
-                <img src="{{ asset('/uploads/'.$team->image ) }}" alt="" class="img-fluid h-100">
+                <img src="{{ asset('/uploads/'.$team->image ) }}" alt="" class="h-100 img-fluid">
                 <!--<figcaption>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae asperiores mollitia.</p>
                   <ul>

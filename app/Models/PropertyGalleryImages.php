@@ -26,7 +26,10 @@ class PropertyGalleryImages extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'property_id',
+        'image',
+    ];
 
     public function agentproperty()
     {

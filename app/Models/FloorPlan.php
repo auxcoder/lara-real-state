@@ -16,5 +16,13 @@ class FloorPlan extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'developer_property_id',
+        'category',
+        'unit_type',
+        'floor_details',
+        'sizes',
+        'type',
+        'image',
+    ];
 }
