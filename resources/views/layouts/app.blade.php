@@ -13,10 +13,9 @@
     <div class="bg-light min-h-screen">
         @include('layouts.navigation')
 
-        <!-- FIX: clear tailwinf classes -->
         @if (isset($header))
         <header class="bg-white shadow">
-            <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="container py-3">
                 {{ $header }}
             </div>
         </header>

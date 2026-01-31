@@ -15,7 +15,7 @@ A modern real estate listing platform built with Laravel. This project powers a 
 ## Tech Stack
 
 - **Laravel 10** backend with Sanctum authentication
-- **Tailwind CSS** and **Vite** for the frontend
+- **Bootstrap 5** and **Vite** for the frontend
 - **MySQL** (or your preferred database)
 - **Docker** support via Laravel Sail (optional)
 

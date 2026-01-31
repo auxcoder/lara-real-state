@@ -116,6 +116,7 @@ Route::middleware(['auth'])->group(function () {
 // Route::get('property/backfill-slugs', [AgentPropertyController::class, 'backfillSlugs'])->name('property.backfill-slugs');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('slugify', [AgentPropertyController::class, 'slugify'])->name('slugify');
     Route::resource('roles', RoleController::class);
     Route::resource('permission', PermissionController::class);
     Route::resource('users', UserController::class);

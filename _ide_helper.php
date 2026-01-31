@@ -18171,7 +18171,25 @@ namespace Illuminate\Foundation\Http {
 
 namespace App\Http\Requests {
             /**
+     */        class ComplaintRequest {
+            }
+            /**
+     */        class ContactRequest {
+            }
+            /**
      */        class ProfileUpdateRequest {
+            }
+            /**
+     */        class StoreAgentPropertyRequest {
+            }
+            /**
+     */        class UpdateAgentPropertyRequest {
+            }
+            /**
+     */        class VendorRegistrationRequest {
+            }
+            /**
+     */        class VisitorSubmissionRequest {
             }
     }
 

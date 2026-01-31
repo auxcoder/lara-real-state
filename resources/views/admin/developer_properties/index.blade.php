@@ -2,25 +2,24 @@
 
 @section('content')
 <div class="container">
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Developer Properties</h1>
-        @can('create', App\Models\DeveloperProperty::class)
-            <a href="{{ route('developer_properties.create') }}" class="btn btn-primary">Add Developer Property</a>
-        @endcan
-    </div>
+    <x-admin.page-header
+        title="Developer Properties"
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Developer Properties']
+        ]"
+    />
 
-    {{-- Success Message --}}
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\DeveloperProperty::class)
+                <a href="{{ route('developer_properties.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Add Developer Property
+                </a>
+            @endcan
+        </x-slot>
 
-    {{-- Data Table --}}
-    <div class="card">
-        <div class="card-body">
+        <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -36,32 +35,26 @@
                             <td>{{ $property->name }}</td>
                             <td>{{ $property->developer->name ?? 'N/A' }}</td>
                             <td>
-                                <span class="badge bg-{{ $property->status == 'new' ? 'success' : 'secondary' }}">
-                                    {{ ucfirst($property->status) }}
+                                <span class="bg- badge{{ $property->status == 'new' ? 'success' : 'secondary' }}">
+                                    {{ ucfirst(str_replace('_', ' ', $property->status)) }}
                                 </span>
                             </td>
                             <td class="text-end">
-                                @can('update', $property)
-                                    <a href="{{ route('developer_properties.edit', $property->id) }}" class="btn btn-sm btn-warning" title="Edit">Edit</a>
-                                @endcan
-
-                                @can('delete', $property)
-                                    <form action="{{ route('developer_properties.destroy', $property->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete">Delete</button>
-                                    </form>
-                                @endcan
+                                <x-admin.crud-actions
+                                    :showRoute="route('developer_properties.show', $property->id)"
+                                    :editRoute="route('developer_properties.edit', $property->id)"
+                                    :deleteRoute="route('developer_properties.destroy', $property->id)"
+                                />
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="text-center text-muted py-4">No developer properties found</td>
+                            <td colspan="4" class="py-4 text-center text-muted">No developer properties found</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-    </div>
+    </x-admin.card>
 </div>
 @endsection

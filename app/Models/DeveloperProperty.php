@@ -112,7 +112,20 @@ class DeveloperProperty extends Model
 
     protected $casts = [
         'paymentPlan' => 'array',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
+
+    public function scopeAvailable($query)
+    {
+        return $query->where('status', 'available');
+    }
+
+    public function scopeByDeveloper($query, $developerId)
+    {
+        return $query->where('developer_id', $developerId);
+    }
 
     public function community()
     {

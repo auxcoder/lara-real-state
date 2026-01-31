@@ -29,7 +29,9 @@ class AgentPropertyController extends Controller
      */
     public function index()
     {
-        $properties = AgentProperty::get();
+        $properties = AgentProperty::with(['agent', 'translations'])
+            ->latest()
+            ->paginate(15);
         return view('admin.agent_properties.index', compact('properties'));
     }
 
@@ -170,4 +172,12 @@ class AgentPropertyController extends Controller
     //         'migrate_output' => $output,
     //     ]);
     // }
+
+    public function slugify(Request $request)
+    {
+        $title = $request->input('title.en', '');
+        $slug = Str::slug($title);
+        
+        return response('<input type="text" class="form-control" name="slug" id="slug" value="' . e($slug) . '" placeholder="e.g. marina-view-2br-apartment"><small class="text-muted">Auto-generated from English title; you can edit.</small>');
+    }
 }

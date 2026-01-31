@@ -2,25 +2,24 @@
 
 @section('content')
 <div class="container">
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Agents</h1>
-        @can('create', App\Models\Agents::class)
-            <a href="{{ route('agents.create') }}" class="btn btn-primary">Add New Agent</a>
-        @endcan
-    </div>
+    <x-admin.page-header 
+        title="Agents" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Agents']
+        ]" 
+    />
 
-    {{-- Success Message --}}
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\Agents::class)
+                <a href="{{ route('agents.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Add New Agent
+                </a>
+            @endcan
+        </x-slot>
 
-    {{-- Data Table --}}
-    <div class="card">
-        <div class="card-body">
+        <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -45,21 +44,11 @@
                                 </span>
                             </td>
                             <td class="text-end">
-                                @can('view', $agent)
-                                    <a href="{{ route('agents.show', $agent->id) }}" class="btn btn-sm btn-info" title="View">View</a>
-                                @endcan
-                                
-                                @can('update', $agent)
-                                    <a href="{{ route('agents.edit', $agent->id) }}" class="btn btn-sm btn-warning" title="Edit">Edit</a>
-                                @endcan
-                                
-                                @can('delete', $agent)
-                                    <form action="{{ route('agents.destroy', $agent->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete">Delete</button>
-                                    </form>
-                                @endcan
+                                <x-admin.crud-actions 
+                                    :showRoute="route('agents.show', $agent->id)"
+                                    :editRoute="route('agents.edit', $agent->id)"
+                                    :deleteRoute="route('agents.destroy', $agent->id)"
+                                />
                             </td>
                         </tr>
                     @empty
@@ -69,7 +58,10 @@
                     @endforelse
                 </tbody>
             </table>
+            <div class="mt-3">
+                {{ $agents->links() }}
+            </div>
         </div>
-    </div>
+    </x-admin.card>
 </div>
 @endsection

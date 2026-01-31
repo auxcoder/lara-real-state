@@ -13,10 +13,7 @@
 
     <!-- App favicon -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico">
-    <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
-
-    <!-- Icons -->
-    <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    @vite(['resources/css/admin.scss', 'resources/js/admin.js'])
 </head>
 
 <body class="bg-color">
@@ -131,16 +128,8 @@
     <!-- END wrapper -->
 
     <!-- Vendor -->
-    {{-- <script src="/assets/libs/jquery/jquery.min.js"></script> --}}
-    {{-- <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script> --}}
     <script src="/assets/libs/simplebar/simplebar.min.js"></script>
     <script src="/assets/libs/node-waves/waves.min.js"></script>
-    {{-- <script src="/assets/libs/waypoints/lib/jquery.waypoints.min.js"></script> --}}
-    {{-- <script src="/assets/libs/jquery.counterup/jquery.counterup.min.js"></script> --}}
-    <script src="/assets/libs/feather-icons/feather.min.js"></script>
-
-    <!-- App js-->
-    {{-- <script src="/assets/js/app.js"></script> --}}
 
 </body>
 

@@ -43,6 +43,22 @@ class Blog extends Model
         'target_audience',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
+
+    public function scopePublished($query)
+    {
+        return $query->latest();
+    }
+
+    public function scopeRecent($query, $limit = 5)
+    {
+        return $query->latest()->limit($limit);
+    }
+
     public function translations()
     {
         return $this->hasMany(BlogTranslation::class);

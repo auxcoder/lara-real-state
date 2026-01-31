@@ -1,0 +1,22 @@
+// Bootstrap Variable Overrides
+// Customize Bootstrap defaults here before importing Bootstrap
+
+// Body
+$body-bg: #fff;
+$body-color: #212529;
+
+// Form Labels
+// Note: Bootstrap doesn't have a direct $form-label variable
+// You can add custom styles after Bootstrap import
+
+// Colors
+$primary: #205154;
+$secondary: #222222;
+$success: #1e8449;
+$info: #49c3e9;
+$warning: #ff9d49;
+$danger: #d0362d;
+$light: #eaeff2;
+
+// Spacing
+$spacer: 1.25rem;

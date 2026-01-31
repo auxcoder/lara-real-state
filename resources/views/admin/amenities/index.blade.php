@@ -2,47 +2,63 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>Amenity List</h1>
+    <x-admin.page-header
+        title="Amenities"
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Amenities']
+        ]"
+    />
 
-            <a href="{{ route('amenity.create') }}" class="btn btn-primary mb-3">Add Amenity</a>
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\Amenity::class)
+                <a href="{{ route('amenity.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Add Amenity
+                </a>
+            @endcan
+        </x-slot>
 
-            <table class="table table-bordered">
+        <div class="table-responsive">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Name</th>
                         <th>Logo</th>
                         <th>Description</th>
-                        <th>Actions</th>
+                        <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($Amenity as $amenity)
+                    @forelse ($Amenity as $amenity)
                         <tr>
                             <td>{{ $amenity->id }}</td>
                             <td>{{ $amenity->name }}</td>
-                            <td><img src="{{ asset('storage/' . $amenity->logo) }}" width="50" height="50"></td>
-                            <td>{{ $amenity->description }}</td>
-                            <td>
-                                <a href="{{ route('Amenity.edit', $amenity->id) }}"
-                                    class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('Amenity.destroy', $amenity->id) }}" method="POST"
-                                    style="display:inline-block;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Are you sure?')">Delete</button>
-                                </form>
-                                <a href="{{ route('Amenity.show', $amenity->id) }}"
-                                    class="btn btn-info btn-sm">View</a>
+                            <td><img src="{{ asset('storage/' . $amenity->logo) }}" width="50" height="50" class="rounded"></td>
+                            <td>{{ Str::limit($amenity->description, 50) }}</td>
+                            <td class="text-end">
+                                <x-admin.crud-actions
+                                    :showRoute="route('Amenity.show', $amenity->id)"
+                                    :editRoute="route('Amenity.edit', $amenity->id)"
+                                    :deleteRoute="route('Amenity.destroy', $amenity->id)"
+                                />
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5" class="py-4 text-center text-muted">No amenities found</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
+
+            @if($Amenity->hasPages())
+                <div class="mt-3">
+                    {{ $Amenity->links() }}
+                </div>
+            @endif
         </div>
-    </div>
+    </x-admin.card>
 </div>
 @endsection

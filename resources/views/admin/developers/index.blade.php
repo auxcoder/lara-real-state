@@ -2,25 +2,24 @@
 
 @section('content')
 <div class="container">
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Developers</h1>
-        @can('create', App\Models\Developer::class)
-            <a href="{{ route('developers.create') }}" class="btn btn-primary">Add Developer</a>
-        @endcan
-    </div>
+    <x-admin.page-header 
+        title="Developers" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Developers']
+        ]" 
+    />
 
-    {{-- Success Message --}}
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\Developer::class)
+                <a href="{{ route('developers.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Add Developer
+                </a>
+            @endcan
+        </x-slot>
 
-    {{-- Data Table --}}
-    <div class="card">
-        <div class="card-body">
+        <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -40,7 +39,7 @@
                             <td>{{ $developer->phone }}</td>
                             <td>
                                 @if ($developer->logo)
-                                    <img src="{{ asset('storage/' . $developer->logo) }}" alt="{{ $developer->name }}" width="50" class="img-thumbnail">
+                                    <img src="{{ asset('storage/' . $developer->logo) }}" alt="{{ $developer->name }}" width="50" class="rounded">
                                 @else
                                     <span class="text-muted">No Logo</span>
                                 @endif
@@ -51,21 +50,11 @@
                                 </span>
                             </td>
                             <td class="text-end">
-                                @can('view', $developer)
-                                    <a href="{{ route('developers.show', $developer->id) }}" class="btn btn-sm btn-info" title="View">View</a>
-                                @endcan
-
-                                @can('update', $developer)
-                                    <a href="{{ route('developers.edit', $developer->id) }}" class="btn btn-sm btn-warning" title="Edit">Edit</a>
-                                @endcan
-
-                                @can('delete', $developer)
-                                    <form action="{{ route('developers.destroy', $developer->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete">Delete</button>
-                                    </form>
-                                @endcan
+                                <x-admin.crud-actions 
+                                    :showRoute="route('developers.show', $developer->id)"
+                                    :editRoute="route('developers.edit', $developer->id)"
+                                    :deleteRoute="route('developers.destroy', $developer->id)"
+                                />
                             </td>
                         </tr>
                     @empty
@@ -76,6 +65,10 @@
                 </tbody>
             </table>
         </div>
-    </div>
+        
+        <div class="mt-3">
+            {{ $developers->links() }}
+        </div>
+    </x-admin.card>
 </div>
 @endsection

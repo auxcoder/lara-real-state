@@ -46,6 +46,12 @@ class Community extends Model
         'image',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
+
     protected $table = 'communities';
 
     public function amenities()
