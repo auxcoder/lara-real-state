@@ -2,22 +2,16 @@
 
 @section('content')
 <div class="container">
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Visitor Submissions</h1>
-    </div>
+    <x-admin.page-header 
+        title="Visitor Submissions" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Visitor Submissions']
+        ]" 
+    />
 
-    {{-- Success Message --}}
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
-
-    {{-- Data Table --}}
-    <div class="card">
-        <div class="card-body">
+    <x-admin.card>
+        <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -28,7 +22,7 @@
                         <th>Nationality</th>
                         <th>Rent For</th>
                         <th>Submitted</th>
-                        <th class="text-end">Action</th>
+                        <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,21 +36,26 @@
                             <td>{{ $submission->payment_for_rent }}</td>
                             <td>{{ $submission->created_at->format('M d, Y H:i') }}</td>
                             <td class="text-end">
-                                <a class="btn btn-primary btn-sm" href="{{ route('visitor-submissions.show', $submission) }}">View</a>
+                                <a href="{{ route('visitor-submissions.show', $submission) }}" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-eye me-1"></i>View
+                                </a>
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center text-muted py-4">No submissions yet.</td>
+                            <td colspan="8" class="text-center text-muted py-4">No submissions found</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
+        </div>
+        
+        @if($submissions->hasPages())
             <div class="mt-3">
                 {{ $submissions->links() }}
             </div>
-        </div>
-    </div>
+        @endif
+    </x-admin.card>
 </div>
 @endsection
 

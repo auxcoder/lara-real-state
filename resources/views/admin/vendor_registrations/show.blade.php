@@ -1,97 +1,103 @@
-@php
-    use Illuminate\Support\Facades\Storage;
-@endphp
-
 @extends('admin.layout.master')
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center page-title-box">
-                <h4 class="page-title">Vendor Registration #{{ $registration->id }}</h4>
-                <a href="{{ route('vendor-registrations.index') }}" class="btn btn-secondary btn-sm">Back to list</a>
-            </div>
-        </div>
-    </div>
+<div class="container">
+    <x-admin.page-header 
+        title="Vendor Registration Details" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Vendor Registrations', 'url' => route('vendor-registrations.index')],
+            ['label' => 'View']
+        ]" 
+    />
 
     <div class="row">
         <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="mb-3">Details</h5>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">Name</div>
-                        <div class="col-sm-8">{{ $registration->name }}</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">Email</div>
-                        <div class="col-sm-8">{{ $registration->email }}</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">Phone Number</div>
-                        <div class="col-sm-8">{{ $registration->phone_number }}</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">Contact Person</div>
-                        <div class="col-sm-8">{{ $registration->contact_person_name }}</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">Office Address</div>
-                        <div class="col-sm-8">{{ $registration->office_address }}</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">Bank Account No.</div>
-                        <div class="col-sm-8">{{ $registration->bank_account_no }}</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">IBAN Letter</div>
-                        <div class="col-sm-8">{{ $registration->iban_letter }}</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">VAT Registration No.</div>
-                        <div class="col-sm-8">{{ $registration->vat_registration_no }}</div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-sm-4 fw-bold">Submitted</div>
-                        <div class="col-sm-8">{{ $registration->created_at->format('Y-m-d H:i') }}</div>
-                    </div>
+            <x-admin.card title="Registration Details">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th width="200">Name:</th>
+                            <td>{{ $registration->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ $registration->email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Phone Number:</th>
+                            <td>{{ $registration->phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Contact Person:</th>
+                            <td>{{ $registration->contact_person_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Office Address:</th>
+                            <td>{{ $registration->office_address }}</td>
+                        </tr>
+                        <tr>
+                            <th>Bank Account No.:</th>
+                            <td>{{ $registration->bank_account_no }}</td>
+                        </tr>
+                        <tr>
+                            <th>IBAN Letter:</th>
+                            <td>{{ $registration->iban_letter }}</td>
+                        </tr>
+                        <tr>
+                            <th>VAT Registration No.:</th>
+                            <td>{{ $registration->vat_registration_no }}</td>
+                        </tr>
+                        <tr>
+                            <th>Submitted:</th>
+                            <td>{{ $registration->created_at->format('M d, Y H:i') }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="mt-3">
+                    <a href="{{ route('vendor-registrations.index') }}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left me-1"></i>Back to List
+                    </a>
                 </div>
-            </div>
+            </x-admin.card>
         </div>
 
         <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="mb-3">Documents</h5>
-                    <ul class="mb-0 list-unstyled">
-                        <li class="mb-2">
-                            Trade License:
-                            @if ($registration->trade_license)
-                                <a target="_blank" href="{{ Storage::url($registration->trade_license) }}">View</a>
-                            @else
-                                N/A
-                            @endif
-                        </li>
-                        <li class="mb-2">
-                            Emirates ID:
-                            @if ($registration->emirates_id)
-                                <a target="_blank" href="{{ Storage::url($registration->emirates_id) }}">View</a>
-                            @else
-                                N/A
-                            @endif
-                        </li>
-                        <li class="mb-2">
-                            Passport:
-                            @if ($registration->passport)
-                                <a target="_blank" href="{{ Storage::url($registration->passport) }}">View</a>
-                            @else
-                                N/A
-                            @endif
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <x-admin.card title="Documents">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <strong>Trade License:</strong>
+                        @if ($registration->trade_license)
+                            <a target="_blank" href="{{ Storage::url($registration->trade_license) }}" class="btn btn-link btn-sm p-0">
+                                <i class="bi bi-file-earmark-pdf me-1"></i>View
+                            </a>
+                        @else
+                            <span class="text-muted">N/A</span>
+                        @endif
+                    </li>
+                    <li class="mb-2">
+                        <strong>Emirates ID:</strong>
+                        @if ($registration->emirates_id)
+                            <a target="_blank" href="{{ Storage::url($registration->emirates_id) }}" class="btn btn-link btn-sm p-0">
+                                <i class="bi bi-file-earmark-pdf me-1"></i>View
+                            </a>
+                        @else
+                            <span class="text-muted">N/A</span>
+                        @endif
+                    </li>
+                    <li class="mb-2">
+                        <strong>Passport:</strong>
+                        @if ($registration->passport)
+                            <a target="_blank" href="{{ Storage::url($registration->passport) }}" class="btn btn-link btn-sm p-0">
+                                <i class="bi bi-file-earmark-pdf me-1"></i>View
+                            </a>
+                        @else
+                            <span class="text-muted">N/A</span>
+                        @endif
+                    </li>
+                </ul>
+            </x-admin.card>
         </div>
     </div>
 </div>

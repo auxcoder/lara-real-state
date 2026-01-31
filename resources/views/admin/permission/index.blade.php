@@ -1,92 +1,54 @@
 @extends('admin.layout.master')
 
 @section('content')
-<div class="content-page">
-    <div class="content">
+<div class="container">
+    <x-admin.page-header 
+        title="Permissions" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Permissions']
+        ]" 
+    />
 
-        <!-- Start Content-->
-        <div class="container-xxl">
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\Permission::class)
+                <a href="{{ route('permission.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Add Permission
+                </a>
+            @endcan
+        </x-slot>
 
-            <div class="d-flex flex-column flex-sm-row align-items-sm-center py-3">
-                <div class="flex-grow-1">
-                    <h4 class="m-0 fs-18 fw-semibold">List</h4>
-                </div>
-
-                <div class="text-end">
-                    <ol class="m-0 py-0 breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Tables</a></li>
-                        <li class="active breadcrumb-item">List</li>
-                    </ol>
-                </div>
-            </div>
-
-
-            @if(Session::has('error'))
-            <p class="alert alert-info">{{ Session::get('error') }}</p>
-            @endif
-
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success">
-                    <p>{{ $message }}</p>
-                </div>
-            @endif
-
-            <!-- Datatables  -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h5 class="mb-0 card-title">Permission List</h5>
-                        <a href="/admin/permission/create" class="mt-3 btn btn-primary">Create</a>
-
-                        </div><!-- end card header -->
-
-                        <div class="card-body">
-                            <table id="datatable" class="dt-responsive nowrap table table-bordered table-responsive">
-                                <thead>
-                                <tr>
-                                <th>S.No</th>
-                                <th>Permissions</th>
-                                <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $id = 1
-                                    @endphp
-                                    @foreach ($permissions as $permission)
-                                    <tr>
-                                        <td>{{ $id++ }}</td>
-                                        <td>{{ $permission->name }}</td>
-                                        <td>
-                                            <a class="btn btn-primary" href="{{ route('permission.edit', $permission->id) }}">Edit</a>
-                                        </td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger"
-                                                    hx-delete="{{ route('permission.destroy', $permission->id) }}"
-                                                    hx-confirm="Delete permission {{ $permission->name }}?"
-                                                    hx-target="closest tr"
-                                                    hx-swap="outerHTML swap:1s">
-                                                Delete
-                                            </button>
-                                        </td>
-
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            
-                            <div class="mt-3">
-                                {{ $permissions->links() }}
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($permissions as $permission)
+                        <tr>
+                            <td>{{ $permission->id }}</td>
+                            <td>{{ $permission->name }}</td>
+                            <td class="text-end">
+                                <x-admin.crud-actions 
+                                    :showRoute="route('permission.show', $permission->id)"
+                                    :editRoute="route('permission.edit', $permission->id)"
+                                    :deleteRoute="route('permission.destroy', $permission->id)"
+                                />
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="3" class="text-center text-muted py-4">No permissions found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
-    </div>
+    </x-admin.card>
 </div>
 @endsection

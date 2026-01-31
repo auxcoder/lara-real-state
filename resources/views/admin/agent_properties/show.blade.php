@@ -2,78 +2,130 @@
 
 @section('content')
 <div class="container">
-    <h1>Property Details</h1>
+    <x-admin.page-header 
+        title="Property Details" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Properties', 'url' => route('property.index')],
+            ['label' => 'View']
+        ]" 
+    />
 
-    <hr>
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('update', $property)
+                <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary btn-sm">
+                    <i class="bi bi-pencil me-1"></i>Edit
+                </a>
+            @endcan
+        </x-slot>
 
-    @php
-        $locales = ['en' => 'English', 'ar' => 'Arabic'];
-    @endphp
+        @php
+            $locales = ['en' => 'English', 'ar' => 'Arabic'];
+        @endphp
 
-    @foreach ($locales as $locale => $label)
-        <div class="mb-4">
-            <h3>{{ $label }}</h3>
-
-            <div class="mb-2">
-                <strong>Title ({{ strtoupper($locale) }}):</strong>
-                <p>{{ $property->translate($locale)->title ?? '—' }}</p>
-            </div>
-
-            <div class="mb-2">
-                <strong>Description ({{ strtoupper($locale) }}):</strong>
-                <p>{!! $property->translate($locale)->description ?? '—' !!}</p>
-            </div>
-        </div>
-    @endforeach
-
-    <hr>
-
-    <div class="row">
-        <div class="col-md-6">
-            <div class="mb-2"><strong>Location:</strong> {{ $property->location }}</div>
-            <div class="mb-2">
-                <strong>Price:</strong>
-                @if (!is_null($property->price))
-                    AED {{ number_format($property->price, 2) }}
-                @else
-                    {{ __('properties.contact_for_price') }}
-                @endif
-            </div>
-            <div class="mb-2"><strong>Area:</strong> {{ $property->area }} sq meter</div>
-            <div class="mb-2"><strong>Bedrooms:</strong> {{ $property->bedrooms ?? 'N/A' }}</div>
-            <div class="mb-2"><strong>Bathrooms:</strong> {{ $property->bathrooms ?? 'N/A' }}</div>
-            <div class="mb-2"><strong>Property Type:</strong> {{ $property->property_type }}</div>
-            <div class="mb-2"><strong>Transaction Type:</strong> {{ $property->transaction_type }}</div>
-            <div class="mb-2"><strong>Status:</strong> {{ ucfirst($property->status) }}</div>
-        </div>
-
-        <div class="col-md-6">
-            @if ($property->main_image)
-                <div class="mb-3">
-                    <strong>Main Image:</strong><br>
-                    <img src="{{ asset('storage/' . $property->main_image) }}" alt="Main Image"
-                        class="img-fluid rounded shadow" style="max-height: 300px;">
+        @foreach ($locales as $locale => $label)
+            <div class="mb-4">
+                <h5 class="text-primary">{{ $label }}</h5>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <th width="150">Title:</th>
+                                    <td>{{ $property->translate($locale)->title ?? '—' }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description:</th>
+                                    <td>{!! $property->translate($locale)->description ?? '—' !!}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            @endif
+            </div>
+        @endforeach
 
-            @if ($property->propertygallery && $property->propertygallery->count())
-                <div class="mb-3">
-                    <strong>Gallery Images:</strong>
-                    <div class="d-flex flex-wrap gap-2 mt-2">
-                        @if (isset($property->propertygallery))
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th width="150">Location:</th>
+                            <td>{{ $property->location }}</td>
+                        </tr>
+                        <tr>
+                            <th>Price:</th>
+                            <td>
+                                @if (!is_null($property->price))
+                                    AED {{ number_format($property->price, 2) }}
+                                @else
+                                    {{ __('properties.contact_for_price') }}
+                                @endif
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Area:</th>
+                            <td>{{ $property->area }} sq meter</td>
+                        </tr>
+                        <tr>
+                            <th>Bedrooms:</th>
+                            <td>{{ $property->bedrooms ?? 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Bathrooms:</th>
+                            <td>{{ $property->bathrooms ?? 'N/A' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Property Type:</th>
+                            <td>{{ $property->property_type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Transaction Type:</th>
+                            <td>{{ $property->transaction_type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Status:</th>
+                            <td>
+                                <span class="badge bg-{{ $property->status === 'available' ? 'success' : 'secondary' }}">
+                                    {{ ucfirst($property->status) }}
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                @if ($property->main_image)
+                    <div class="mb-3">
+                        <h6>Main Image:</h6>
+                        <img src="{{ asset('storage/' . $property->main_image) }}" alt="Main Image"
+                            class="img-fluid rounded shadow" style="max-height: 300px;">
+                    </div>
+                @endif
+
+                @if ($property->propertygallery && $property->propertygallery->count())
+                    <div class="mb-3">
+                        <h6>Gallery Images:</h6>
+                        <div class="d-flex flex-wrap gap-2 mt-2">
                             @foreach ($property->propertygallery as $image)
                                 <img src="{{ asset('storage/' . $image->image) }}" alt="Gallery Image"
                                     class="img-thumbnail" style="height: 100px; object-fit: cover;">
                             @endforeach
-                        @endif
+                        </div>
                     </div>
-                </div>
-            @endif
+                @endif
+            </div>
         </div>
-    </div>
 
-    <hr>
-
-    <a href="{{ route('property.index') }}" class="btn btn-secondary mt-3">Back</a>
+        <div class="mt-3">
+            <a href="{{ route('property.index') }}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-1"></i>Back to List
+            </a>
+        </div>
+    </x-admin.card>
 </div>
 @endsection

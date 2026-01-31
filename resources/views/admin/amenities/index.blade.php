@@ -2,25 +2,24 @@
 
 @section('content')
 <div class="container">
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Amenities</h1>
-        @can('create', App\Models\Amenity::class)
-            <a href="{{ route('amenity.create') }}" class="btn btn-primary">Add Amenity</a>
-        @endcan
-    </div>
+    <x-admin.page-header 
+        title="Amenities" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Amenities']
+        ]" 
+    />
 
-    {{-- Success Message --}}
-    @if (session('success'))
-        <div class="alert alert-dismissible alert-success fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\Amenity::class)
+                <a href="{{ route('amenity.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Add Amenity
+                </a>
+            @endcan
+        </x-slot>
 
-    {{-- Data Table --}}
-    <div class="card">
-        <div class="card-body">
+        <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -32,22 +31,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($Amenity as $amenity)
+                    @forelse ($Amenity as $amenity)
                         <tr>
                             <td>{{ $amenity->id }}</td>
                             <td>{{ $amenity->name }}</td>
-                            <td><img src="{{ asset('storage/' . $amenity->logo) }}" width="50" height="50"></td>
+                            <td><img src="{{ asset('storage/' . $amenity->logo) }}" width="50" height="50" class="rounded"></td>
                             <td>{{ Str::limit($amenity->description, 50) }}</td>
                             <td class="text-end">
-                                @can('view', $amenity)
-                                    <a href="{{ route('Amenity.show', $amenity->id) }}" class="btn btn-info btn-sm">View</a>
-                                @endcan
-                                @can('update', $amenity)
-                                    <a href="{{ route('Amenity.edit', $amenity->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                @endcan
-                                @can('delete', $amenity)
-                                    <button type="button" class="btn btn-danger btn-sm"
-                                            hx-delete="{{ route('Amenity.destroy', $amenity->id) }}"
+                                <x-admin.crud-actions 
+                                    :showRoute="route('Amenity.show', $amenity->id)"
+                                    :editRoute="route('Amenity.edit', $amenity->id)"
+                                    :deleteRoute="route('Amenity.destroy', $amenity->id)"
+                                />
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">No amenities found</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
+    </x-admin.card>
+</div>
+@endsection
                                             hx-confirm="Delete {{ $amenity->name }}?"
                                             hx-target="closest tr"
                                             hx-swap="outerHTML swap:1s">

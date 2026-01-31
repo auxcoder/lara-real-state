@@ -2,13 +2,15 @@
 
 @section('content')
 <div class="container">
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Locations</h1>
+    <x-admin.page-header 
+        title="Locations" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Locations']
+        ]">
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add Location</button>
-    </div>
+    </x-admin.page-header>
 
-    {{-- Success Message --}}
     @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show">
             {{ session('success') }}
@@ -16,29 +18,26 @@
         </div>
     @endif
 
-    {{-- Data Table --}}
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th class="text-end">Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="locationTable">
-                    @foreach ($Locations as $location)
-                        @include('admin.location._row', ['location' => $location])
-                    @endforeach
-                </tbody>
-            </table>
-            <div class="mt-3">
-                {{ $Locations->links() }}
-            </div>
+    <x-admin.card>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="locationTable">
+                @foreach ($Locations as $location)
+                    @include('admin.location._row', ['location' => $location])
+                @endforeach
+            </tbody>
+        </table>
+        <div class="mt-3">
+            {{ $Locations->links() }}
         </div>
-    </div>
+    </x-admin.card>
 </div>
 
 <!-- Create Modal -->

@@ -2,25 +2,24 @@
 
 @section('content')
 <div class="container">
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Blogs</h1>
-        @can('create', App\Models\Blog::class)
-            <a href="{{ route('blogs.create') }}" class="btn btn-primary">Create New Blog</a>
-        @endcan
-    </div>
+    <x-admin.page-header 
+        title="Blogs" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Blogs']
+        ]" 
+    />
 
-    {{-- Success Message --}}
-    @if (session('success') || session('status'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') ?? session('status') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
+    <x-admin.card>
+        <x-slot name="actions">
+            @can('create', App\Models\Blog::class)
+                <a href="{{ route('blogs.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle me-1"></i>Create New Blog
+                </a>
+            @endcan
+        </x-slot>
 
-    {{-- Data Table --}}
-    <div class="card">
-        <div class="card-body">
+        <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -36,20 +35,13 @@
                             <td>{{ $blog->id }}</td>
                             <td>{{ $blog->translate()->title }}</td>
                             <td>
-                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->translate()->title }}" width="80" class="img-thumbnail">
+                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->translate()->title }}" width="80" class="rounded">
                             </td>
                             <td class="text-end">
-                                @can('update', $blog)
-                                    <a href="{{ route('blogs.edit', $blog->id) }}" class="btn btn-sm btn-warning" title="Edit">Edit</a>
-                                @endcan
-                                
-                                @can('delete', $blog)
-                                    <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(event)">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete">Delete</button>
-                                    </form>
-                                @endcan
+                                <x-admin.crud-actions 
+                                    :editRoute="route('blogs.edit', $blog->id)"
+                                    :deleteRoute="route('blogs.destroy', $blog->id)"
+                                />
                             </td>
                         </tr>
                     @empty
@@ -60,15 +52,15 @@
                 </tbody>
             </table>
             
-            <div class="mt-3">
-                {{ $blogs->links() }}
-            </div>
+            @if($blogs->hasPages())
+                <div class="mt-3">
+                    {{ $blogs->links() }}
+                </div>
+            @endif
         </div>
-    </div>
+    </x-admin.card>
 </div>
-
-<script>
-    function confirmDelete(event) {
+@endsection
         event.preventDefault();
         Swal.fire({
             title: 'Are you sure?',

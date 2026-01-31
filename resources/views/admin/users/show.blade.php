@@ -1,40 +1,57 @@
 @extends('admin.layout.master')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2> Show User</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('users.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
+<div class="container">
+    <x-admin.page-header 
+        title="User Details" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Users', 'url' => route('users.index')],
+            ['label' => 'View']
+        ]" 
+    />
 
+    <x-admin.card>
+        <x-slot name="actions">
+            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary btn-sm">
+                <i class="bi bi-pencil me-1"></i>Edit
+            </a>
+        </x-slot>
 
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong> {{ $user->name }}
+        <div class="row">
+            <div class="col-md-8">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th width="200">Name:</th>
+                            <td>{{ $user->name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td>{{ $user->email }}</td>
+                        </tr>
+                        <tr>
+                            <th>Roles:</th>
+                            <td>
+                                @if($user->getRoleNames()->isNotEmpty())
+                                    @foreach($user->getRoleNames() as $role)
+                                        <span class="badge bg-success text-capitalize">{{ $role }}</span>
+                                    @endforeach
+                                @else
+                                    <span class="text-muted">No roles assigned</span>
+                                @endif
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Email:</strong> {{ $user->email }}
+        <div class="mt-3">
+            <a href="{{ route('users.index') }}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-1"></i>Back to List
+            </a>
         </div>
-    </div>
-
-    {{-- <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Roles:</strong>
-            @if(!empty($user->getRoleNames()))
-                @foreach($user->getRoleNames() as $v)
-                    <label class="badge badge-success">{{ $v }}</label>
-                @endforeach
-            @endif
-        </div>
-    </div> --}}
+    </x-admin.card>
 </div>
 @endsection

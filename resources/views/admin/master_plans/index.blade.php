@@ -2,43 +2,46 @@
 
 @section('content')
 <div class="container">
-    {{-- Page Header --}}
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Master Plans</h1>
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">Add Master Plan</button>
-    </div>
+    <x-admin.page-header 
+        title="Master Plans" 
+        :breadcrumbs="[
+            ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
+            ['label' => 'Master Plans']
+        ]" 
+    />
 
-    {{-- Success Message --}}
-    @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    @endif
+    <x-admin.card>
+        <x-slot name="actions">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                <i class="bi bi-plus-circle me-1"></i>Add Master Plan
+            </button>
+        </x-slot>
 
-    {{-- Data Table --}}
-    <div class="card">
-        <div class="card-body">
+        <div class="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Image</th>
                         <th class="text-end">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="masterPlanTable">
-                    @foreach ($masterPlans as $masterPlan)
+                    @forelse ($masterPlans as $masterPlan)
                         @include('admin.master_plans._row', ['masterPlan' => $masterPlan])
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">No master plans found</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
             <div class="mt-3">
                 {{ $masterPlans->links() }}
             </div>
         </div>
-    </div>
+    </x-admin.card>
 </div>
 
 <!-- Create Modal -->
@@ -52,28 +55,41 @@
                   enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Master Plan</h5>
+                    <h5 class="modal-title">
+                        <i class="bi bi-plus-circle me-2"></i>Add New Master Plan
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" required>
+                        @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
-                        <input type="file" class="form-control" name="image" required accept="image/*">
+                        <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" required accept="image/*">
+                        @error('image')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" name="description" required>
+                        <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" id="description" required>
+                        @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-1"></i>Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
                         <span class="htmx-indicator spinner-border spinner-border-sm me-1" role="status"></span>
-                        Save
+                        <i class="bi bi-check-circle me-1"></i>Save
                     </button>
                 </div>
             </form>
@@ -91,17 +107,21 @@
                 @csrf
                 @method('PUT')
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Master Plan</h5>
+                    <h5 class="modal-title">
+                        <i class="bi bi-pencil me-2"></i>Edit Master Plan
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="editModalBody">
                     <!-- Content loaded via HTMX -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-1"></i>Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
                         <span class="htmx-indicator spinner-border spinner-border-sm me-1" role="status"></span>
-                        Update
+                        <i class="bi bi-check-circle me-1"></i>Update
                     </button>
                 </div>
             </form>
