@@ -29,7 +29,7 @@
                 <h5 class="text-primary">{{ $label }}</h5>
                 <div class="row">
                     <div class="col-md-6">
-                        <table class="table table-borderless">
+                        <table class="table align-middle table-borderless">
                             <tbody>
                                 <tr>
                                     <th width="150">Title:</th>
@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <table class="table table-borderless">
+                <table class="table align-middle table-borderless">
                     <tbody>
                         <tr>
                             <th width="150">Location:</th>

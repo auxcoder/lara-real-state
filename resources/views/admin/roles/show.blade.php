@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-md-8">
-                <table class="table table-borderless">
+                <table class="table align-middle table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Name:</th>

@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-lg-8">
             <x-admin.card title="Personal Details">
-                <table class="table table-borderless">
+                <table class="table align-middle table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Name:</th>
@@ -45,7 +45,7 @@
             </x-admin.card>
 
             <x-admin.card title="Property Preferences" class="mt-3">
-                <table class="table table-borderless">
+                <table class="table align-middle table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Property Type:</th>

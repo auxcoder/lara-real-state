@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-lg-8">
             <x-admin.card title="Registration Details">
-                <table class="table table-borderless">
+                <table class="table align-middle table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Name:</th>
