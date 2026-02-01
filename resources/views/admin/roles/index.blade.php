@@ -12,7 +12,7 @@
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\Role::class)
+            @can('create roles')
                 <a href="{{ route('roles.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Add Role
                 </a>

@@ -13,7 +13,7 @@
 
     <x-admin.card class="mb-4">
         <x-slot name="actions">
-            @can('update', $property)
+            @can('edit agent properties')
                 <a href="{{ route('property.edit', $property->id) }}" class="btn btn-primary btn-sm">
                     <i class="bi bi-pencil me-1"></i>Edit
                 </a>

@@ -12,7 +12,7 @@
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\Permission::class)
+            @can('create permissions')
                 <a href="{{ route('permission.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Add Permission
                 </a>

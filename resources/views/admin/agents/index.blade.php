@@ -12,7 +12,7 @@
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\Agents::class)
+            @can('create agents')
                 <a href="{{ route('agents.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Add New Agent
                 </a>

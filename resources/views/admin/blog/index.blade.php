@@ -12,7 +12,7 @@
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\Blog::class)
+            @can('create blogs')
                 <a href="{{ route('blogs.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Create New Blog
                 </a>
