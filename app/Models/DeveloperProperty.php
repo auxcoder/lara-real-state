@@ -47,6 +47,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $master_plans_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PropertyType> $propertyTypes
  * @property-read int|null $property_types_count
+ * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty available()
+ * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty byDeveloper($developerId)
  * @method static \Database\Factories\DeveloperPropertyFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DeveloperProperty newQuery()

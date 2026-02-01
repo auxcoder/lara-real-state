@@ -27,6 +27,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $propertygallery_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PropertyTranslation> $translations
  * @property-read int|null $translations_count
+ * @method static \Illuminate\Database\Eloquent\Builder|AgentProperty available()
+ * @method static \Illuminate\Database\Eloquent\Builder|AgentProperty byLocation($location)
+ * @method static \Illuminate\Database\Eloquent\Builder|AgentProperty byType($type)
+ * @method static \Illuminate\Database\Eloquent\Builder|AgentProperty featured()
  * @method static \Illuminate\Database\Eloquent\Builder|AgentProperty newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AgentProperty newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AgentProperty onlyTrashed()

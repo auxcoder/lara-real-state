@@ -19,7 +19,7 @@
         <div id="contentWrapper">
             <div class="navbar navbar-expand-md shadow">
                 <div class="container-fluid">
-                    <button class="nav-link button-toggle-menu border-0 bg-transparent">
+                    <button class="bg-transparent nav-link border-0 button-toggle-menu">
                         <i class="bi bi-list fs-4"></i>
                     </button>
 
@@ -72,8 +72,8 @@
 
             <footer class="footer">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="text-center text-muted col fs-13">
+                    <div class="row mt-2">
+                        <div class="text-center text-muted text-sm col small">
                             &copy; {{ date('Y') }} - Made with <span class="text-danger bi bi-heart-fill"></span> by <a
                                 href="#!" class="text-reset fw-semibold">Auxcoder</a>
                         </div>
