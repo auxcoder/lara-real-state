@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="User Details" 
+    <x-admin.page-header
+        title="User Details"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Users', 'url' => route('users.index')],
             ['label' => 'View']
-        ]" 
+        ]"
     />
 
     <x-admin.card class="mb-4">
@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-md-8">
-                <table class="table table-borderless">
+                <table class="align-middle table table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Name:</th>
@@ -35,7 +35,7 @@
                             <td>
                                 @if($user->getRoleNames()->isNotEmpty())
                                     @foreach($user->getRoleNames() as $role)
-                                        <span class="badge bg-success text-capitalize">{{ $role }}</span>
+                                        <span class="text-capitalize bg-success badge">{{ $role }}</span>
                                     @endforeach
                                 @else
                                     <span class="text-muted">No roles assigned</span>

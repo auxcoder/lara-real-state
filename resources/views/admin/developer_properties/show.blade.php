@@ -13,7 +13,7 @@
 
     <x-admin.card class="mb-4">
         <x-slot name="actions">
-            @can('update', $developer)
+            @can('edit developers')
                 <a href="{{ route('developer_properties.edit', $developer->id) }}" class="btn btn-primary btn-sm">
                     <i class="bi bi-pencil me-1"></i>Edit
                 </a>
@@ -22,7 +22,7 @@
 
         <div class="row">
             <div class="col-md-8">
-                <table class="table table-borderless">
+                <table class="table align-middle table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Name:</th>

@@ -2,19 +2,19 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Visitor Submission Details" 
+    <x-admin.page-header
+        title="Visitor Submission Details"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Visitor Submissions', 'url' => route('visitor-submissions.index')],
             ['label' => 'View']
-        ]" 
+        ]"
     />
 
     <div class="row">
         <div class="col-lg-8">
             <x-admin.card title="Personal Details">
-                <table class="table table-borderless">
+                <table class="align-middle table table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Name:</th>
@@ -45,7 +45,7 @@
             </x-admin.card>
 
             <x-admin.card title="Property Preferences" class="mt-3">
-                <table class="table table-borderless">
+                <table class="align-middle table table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Property Type:</th>
@@ -80,7 +80,7 @@
                     <li class="mb-2">
                         <strong>Passport:</strong>
                         @if($submission->passport_pdf)
-                            <a target="_blank" href="{{ asset('storage/' . $submission->passport_pdf) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ asset('storage/' . $submission->passport_pdf) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else
@@ -90,7 +90,7 @@
                     <li class="mb-2">
                         <strong>Emirates ID:</strong>
                         @if($submission->emirates_id_pdf)
-                            <a target="_blank" href="{{ asset('storage/' . $submission->emirates_id_pdf) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ asset('storage/' . $submission->emirates_id_pdf) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else
@@ -100,7 +100,7 @@
                     <li class="mb-2">
                         <strong>Bank Statement:</strong>
                         @if($submission->bank_statement_pdf)
-                            <a target="_blank" href="{{ asset('storage/' . $submission->bank_statement_pdf) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ asset('storage/' . $submission->bank_statement_pdf) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else
@@ -110,7 +110,7 @@
                     <li class="mb-2">
                         <strong>Trade License:</strong>
                         @if($submission->trade_license_pdf)
-                            <a target="_blank" href="{{ asset('storage/' . $submission->trade_license_pdf) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ asset('storage/' . $submission->trade_license_pdf) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else
@@ -120,7 +120,7 @@
                     <li class="mb-2">
                         <strong>VAT Registration:</strong>
                         @if($submission->vat_registration_certificate_pdf)
-                            <a target="_blank" href="{{ asset('storage/' . $submission->vat_registration_certificate_pdf) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ asset('storage/' . $submission->vat_registration_certificate_pdf) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else
@@ -130,7 +130,7 @@
                     <li class="mb-2">
                         <strong>Etihad Credit Bureau:</strong>
                         @if($submission->etihad_credit_bureau_pdf)
-                            <a target="_blank" href="{{ asset('storage/' . $submission->etihad_credit_bureau_pdf) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ asset('storage/' . $submission->etihad_credit_bureau_pdf) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else

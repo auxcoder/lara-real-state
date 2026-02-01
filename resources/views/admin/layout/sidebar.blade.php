@@ -1,26 +1,26 @@
  <div class="app-sidebar-menu">
      <div class="h-100" data-simplebar>
          <div id="sidebarMenu" class="bg-dark">
-             <div class="w-100 bg-primary">
+             <div class="bg-primary w-100">
                  <a class='d-block mx-auto ms-3' href='{{ route('home') }}'>
                     <img src="{{ asset('assets/img/logo-countryside-g.jpg') }}" alt="" height="70">
                  </a>
              </div>
 
-             <ul class="nav flex-column ms-3 pt-3">
-                 <li class="nav-item text-light">{{ __('Menu') }}</li>
+             <ul class="flex-column pt-3 nav ms-3">
+                 <li class="text-light nav-item">{{ __('Menu') }}</li>
 
                  <li class="nav-item">
-                     <a class="nav-link text-white" href='{{ route('admin.dashboard') }}'>
+                     <a class="text-white nav-link" href='{{ route('admin.dashboard') }}'>
                          <i class="bi bi-columns"></i>
                          <span>{{ __('Dashboard') }}</span>
                      </a>
                  </li>
 
-                 <li class="nav-item text-light">{{ __('Pages') }}</li>
+                 <li class="text-light nav-item">{{ __('Pages') }}</li>
                  @if (auth()->user()->hasRole('admin'))
-                     <li class="{{ request()->routeIs(['users.*', 'roles.*', 'permission.*']) ? 'menuitem-active' : '' }} nav-item">
-                         <a class="nav-link text-white d-flex gap-2" href="#sidebarExpages" data-bs-toggle="collapse">
+                     <li class="{{ request()->routeIs(['users.*', 'roles.*', 'permission.*']) ? 'menuitem-active' : '' }}nav-item">
+                         <a class="d-flex text-white nav-link gap-2" href="#sidebarExpages" data-bs-toggle="collapse">
                              <i class="bi bi-file-text"></i>
                              <span class="d-flex justify-content-between w-100">
                                 <span>{{ __('Admin') }}</span>
@@ -28,21 +28,21 @@
                              </span>
                          </a>
                          <div class="collapse {{ request()->routeIs(['users.*', 'roles.*', 'permission.*']) ? 'show' : '' }}" id="sidebarExpages">
-                             <ul class="nav-second-level list-unstyled ms-2">
+                             <ul class="bg-gray-800 nav-second-level list-unstyled ms-2">
                                  <li class="{{ request()->routeIs('permission.*') ? 'menuitem-active' : '' }}">
-                                     <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('permission.index') }}'>
+                                     <a class="d-flex text-decoration-none text-white gap-2" href='{{ route('permission.index') }}'>
                                          <i class="bi bi-person-lock"></i>
                                          {{ __('Permissions') }}
                                      </a>
                                  </li>
                                  <li class="{{ request()->routeIs('roles.*') ? 'menuitem-active' : '' }}">
-                                     <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('roles.index') }}'>
+                                     <a class="d-flex text-decoration-none text-white gap-2" href='{{ route('roles.index') }}'>
                                          <i class="bi bi-person-rolodex"></i>
                                          {{ __('Roles') }}
                                      </a>
                                  </li>
                                  <li class="{{ request()->routeIs('users.*') ? 'menuitem-active' : '' }}">
-                                     <a class="text-white text-decoration-none d-flex gap-2" href='{{ route('users.index') }}'>
+                                     <a class="d-flex text-decoration-none text-white gap-2" href='{{ route('users.index') }}'>
                                          <i class="bi bi-person-plus"></i>
                                          {{ __('Users') }}
                                      </a>
@@ -51,8 +51,8 @@
                          </div>
                      </li>
                  @endif
-                 <li class="{{ request()->routeIs('property.*') ? 'menuitem-active' : '' }} nav-item">
-                     <a class="nav-link text-white" href='{{ route('property.index') }}'>
+                 <li class="{{ request()->routeIs('property.*') ? 'menuitem-active' : '' }}nav-item">
+                     <a class="text-white nav-link" href='{{ route('property.index') }}'>
                          <i class="bi bi-house"></i>
                          <span>{{ __('Properties') }}</span>
                      </a>
@@ -82,25 +82,25 @@
                     </a>
                  </li> --}}
                  <li class="nav-item {{ request()->routeIs('Amenity.*') ? 'menuitem-active' : '' }}">
-                     <a class="nav-link text-white" href="{{ route('amenity.index') }}">
+                     <a class="text-white nav-link" href="{{ route('amenity.index') }}">
                          <i class="bi bi-star"></i>
                          <span>Amenity</span>
                      </a>
                  </li>
                  <li class="nav-item {{ request()->routeIs('master-plans.*') ? 'menuitem-active' : '' }}">
-                     <a class="nav-link text-white" href="{{ route('master-plans.index') }}">
+                     <a class="text-white nav-link" href="{{ route('master-plans.index') }}">
                          <i class="bi bi-grid"></i>
                          <span>Master Plans</span>
                      </a>
                  </li>
                  <li class="nav-item {{ request()->routeIs('locations.*') ? 'menuitem-active' : '' }}">
-                     <a class="nav-link text-white" href='{{ route('locations.index') }}'>
+                     <a class="text-white nav-link" href='{{ route('locations.index') }}'>
                          <i class="bi bi-geo-alt"></i>
                          <span>Locations</span>
                      </a>
                  </li>
                  <li class="nav-item {{ request()->routeIs('communities.*') ? 'menuitem-active' : '' }}">
-                     <a class="nav-link text-white" href='{{ route('communities.index') }}'>
+                     <a class="text-white nav-link" href='{{ route('communities.index') }}'>
                          <i class="bi bi-people"></i>
                          <span>Communities</span>
                      </a>
@@ -124,7 +124,7 @@
                      </a>
                 </li>--}}
                 <li class="nav-item">
-                    <a class="nav-link text-white" href='{{ route('logout') }}' class="text-danger ">
+                    <a class="text-white nav-link" href='{{ route('logout') }}' class="text-danger ">
                         <i class="bi bi-box-arrow-right"></i>
                         <span> Logout </span>
                      </a>

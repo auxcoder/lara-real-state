@@ -2,17 +2,17 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        :title="__('Roles')" 
+    <x-admin.page-header
+        :title="__('Roles')"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => __('Roles')]
-        ]" 
+        ]"
     />
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\Role::class)
+            @can('create roles')
                 <a href="{{ route('roles.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Add Role
                 </a>
@@ -20,7 +20,7 @@
         </x-slot>
 
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="align-middle table table-hover">
                 <thead>
                     <tr>
                         <th>{{ __('ID') }}</th>
@@ -34,7 +34,7 @@
                             <td>{{ $role->id }}</td>
                             <td>{{ $role->name }}</td>
                             <td class="text-end">
-                                <x-admin.crud-actions 
+                                <x-admin.crud-actions
                                     :showRoute="route('roles.show', $role->id)"
                                     :editRoute="route('roles.edit', $role->id)"
                                     :deleteRoute="route('roles.destroy', $role->id)"
@@ -43,7 +43,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="3" class="text-center text-muted py-4">{{ __('no_records') }}</td>
+                            <td colspan="3" class="py-4 text-center text-muted">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
