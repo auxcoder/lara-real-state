@@ -2,17 +2,17 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        :title="__('Vendor Registrations')" 
+    <x-admin.page-header
+        :title="__('Vendor Registrations')"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => __('Vendor Registrations')]
-        ]" 
+        ]"
     />
 
     <x-admin.card>
         <div class="table-responsive">
-            <table class="table align-middle table-hover">
+            <table class="align-middle table table-hover">
                 <thead>
                     <tr>
                         <th>{{ __('ID') }}</th>
@@ -43,13 +43,13 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center text-muted py-4">{{ __('no_records') }}</td>
+                            <td colspan="7" class="py-4 text-center text-muted">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
-        
+
         @if($registrations->hasPages())
             <div class="mt-3">
                 {{ $registrations->links() }}

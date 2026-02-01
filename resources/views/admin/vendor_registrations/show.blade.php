@@ -2,19 +2,19 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Vendor Registration Details" 
+    <x-admin.page-header
+        title="Vendor Registration Details"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Vendor Registrations', 'url' => route('vendor-registrations.index')],
             ['label' => 'View']
-        ]" 
+        ]"
     />
 
     <div class="row">
         <div class="col-lg-8">
             <x-admin.card title="Registration Details">
-                <table class="table align-middle table-borderless">
+                <table class="align-middle table table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Name:</th>
@@ -69,7 +69,7 @@
                     <li class="mb-2">
                         <strong>Trade License:</strong>
                         @if ($registration->trade_license)
-                            <a target="_blank" href="{{ Storage::url($registration->trade_license) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ Storage::url($registration->trade_license) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else
@@ -79,7 +79,7 @@
                     <li class="mb-2">
                         <strong>Emirates ID:</strong>
                         @if ($registration->emirates_id)
-                            <a target="_blank" href="{{ Storage::url($registration->emirates_id) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ Storage::url($registration->emirates_id) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else
@@ -89,7 +89,7 @@
                     <li class="mb-2">
                         <strong>Passport:</strong>
                         @if ($registration->passport)
-                            <a target="_blank" href="{{ Storage::url($registration->passport) }}" class="btn btn-link btn-sm p-0">
+                            <a target="_blank" href="{{ Storage::url($registration->passport) }}" class="p-0 btn btn-link btn-sm">
                                 <i class="bi bi-file-earmark-pdf me-1"></i>View
                             </a>
                         @else
