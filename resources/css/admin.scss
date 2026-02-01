@@ -41,14 +41,15 @@ html {
     min-height: 100%;
 }
 
-// body[data-menu-color="dark"] #sidebarWrapper {
-//     background-color: var(--bs-dark);
-//     box-shadow: none;
-// }
+body[data-menu-color="dark"] #sidebarWrapper {
+    background-color: var(--bs-dark);
+    box-shadow: none;
+}
 
 #wrapper {
     overflow-x: hidden;
 }
+
 #sidebarWrapper {
     min-height: 100vh;
     margin-left: -15rem; /* This hides it initially on smaller screens */
@@ -61,13 +62,14 @@ html {
     .nav-second-level li a {
         padding: 8px 20px;
         transition: all 0.4s;
-        font-size: 0.875rem;
     }
 }
+
 #contentWrapper {
     width: 100%;
     transition: margin 0.25s ease-out;
 }
+
 @media (min-width: 992px) {
     #sidebarWrapper {
         margin-left: 0;

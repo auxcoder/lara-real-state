@@ -2,17 +2,17 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        :title="__('Users')" 
+    <x-admin.page-header
+        :title="__('Users')"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => __('Users')]
-        ]" 
+        ]"
     />
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\User::class)
+            @can('create users')
                 <a href="{{ route('users.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Add User
                 </a>
@@ -20,7 +20,7 @@
         </x-slot>
 
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="align-middle table table-hover">
                 <thead>
                     <tr>
                         <th>{{ __('ID') }}</th>
@@ -39,12 +39,12 @@
                             <td>
                                 @if ($user->getRoleNames()->isNotEmpty())
                                     @foreach ($user->getRoleNames() as $role)
-                                        <span class="badge bg-success text-capitalize">{{ $role }}</span>
+                                        <span class="text-capitalize bg-success badge">{{ $role }}</span>
                                     @endforeach
                                 @endif
                             </td>
                             <td class="text-end">
-                                <x-admin.crud-actions 
+                                <x-admin.crud-actions
                                     :showRoute="route('users.show', $user->id)"
                                     :editRoute="route('users.edit', $user->id)"
                                     :deleteRoute="route('users.destroy', $user->id)"
@@ -53,7 +53,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4">{{ __('no_records') }}</td>
+                            <td colspan="5" class="py-4 text-center text-muted">{{ __('no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>

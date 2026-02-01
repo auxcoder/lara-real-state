@@ -12,7 +12,7 @@
 
     <x-admin.card>
         <x-slot name="actions">
-            @can('create', App\Models\AgentProperty::class)
+            @can('create agent properties')
                 <a href="{{ route('property.create') }}" class="btn btn-primary">
                     <i class="bi bi-plus-circle me-1"></i>Add New Property
                 </a>
@@ -20,7 +20,7 @@
         </x-slot>
 
         <div class="table-responsive">
-            <table class="table table-hover">
+            <table class="table align-middle table-hover">
                 <thead>
                     <tr>
                         <th>{{ __('ID') }}</th>

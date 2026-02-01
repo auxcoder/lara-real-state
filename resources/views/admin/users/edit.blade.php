@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Edit User" 
+    <x-admin.page-header
+        title="Edit User"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Users', 'url' => route('users.index')],
             ['label' => 'Edit']
-        ]" 
+        ]"
     />
 
     <x-admin.card class="mb-4">

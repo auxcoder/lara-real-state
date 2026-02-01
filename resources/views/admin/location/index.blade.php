@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        :title="__('Locations')" 
+    <x-admin.page-header
+        :title="__('Locations')"
         :breadcrumbs="[
             ['label' => __('Dashboard'), 'url' => route('admin.dashboard')],
             ['label' => __('Locations')]
@@ -14,14 +14,14 @@
     </x-admin.page-header>
 
     @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show">
+        <div class="alert alert-dismissible alert-success fade show">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
     @endif
 
     <x-admin.card>
-        <table class="table table-hover">
+        <table class="align-middle table table-hover">
             <thead>
                 <tr>
                     <th>{{ __('ID') }}</th>
@@ -73,7 +73,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">
-                        <span class="htmx-indicator spinner-border spinner-border-sm me-1" role="status"></span>
+                        <span class="htmx-indicator me-1 spinner-border spinner-border-sm" role="status"></span>
                         Save
                     </button>
                 </div>
@@ -101,7 +101,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">
-                        <span class="htmx-indicator spinner-border spinner-border-sm me-1" role="status"></span>
+                        <span class="htmx-indicator me-1 spinner-border spinner-border-sm" role="status"></span>
                         Update
                     </button>
                 </div>

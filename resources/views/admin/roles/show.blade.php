@@ -2,13 +2,13 @@
 
 @section('content')
 <div class="container">
-    <x-admin.page-header 
-        title="Role Details" 
+    <x-admin.page-header
+        title="Role Details"
         :breadcrumbs="[
             ['label' => 'Dashboard', 'url' => route('admin.dashboard')],
             ['label' => 'Roles', 'url' => route('roles.index')],
             ['label' => 'View']
-        ]" 
+        ]"
     />
 
     <x-admin.card class="mb-4">
@@ -20,7 +20,7 @@
 
         <div class="row">
             <div class="col-md-8">
-                <table class="table table-borderless">
+                <table class="align-middle table table-borderless">
                     <tbody>
                         <tr>
                             <th width="200">Name:</th>
@@ -31,7 +31,7 @@
                             <td>
                                 @if(!empty($rolePermissions) && $rolePermissions->count() > 0)
                                     @foreach($rolePermissions as $permission)
-                                        <span class="badge bg-success me-1">{{ $permission->name }}</span>
+                                        <span class="bg-success badge me-1">{{ $permission->name }}</span>
                                     @endforeach
                                 @else
                                     <span class="text-muted">No permissions assigned</span>

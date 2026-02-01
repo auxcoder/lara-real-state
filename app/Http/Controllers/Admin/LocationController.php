@@ -11,18 +11,20 @@ class LocationController extends Controller
     public function index()
     {
         $this->authorize('view locations');
-        
+
         $Locations = Location::latest()->paginate(15);
+
         return view('admin.location.index', compact('Locations'));
     }
 
     public function edit(Location $location)
     {
         $this->authorize('edit locations');
-        
+
         if (request()->header('HX-Request')) {
             return view('admin.location._edit_form', compact('location'));
         }
+
         return response()->json(['success' => true, 'location' => $location]);
     }
 
@@ -78,7 +80,7 @@ class LocationController extends Controller
     public function destroy(Location $location)
     {
         $this->authorize('delete locations');
-        
+
         $location->delete();
 
         if (request()->header('HX-Request')) {
